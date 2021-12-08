@@ -1,0 +1,17 @@
+Interesovanje - kljuc ce nam predstavljati kombinacija JMBGA i datuma podnosenja interesovanja, sa tim
+da isti pacijent nece moci dva puta dnevno da podnese interesovanje, stoga ce kombinacija sigurno
+biti jedinstvena.
+
+Potvrda o vakcinaciji - sifra potvrde, koja ce biti jedinstvena.
+
+Saglasnost - kljuc ce predstavljati kombinaciju rednog broja vakcine koja se prima i JMBGA/Broja pas-
+osa u slucaju stranih drzavljana.
+
+Zahtev zelenog sertifikata - kljuc ce nam predstavljati kombinacija JMBGA i datuma podnosenja 
+zahteva za zeleni serifikat sa tim da isti pacijent nece moci dva puta dnevno da podnese zahtev 
+za zeleni sertifikat stoga ce kombinacija sigurno biti jedinstvena.
+
+Zeleni sertifikat - broj sertifikata, koji je jedinstven.
+
+Izvestaj o imunizaciji - na dokument ce biti dodat atribut redni broj o kome ce se programski
+voditi racuna.

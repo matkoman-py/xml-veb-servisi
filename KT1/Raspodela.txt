@@ -1,0 +1,25 @@
+Marko Suljak:
+	-Dijagrami: 
+		1. Zahtev za zeleni sertifikat (4. tacka gradjanina)
+		2. Pregled dokumenta od strane gradjanina (5. tacka gradjanina)
+		3. Zdravstveni radnik imunizacija
+	-XML Seme:
+		1. Saglasnost
+		2. Izvestaj o imunizaciji
+
+Aleksandar Cepic:
+	-Dijagrami: 
+		1. Azuriranje i pregled stanja vakcine(3. tacka sluzbenik)
+		2. Pretraga i preuzimanje dokumenata od strane sluzbenika (4. tacka sluzbenik)
+	-XML Seme:
+		1. Iskazivanje interesovanja
+		2. Zahtev za zeleni sertifikat
+
+Mateja Cosovic:
+	-Dijagrami: 
+		1. Registracija gradjanina(1. tacka gradjanin)
+		2. Iskazivanje interesovanja (2. tacka gradjanin)
+		3. Iskazivanje saglasnosti (3. tacka gradjanin)
+	-XML Seme:
+		1. Potvrda o vakcinaciji
+	    

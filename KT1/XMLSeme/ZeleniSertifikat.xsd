@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="www.ftn.uns.ac.rs/zelenisertifikat"
+    xmlns:zel="www.ftn.uns.ac.rs/zelenisertifikat" id="asdasda"
+    xmlns="www.ftn.uns.ac.rs/zelenisertifikat">
+
+    <xs:element name="zeleni_sertifikat">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="qr_kod">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="4"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="broj_sertifikata">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="\d{6}[/]\d{2}"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="datum_izdavanja" type="xs:dateTime"/>
+                <xs:element name="podaci_o_pacijentu" type="zel:TPacijent"/>
+                <xs:element maxOccurs="2" name="podaci_o_vakcinaciji" type="zel:TVakcinacija"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="TPacijent">
+        <xs:sequence>
+            <xs:element name="ime_prezime">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="3"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="pol">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Musko"/>
+                        <xs:enumeration value="Zensko"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="datum_rodjenja" type="xs:date"/>
+            <xs:element name="jmbg">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="13"/>
+                        <xs:pattern value="\d+"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="broj_pasosa">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="13"/>
+                        <xs:pattern value="\d+"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TVakcinacija">
+        <xs:sequence>
+            <xs:element name="doza" type="xs:positiveInteger"/>
+            <xs:element name="tip" type="xs:string"/>
+            <xs:element name="proizvodjac_serija" type="xs:string"/>
+            <xs:element name="datum" type="xs:date"/>
+            <xs:element name="zdravstvena_ustanova" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

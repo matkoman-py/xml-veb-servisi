@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1"
+    targetNamespace="www.ftn.uns.ac.rs/Saglasnost" xmlns:sag="www.ftn.uns.ac.rs/Saglasnost"
+    xpathDefaultNamespace="##targetNamespace">
+
+    <xs:element name="Saglasnost">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Drzavljanstvo" type="sag:TDrzavljanstvo"/>
+                <xs:element name="Podaci_o_pacijentu" type="sag:TPacijent"/>
+                <xs:element name="Evidencija_o_vakcinaciji" type="sag:TEvidencija"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="TDrzavljanstvo">
+        <xs:choice>
+            <xs:element name="JMBG">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:whiteSpace value="collapse"/>
+                        <xs:length value="13"/>
+                        <xs:pattern value="[0-9]{13}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:sequence>
+                <xs:element name="Naziv" type="xs:string" form="qualified"/>
+                <xs:element name="Broj_pasosa_EBS">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="[0-9]+"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="TPacijent">
+        <xs:sequence>
+            <xs:element name="Prezime" type="xs:string"/>
+            <xs:element name="Ime" type="xs:string"/>
+            <xs:element name="Ime_roditelja" type="xs:string"/>
+            <xs:element name="Pol" type="sag:TPol"/>
+            <xs:element name="Datum_rodjenja" type="xs:date"/>
+            <xs:element name="Mesto_rodjenja" type="xs:string"/>
+            <xs:element name="Adresa" type="sag:TAdresa"/>
+            <xs:element name="Kontakt" type="sag:TKontakt"/>
+            <xs:element name="Radni_status" type="sag:TRadni_status"/>
+            <xs:element name="Zanimanje" type="sag:TZanimanje" minOccurs="0" nillable="false"/>
+            <xs:element name="Socijalna_zastita_info" type="sag:TSocijalna_zastita"/>
+            <xs:element name="Izjava_saglasnosti" type="sag:TIzjava_saglasnosti"/>
+            <xs:element name="Datum" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="TPol">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="muski"/>
+            <xs:enumeration value="zenski"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="TAdresa">
+        <xs:sequence>
+            <xs:element name="Ulica_i_broj" type="xs:string"/>
+            <xs:element name="Mesto" type="xs:string"/>
+            <xs:element name="Opstina" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TKontakt">
+        <xs:sequence>
+            <xs:element name="Fiksni">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[+]?[0-9]+"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Mobilni">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[+]?[0-9]+"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Email">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="TRadni_status">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="zaposlen"/>
+            <xs:enumeration value="nezaposlen"/>
+            <xs:enumeration value="penzioner"/>
+            <xs:enumeration value="ucenik"/>
+            <xs:enumeration value="student"/>
+            <xs:enumeration value="dete"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TZanimanje">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="zdravstvena_zastita"/>
+            <xs:enumeration value="socijalna_zastita"/>
+            <xs:enumeration value="prosveta"/>
+            <xs:enumeration value="MUP"/>
+            <xs:enumeration value="vojska_rs"/>
+            <xs:enumeration value="drugo"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="TSocijalna_zastita">
+
+        <xs:sequence>
+            <xs:element name="Koristi_zastitu">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="da"/>
+                        <xs:enumeration value="ne"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Naziv_opstina_sedista" type="xs:string" nillable="true" minOccurs="0"
+            />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TIzjava_saglasnosti">
+        <xs:sequence>
+            <xs:element name="Saglasan">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="saglasan sam"/>
+                        <xs:enumeration value="nisam saglasan"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Naziv_leka" type="xs:string" nillable="true" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TEvidencija">
+        <xs:sequence>
+            <xs:element name="Naziv_ustanove" type="xs:string"/>
+            <xs:element name="Vakcinacijski_punkt" type="xs:string"/>
+            <xs:element name="Podaci_lekar" type="xs:string"/>
+            <xs:element name="Vakcinacija" type="sag:TVakcinacija"/>
+            <xs:element name="Revakcinacija" type="sag:TVakcinacija"/>
+            <xs:element name="Privremene_kontraindikacije" type="xs:string" nillable="true"
+                minOccurs="0"/>
+            <xs:element name="Odluka_komisije" type="xs:string" nillable="true" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TVakcinacija">
+        <xs:sequence>
+            <xs:element name="Naziv_vakcine" type="xs:string"/>
+            <xs:element name="Datum_vakcinacije" type="xs:date"/>
+            <xs:element name="Ekstremitet">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="lr"/>
+                        <xs:enumeration value="dr"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Lot" type="xs:string"/>
+            <xs:element name="Proizvodjac" type="xs:string"/>
+            <xs:element name="Nezeljena_reakcija" type="xs:string" nillable="true" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

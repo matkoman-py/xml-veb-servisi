@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Potvrda xmlns="www.ftn.uns.ac.rs/potvrda_o_vakcinaciji"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="www.ftn.uns.ac.rs/potvrda_o_vakcinaciji file:/D:/Faks/CetvrtaDina/XMLVebServisi/XML%20%D0%B8%20%D0%B2%D0%B5%D0%B1%20%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%B8%20-%20%D0%9F%D1%80%D0%BE%D1%98%D0%B5%D0%BA%D0%B0%D1%82/PotvrdaOVakcinaciji.xsd">
+    <Sifra_potvrde>Sifra_potvrde0</Sifra_potvrde>
+    <pacijent>
+        <Ime_i_prezime>Ime_i_prezime0</Ime_i_prezime>
+        <Datum_rodjenja>2006-05-04</Datum_rodjenja>
+        <Pol>Musko</Pol>
+        <Jmbg>0000000000000</Jmbg>
+    </pacijent>
+    <Vakcinacija_info>
+        <Prva_doza>
+            <Datum_vakcine>2006-05-04</Datum_vakcine>
+            <Serija_vakcine>Serija_vakcine0</Serija_vakcine>
+        </Prva_doza>
+        <Zdravstvena_ustanova>Zdravstvena_ustanova0</Zdravstvena_ustanova>
+        <Naziv_vakcine>Naziv_vakcine0</Naziv_vakcine>
+        <Datum_izdavanja>2006-05-04</Datum_izdavanja>
+    </Vakcinacija_info>
+    <Qr_kod>Qr_kod0</Qr_kod>
+</Potvrda>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji" version="1.1"
+    xmlns:izv="www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji">
+
+    <xs:element name="Izvestaj_o_imunizaciji">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Period" type="izv:TPeriod"/>
+                <xs:element name="Broj_podnetih_interesovanja" type="xs:positiveInteger"/>
+                <xs:element name="Zeleni_sertifikat_info" type="izv:TZeleni_sertifikat"/>
+                <xs:element name="Doza_info" type="izv:TDoza_info"/>
+                <xs:element name="Proizvodjaci_info" type="izv:TProizvodjaci_info"/>
+                <xs:element name="Datum_izdavanja" type="xs:date"/>
+            </xs:sequence>
+            <xs:attribute name="redni_broj" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="TPeriod">
+        <xs:sequence>
+            <xs:element name="Datum_od" type="xs:date"/>
+            <xs:element name="Datum_do" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TZeleni_sertifikat">
+        <xs:sequence>
+            <xs:element name="Broj_primljenih_zahteva" type="xs:nonNegativeInteger"/>
+            <xs:element name="Broj_izdatih_sertifikata" type="xs:nonNegativeInteger"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TDoza_info">
+        <xs:sequence>
+            <xs:element name="Broj_datih_doza" type="xs:nonNegativeInteger"/>
+            <xs:element name="Broj_date_prve_doze" type="xs:nonNegativeInteger"/>
+            <xs:element name="Broj_date_druge_doze" type="xs:positiveInteger"/>
+            <xs:element name="Broj_date_trece_doze" type="xs:nonNegativeInteger"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TProizvodjaci_info">
+        <xs:sequence>
+            <xs:element name="Broj_doza_Pfizer_BioNTech" type="xs:nonNegativeInteger"/>
+            <xs:element name="Broj_doza_Sinopharm" type="xs:nonNegativeInteger"/>
+            <xs:element name="Broj_doza_SputnikV" type="xs:nonNegativeInteger"/>
+            <xs:element name="Broj_doza_AstraZeneca" type="xs:nonNegativeInteger"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

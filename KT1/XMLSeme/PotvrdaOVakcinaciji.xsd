@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="www.ftn.uns.ac.rs/potvrda_o_vakcinaciji"
+    xmlns:pot="www.ftn.uns.ac.rs/potvrda_o_vakcinaciji">
+    <xs:element name="Potvrda">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Sifra_potvrde" type="xs:string"/>
+                <xs:element name="pacijent" type="pot:TPacijent"/>
+                <xs:element name="Vakcinacija_info" type="pot:TVakcinacija"/>
+                <xs:element name="Qr_kod" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="TDozaInfo">
+        <xs:sequence>
+            <xs:element name="Datum_vakcine" type="xs:date"/>
+            <xs:element name="Serija_vakcine" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TPacijent">
+        <xs:sequence>
+            <xs:element name="Ime_i_prezime" type="xs:string"/>
+            <xs:element name="Datum_rodjenja" type="xs:date"/>
+            <xs:element name="Pol">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Musko"/>
+                        <xs:enumeration value="Zensko"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Jmbg">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="13"/>
+                        <xs:pattern value="\d{13}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TVakcinacija">
+        <xs:sequence>
+            <xs:element name="Prva_doza" type="pot:TDozaInfo"/>
+            <xs:element minOccurs="0" name="Druga_doza" type="pot:TDozaInfo"/>
+            <xs:element name="Zdravstvena_ustanova" type="xs:string"/>
+            <xs:element name="Naziv_vakcine" type="xs:string"/>
+            <xs:element name="Datum_izdavanja" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
