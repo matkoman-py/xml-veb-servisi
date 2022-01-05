@@ -13,7 +13,7 @@
                 <xs:element name="Proizvodjaci_info" type="izv:TProizvodjaci_info"/>
                 <xs:element name="Datum_izdavanja" type="xs:date"/>
             </xs:sequence>
-            <xs:attribute name="redni_broj" type="xs:positiveInteger" use="required"/>
+            <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="TPeriod">

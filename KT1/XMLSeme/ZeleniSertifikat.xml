@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zeleni_sertifikat xmlns="http://www.ftn.uns.ac.rs/zelenisertifikat"
+<zeleni_sertifikat xmlns="www.ftn.uns.ac.rs/zelenisertifikat"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.ftn.uns.ac.rs/zelenisertifikat file:/C:/Users/Petar/Desktop/cetvrta%20godina/XML%20-%201kt/sema.xsd">
-    <qr_kod>qr_kod0</qr_kod>
-    <broj_sertifikata>000000/00</broj_sertifikata>
-    <datum_izdavanja>2006-05-04T18:13:51.0</datum_izdavanja>
+ xsi:schemaLocation="www.ftn.uns.ac.rs/zelenisertifikat ZeleniSertifikat.xsd">
+    <qr_kod>NSw2LDQsMiw0MjMsNDIzLGRzYWRzYQ==</qr_kod>
+    <broj_sertifikata>312312/21</broj_sertifikata>
+    <datum_izdavanja>2021-05-04T18:13:51.0</datum_izdavanja>
     <podaci_o_pacijentu>
-        <ime_prezime>ime_prezime0</ime_prezime>
+        <ime_prezime>Petar Markovic</ime_prezime>
         <pol>Musko</pol>
-        <datum_rodjenja>2006-05-04</datum_rodjenja>
-        <jmg>0000000000000</jmg>
-        <broj_pasosa>0000000000000</broj_pasosa>
+        <datum_rodjenja>1999-10-29</datum_rodjenja>
+        <jmbg>2910999730020</jmbg>
+        <broj_pasosa>4324234234423</broj_pasosa>
     </podaci_o_pacijentu>
     <podaci_o_vakcinaciji>
-        <doza>50</doza>
-        <tip>tip0</tip>
-        <proizvodjac_serija>proizvodjac_serija0</proizvodjac_serija>
-        <datum>2006-05-04</datum>
-        <zdravstvena_ustanova>zdravstvena_ustanova0</zdravstvena_ustanova>
+        <doza>1</doza>
+        <tip>Pzifer-BioNtech</tip>
+        <proizvodjac_serija>BionTech Manufacturing EW2324</proizvodjac_serija>
+        <datum>2021-04-03</datum>
+        <zdravstvena_ustanova>Dom zdravlja Novo Naselje</zdravstvena_ustanova>
     </podaci_o_vakcinaciji>
     <podaci_o_vakcinaciji>
-        <doza>50</doza>
-        <tip>tip1</tip>
-        <proizvodjac_serija>proizvodjac_serija1</proizvodjac_serija>
-        <datum>2006-05-04</datum>
-        <zdravstvena_ustanova>zdravstvena_ustanova1</zdravstvena_ustanova>
+        <doza>2</doza>
+        <tip>Pzifer-BioNtech</tip>
+        <proizvodjac_serija>BionTech Manufacturing EW2324</proizvodjac_serija>
+        <datum>2021-04-24</datum>
+        <zdravstvena_ustanova>Dom zdravlja Novo Naselje</zdravstvena_ustanova>
     </podaci_o_vakcinaciji>
 </zeleni_sertifikat>

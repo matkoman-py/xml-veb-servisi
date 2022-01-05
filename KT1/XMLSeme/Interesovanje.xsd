@@ -58,21 +58,21 @@
             <xs:element name="Adresa_elektronske_poste">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:pattern value=""/>
+                        <xs:pattern value="[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9\-.]+"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
             <xs:element name="Broj_mobilnog_telefona">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:pattern value="06\d{13}"/>
+                        <xs:pattern value="06\d{8}"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
             <xs:element name="Broj_fiksnog_telefona">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:pattern value="011\d{13}"/>
+                        <xs:pattern value="0[1-2]{1}\d{7}"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>

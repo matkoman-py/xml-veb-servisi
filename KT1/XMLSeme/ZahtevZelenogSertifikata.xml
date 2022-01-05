@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zahtev xmlns="www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata file:/C:/Users/aleks/Desktop/PROGRAMIRANJE/FAKS/CETVRTA%20GODINA/XML/ZahtevZelenogSertifikata.xsd">
+ xsi:schemaLocation="www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata ZahtevZelenogSertifikata.xsd">
     <Podnosilac_zahteva>
-        <Ime_i_prezime>Ime_i_prezime0</Ime_i_prezime>
-        <Datum_rodjenja>2006-05-04</Datum_rodjenja>
+        <Ime_i_prezime>Petar Markovic</Ime_i_prezime>
+        <Datum_rodjenja>1999-10-29</Datum_rodjenja>
         <Pol>Musko</Pol>
-        <Jedinstveni_maticni_broj_gradjana>0000000000000</Jedinstveni_maticni_broj_gradjana>
-        <Broj_pasosa>0000000000</Broj_pasosa>
+        <Jedinstveni_maticni_broj_gradjana>2132142331231</Jedinstveni_maticni_broj_gradjana>
+        <Broj_pasosa>1000232224</Broj_pasosa>
     </Podnosilac_zahteva>
     <Informacije_o_zahtevu>
-        <Razlog>Razlog0</Razlog>
-        <Mesto>Mesto0</Mesto>
-        <Datum_izdavanja>2006-05-04</Datum_izdavanja>
+        <Razlog>Za posao</Razlog>
+        <Mesto>Novi Sad</Mesto>
+        <Datum_izdavanja>2021-05-04</Datum_izdavanja>
     </Informacije_o_zahtevu>
 </zahtev>

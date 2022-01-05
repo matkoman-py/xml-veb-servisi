@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Izvestaj_o_imunizaciji xmlns="www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji file:/D:/Faks/CetvrtaDina/XMLVebServisi/KT1/XMLSeme/Izvestaj_o_imunizaciji.xsd" redni_broj="50">
+ xsi:schemaLocation="www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji Izvestaj_o_imunizaciji.xsd" id="50">
     <Period>
-        <Datum_od>2006-05-04</Datum_od>
-        <Datum_do>2006-05-04</Datum_do>
+        <Datum_od>2021-05-04</Datum_od>
+        <Datum_do>2021-05-24</Datum_do>
     </Period>
-    <Broj_podnetih_interesovanja>50</Broj_podnetih_interesovanja>
+    <Broj_podnetih_interesovanja>450</Broj_podnetih_interesovanja>
     <Zeleni_sertifikat_info>
-        <Broj_primljenih_zahteva>50</Broj_primljenih_zahteva>
-        <Broj_izdatih_sertifikata>50</Broj_izdatih_sertifikata>
+        <Broj_primljenih_zahteva>330</Broj_primljenih_zahteva>
+        <Broj_izdatih_sertifikata>300</Broj_izdatih_sertifikata>
     </Zeleni_sertifikat_info>
     <Doza_info>
-        <Broj_datih_doza>50</Broj_datih_doza>
-        <Broj_date_prve_doze>50</Broj_date_prve_doze>
-        <Broj_date_druge_doze>50</Broj_date_druge_doze>
-        <Broj_date_trece_doze>50</Broj_date_trece_doze>
+        <Broj_datih_doza>6000</Broj_datih_doza>
+        <Broj_date_prve_doze>3000</Broj_date_prve_doze>
+        <Broj_date_druge_doze>2000</Broj_date_druge_doze>
+        <Broj_date_trece_doze>1000</Broj_date_trece_doze>
     </Doza_info>
     <Proizvodjaci_info>
-        <Broj_doza_Pfizer_BioNTech>50</Broj_doza_Pfizer_BioNTech>
-        <Broj_doza_Sinopharm>50</Broj_doza_Sinopharm>
-        <Broj_doza_SputnikV>50</Broj_doza_SputnikV>
-        <Broj_doza_AstraZeneca>50</Broj_doza_AstraZeneca>
+        <Broj_doza_Pfizer_BioNTech>4500</Broj_doza_Pfizer_BioNTech>
+        <Broj_doza_Sinopharm>1000</Broj_doza_Sinopharm>
+        <Broj_doza_SputnikV>300</Broj_doza_SputnikV>
+        <Broj_doza_AstraZeneca>200</Broj_doza_AstraZeneca>
     </Proizvodjaci_info>
-    <Datum_izdavanja>2006-05-04</Datum_izdavanja>
+    <Datum_izdavanja>2021-06-04</Datum_izdavanja>
 </Izvestaj_o_imunizaciji>

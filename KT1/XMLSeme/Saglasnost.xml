@@ -2,27 +2,26 @@
 <sag:Saglasnost xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
  xmlns:sag="www.ftn.uns.ac.rs/Saglasnost"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="www.ftn.uns.ac.rs/Saglasnost file:/C:/Users/marko/OneDrive/Desktop/F%20T%20N/IV%20godina/XML/saglasnost.xsd">
+ xsi:schemaLocation="www.ftn.uns.ac.rs/Saglasnost saglasnost.xsd">
     <sag:Drzavljanstvo>
-        <sag:Naziv>Naziv0</sag:Naziv>
-        <sag:Broj_pasosa_EBS>0</sag:Broj_pasosa_EBS>
+        <sag:JMBG>2910999730020</sag:JMBG>
     </sag:Drzavljanstvo>
     <sag:Podaci_o_pacijentu>
-        <sag:Prezime>Prezime0</sag:Prezime>
-        <sag:Ime>Ime0</sag:Ime>
-        <sag:Ime_roditelja>Ime_roditelja0</sag:Ime_roditelja>
+        <sag:Prezime>Markovic</sag:Prezime>
+        <sag:Ime>Petar</sag:Ime>
+        <sag:Ime_roditelja>Zoran</sag:Ime_roditelja>
         <sag:Pol>muski</sag:Pol>
-        <sag:Datum_rodjenja>2006-05-04</sag:Datum_rodjenja>
-        <sag:Mesto_rodjenja>Mesto_rodjenja0</sag:Mesto_rodjenja>
+        <sag:Datum_rodjenja>1999-10-29</sag:Datum_rodjenja>
+        <sag:Mesto_rodjenja>Nis</sag:Mesto_rodjenja>
         <sag:Adresa>
-            <sag:Ulica_i_broj>Ulica_i_broj0</sag:Ulica_i_broj>
-            <sag:Mesto>Mesto0</sag:Mesto>
-            <sag:Opstina>Opstina0</sag:Opstina>
+            <sag:Ulica_i_broj>Vladike Cirica 5</sag:Ulica_i_broj>
+            <sag:Mesto>Novi Sad</sag:Mesto>
+            <sag:Opstina>Novi sad</sag:Opstina>
         </sag:Adresa>
         <sag:Kontakt>
-            <sag:Fiksni>0</sag:Fiksni>
-            <sag:Mobilni>0</sag:Mobilni>
-            <sag:Email>marko@gmail.com</sag:Email>
+            <sag:Fiksni>021493103</sag:Fiksni>
+            <sag:Mobilni>0692910099</sag:Mobilni>
+            <sag:Email>petarns99@gmail.com</sag:Email>
         </sag:Kontakt>
         <sag:Radni_status>zaposlen</sag:Radni_status>
         <sag:Socijalna_zastita_info>
@@ -31,25 +30,25 @@
         <sag:Izjava_saglasnosti>
             <sag:Saglasan>saglasan sam</sag:Saglasan>
         </sag:Izjava_saglasnosti>
-        <sag:Datum>2006-05-04</sag:Datum>
+        <sag:Datum>2021-05-04</sag:Datum>
     </sag:Podaci_o_pacijentu>
     <sag:Evidencija_o_vakcinaciji>
-        <sag:Naziv_ustanove>Naziv_ustanove0</sag:Naziv_ustanove>
-        <sag:Vakcinacijski_punkt>Vakcinacijski_punkt0</sag:Vakcinacijski_punkt>
-        <sag:Podaci_lekar>Podaci_lekar0</sag:Podaci_lekar>
+        <sag:Naziv_ustanove>Dom zdravlja Novo Naselje</sag:Naziv_ustanove>
+        <sag:Vakcinacijski_punkt>Punkt broj 1</sag:Vakcinacijski_punkt>
+        <sag:Podaci_lekar>Marko Markovic 0643543232</sag:Podaci_lekar>
         <sag:Vakcinacija>
-            <sag:Naziv_vakcine>Naziv_vakcine0</sag:Naziv_vakcine>
-            <sag:Datum_vakcinacije>2006-05-04</sag:Datum_vakcinacije>
+            <sag:Naziv_vakcine>Pfizer BionTech</sag:Naziv_vakcine>
+            <sag:Datum_vakcinacije>2021-06-04</sag:Datum_vakcinacije>
             <sag:Ekstremitet>lr</sag:Ekstremitet>
-            <sag:Lot>Lot0</sag:Lot>
-            <sag:Proizvodjac>Proizvodjac0</sag:Proizvodjac>
+            <sag:Lot>Lot 1</sag:Lot>
+            <sag:Proizvodjac>Pfizer</sag:Proizvodjac>
         </sag:Vakcinacija>
         <sag:Revakcinacija>
-            <sag:Naziv_vakcine>Naziv_vakcine1</sag:Naziv_vakcine>
-            <sag:Datum_vakcinacije>2006-05-04</sag:Datum_vakcinacije>
+            <sag:Naziv_vakcine>Pfizer BionTech</sag:Naziv_vakcine>
+            <sag:Datum_vakcinacije>2021-06-24</sag:Datum_vakcinacije>
             <sag:Ekstremitet>lr</sag:Ekstremitet>
-            <sag:Lot>Lot1</sag:Lot>
-            <sag:Proizvodjac>Proizvodjac1</sag:Proizvodjac>
+            <sag:Lot>Lot 2</sag:Lot>
+            <sag:Proizvodjac>Pfizer</sag:Proizvodjac>
         </sag:Revakcinacija>
     </sag:Evidencija_o_vakcinaciji>
 </sag:Saglasnost>

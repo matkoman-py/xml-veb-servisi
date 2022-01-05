@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interesovanje xmlns="www.ftn.uns.ac.rs/interesovanje"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="www.ftn.uns.ac.rs/interesovanje file:/C:/Users/aleks/Desktop/PROGRAMIRANJE/FAKS/CETVRTA%20GODINA/XML/interesovanje.xsd">
+ xsi:schemaLocation="www.ftn.uns.ac.rs/interesovanje interesovanje.xsd">
     <Podaci_o_primaocu>
         <Drzavljanstvo>Drzavljanin Republike Srbije </Drzavljanstvo>
-        <JMBG>0000000000000</JMBG>
-        <Ime>Ime0</Ime>
-        <Prezime>Prezime0</Prezime>
+        <JMBG>2910999730020</JMBG>
+        <Ime>Petar</Ime>
+        <Prezime>Markovic</Prezime>
         <Kontakt>
-            <Adresa_elektronske_poste></Adresa_elektronske_poste>
-            <Broj_mobilnog_telefona>060000000000000</Broj_mobilnog_telefona>
-            <Broj_fiksnog_telefona>0110000000000000</Broj_fiksnog_telefona>
+            <Adresa_elektronske_poste>petarns99@gmail.com</Adresa_elektronske_poste>
+            <Broj_mobilnog_telefona>0692910099</Broj_mobilnog_telefona>
+            <Broj_fiksnog_telefona>021493103</Broj_fiksnog_telefona>
         </Kontakt>
         <Davalac_krvi>Da</Davalac_krvi>
     </Podaci_o_primaocu>
     <Odabir_vakcine>Pfizer-BioNTech </Odabir_vakcine>
-    <Datum>2006-05-04</Datum>
+    <Datum>2021-05-04</Datum>
 </interesovanje>

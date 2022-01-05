@@ -1,17 +1,24 @@
-Interesovanje - kljuc ce nam predstavljati kombinacija JMBGA i datuma podnosenja interesovanja, sa tim
-da isti pacijent nece moci dva puta dnevno da podnese interesovanje, stoga ce kombinacija sigurno
-biti jedinstvena.
+Interesovanje
 
-Potvrda o vakcinaciji - sifra potvrde, koja ce biti jedinstvena.
+https://www.ftn.uns.ac.rs/interesovanje/{jmbg}/{datum}
 
-Saglasnost - kljuc ce predstavljati kombinaciju rednog broja vakcine koja se prima i JMBGA/Broja pas-
-osa u slucaju stranih drzavljana.
 
-Zahtev zelenog sertifikata - kljuc ce nam predstavljati kombinacija JMBGA i datuma podnosenja 
-zahteva za zeleni serifikat sa tim da isti pacijent nece moci dva puta dnevno da podnese zahtev 
-za zeleni sertifikat stoga ce kombinacija sigurno biti jedinstvena.
+Potvrda o vakcinaciji
 
-Zeleni sertifikat - broj sertifikata, koji je jedinstven.
+https://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji/{sifra_potvrde}
 
-Izvestaj o imunizaciji - na dokument ce biti dodat atribut redni broj o kome ce se programski
-voditi racuna.
+Saglasnost 
+
+https://www.ftn.uns.ac.rs/Saglasnost/{jmbg}/{broj_vakcine}
+
+Zahtev zelenog sertifikata
+
+https://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/{jmbg}/{datum}
+
+Zeleni sertifikat
+
+https://www.ftn.uns.ac.rs/zelenisertifikat/{broj_sertifikata}
+
+Izvestaj o imunizaciji
+
+https://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji/{id}
