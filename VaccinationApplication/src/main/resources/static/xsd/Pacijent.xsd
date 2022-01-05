@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="Pacijent">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="email" type="xs:string"/>
+                <xs:element name="sifra" type="xs:string"/>
+                <xs:element name="ime" type="xs:string"/>
+                <xs:element name="prezime" type="xs:string"/>
+                <xs:element name="rodjendan" type="xs:date"/>
+                <xs:element name="pol">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="Musko"/>
+                            <xs:enumeration value="Zensko"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="kontakt" type="TKontakt"/>
+                <xs:element name="lokacija" type="TLokacija"/>
+                <xs:element name="drzavljanstvo" type="TDrzavljanstvo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="TKontakt">
+        <xs:sequence>
+            <xs:element name="fiksni_telefon" type="xs:string"/>
+            <xs:element name="mobilni_telefon" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TLokacija">
+        <xs:sequence>
+            <xs:element name="drzava" type="xs:string"/>
+            <xs:element name="grad" type="xs:string"/>
+            <xs:element name="adresa" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TDrzavljanstvo">
+        <xs:choice>
+            <xs:element name="JMBG">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:whiteSpace value="collapse"/>
+                        <xs:length value="13"/>
+                        <xs:pattern value="[0-9]{13}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:sequence>
+                <xs:element form="qualified" name="Naziv" type="xs:string"/>
+                <xs:element name="Broj_pasosa_EBS">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="[0-9]+"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:choice>
+    </xs:complexType>
+</xs:schema>
