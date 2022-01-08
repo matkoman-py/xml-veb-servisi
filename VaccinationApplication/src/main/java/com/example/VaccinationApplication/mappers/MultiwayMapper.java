@@ -17,23 +17,23 @@ import java.io.StringWriter;
 @Component
 public class MultiwayMapper {
 
-    public Interesovanje convertToObject(String xmlString, String className, Class<?> classOfObject) {
+    public Object convertToObject(String xmlString, String xsdFileName, Class<?> classOfObject) {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(classOfObject);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
 //            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-//            File file = ResourceUtils.getFile("classpath:static/xsd/"+className+".xsd");
+//            File file = ResourceUtils.getFile("classpath:static/xsd/"+xsdFileName+".xsd");
 //            Schema schema = schemaFactory.newSchema(file);
 //            unmarshaller.setSchema(schema);
-            return (Interesovanje) unmarshaller.unmarshal(new StringReader(xmlString));
+            return  unmarshaller.unmarshal(new StringReader(xmlString));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public String convertToXml(Interesovanje object, Class<?> classOfObject) {
+    public String convertToXml(Object object, Class<?> classOfObject) {
         StringWriter sw = new StringWriter();
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(classOfObject);

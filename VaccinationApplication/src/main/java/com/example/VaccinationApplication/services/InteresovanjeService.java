@@ -1,6 +1,6 @@
 package com.example.VaccinationApplication.services;
 
-import com.example.VaccinationApplication.dao.InteresovanjeDAO;
+import com.example.VaccinationApplication.dao.DataAccessLayer;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.documents.Interesovanje;
 import org.springframework.stereotype.Service;
@@ -8,22 +8,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class InteresovanjeService {
 
-    private final InteresovanjeDAO interesovanjeDAO;
+    private final DataAccessLayer dataAccessLayer;
     private final MultiwayMapper mapper;
+    private final String folderId = "/db/vaccination-system/interesovanja";
 
-    public InteresovanjeService(InteresovanjeDAO interesovanjeDAO, MultiwayMapper mapper) {
-        this.interesovanjeDAO = interesovanjeDAO;
+    public InteresovanjeService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper) {
+        this.dataAccessLayer = dataAccessLayer;
         this.mapper = mapper;
     }
 
-    public String getXml(String id){
-        return interesovanjeDAO.getInteresovanje(id).get();
+    public String getXml(String documentId){
+        return dataAccessLayer.getDocument(folderId, documentId).get();
     }
 
-    public Interesovanje saveXml(String interesovanjeXmlString){
-        Interesovanje interesovanje = mapper.convertToObject(interesovanjeXmlString, "Interesovanje",
+    public Interesovanje saveXml(String xmlString){
+        Interesovanje interesovanje = (Interesovanje) mapper.convertToObject(xmlString, "Interesovanje",
                 Interesovanje.class);
-        interesovanjeDAO.saveInteresovanje(interesovanje);
+        String documentId = interesovanje.getPodaciOPrimaocu().getJMBG() + ".xml";
+        dataAccessLayer.saveDocument(interesovanje, folderId, documentId, Interesovanje.class);
         return interesovanje;
     }
 
