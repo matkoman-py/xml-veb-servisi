@@ -1,10 +1,6 @@
 
 package com.example.VaccinationApplication.model.types.izvestaj_o_imunizaciji;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -42,10 +38,17 @@ import javax.xml.bind.annotation.XmlType;
     "brojDateDrugeDoze",
     "brojDateTreceDoze"
 })
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class TDozaInfo {
+
+    public TDozaInfo(BigInteger brojDatihDoza, BigInteger brojDatePrveDoze, BigInteger brojDateDrugeDoze, BigInteger brojDateTreceDoze) {
+        this.brojDatihDoza = brojDatihDoza;
+        this.brojDatePrveDoze = brojDatePrveDoze;
+        this.brojDateDrugeDoze = brojDateDrugeDoze;
+        this.brojDateTreceDoze = brojDateTreceDoze;
+    }
+
+    public TDozaInfo() {
+    }
 
     @XmlElement(name = "Broj_datih_doza", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")

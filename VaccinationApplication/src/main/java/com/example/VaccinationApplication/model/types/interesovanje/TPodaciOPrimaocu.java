@@ -1,10 +1,6 @@
 
 package com.example.VaccinationApplication.model.types.interesovanje;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -66,10 +62,19 @@ import javax.xml.bind.annotation.XmlType;
     "kontakt",
     "davalacKrvi"
 })
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class TPodaciOPrimaocu {
+
+    public TPodaciOPrimaocu(String drzavljanstvo, String jmbg, String ime, String prezime, TKontakt kontakt, String davalacKrvi) {
+        this.drzavljanstvo = drzavljanstvo;
+        this.jmbg = jmbg;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.kontakt = kontakt;
+        this.davalacKrvi = davalacKrvi;
+    }
+
+    public TPodaciOPrimaocu() {
+    }
 
     @XmlElement(name = "Drzavljanstvo", namespace = "www.ftn.uns.ac.rs/interesovanje", required = true)
     protected String drzavljanstvo;

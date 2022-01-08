@@ -1,9 +1,6 @@
 
 package com.example.VaccinationApplication.model.types.zeleni_sertifikat;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -45,10 +42,18 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "datum",
     "zdravstvenaUstanova"
 })
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class TVakcinacija {
+
+    public TVakcinacija(BigInteger doza, String tip, String proizvodjacSerija, XMLGregorianCalendar datum, String zdravstvenaUstanova) {
+        this.doza = doza;
+        this.tip = tip;
+        this.proizvodjacSerija = proizvodjacSerija;
+        this.datum = datum;
+        this.zdravstvenaUstanova = zdravstvenaUstanova;
+    }
+
+    public TVakcinacija() {
+    }
 
     @XmlElement(namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     @XmlSchemaType(name = "positiveInteger")

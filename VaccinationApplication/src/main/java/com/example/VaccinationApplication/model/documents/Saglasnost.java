@@ -1,13 +1,9 @@
 
 package com.example.VaccinationApplication.model.documents;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import com.example.VaccinationApplication.model.types.saglasnost.TDrzavljanstvo;
 import com.example.VaccinationApplication.model.types.saglasnost.TEvidencija;
 import com.example.VaccinationApplication.model.types.saglasnost.TPacijent;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -43,10 +39,16 @@ import javax.xml.bind.annotation.XmlType;
     "evidencijaOVakcinaciji"
 })
 @XmlRootElement(name = "Saglasnost", namespace = "www.ftn.uns.ac.rs/Saglasnost")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class Saglasnost {
+
+    public Saglasnost(TDrzavljanstvo drzavljanstvo, TPacijent podaciOPacijentu, TEvidencija evidencijaOVakcinaciji) {
+        this.drzavljanstvo = drzavljanstvo;
+        this.podaciOPacijentu = podaciOPacijentu;
+        this.evidencijaOVakcinaciji = evidencijaOVakcinaciji;
+    }
+
+    public Saglasnost() {
+    }
 
     @XmlElement(name = "Drzavljanstvo", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TDrzavljanstvo drzavljanstvo;

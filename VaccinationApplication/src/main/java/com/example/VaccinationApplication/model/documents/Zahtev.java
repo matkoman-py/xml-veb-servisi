@@ -1,12 +1,8 @@
 
 package com.example.VaccinationApplication.model.documents;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import com.example.VaccinationApplication.model.types.zahtev_zelenog_sertifikata.TInformacijeOPodnosiocu;
 import com.example.VaccinationApplication.model.types.zahtev_zelenog_sertifikata.TInformacijeOZahtevu;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -40,10 +36,15 @@ import javax.xml.bind.annotation.XmlType;
     "informacijeOZahtevu"
 })
 @XmlRootElement(name = "zahtev", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class Zahtev {
+
+    public Zahtev(TInformacijeOPodnosiocu podnosilacZahteva, TInformacijeOZahtevu informacijeOZahtevu) {
+        this.podnosilacZahteva = podnosilacZahteva;
+        this.informacijeOZahtevu = informacijeOZahtevu;
+    }
+
+    public Zahtev() {
+    }
 
     @XmlElement(name = "Podnosilac_zahteva", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
     protected TInformacijeOPodnosiocu podnosilacZahteva;

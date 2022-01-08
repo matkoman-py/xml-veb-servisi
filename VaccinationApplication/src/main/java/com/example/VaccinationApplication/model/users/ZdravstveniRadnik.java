@@ -44,6 +44,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlRootElement(name = "ZdravstveniRadnik")
 public class ZdravstveniRadnik {
 
+    public ZdravstveniRadnik(String email, String sifra, String ime, String prezime, XMLGregorianCalendar rodjendan) {
+        this.email = email;
+        this.sifra = sifra;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.rodjendan = rodjendan;
+    }
+
+    public ZdravstveniRadnik() {
+    }
+
     @XmlElement(required = true)
     protected String email;
     @XmlElement(required = true)

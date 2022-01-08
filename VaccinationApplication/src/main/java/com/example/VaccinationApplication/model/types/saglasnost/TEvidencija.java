@@ -1,10 +1,6 @@
 
 package com.example.VaccinationApplication.model.types.saglasnost;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -48,10 +44,20 @@ import javax.xml.bind.annotation.XmlType;
     "privremeneKontraindikacije",
     "odlukaKomisije"
 })
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class TEvidencija {
+
+    public TEvidencija(String nazivUstanove, String vakcinacijskiPunkt, String podaciLekar, TVakcinacija vakcinacija, TVakcinacija revakcinacija, JAXBElement<String> privremeneKontraindikacije, JAXBElement<String> odlukaKomisije) {
+        this.nazivUstanove = nazivUstanove;
+        this.vakcinacijskiPunkt = vakcinacijskiPunkt;
+        this.podaciLekar = podaciLekar;
+        this.vakcinacija = vakcinacija;
+        this.revakcinacija = revakcinacija;
+        this.privremeneKontraindikacije = privremeneKontraindikacije;
+        this.odlukaKomisije = odlukaKomisije;
+    }
+
+    public TEvidencija() {
+    }
 
     @XmlElement(name = "Naziv_ustanove", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String nazivUstanove;

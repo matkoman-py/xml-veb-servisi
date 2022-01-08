@@ -1,10 +1,6 @@
 
 package com.example.VaccinationApplication.model.types.potvrda_o_vakcinaciji;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -56,10 +52,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "pol",
     "jmbg"
 })
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class TPacijent {
+
+    public TPacijent(String imeIPrezime, XMLGregorianCalendar datumRodjenja, String pol, String jmbg) {
+        this.imeIPrezime = imeIPrezime;
+        this.datumRodjenja = datumRodjenja;
+        this.pol = pol;
+        this.jmbg = jmbg;
+    }
+
+    public TPacijent() {
+    }
 
     @XmlElement(name = "Ime_i_prezime", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     protected String imeIPrezime;

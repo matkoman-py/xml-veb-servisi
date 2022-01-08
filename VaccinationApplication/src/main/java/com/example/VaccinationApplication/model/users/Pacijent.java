@@ -63,6 +63,21 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlRootElement(name = "Pacijent")
 public class Pacijent {
 
+    public Pacijent(String email, String sifra, String ime, String prezime, XMLGregorianCalendar rodjendan, String pol, TKontakt kontakt, TLokacija lokacija, TDrzavljanstvo drzavljanstvo) {
+        this.email = email;
+        this.sifra = sifra;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.rodjendan = rodjendan;
+        this.pol = pol;
+        this.kontakt = kontakt;
+        this.lokacija = lokacija;
+        this.drzavljanstvo = drzavljanstvo;
+    }
+
+    public Pacijent() {
+    }
+
     @XmlElement(required = true)
     protected String email;
     @XmlElement(required = true)

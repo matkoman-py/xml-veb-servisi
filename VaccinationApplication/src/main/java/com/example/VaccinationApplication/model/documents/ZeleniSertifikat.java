@@ -1,12 +1,7 @@
-
 package com.example.VaccinationApplication.model.documents;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import com.example.VaccinationApplication.model.types.zeleni_sertifikat.TPacijent;
 import com.example.VaccinationApplication.model.types.zeleni_sertifikat.TVakcinacija;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -62,10 +57,18 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "podaciOVakcinaciji"
 })
 @XmlRootElement(name = "zeleni_sertifikat", namespace = "www.ftn.uns.ac.rs/zelenisertifikat")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class ZeleniSertifikat {
+
+    public ZeleniSertifikat(String qrKod, String brojSertifikata, XMLGregorianCalendar datumIzdavanja, TPacijent podaciOPacijentu, List<TVakcinacija> podaciOVakcinaciji) {
+        this.qrKod = qrKod;
+        this.brojSertifikata = brojSertifikata;
+        this.datumIzdavanja = datumIzdavanja;
+        this.podaciOPacijentu = podaciOPacijentu;
+        this.podaciOVakcinaciji = podaciOVakcinaciji;
+    }
+
+    public ZeleniSertifikat() {
+    }
 
     @XmlElement(name = "qr_kod", namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     protected String qrKod;

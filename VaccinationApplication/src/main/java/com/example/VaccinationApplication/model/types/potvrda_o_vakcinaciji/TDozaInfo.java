@@ -1,10 +1,6 @@
 
 package com.example.VaccinationApplication.model.types.potvrda_o_vakcinaciji;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -38,10 +34,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "datumVakcine",
     "serijaVakcine"
 })
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class TDozaInfo {
+
+    public TDozaInfo(XMLGregorianCalendar datumVakcine, String serijaVakcine) {
+        this.datumVakcine = datumVakcine;
+        this.serijaVakcine = serijaVakcine;
+    }
+
+    public TDozaInfo() {
+    }
 
     @XmlElement(name = "Datum_vakcine", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     @XmlSchemaType(name = "date")

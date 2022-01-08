@@ -1,9 +1,6 @@
 
 package com.example.VaccinationApplication.model.documents;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import com.example.VaccinationApplication.model.types.izvestaj_o_imunizaciji.TDozaInfo;
 import com.example.VaccinationApplication.model.types.izvestaj_o_imunizaciji.TPeriod;
 import com.example.VaccinationApplication.model.types.izvestaj_o_imunizaciji.TProizvodjaciInfo;
@@ -55,10 +52,20 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "datumIzdavanja"
 })
 @XmlRootElement(name = "Izvestaj_o_imunizaciji", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class IzvestajOImunizaciji {
+
+    public IzvestajOImunizaciji(TPeriod period, BigInteger brojPodnetihInteresovanja, TZeleniSertifikat zeleniSertifikatInfo, TDozaInfo dozaInfo, TProizvodjaciInfo proizvodjaciInfo, XMLGregorianCalendar datumIzdavanja, BigInteger id) {
+        this.period = period;
+        this.brojPodnetihInteresovanja = brojPodnetihInteresovanja;
+        this.zeleniSertifikatInfo = zeleniSertifikatInfo;
+        this.dozaInfo = dozaInfo;
+        this.proizvodjaciInfo = proizvodjaciInfo;
+        this.datumIzdavanja = datumIzdavanja;
+        this.id = id;
+    }
+
+    public IzvestajOImunizaciji() {
+    }
 
     @XmlElement(name = "Period", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     protected TPeriod period;

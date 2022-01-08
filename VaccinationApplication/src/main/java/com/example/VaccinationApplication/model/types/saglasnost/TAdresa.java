@@ -1,10 +1,6 @@
 
 package com.example.VaccinationApplication.model.types.saglasnost;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -38,10 +34,16 @@ import javax.xml.bind.annotation.XmlType;
     "mesto",
     "opstina"
 })
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class TAdresa {
+
+    public TAdresa(String ulicaIBroj, String mesto, String opstina) {
+        this.ulicaIBroj = ulicaIBroj;
+        this.mesto = mesto;
+        this.opstina = opstina;
+    }
+
+    public TAdresa() {
+    }
 
     @XmlElement(name = "Ulica_i_broj", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String ulicaIBroj;

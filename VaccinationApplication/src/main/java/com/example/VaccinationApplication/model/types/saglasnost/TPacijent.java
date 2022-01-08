@@ -1,10 +1,6 @@
 
 package com.example.VaccinationApplication.model.types.saglasnost;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -60,10 +56,26 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "izjavaSaglasnosti",
     "datum"
 })
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class TPacijent {
+
+    public TPacijent(String prezime, String ime, String imeRoditelja, TPol pol, XMLGregorianCalendar datumRodjenja, String mestoRodjenja, TAdresa adresa, TKontakt kontakt, TRadniStatus radniStatus, TZanimanje zanimanje, TSocijalnaZastita socijalnaZastitaInfo, TIzjavaSaglasnosti izjavaSaglasnosti, XMLGregorianCalendar datum) {
+        this.prezime = prezime;
+        this.ime = ime;
+        this.imeRoditelja = imeRoditelja;
+        this.pol = pol;
+        this.datumRodjenja = datumRodjenja;
+        this.mestoRodjenja = mestoRodjenja;
+        this.adresa = adresa;
+        this.kontakt = kontakt;
+        this.radniStatus = radniStatus;
+        this.zanimanje = zanimanje;
+        this.socijalnaZastitaInfo = socijalnaZastitaInfo;
+        this.izjavaSaglasnosti = izjavaSaglasnosti;
+        this.datum = datum;
+    }
+
+    public TPacijent() {
+    }
 
     @XmlElement(name = "Prezime", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String prezime;

@@ -1,9 +1,6 @@
 
 package com.example.VaccinationApplication.model.types.saglasnost;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -45,10 +42,15 @@ import javax.xml.bind.annotation.XmlType;
     "saglasan",
     "nazivLeka"
 })
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class TIzjavaSaglasnosti {
+
+    public TIzjavaSaglasnosti(String saglasan, JAXBElement<String> nazivLeka) {
+        this.saglasan = saglasan;
+        this.nazivLeka = nazivLeka;
+    }
+
+    public TIzjavaSaglasnosti() {
+    }
 
     @XmlElement(name = "Saglasan", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String saglasan;

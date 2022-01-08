@@ -1,10 +1,6 @@
 
 package com.example.VaccinationApplication.model.types.zahtev_zelenog_sertifikata;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -64,10 +60,18 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "jedinstveniMaticniBrojGradjana",
     "brojPasosa"
 })
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class TInformacijeOPodnosiocu {
+
+    public TInformacijeOPodnosiocu(String imeIPrezime, XMLGregorianCalendar datumRodjenja, String pol, String jedinstveniMaticniBrojGradjana, String brojPasosa) {
+        this.imeIPrezime = imeIPrezime;
+        this.datumRodjenja = datumRodjenja;
+        this.pol = pol;
+        this.jedinstveniMaticniBrojGradjana = jedinstveniMaticniBrojGradjana;
+        this.brojPasosa = brojPasosa;
+    }
+
+    public TInformacijeOPodnosiocu() {
+    }
 
     @XmlElement(name = "Ime_i_prezime", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
     protected String imeIPrezime;

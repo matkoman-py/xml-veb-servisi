@@ -36,6 +36,15 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TLokacija {
 
+    public TLokacija(String drzava, String grad, String adresa) {
+        this.drzava = drzava;
+        this.grad = grad;
+        this.adresa = adresa;
+    }
+
+    public TLokacija() {
+    }
+
     @XmlElement(required = true)
     protected String drzava;
     @XmlElement(required = true)

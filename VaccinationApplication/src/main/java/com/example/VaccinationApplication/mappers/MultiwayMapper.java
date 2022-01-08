@@ -15,17 +15,17 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 @Component
-public class InteresovanjeMapper {
+public class MultiwayMapper {
 
-    public Interesovanje convertToObject(String xmlString) {
+    public Interesovanje convertToObject(String xmlString, String className, Class<?> classOfObject) {
         try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(Interesovanje.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(classOfObject);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
-            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            File file = ResourceUtils.getFile("classpath:static/xsd/Interesovanje.xsd");
-            Schema schema = schemaFactory.newSchema(file);
-            unmarshaller.setSchema(schema);
+//            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+//            File file = ResourceUtils.getFile("classpath:static/xsd/"+className+".xsd");
+//            Schema schema = schemaFactory.newSchema(file);
+//            unmarshaller.setSchema(schema);
             return (Interesovanje) unmarshaller.unmarshal(new StringReader(xmlString));
         } catch (Exception e) {
             e.printStackTrace();
@@ -33,10 +33,10 @@ public class InteresovanjeMapper {
         return null;
     }
 
-    public String convertToXml(Interesovanje object) {
+    public String convertToXml(Interesovanje object, Class<?> classOfObject) {
         StringWriter sw = new StringWriter();
         try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(Interesovanje.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(classOfObject);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             marshaller.marshal(object, sw);

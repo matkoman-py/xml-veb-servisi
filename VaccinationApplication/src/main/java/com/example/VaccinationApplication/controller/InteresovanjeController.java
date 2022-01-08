@@ -1,34 +1,35 @@
 package com.example.VaccinationApplication.controller;
 
-import com.example.VaccinationApplication.dao.InteresovanjeDAO;
 import com.example.VaccinationApplication.model.documents.Interesovanje;
 import com.example.VaccinationApplication.services.InteresovanjeService;
-import lombok.RequiredArgsConstructor;
-import org.apache.jena.base.Sys;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
-import javax.websocket.server.PathParam;
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/interesovanja")
-@RequiredArgsConstructor
 public class InteresovanjeController {
 
     private final InteresovanjeService interesovanjeService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<String> get(@PathVariable String id) {
-        String retval = interesovanjeService.get("1010998800070");
+    public InteresovanjeController(InteresovanjeService interesovanjeService) {
+        this.interesovanjeService = interesovanjeService;
+    }
+
+    @GetMapping("getXml/{id}")
+    public ResponseEntity<String> getXml(@PathVariable String id) {
+        String retval = interesovanjeService.getXml(id);
         return ResponseEntity.ok(retval);
     }
 
-    @PostMapping
-    public ResponseEntity<String> save(@RequestBody String interesovanjeXml) {
-        String retval = interesovanjeService.save(interesovanjeXml);
+    @PostMapping("saveXml")
+    public ResponseEntity<Interesovanje> saveXml(@RequestBody String interesovanjeXml) {
+        Interesovanje retval = interesovanjeService.saveXml(interesovanjeXml);
+        return ResponseEntity.ok(retval);
+    }
+
+    @PostMapping("convertToXml")
+    public ResponseEntity<String> saveObject(@RequestBody Interesovanje interesovanje) {
+        String retval = interesovanjeService.convertToXml(interesovanje);
         return ResponseEntity.ok(retval);
     }
 }

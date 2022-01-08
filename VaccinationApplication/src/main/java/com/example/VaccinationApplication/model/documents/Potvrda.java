@@ -1,9 +1,6 @@
 
 package com.example.VaccinationApplication.model.documents;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import com.example.VaccinationApplication.model.types.potvrda_o_vakcinaciji.TPacijent;
 import com.example.VaccinationApplication.model.types.potvrda_o_vakcinaciji.TVakcinacija;
 
@@ -44,10 +41,17 @@ import javax.xml.bind.annotation.XmlType;
     "qrKod"
 })
 @XmlRootElement(name = "Potvrda", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class Potvrda {
+
+    public Potvrda(String sifraPotvrde, TPacijent pacijent, TVakcinacija vakcinacijaInfo, String qrKod) {
+        this.sifraPotvrde = sifraPotvrde;
+        this.pacijent = pacijent;
+        this.vakcinacijaInfo = vakcinacijaInfo;
+        this.qrKod = qrKod;
+    }
+
+    public Potvrda() {
+    }
 
     @XmlElement(name = "Sifra_potvrde", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     protected String sifraPotvrde;

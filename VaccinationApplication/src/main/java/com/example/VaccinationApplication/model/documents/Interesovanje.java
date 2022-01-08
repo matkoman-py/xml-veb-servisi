@@ -1,11 +1,7 @@
 
 package com.example.VaccinationApplication.model.documents;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import com.example.VaccinationApplication.model.types.interesovanje.TPodaciOPrimaocu;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -52,11 +48,18 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "odabirVakcine",
     "datum"
 })
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 @XmlRootElement(name = "interesovanje", namespace = "www.ftn.uns.ac.rs/interesovanje")
 public class Interesovanje {
+
+    public Interesovanje(TPodaciOPrimaocu podaciOPrimaocu, String odabirVakcine, XMLGregorianCalendar datum) {
+        this.podaciOPrimaocu = podaciOPrimaocu;
+        this.odabirVakcine = odabirVakcine;
+        this.datum = datum;
+    }
+
+    public Interesovanje() {
+    }
+
     @XmlElement(name = "Podaci_o_primaocu", namespace = "www.ftn.uns.ac.rs/interesovanje", required = true)
     protected TPodaciOPrimaocu podaciOPrimaocu;
     @XmlElement(name = "Odabir_vakcine", namespace = "www.ftn.uns.ac.rs/interesovanje", required = true)

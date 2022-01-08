@@ -1,10 +1,6 @@
 
 package com.example.VaccinationApplication.model.types.saglasnost;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -45,10 +41,15 @@ import javax.xml.bind.annotation.XmlType;
     "koristiZastitu",
     "nazivOpstinaSedista"
 })
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class TSocijalnaZastita {
+
+    public TSocijalnaZastita(String koristiZastitu, JAXBElement<String> nazivOpstinaSedista) {
+        this.koristiZastitu = koristiZastitu;
+        this.nazivOpstinaSedista = nazivOpstinaSedista;
+    }
+
+    public TSocijalnaZastita() {
+    }
 
     @XmlElement(name = "Koristi_zastitu", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String koristiZastitu;

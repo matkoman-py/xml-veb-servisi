@@ -1,10 +1,6 @@
 
 package com.example.VaccinationApplication.model.types.izvestaj_o_imunizaciji;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -42,10 +38,17 @@ import javax.xml.bind.annotation.XmlType;
     "brojDozaSputnikV",
     "brojDozaAstraZeneca"
 })
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
 public class TProizvodjaciInfo {
+
+    public TProizvodjaciInfo(BigInteger brojDozaPfizerBioNTech, BigInteger brojDozaSinopharm, BigInteger brojDozaSputnikV, BigInteger brojDozaAstraZeneca) {
+        this.brojDozaPfizerBioNTech = brojDozaPfizerBioNTech;
+        this.brojDozaSinopharm = brojDozaSinopharm;
+        this.brojDozaSputnikV = brojDozaSputnikV;
+        this.brojDozaAstraZeneca = brojDozaAstraZeneca;
+    }
+
+    public TProizvodjaciInfo() {
+    }
 
     @XmlElement(name = "Broj_doza_Pfizer_BioNTech", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
