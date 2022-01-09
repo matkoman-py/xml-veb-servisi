@@ -1,10 +1,16 @@
 package com.example.officialsapplication.mappers;
 
+import com.example.officialsapplication.eventhandlers.OfficialsEventHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
 
@@ -16,10 +22,12 @@ public class MultiwayMapper {
             JAXBContext jaxbContext = JAXBContext.newInstance(classOfObject);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
-//            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-//            File file = ResourceUtils.getFile("classpath:static/xsd/"+xsdFileName+".xsd");
-//            Schema schema = schemaFactory.newSchema(file);
-//            unmarshaller.setSchema(schema);
+            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            File file = ResourceUtils.getFile("classpath:static/xsd/" + xsdFileName + ".xsd");
+            Schema schema = schemaFactory.newSchema(file);
+            unmarshaller.setSchema(schema);
+            unmarshaller.setEventHandler(new OfficialsEventHandler());
+
             return  unmarshaller.unmarshal(new StringReader(xmlString));
         } catch (Exception e) {
             e.printStackTrace();
