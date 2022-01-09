@@ -54,15 +54,6 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TKontakt {
 
-    public TKontakt(String fiksni, String mobilni, String email) {
-        this.fiksni = fiksni;
-        this.mobilni = mobilni;
-        this.email = email;
-    }
-
-    public TKontakt() {
-    }
-
     @XmlElement(name = "Fiksni", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String fiksni;
     @XmlElement(name = "Mobilni", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)

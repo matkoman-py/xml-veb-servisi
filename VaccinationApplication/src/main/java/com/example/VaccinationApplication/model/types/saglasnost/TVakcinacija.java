@@ -1,11 +1,9 @@
 
 package com.example.VaccinationApplication.model.types.saglasnost;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -33,7 +31,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;/element>
  *         &lt;element name="Lot" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="Proizvodjac" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="Nezeljena_reakcija" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="Nezeljena_reakcija" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -53,18 +51,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class TVakcinacija {
 
-    public TVakcinacija(String nazivVakcine, XMLGregorianCalendar datumVakcinacije, String ekstremitet, String lot, String proizvodjac, JAXBElement<String> nezeljenaReakcija) {
-        this.nazivVakcine = nazivVakcine;
-        this.datumVakcinacije = datumVakcinacije;
-        this.ekstremitet = ekstremitet;
-        this.lot = lot;
-        this.proizvodjac = proizvodjac;
-        this.nezeljenaReakcija = nezeljenaReakcija;
-    }
-
-    public TVakcinacija() {
-    }
-
     @XmlElement(name = "Naziv_vakcine", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String nazivVakcine;
     @XmlElement(name = "Datum_vakcinacije", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
@@ -76,8 +62,8 @@ public class TVakcinacija {
     protected String lot;
     @XmlElement(name = "Proizvodjac", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String proizvodjac;
-    @XmlElementRef(name = "Nezeljena_reakcija", namespace = "www.ftn.uns.ac.rs/Saglasnost", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> nezeljenaReakcija;
+    @XmlElement(name = "Nezeljena_reakcija", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true, nillable = true)
+    protected String nezeljenaReakcija;
 
     /**
      * Gets the value of the nazivVakcine property.
@@ -204,10 +190,10 @@ public class TVakcinacija {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getNezeljenaReakcija() {
+    public String getNezeljenaReakcija() {
         return nezeljenaReakcija;
     }
 
@@ -216,10 +202,10 @@ public class TVakcinacija {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setNezeljenaReakcija(JAXBElement<String> value) {
+    public void setNezeljenaReakcija(String value) {
         this.nezeljenaReakcija = value;
     }
 

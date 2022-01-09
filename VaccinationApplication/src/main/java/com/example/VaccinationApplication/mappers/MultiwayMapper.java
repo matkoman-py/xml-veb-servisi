@@ -1,6 +1,6 @@
 package com.example.VaccinationApplication.mappers;
 
-import com.example.VaccinationApplication.model.documents.Interesovanje;
+import com.example.VaccinationApplication.eventhandler.VaccinationEventHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
@@ -22,10 +22,12 @@ public class MultiwayMapper {
             JAXBContext jaxbContext = JAXBContext.newInstance(classOfObject);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
-//            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-//            File file = ResourceUtils.getFile("classpath:static/xsd/"+xsdFileName+".xsd");
-//            Schema schema = schemaFactory.newSchema(file);
-//            unmarshaller.setSchema(schema);
+            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            File file = ResourceUtils.getFile("classpath:static/xsd/" + xsdFileName + ".xsd");
+            Schema schema = schemaFactory.newSchema(file);
+            unmarshaller.setSchema(schema);
+            unmarshaller.setEventHandler(new VaccinationEventHandler());
+
             return  unmarshaller.unmarshal(new StringReader(xmlString));
         } catch (Exception e) {
             e.printStackTrace();
