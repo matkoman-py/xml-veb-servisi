@@ -7,19 +7,19 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Period" type="izv:TPeriod"/>
-                <xs:element name="Broj_podnetih_interesovanja" type="xs:positiveInteger"/>
+                <xs:element name="Broj_podnetih_interesovanja" type="izv:TBrojPodnetihInteresovanja"/>
                 <xs:element name="Zeleni_sertifikat_info" type="izv:TZeleni_sertifikat"/>
                 <xs:element name="Doza_info" type="izv:TDoza_info"/>
                 <xs:element name="Proizvodjaci_info" type="izv:TProizvodjaci_info"/>
                 <xs:element name="Datum_izdavanja" type="xs:date"/>
             </xs:sequence>
-            <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+            <xs:attribute name="about" type="xs:string" use="required"/>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="TPeriod">
         <xs:sequence>
-            <xs:element name="Datum_od" type="xs:date"/>
-            <xs:element name="Datum_do" type="xs:date"/>
+            <xs:element name="Datum_od" type="izv:TDatumOd"/>
+            <xs:element name="Datum_do" type="izv:TDatumDo"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TZeleni_sertifikat">
@@ -43,5 +43,29 @@
             <xs:element name="Broj_doza_SputnikV" type="xs:nonNegativeInteger"/>
             <xs:element name="Broj_doza_AstraZeneca" type="xs:nonNegativeInteger"/>
         </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TBrojPodnetihInteresovanja">
+        <xs:simpleContent>
+            <xs:extension base="xs:positiveInteger">
+                <xs:attribute name="property" use="required" fixed="pred:broj_interesovanja"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:positiveInteger"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TDatumOd">
+        <xs:simpleContent>
+            <xs:extension base="xs:date">
+                <xs:attribute name="property" use="required" fixed="pred:datum_od"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:date"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TDatumDo">
+        <xs:simpleContent>
+            <xs:extension base="xs:date">
+                <xs:attribute name="property" use="required" fixed="pred:datum_do"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:date"/>
+            </xs:extension>
+        </xs:simpleContent>
     </xs:complexType>
 </xs:schema>
