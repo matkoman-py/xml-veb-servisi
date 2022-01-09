@@ -1,9 +1,9 @@
 
 package com.example.VaccinationApplication.model.users;
 
-import com.example.VaccinationApplication.model.types.pacijent.TDrzavljanstvo;
-import com.example.VaccinationApplication.model.types.pacijent.TKontakt;
-import com.example.VaccinationApplication.model.types.pacijent.TLokacija;
+import com.example.VaccinationApplication.model.users.types.TDrzavljanstvo;
+import com.example.VaccinationApplication.model.users.types.TKontakt;
+import com.example.VaccinationApplication.model.users.types.TLokacija;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

@@ -3,6 +3,7 @@
     targetNamespace="www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji" version="1.1"
     xmlns:izv="www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji">
 
+
     <xs:element name="Izvestaj_o_imunizaciji">
         <xs:complexType>
             <xs:sequence>
@@ -14,6 +15,7 @@
                 <xs:element name="Datum_izdavanja" type="xs:date"/>
             </xs:sequence>
             <xs:attribute name="about" type="xs:string" use="required"/>
+            <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="TPeriod">

@@ -2,8 +2,8 @@ package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
-import com.example.VaccinationApplication.model.documents.ZeleniSertifikat;
 
+import com.example.VaccinationApplication.model.zeleni_sertifikat.ZeleniSertifikat;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,13 +32,13 @@ public class ZeleniSertifikatService {
     public ZeleniSertifikat saveXmlFromText(String xmlString){
         ZeleniSertifikat zeleniSertifikat = (ZeleniSertifikat) mapper.convertToObject(xmlString, "ZeleniSertifikat",
         		ZeleniSertifikat.class);
-        String documentId = zeleniSertifikat.getBrojSertifikata().replace('/', '-') + ".xml";
+        String documentId = zeleniSertifikat.getBrojSertifikata().getValue().replace('/', '-') + ".xml";
         dataAccessLayer.saveDocument(zeleniSertifikat, folderId, documentId, ZeleniSertifikat.class);
         return zeleniSertifikat;
     }
     
     public ZeleniSertifikat saveXmlFromObject(ZeleniSertifikat zeleniSertifikat){
-        String documentId = zeleniSertifikat.getBrojSertifikata().replace('/', '-') + ".xml";
+        String documentId = zeleniSertifikat.getBrojSertifikata().getValue().replace('/', '-') + ".xml";
         dataAccessLayer.saveDocument(zeleniSertifikat, folderId, documentId, ZeleniSertifikat.class);
         return zeleniSertifikat;
     }

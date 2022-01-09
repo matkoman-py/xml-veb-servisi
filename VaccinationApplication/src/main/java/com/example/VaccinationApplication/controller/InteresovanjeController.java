@@ -1,6 +1,6 @@
 package com.example.VaccinationApplication.controller;
 
-import com.example.VaccinationApplication.model.documents.Interesovanje;
+import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
 import com.example.VaccinationApplication.services.InteresovanjeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

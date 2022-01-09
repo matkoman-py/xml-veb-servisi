@@ -2,7 +2,7 @@ package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
-import com.example.VaccinationApplication.model.documents.Interesovanje;
+import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
 import org.springframework.stereotype.Service;
 
 @Service

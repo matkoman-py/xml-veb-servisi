@@ -2,7 +2,7 @@ package com.example.officialsapplication.services;
 
 import com.example.officialsapplication.dao.DataAccessLayer;
 import com.example.officialsapplication.mappers.MultiwayMapper;
-import com.example.officialsapplication.model.documents.IzvestajOImunizaciji;
+import com.example.officialsapplication.model.users.izvestaj.IzvestajOImunizaciji;
 import org.springframework.stereotype.Service;
 
 @Service

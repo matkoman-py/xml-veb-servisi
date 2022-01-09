@@ -10,6 +10,9 @@
                 <xs:element name="Vakcinacija_info" type="pot:TVakcinacija"/>
                 <xs:element name="Qr_kod" type="xs:string"/>
             </xs:sequence>
+            <xs:attribute name="about" type="xs:string" use="required"/>
+            <xs:attribute fixed="pred:parentTo" name="rel" type="xs:string"/>
+            <xs:attribute name="href" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="TDozaInfo">
@@ -20,7 +23,7 @@
     </xs:complexType>
     <xs:complexType name="TPacijent">
         <xs:sequence>
-            <xs:element name="Ime_i_prezime" type="xs:string"/>
+            <xs:element name="Ime_i_prezime" type="pot:TImeIPrezime"/>
             <xs:element name="Datum_rodjenja" type="xs:date"/>
             <xs:element name="Pol">
                 <xs:simpleType>
@@ -30,23 +33,48 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:element name="Jmbg">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:length value="13"/>
-                        <xs:pattern value="\d{13}"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="Jmbg" type="pot:TJmbg"> </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TVakcinacija">
         <xs:sequence>
             <xs:element name="Prva_doza" type="pot:TDozaInfo"/>
             <xs:element minOccurs="0" name="Druga_doza" type="pot:TDozaInfo"/>
-            <xs:element name="Zdravstvena_ustanova" type="xs:string"/>
-            <xs:element name="Naziv_vakcine" type="xs:string"/>
+            <xs:element name="Zdravstvena_ustanova" type="pot:TZdravstvenaUstanova"/>
+            <xs:element name="Naziv_vakcine" type="pot:TNazivVakcine"/>
             <xs:element name="Datum_izdavanja" type="xs:date"/>
         </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TNazivVakcine">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="property" use="required" fixed="pred:naziv_vakcine"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TZdravstvenaUstanova">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="property" use="required" fixed="pred:zdravstvena_ustanova"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TImeIPrezime">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="property" use="required" fixed="pred:ime_i_prezime"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TJmbg">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="property" use="required" fixed="pred:jmbg"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
     </xs:complexType>
 </xs:schema>
