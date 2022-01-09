@@ -22,9 +22,9 @@ public class ZahtevService {
     }
 
     public Zahtev saveXml(String xmlString){
-    	Zahtev zahtev = (Zahtev) mapper.convertToObject(xmlString, "Zahtev",
+    	Zahtev zahtev = (Zahtev) mapper.convertToObject(xmlString, "ZahtevZelenogSertifikata",
     			Zahtev.class);
-        String documentId = zahtev.getPodnosilacZahteva().getJedinstveniMaticniBrojGradjana() + ".xml";
+        String documentId = zahtev.getPodnosilacZahteva().getJedinstveniMaticniBrojGradjana().getValue() + ".xml";
         dataAccessLayer.saveDocument(zahtev, folderId, documentId, Zahtev.class);
         return zahtev;
     }
