@@ -1,6 +1,5 @@
 package com.example.VaccinationApplication.dao;
 
-import com.example.VaccinationApplication.model.documents.Interesovanje;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
