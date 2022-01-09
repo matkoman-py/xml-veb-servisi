@@ -36,15 +36,6 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TAdresa {
 
-    public TAdresa(String ulicaIBroj, String mesto, String opstina) {
-        this.ulicaIBroj = ulicaIBroj;
-        this.mesto = mesto;
-        this.opstina = opstina;
-    }
-
-    public TAdresa() {
-    }
-
     @XmlElement(name = "Ulica_i_broj", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String ulicaIBroj;
     @XmlElement(name = "Mesto", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)

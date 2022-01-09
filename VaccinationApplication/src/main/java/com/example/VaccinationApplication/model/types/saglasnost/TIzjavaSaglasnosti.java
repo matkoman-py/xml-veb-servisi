@@ -1,12 +1,9 @@
 
 package com.example.VaccinationApplication.model.types.saglasnost;
 
-
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -28,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="Naziv_leka" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="Naziv_leka" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -44,18 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TIzjavaSaglasnosti {
 
-    public TIzjavaSaglasnosti(String saglasan, JAXBElement<String> nazivLeka) {
-        this.saglasan = saglasan;
-        this.nazivLeka = nazivLeka;
-    }
-
-    public TIzjavaSaglasnosti() {
-    }
-
     @XmlElement(name = "Saglasan", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String saglasan;
-    @XmlElementRef(name = "Naziv_leka", namespace = "www.ftn.uns.ac.rs/Saglasnost", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> nazivLeka;
+    @XmlElement(name = "Naziv_leka", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true, nillable = true)
+    protected String nazivLeka;
 
     /**
      * Gets the value of the saglasan property.
@@ -86,10 +75,10 @@ public class TIzjavaSaglasnosti {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getNazivLeka() {
+    public String getNazivLeka() {
         return nazivLeka;
     }
 
@@ -98,10 +87,10 @@ public class TIzjavaSaglasnosti {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setNazivLeka(JAXBElement<String> value) {
+    public void setNazivLeka(String value) {
         this.nazivLeka = value;
     }
 

@@ -52,15 +52,6 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TDrzavljanstvo {
 
-    public TDrzavljanstvo(String jmbg, String naziv, String brojPasosaEBS) {
-        this.jmbg = jmbg;
-        this.naziv = naziv;
-        this.brojPasosaEBS = brojPasosaEBS;
-    }
-
-    public TDrzavljanstvo() {
-    }
-
     @XmlElement(name = "JMBG", namespace = "www.ftn.uns.ac.rs/Saglasnost")
     protected String jmbg;
     @XmlElement(name = "Naziv", namespace = "www.ftn.uns.ac.rs/Saglasnost")

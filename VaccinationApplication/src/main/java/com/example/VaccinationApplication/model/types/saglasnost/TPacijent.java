@@ -28,7 +28,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="Adresa" type="{www.ftn.uns.ac.rs/Saglasnost}TAdresa"/>
  *         &lt;element name="Kontakt" type="{www.ftn.uns.ac.rs/Saglasnost}TKontakt"/>
  *         &lt;element name="Radni_status" type="{www.ftn.uns.ac.rs/Saglasnost}TRadni_status"/>
- *         &lt;element name="Zanimanje" type="{www.ftn.uns.ac.rs/Saglasnost}TZanimanje" minOccurs="0"/>
+ *         &lt;element name="Zanimanje" type="{www.ftn.uns.ac.rs/Saglasnost}TZanimanje"/>
  *         &lt;element name="Socijalna_zastita_info" type="{www.ftn.uns.ac.rs/Saglasnost}TSocijalna_zastita"/>
  *         &lt;element name="Izjava_saglasnosti" type="{www.ftn.uns.ac.rs/Saglasnost}TIzjava_saglasnosti"/>
  *         &lt;element name="Datum" type="{http://www.w3.org/2001/XMLSchema}date"/>
@@ -58,25 +58,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class TPacijent {
 
-    public TPacijent(String prezime, String ime, String imeRoditelja, TPol pol, XMLGregorianCalendar datumRodjenja, String mestoRodjenja, TAdresa adresa, TKontakt kontakt, TRadniStatus radniStatus, TZanimanje zanimanje, TSocijalnaZastita socijalnaZastitaInfo, TIzjavaSaglasnosti izjavaSaglasnosti, XMLGregorianCalendar datum) {
-        this.prezime = prezime;
-        this.ime = ime;
-        this.imeRoditelja = imeRoditelja;
-        this.pol = pol;
-        this.datumRodjenja = datumRodjenja;
-        this.mestoRodjenja = mestoRodjenja;
-        this.adresa = adresa;
-        this.kontakt = kontakt;
-        this.radniStatus = radniStatus;
-        this.zanimanje = zanimanje;
-        this.socijalnaZastitaInfo = socijalnaZastitaInfo;
-        this.izjavaSaglasnosti = izjavaSaglasnosti;
-        this.datum = datum;
-    }
-
-    public TPacijent() {
-    }
-
     @XmlElement(name = "Prezime", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String prezime;
     @XmlElement(name = "Ime", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
@@ -98,7 +79,7 @@ public class TPacijent {
     @XmlElement(name = "Radni_status", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     @XmlSchemaType(name = "string")
     protected TRadniStatus radniStatus;
-    @XmlElement(name = "Zanimanje", namespace = "www.ftn.uns.ac.rs/Saglasnost")
+    @XmlElement(name = "Zanimanje", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     @XmlSchemaType(name = "string")
     protected TZanimanje zanimanje;
     @XmlElement(name = "Socijalna_zastita_info", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)

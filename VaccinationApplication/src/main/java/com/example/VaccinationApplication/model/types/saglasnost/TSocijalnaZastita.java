@@ -1,11 +1,9 @@
 
 package com.example.VaccinationApplication.model.types.saglasnost;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -27,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="Naziv_opstina_sedista" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="Naziv_opstina_sedista" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -43,18 +41,10 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TSocijalnaZastita {
 
-    public TSocijalnaZastita(String koristiZastitu, JAXBElement<String> nazivOpstinaSedista) {
-        this.koristiZastitu = koristiZastitu;
-        this.nazivOpstinaSedista = nazivOpstinaSedista;
-    }
-
-    public TSocijalnaZastita() {
-    }
-
     @XmlElement(name = "Koristi_zastitu", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String koristiZastitu;
-    @XmlElementRef(name = "Naziv_opstina_sedista", namespace = "www.ftn.uns.ac.rs/Saglasnost", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> nazivOpstinaSedista;
+    @XmlElement(name = "Naziv_opstina_sedista", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true, nillable = true)
+    protected String nazivOpstinaSedista;
 
     /**
      * Gets the value of the koristiZastitu property.
@@ -85,10 +75,10 @@ public class TSocijalnaZastita {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getNazivOpstinaSedista() {
+    public String getNazivOpstinaSedista() {
         return nazivOpstinaSedista;
     }
 
@@ -97,10 +87,10 @@ public class TSocijalnaZastita {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setNazivOpstinaSedista(JAXBElement<String> value) {
+    public void setNazivOpstinaSedista(String value) {
         this.nazivOpstinaSedista = value;
     }
 

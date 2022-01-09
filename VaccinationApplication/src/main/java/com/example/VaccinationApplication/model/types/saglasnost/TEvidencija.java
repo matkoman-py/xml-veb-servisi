@@ -1,11 +1,9 @@
 
 package com.example.VaccinationApplication.model.types.saglasnost;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -24,8 +22,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="Podaci_lekar" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="Vakcinacija" type="{www.ftn.uns.ac.rs/Saglasnost}TVakcinacija"/>
  *         &lt;element name="Revakcinacija" type="{www.ftn.uns.ac.rs/Saglasnost}TVakcinacija"/>
- *         &lt;element name="Privremene_kontraindikacije" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="Odluka_komisije" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="Privremene_kontraindikacije" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="Odluka_komisije" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -46,19 +44,6 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TEvidencija {
 
-    public TEvidencija(String nazivUstanove, String vakcinacijskiPunkt, String podaciLekar, TVakcinacija vakcinacija, TVakcinacija revakcinacija, JAXBElement<String> privremeneKontraindikacije, JAXBElement<String> odlukaKomisije) {
-        this.nazivUstanove = nazivUstanove;
-        this.vakcinacijskiPunkt = vakcinacijskiPunkt;
-        this.podaciLekar = podaciLekar;
-        this.vakcinacija = vakcinacija;
-        this.revakcinacija = revakcinacija;
-        this.privremeneKontraindikacije = privremeneKontraindikacije;
-        this.odlukaKomisije = odlukaKomisije;
-    }
-
-    public TEvidencija() {
-    }
-
     @XmlElement(name = "Naziv_ustanove", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String nazivUstanove;
     @XmlElement(name = "Vakcinacijski_punkt", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
@@ -69,10 +54,10 @@ public class TEvidencija {
     protected TVakcinacija vakcinacija;
     @XmlElement(name = "Revakcinacija", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TVakcinacija revakcinacija;
-    @XmlElementRef(name = "Privremene_kontraindikacije", namespace = "www.ftn.uns.ac.rs/Saglasnost", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> privremeneKontraindikacije;
-    @XmlElementRef(name = "Odluka_komisije", namespace = "www.ftn.uns.ac.rs/Saglasnost", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> odlukaKomisije;
+    @XmlElement(name = "Privremene_kontraindikacije", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true, nillable = true)
+    protected String privremeneKontraindikacije;
+    @XmlElement(name = "Odluka_komisije", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true, nillable = true)
+    protected String odlukaKomisije;
 
     /**
      * Gets the value of the nazivUstanove property.
@@ -199,10 +184,10 @@ public class TEvidencija {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getPrivremeneKontraindikacije() {
+    public String getPrivremeneKontraindikacije() {
         return privremeneKontraindikacije;
     }
 
@@ -211,10 +196,10 @@ public class TEvidencija {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setPrivremeneKontraindikacije(JAXBElement<String> value) {
+    public void setPrivremeneKontraindikacije(String value) {
         this.privremeneKontraindikacije = value;
     }
 
@@ -223,10 +208,10 @@ public class TEvidencija {
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getOdlukaKomisije() {
+    public String getOdlukaKomisije() {
         return odlukaKomisije;
     }
 
@@ -235,10 +220,10 @@ public class TEvidencija {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setOdlukaKomisije(JAXBElement<String> value) {
+    public void setOdlukaKomisije(String value) {
         this.odlukaKomisije = value;
     }
 
