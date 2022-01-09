@@ -1,6 +1,6 @@
 package com.example.officialsapplication.controller;
 
-import com.example.officialsapplication.model.documents.IzvestajOImunizaciji;
+import com.example.officialsapplication.model.users.izvestaj.IzvestajOImunizaciji;
 import com.example.officialsapplication.services.IzvestajOImunizacijiService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

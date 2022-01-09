@@ -2,7 +2,7 @@ package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
-import com.example.VaccinationApplication.model.documents.Potvrda;
+import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import org.springframework.stereotype.Service;
 
 @Service

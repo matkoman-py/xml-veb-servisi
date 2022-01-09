@@ -24,9 +24,9 @@ public class MultiwayMapper {
 
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             
-            File file = ResourceUtils.getFile("src/main/resources/static/xsd/"+xsdFileName+".xsd");
+            File file = ResourceUtils.getFile("src/main/resources/static/xsd/" + xsdFileName + ".xsd");
             if(!file.exists()) {
-            	file = ResourceUtils.getFile("classpath:static/xsd/"+xsdFileName+".xsd");
+            	file = ResourceUtils.getFile("classpath:static/xsd/" + xsdFileName + ".xsd");
             }
             Schema schema = schemaFactory.newSchema(file);
             unmarshaller.setSchema(schema);

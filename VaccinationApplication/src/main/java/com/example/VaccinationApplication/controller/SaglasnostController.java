@@ -1,8 +1,7 @@
 package com.example.VaccinationApplication.controller;
 
-import com.example.VaccinationApplication.model.documents.Saglasnost;
+import com.example.VaccinationApplication.model.saglasnost.Saglasnost;
 import com.example.VaccinationApplication.services.SaglasnostService;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

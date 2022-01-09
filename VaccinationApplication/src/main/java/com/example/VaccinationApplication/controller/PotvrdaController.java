@@ -1,6 +1,6 @@
 package com.example.VaccinationApplication.controller;
 
-import com.example.VaccinationApplication.model.documents.Potvrda;
+import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import com.example.VaccinationApplication.services.PotvrdaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

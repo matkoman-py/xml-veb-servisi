@@ -1,8 +1,6 @@
 package com.example.VaccinationApplication.controller;
 
-import com.example.VaccinationApplication.model.documents.Interesovanje;
-import com.example.VaccinationApplication.model.documents.ZeleniSertifikat;
-import com.example.VaccinationApplication.services.InteresovanjeService;
+import com.example.VaccinationApplication.model.zeleni_sertifikat.ZeleniSertifikat;
 import com.example.VaccinationApplication.services.ZeleniSertifikatService;
 
 import org.springframework.http.ResponseEntity;

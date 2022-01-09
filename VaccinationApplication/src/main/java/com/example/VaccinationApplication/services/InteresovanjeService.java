@@ -2,7 +2,7 @@ package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
-import com.example.VaccinationApplication.model.documents.Interesovanje;
+import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,7 +24,7 @@ public class InteresovanjeService {
     public Interesovanje saveXml(String xmlString){
         Interesovanje interesovanje = (Interesovanje) mapper.convertToObject(xmlString, "Interesovanje",
                 Interesovanje.class);
-        String documentId = interesovanje.getPodaciOPrimaocu().getJMBG() + ".xml";
+        String documentId = interesovanje.getPodaciOPrimaocu().getJMBG().getValue() + ".xml";
         dataAccessLayer.saveDocument(interesovanje, folderId, documentId, Interesovanje.class);
         return interesovanje;
     }

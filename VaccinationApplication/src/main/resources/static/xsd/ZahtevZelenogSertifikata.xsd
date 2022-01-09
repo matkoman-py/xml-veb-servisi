@@ -9,11 +9,14 @@
                     type="zzs:TInformacije_o_podnosiocu"/>
                 <xs:element name="Informacije_o_zahtevu" type="zzs:TInformacije_o_zahtevu"/>
             </xs:sequence>
+            <xs:attribute name="about" type="xs:string" use="required"/>
+            <xs:attribute fixed="pred:parentTo" name="rel" type="xs:string" use="optional"/>
+            <xs:attribute name="href" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="TInformacije_o_podnosiocu">
         <xs:sequence>
-            <xs:element name="Ime_i_prezime" type="xs:string"/>
+            <xs:element name="Ime_i_prezime" type="zzs:TImePrezime"/>
             <xs:element name="Datum_rodjenja" type="xs:date"/>
             <xs:element name="Pol">
                 <xs:simpleType>
@@ -23,21 +26,8 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:element name="Jedinstveni_maticni_broj_gradjana">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:length value="13"/>
-                        <xs:pattern value="\d{13}"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="Broj_pasosa">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="\d{10}"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="Jedinstveni_maticni_broj_gradjana" type="zzs:TJmbg"> </xs:element>
+            <xs:element name="Broj_pasosa" type="zzs:TBrojPasosa"> </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TInformacije_o_zahtevu">
@@ -53,5 +43,29 @@
             <xs:element name="Mesto" type="xs:string"/>
             <xs:element name="Datum_izdavanja" type="xs:date"/>
         </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TImePrezime">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="property" use="required" fixed="pred:ime_i_prezime"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TJmbg">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="property" use="required" fixed="pred:jmbg"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TBrojPasosa">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="property" use="required" fixed="pred:broj_pasosa"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
     </xs:complexType>
 </xs:schema>
