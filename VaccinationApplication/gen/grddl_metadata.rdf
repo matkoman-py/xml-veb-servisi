@@ -1,0 +1,14 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
+  <rdf:Description rdf:about="www.ftn.uns.ac.rs/zelenisertifikat/13579/22">
+    <pred:parentTo xmlns:pred="www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:resource="www.ftn.uns.ac.rs/zelenisertifikat/13579/22"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="www.ftn.uns.ac.rs/zelenisertifikat/13579/22">
+    <pred:broj_sertifikata xmlns:pred="www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="string">13579/22</pred:broj_sertifikata>
+  </rdf:Description>
+  <rdf:Description rdf:about="www.ftn.uns.ac.rs/zelenisertifikat/13579/22">
+    <pred:ime_i_prezime xmlns:pred="www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="string">zel:ime_prezime</pred:ime_i_prezime>
+  </rdf:Description>
+  <rdf:Description rdf:about="www.ftn.uns.ac.rs/zelenisertifikat/13579/22">
+    <pred:jmbg xmlns:pred="www.ftn.uns.ac.rs/rdf/examples/predicate/" rdf:datatype="string">zel:jmbg</pred:jmbg>
+  </rdf:Description>
+</rdf:RDF>

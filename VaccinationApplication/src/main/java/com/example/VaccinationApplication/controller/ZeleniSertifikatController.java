@@ -3,6 +3,10 @@ package com.example.VaccinationApplication.controller;
 import com.example.VaccinationApplication.model.zeleni_sertifikat.ZeleniSertifikat;
 import com.example.VaccinationApplication.services.ZeleniSertifikatService;
 
+import java.io.FileNotFoundException;
+
+import javax.xml.transform.TransformerException;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +52,7 @@ public class ZeleniSertifikatController {
     }
     
     @PostMapping("convertToObject")
-    public ResponseEntity<ZeleniSertifikat> xmlToObject(@RequestBody String xmlString) {
+    public ResponseEntity<ZeleniSertifikat> xmlToObject(@RequestBody String xmlString) throws FileNotFoundException, TransformerException {
         ZeleniSertifikat retval = zeleniSertifikatService.convertToObject(xmlString);
         return ResponseEntity.ok(retval);
     }
