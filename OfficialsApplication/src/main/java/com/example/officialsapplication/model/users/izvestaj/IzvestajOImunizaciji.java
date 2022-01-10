@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -22,12 +21,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Period" type="{www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TPeriod"/>
- *         &lt;element name="Broj_podnetih_interesovanja" type="{www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TBrojPodnetihInteresovanja"/>
- *         &lt;element name="Zeleni_sertifikat_info" type="{www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TZeleni_sertifikat"/>
- *         &lt;element name="Doza_info" type="{www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TDoza_info"/>
- *         &lt;element name="Proizvodjaci_info" type="{www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TProizvodjaci_info"/>
- *         &lt;element name="Datum_izdavanja" type="{http://www.w3.org/2001/XMLSchema}date"/>
+ *         &lt;element name="Period" type="{http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TPeriod"/>
+ *         &lt;element name="Broj_podnetih_interesovanja" type="{http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TBrojPodnetihInteresovanja"/>
+ *         &lt;element name="Zeleni_sertifikat_info" type="{http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TZeleni_sertifikat"/>
+ *         &lt;element name="Doza_info" type="{http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TDoza_info"/>
+ *         &lt;element name="Proizvodjaci_info" type="{http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TProizvodjaci_info"/>
+ *         &lt;element name="Datum_izdavanja" type="{http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TDatumIzdavanja"/>
  *       &lt;/sequence>
  *       &lt;attribute name="about" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}positiveInteger" />
@@ -47,22 +46,21 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "proizvodjaciInfo",
     "datumIzdavanja"
 })
-@XmlRootElement(name = "Izvestaj_o_imunizaciji", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji")
+@XmlRootElement(name = "Izvestaj_o_imunizaciji", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji")
 public class IzvestajOImunizaciji {
 
-    @XmlElement(name = "Period", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Period", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     protected TPeriod period;
-    @XmlElement(name = "Broj_podnetih_interesovanja", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Broj_podnetih_interesovanja", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     protected TBrojPodnetihInteresovanja brojPodnetihInteresovanja;
-    @XmlElement(name = "Zeleni_sertifikat_info", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Zeleni_sertifikat_info", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     protected TZeleniSertifikat zeleniSertifikatInfo;
-    @XmlElement(name = "Doza_info", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Doza_info", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     protected TDozaInfo dozaInfo;
-    @XmlElement(name = "Proizvodjaci_info", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Proizvodjaci_info", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     protected TProizvodjaciInfo proizvodjaciInfo;
-    @XmlElement(name = "Datum_izdavanja", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
-    @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar datumIzdavanja;
+    @XmlElement(name = "Datum_izdavanja", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    protected TDatumIzdavanja datumIzdavanja;
     @XmlAttribute(name = "about", required = true)
     protected String about;
     @XmlAttribute(name = "id", required = true)
@@ -194,10 +192,10 @@ public class IzvestajOImunizaciji {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link TDatumIzdavanja }
      *     
      */
-    public XMLGregorianCalendar getDatumIzdavanja() {
+    public TDatumIzdavanja getDatumIzdavanja() {
         return datumIzdavanja;
     }
 
@@ -206,10 +204,10 @@ public class IzvestajOImunizaciji {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link TDatumIzdavanja }
      *     
      */
-    public void setDatumIzdavanja(XMLGregorianCalendar value) {
+    public void setDatumIzdavanja(TDatumIzdavanja value) {
         this.datumIzdavanja = value;
     }
 

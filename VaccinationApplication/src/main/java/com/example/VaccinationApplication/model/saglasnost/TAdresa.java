@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="Ulica_i_broj" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="Mesto" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="Opstina" type="{www.ftn.uns.ac.rs/Saglasnost}TOpstina"/>
+ *         &lt;element name="Opstina" type="{http://www.ftn.uns.ac.rs/Saglasnost}TOpstina"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,18 +29,18 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TAdresa", namespace = "www.ftn.uns.ac.rs/Saglasnost", propOrder = {
+@XmlType(name = "TAdresa", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", propOrder = {
     "ulicaIBroj",
     "mesto",
     "opstina"
 })
 public class TAdresa {
 
-    @XmlElement(name = "Ulica_i_broj", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Ulica_i_broj", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String ulicaIBroj;
-    @XmlElement(name = "Mesto", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Mesto", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String mesto;
-    @XmlElement(name = "Opstina", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Opstina", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TOpstina opstina;
 
     /**

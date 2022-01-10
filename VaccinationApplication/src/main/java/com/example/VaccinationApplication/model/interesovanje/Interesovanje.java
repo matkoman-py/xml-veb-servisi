@@ -6,9 +6,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -21,7 +19,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Podaci_o_primaocu" type="{www.ftn.uns.ac.rs/interesovanje}TPodaci_o_primaocu"/>
+ *         &lt;element name="Podaci_o_primaocu" type="{http://www.ftn.uns.ac.rs/interesovanje}TPodaci_o_primaocu"/>
  *         &lt;element name="Odabir_vakcine">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -33,10 +31,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="Datum" type="{http://www.w3.org/2001/XMLSchema}date"/>
+ *         &lt;element name="Datum" type="{http://www.ftn.uns.ac.rs/interesovanje}TDatumIzdavanja"/>
  *       &lt;/sequence>
  *       &lt;attribute name="about" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="rel" type="{http://www.w3.org/2001/XMLSchema}string" fixed="pred:parentTo" />
+ *       &lt;attribute name="rel" type="{http://www.w3.org/2001/XMLSchema}string" fixed="pred:answeredBy" />
  *       &lt;attribute name="href" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -51,16 +49,15 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "odabirVakcine",
     "datum"
 })
-@XmlRootElement(name = "interesovanje", namespace = "www.ftn.uns.ac.rs/interesovanje")
+@XmlRootElement(name = "interesovanje", namespace = "http://www.ftn.uns.ac.rs/interesovanje")
 public class Interesovanje {
 
-    @XmlElement(name = "Podaci_o_primaocu", namespace = "www.ftn.uns.ac.rs/interesovanje", required = true)
+    @XmlElement(name = "Podaci_o_primaocu", namespace = "http://www.ftn.uns.ac.rs/interesovanje", required = true)
     protected TPodaciOPrimaocu podaciOPrimaocu;
-    @XmlElement(name = "Odabir_vakcine", namespace = "www.ftn.uns.ac.rs/interesovanje", required = true)
+    @XmlElement(name = "Odabir_vakcine", namespace = "http://www.ftn.uns.ac.rs/interesovanje", required = true)
     protected String odabirVakcine;
-    @XmlElement(name = "Datum", namespace = "www.ftn.uns.ac.rs/interesovanje", required = true)
-    @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar datum;
+    @XmlElement(name = "Datum", namespace = "http://www.ftn.uns.ac.rs/interesovanje", required = true)
+    protected TDatumIzdavanja datum;
     @XmlAttribute(name = "about", required = true)
     protected String about;
     @XmlAttribute(name = "rel")
@@ -121,10 +118,10 @@ public class Interesovanje {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link TDatumIzdavanja }
      *     
      */
-    public XMLGregorianCalendar getDatum() {
+    public TDatumIzdavanja getDatum() {
         return datum;
     }
 
@@ -133,10 +130,10 @@ public class Interesovanje {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link TDatumIzdavanja }
      *     
      */
-    public void setDatum(XMLGregorianCalendar value) {
+    public void setDatum(TDatumIzdavanja value) {
         this.datum = value;
     }
 
@@ -174,7 +171,7 @@ public class Interesovanje {
      */
     public String getRel() {
         if (rel == null) {
-            return "pred:parentTo";
+            return "pred:answeredBy";
         } else {
             return rel;
         }

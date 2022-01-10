@@ -1,6 +1,7 @@
 package com.example.VaccinationApplication.mappers;
 
 import com.example.VaccinationApplication.eventhandler.VaccinationEventHandler;
+import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
@@ -45,6 +46,7 @@ public class MultiwayMapper {
             JAXBContext jaxbContext = JAXBContext.newInstance(classOfObject);
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
             marshaller.marshal(object, sw);
         } catch (Exception ignored) {
         }

@@ -17,11 +17,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Naziv_ustanove" type="{www.ftn.uns.ac.rs/Saglasnost}TZdravstvenaUstanova"/>
+ *         &lt;element name="Naziv_ustanove" type="{http://www.ftn.uns.ac.rs/Saglasnost}TZdravstvenaUstanova"/>
  *         &lt;element name="Vakcinacijski_punkt" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="Podaci_lekar" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="Vakcinacija" type="{www.ftn.uns.ac.rs/Saglasnost}TVakcinacija"/>
- *         &lt;element name="Revakcinacija" type="{www.ftn.uns.ac.rs/Saglasnost}TVakcinacija"/>
+ *         &lt;element name="Vakcinacija" type="{http://www.ftn.uns.ac.rs/Saglasnost}TVakcinacija"/>
+ *         &lt;element name="Revakcinacija" type="{http://www.ftn.uns.ac.rs/Saglasnost}TVakcinacija"/>
  *         &lt;element name="Privremene_kontraindikacije" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="Odluka_komisije" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TEvidencija", namespace = "www.ftn.uns.ac.rs/Saglasnost", propOrder = {
+@XmlType(name = "TEvidencija", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", propOrder = {
     "nazivUstanove",
     "vakcinacijskiPunkt",
     "podaciLekar",
@@ -44,19 +44,19 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TEvidencija {
 
-    @XmlElement(name = "Naziv_ustanove", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Naziv_ustanove", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TZdravstvenaUstanova nazivUstanove;
-    @XmlElement(name = "Vakcinacijski_punkt", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Vakcinacijski_punkt", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String vakcinacijskiPunkt;
-    @XmlElement(name = "Podaci_lekar", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Podaci_lekar", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String podaciLekar;
-    @XmlElement(name = "Vakcinacija", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Vakcinacija", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TVakcinacija vakcinacija;
-    @XmlElement(name = "Revakcinacija", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Revakcinacija", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TVakcinacija revakcinacija;
-    @XmlElement(name = "Privremene_kontraindikacije", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true, nillable = true)
+    @XmlElement(name = "Privremene_kontraindikacije", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true, nillable = true)
     protected String privremeneKontraindikacije;
-    @XmlElement(name = "Odluka_komisije", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true, nillable = true)
+    @XmlElement(name = "Odluka_komisije", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true, nillable = true)
     protected String odlukaKomisije;
 
     /**

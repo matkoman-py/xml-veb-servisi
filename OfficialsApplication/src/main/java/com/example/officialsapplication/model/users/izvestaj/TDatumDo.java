@@ -29,7 +29,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TDatumDo", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", propOrder = {
+@XmlType(name = "TDatumDo", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", propOrder = {
     "value"
 })
 public class TDatumDo {

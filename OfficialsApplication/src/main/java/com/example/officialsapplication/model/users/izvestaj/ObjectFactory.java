@@ -78,6 +78,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link TDatumIzdavanja }
+     * 
+     */
+    public TDatumIzdavanja createTDatumIzdavanja() {
+        return new TDatumIzdavanja();
+    }
+
+    /**
      * Create an instance of {@link TDatumOd }
      * 
      */

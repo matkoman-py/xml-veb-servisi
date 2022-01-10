@@ -20,16 +20,16 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="Drzavljanstvo">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;enumeration value="Drzavljanin Republike Srbije "/>
+ *               &lt;enumeration value="Drzavljanin Republike Srbije"/>
  *               &lt;enumeration value="Strani drzavljanin sa boravkom u RS"/>
  *               &lt;enumeration value="Strani drzavljanin bez boravka u RS"/>
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="JMBG" type="{www.ftn.uns.ac.rs/interesovanje}TJmbg"/>
- *         &lt;element name="Ime" type="{www.ftn.uns.ac.rs/interesovanje}TIme"/>
- *         &lt;element name="Prezime" type="{www.ftn.uns.ac.rs/interesovanje}TPrezime"/>
- *         &lt;element name="Kontakt" type="{www.ftn.uns.ac.rs/interesovanje}TKontakt"/>
+ *         &lt;element name="JMBG" type="{http://www.ftn.uns.ac.rs/interesovanje}TJmbg"/>
+ *         &lt;element name="Ime" type="{http://www.ftn.uns.ac.rs/interesovanje}TIme"/>
+ *         &lt;element name="Prezime" type="{http://www.ftn.uns.ac.rs/interesovanje}TPrezime"/>
+ *         &lt;element name="Kontakt" type="{http://www.ftn.uns.ac.rs/interesovanje}TKontakt"/>
  *         &lt;element name="Davalac_krvi">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -47,7 +47,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TPodaci_o_primaocu", namespace = "www.ftn.uns.ac.rs/interesovanje", propOrder = {
+@XmlType(name = "TPodaci_o_primaocu", namespace = "http://www.ftn.uns.ac.rs/interesovanje", propOrder = {
     "drzavljanstvo",
     "jmbg",
     "ime",
@@ -57,17 +57,17 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TPodaciOPrimaocu {
 
-    @XmlElement(name = "Drzavljanstvo", namespace = "www.ftn.uns.ac.rs/interesovanje", required = true)
+    @XmlElement(name = "Drzavljanstvo", namespace = "http://www.ftn.uns.ac.rs/interesovanje", required = true)
     protected String drzavljanstvo;
-    @XmlElement(name = "JMBG", namespace = "www.ftn.uns.ac.rs/interesovanje", required = true)
+    @XmlElement(name = "JMBG", namespace = "http://www.ftn.uns.ac.rs/interesovanje", required = true)
     protected TJmbg jmbg;
-    @XmlElement(name = "Ime", namespace = "www.ftn.uns.ac.rs/interesovanje", required = true)
+    @XmlElement(name = "Ime", namespace = "http://www.ftn.uns.ac.rs/interesovanje", required = true)
     protected TIme ime;
-    @XmlElement(name = "Prezime", namespace = "www.ftn.uns.ac.rs/interesovanje", required = true)
+    @XmlElement(name = "Prezime", namespace = "http://www.ftn.uns.ac.rs/interesovanje", required = true)
     protected TPrezime prezime;
-    @XmlElement(name = "Kontakt", namespace = "www.ftn.uns.ac.rs/interesovanje", required = true)
+    @XmlElement(name = "Kontakt", namespace = "http://www.ftn.uns.ac.rs/interesovanje", required = true)
     protected TKontakt kontakt;
-    @XmlElement(name = "Davalac_krvi", namespace = "www.ftn.uns.ac.rs/interesovanje", required = true)
+    @XmlElement(name = "Davalac_krvi", namespace = "http://www.ftn.uns.ac.rs/interesovanje", required = true)
     protected String davalacKrvi;
 
     /**

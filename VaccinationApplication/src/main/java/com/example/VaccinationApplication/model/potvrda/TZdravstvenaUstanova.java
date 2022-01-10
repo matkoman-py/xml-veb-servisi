@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TZdravstvenaUstanova", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", propOrder = {
+@XmlType(name = "TZdravstvenaUstanova", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", propOrder = {
     "value"
 })
 public class TZdravstvenaUstanova {

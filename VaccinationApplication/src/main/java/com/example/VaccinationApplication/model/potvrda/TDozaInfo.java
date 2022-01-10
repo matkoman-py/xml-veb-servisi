@@ -30,16 +30,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TDozaInfo", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", propOrder = {
+@XmlType(name = "TDozaInfo", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", propOrder = {
     "datumVakcine",
     "serijaVakcine"
 })
 public class TDozaInfo {
 
-    @XmlElement(name = "Datum_vakcine", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
+    @XmlElement(name = "Datum_vakcine", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datumVakcine;
-    @XmlElement(name = "Serija_vakcine", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
+    @XmlElement(name = "Serija_vakcine", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     protected String serijaVakcine;
 
     /**

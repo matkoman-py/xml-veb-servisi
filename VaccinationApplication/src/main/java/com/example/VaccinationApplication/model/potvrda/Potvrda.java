@@ -20,8 +20,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="Sifra_potvrde" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="pacijent" type="{www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TPacijent"/>
- *         &lt;element name="Vakcinacija_info" type="{www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TVakcinacija"/>
+ *         &lt;element name="pacijent" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TPacijent"/>
+ *         &lt;element name="Vakcinacija_info" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TVakcinacija"/>
  *         &lt;element name="Qr_kod" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *       &lt;attribute name="about" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -41,16 +41,16 @@ import javax.xml.bind.annotation.XmlType;
     "vakcinacijaInfo",
     "qrKod"
 })
-@XmlRootElement(name = "Potvrda", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji")
+@XmlRootElement(name = "Potvrda", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji")
 public class Potvrda {
 
-    @XmlElement(name = "Sifra_potvrde", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
+    @XmlElement(name = "Sifra_potvrde", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     protected String sifraPotvrde;
-    @XmlElement(namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
+    @XmlElement(namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     protected TPacijent pacijent;
-    @XmlElement(name = "Vakcinacija_info", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
+    @XmlElement(name = "Vakcinacija_info", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     protected TVakcinacija vakcinacijaInfo;
-    @XmlElement(name = "Qr_kod", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
+    @XmlElement(name = "Qr_kod", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     protected String qrKod;
     @XmlAttribute(name = "about", required = true)
     protected String about;

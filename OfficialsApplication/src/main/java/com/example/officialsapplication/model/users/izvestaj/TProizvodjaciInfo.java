@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TProizvodjaci_info", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", propOrder = {
+@XmlType(name = "TProizvodjaci_info", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", propOrder = {
     "brojDozaPfizerBioNTech",
     "brojDozaSinopharm",
     "brojDozaSputnikV",
@@ -40,16 +40,16 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TProizvodjaciInfo {
 
-    @XmlElement(name = "Broj_doza_Pfizer_BioNTech", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Broj_doza_Pfizer_BioNTech", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
     protected BigInteger brojDozaPfizerBioNTech;
-    @XmlElement(name = "Broj_doza_Sinopharm", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Broj_doza_Sinopharm", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
     protected BigInteger brojDozaSinopharm;
-    @XmlElement(name = "Broj_doza_SputnikV", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Broj_doza_SputnikV", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
     protected BigInteger brojDozaSputnikV;
-    @XmlElement(name = "Broj_doza_AstraZeneca", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Broj_doza_AstraZeneca", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
     protected BigInteger brojDozaAstraZeneca;
 

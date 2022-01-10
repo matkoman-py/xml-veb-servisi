@@ -19,7 +19,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Naziv_vakcine" type="{www.ftn.uns.ac.rs/Saglasnost}TNazivVakcine"/>
+ *         &lt;element name="Naziv_vakcine" type="{http://www.ftn.uns.ac.rs/Saglasnost}TNazivVakcine"/>
  *         &lt;element name="Datum_vakcinacije" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *         &lt;element name="Ekstremitet">
  *           &lt;simpleType>
@@ -41,7 +41,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TVakcinacija", namespace = "www.ftn.uns.ac.rs/Saglasnost", propOrder = {
+@XmlType(name = "TVakcinacija", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", propOrder = {
     "nazivVakcine",
     "datumVakcinacije",
     "ekstremitet",
@@ -51,18 +51,18 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class TVakcinacija {
 
-    @XmlElement(name = "Naziv_vakcine", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Naziv_vakcine", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TNazivVakcine nazivVakcine;
-    @XmlElement(name = "Datum_vakcinacije", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Datum_vakcinacije", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datumVakcinacije;
-    @XmlElement(name = "Ekstremitet", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Ekstremitet", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String ekstremitet;
-    @XmlElement(name = "Lot", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Lot", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String lot;
-    @XmlElement(name = "Proizvodjac", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Proizvodjac", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String proizvodjac;
-    @XmlElement(name = "Nezeljena_reakcija", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true, nillable = true)
+    @XmlElement(name = "Nezeljena_reakcija", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true, nillable = true)
     protected String nezeljenaReakcija;
 
     /**

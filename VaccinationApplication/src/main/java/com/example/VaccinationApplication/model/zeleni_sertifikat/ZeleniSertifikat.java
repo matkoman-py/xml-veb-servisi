@@ -8,9 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -30,13 +28,13 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="broj_sertifikata" type="{www.ftn.uns.ac.rs/zelenisertifikat}TBrojSertifikata"/>
- *         &lt;element name="datum_izdavanja" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
- *         &lt;element name="podaci_o_pacijentu" type="{www.ftn.uns.ac.rs/zelenisertifikat}TPacijent"/>
- *         &lt;element name="podaci_o_vakcinaciji" type="{www.ftn.uns.ac.rs/zelenisertifikat}TVakcinacija" maxOccurs="unbounded"/>
+ *         &lt;element name="broj_sertifikata" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TBrojSertifikata"/>
+ *         &lt;element name="datum_izdavanja" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TDatumIzdavanja"/>
+ *         &lt;element name="podaci_o_pacijentu" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TPacijent"/>
+ *         &lt;element name="podaci_o_vakcinaciji" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TVakcinacija" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="about" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="rel" type="{http://www.w3.org/2001/XMLSchema}string" fixed="pred:parentTo" />
+ *       &lt;attribute name="rel" type="{http://www.w3.org/2001/XMLSchema}string" fixed="pred:answerTo" />
  *       &lt;attribute name="href" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -53,19 +51,18 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "podaciOPacijentu",
     "podaciOVakcinaciji"
 })
-@XmlRootElement(name = "zeleni_sertifikat", namespace = "www.ftn.uns.ac.rs/zelenisertifikat")
+@XmlRootElement(name = "zeleni_sertifikat", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat")
 public class ZeleniSertifikat {
 
-    @XmlElement(name = "qr_kod", namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(name = "qr_kod", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     protected String qrKod;
-    @XmlElement(name = "broj_sertifikata", namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(name = "broj_sertifikata", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     protected TBrojSertifikata brojSertifikata;
-    @XmlElement(name = "datum_izdavanja", namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar datumIzdavanja;
-    @XmlElement(name = "podaci_o_pacijentu", namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(name = "datum_izdavanja", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    protected TDatumIzdavanja datumIzdavanja;
+    @XmlElement(name = "podaci_o_pacijentu", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     protected TPacijent podaciOPacijentu;
-    @XmlElement(name = "podaci_o_vakcinaciji", namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(name = "podaci_o_vakcinaciji", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     protected List<TVakcinacija> podaciOVakcinaciji;
     @XmlAttribute(name = "about", required = true)
     protected String about;
@@ -127,10 +124,10 @@ public class ZeleniSertifikat {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link TDatumIzdavanja }
      *     
      */
-    public XMLGregorianCalendar getDatumIzdavanja() {
+    public TDatumIzdavanja getDatumIzdavanja() {
         return datumIzdavanja;
     }
 
@@ -139,10 +136,10 @@ public class ZeleniSertifikat {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link TDatumIzdavanja }
      *     
      */
-    public void setDatumIzdavanja(XMLGregorianCalendar value) {
+    public void setDatumIzdavanja(TDatumIzdavanja value) {
         this.datumIzdavanja = value;
     }
 
@@ -233,7 +230,7 @@ public class ZeleniSertifikat {
      */
     public String getRel() {
         if (rel == null) {
-            return "pred:parentTo";
+            return "pred:answerTo";
         } else {
             return rel;
         }

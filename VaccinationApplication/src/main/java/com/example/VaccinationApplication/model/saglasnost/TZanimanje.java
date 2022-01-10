@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
-@XmlType(name = "TZanimanje", namespace = "www.ftn.uns.ac.rs/Saglasnost")
+@XmlType(name = "TZanimanje", namespace = "http://www.ftn.uns.ac.rs/Saglasnost")
 @XmlEnum
 public enum TZanimanje {
 

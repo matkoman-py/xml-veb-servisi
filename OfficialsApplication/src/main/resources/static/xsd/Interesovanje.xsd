@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="www.ftn.uns.ac.rs/interesovanje" xmlns:int="www.ftn.uns.ac.rs/interesovanje">
+    targetNamespace="http://www.ftn.uns.ac.rs/interesovanje"
+    xmlns:int="http://www.ftn.uns.ac.rs/interesovanje"
+    xmlns:pred="http://www.ftn.uns.ac.rs/predicate">
 
     <xs:element name="interesovanje">
         <xs:complexType>
@@ -17,10 +19,10 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element name="Datum" type="xs:date"/>
+                <xs:element name="Datum" type="int:TDatumIzdavanja"/>
             </xs:sequence>
             <xs:attribute name="about" type="xs:string" use="required"/>
-            <xs:attribute fixed="pred:parentTo" name="rel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="pred:answeredBy" name="rel" type="xs:string" use="optional"/>
             <xs:attribute name="href" type="xs:string"/>
         </xs:complexType>
     </xs:element>
@@ -29,7 +31,7 @@
             <xs:element name="Drzavljanstvo">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="Drzavljanin Republike Srbije "/>
+                        <xs:enumeration value="Drzavljanin Republike Srbije"/>
                         <xs:enumeration value="Strani drzavljanin sa boravkom u RS"/>
                         <xs:enumeration value="Strani drzavljanin bez boravka u RS"/>
                     </xs:restriction>
@@ -95,6 +97,14 @@
             <xs:extension base="xs:string">
                 <xs:attribute name="property" use="required" fixed="pred:jmbg"/>
                 <xs:attribute name="datatype" use="required" fixed="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TDatumIzdavanja">
+        <xs:simpleContent>
+            <xs:extension base="xs:date">
+                <xs:attribute name="property" use="required" fixed="pred:datum"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:date"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>

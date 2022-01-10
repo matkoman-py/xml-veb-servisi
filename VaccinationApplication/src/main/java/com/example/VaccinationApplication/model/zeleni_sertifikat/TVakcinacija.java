@@ -34,7 +34,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TVakcinacija", namespace = "www.ftn.uns.ac.rs/zelenisertifikat", propOrder = {
+@XmlType(name = "TVakcinacija", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", propOrder = {
     "doza",
     "tip",
     "proizvodjacSerija",
@@ -43,17 +43,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class TVakcinacija {
 
-    @XmlElement(namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger doza;
-    @XmlElement(namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     protected String tip;
-    @XmlElement(name = "proizvodjac_serija", namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(name = "proizvodjac_serija", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     protected String proizvodjacSerija;
-    @XmlElement(namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datum;
-    @XmlElement(name = "zdravstvena_ustanova", namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(name = "zdravstvena_ustanova", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     protected String zdravstvenaUstanova;
 
     /**

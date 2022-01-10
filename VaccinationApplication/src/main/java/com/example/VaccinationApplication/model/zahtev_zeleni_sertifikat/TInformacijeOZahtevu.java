@@ -4,9 +4,7 @@ package com.example.VaccinationApplication.model.zahtev_zeleni_sertifikat;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -28,7 +26,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *           &lt;/simpleType>
  *         &lt;/element>
  *         &lt;element name="Mesto" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="Datum_izdavanja" type="{http://www.w3.org/2001/XMLSchema}date"/>
+ *         &lt;element name="Datum_izdavanja" type="{http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata}TDatumIzdavanja"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,20 +36,19 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TInformacije_o_zahtevu", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", propOrder = {
+@XmlType(name = "TInformacije_o_zahtevu", namespace = "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", propOrder = {
     "razlog",
     "mesto",
     "datumIzdavanja"
 })
 public class TInformacijeOZahtevu {
 
-    @XmlElement(name = "Razlog", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
+    @XmlElement(name = "Razlog", namespace = "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
     protected String razlog;
-    @XmlElement(name = "Mesto", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
+    @XmlElement(name = "Mesto", namespace = "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
     protected String mesto;
-    @XmlElement(name = "Datum_izdavanja", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
-    @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar datumIzdavanja;
+    @XmlElement(name = "Datum_izdavanja", namespace = "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
+    protected TDatumIzdavanja datumIzdavanja;
 
     /**
      * Gets the value of the razlog property.
@@ -106,10 +103,10 @@ public class TInformacijeOZahtevu {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link TDatumIzdavanja }
      *     
      */
-    public XMLGregorianCalendar getDatumIzdavanja() {
+    public TDatumIzdavanja getDatumIzdavanja() {
         return datumIzdavanja;
     }
 
@@ -118,10 +115,10 @@ public class TInformacijeOZahtevu {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link TDatumIzdavanja }
      *     
      */
-    public void setDatumIzdavanja(XMLGregorianCalendar value) {
+    public void setDatumIzdavanja(TDatumIzdavanja value) {
         this.datumIzdavanja = value;
     }
 

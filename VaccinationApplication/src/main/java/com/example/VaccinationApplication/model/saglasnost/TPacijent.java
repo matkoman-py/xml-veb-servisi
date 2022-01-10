@@ -19,19 +19,19 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Prezime" type="{www.ftn.uns.ac.rs/Saglasnost}TPrezime"/>
- *         &lt;element name="Ime" type="{www.ftn.uns.ac.rs/Saglasnost}TIme"/>
+ *         &lt;element name="Prezime" type="{http://www.ftn.uns.ac.rs/Saglasnost}TPrezime"/>
+ *         &lt;element name="Ime" type="{http://www.ftn.uns.ac.rs/Saglasnost}TIme"/>
  *         &lt;element name="Ime_roditelja" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="Pol" type="{www.ftn.uns.ac.rs/Saglasnost}TPol"/>
+ *         &lt;element name="Pol" type="{http://www.ftn.uns.ac.rs/Saglasnost}TPol"/>
  *         &lt;element name="Datum_rodjenja" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *         &lt;element name="Mesto_rodjenja" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="Adresa" type="{www.ftn.uns.ac.rs/Saglasnost}TAdresa"/>
- *         &lt;element name="Kontakt" type="{www.ftn.uns.ac.rs/Saglasnost}TKontakt"/>
- *         &lt;element name="Radni_status" type="{www.ftn.uns.ac.rs/Saglasnost}TRadni_status"/>
- *         &lt;element name="Zanimanje" type="{www.ftn.uns.ac.rs/Saglasnost}TZanimanje"/>
- *         &lt;element name="Socijalna_zastita_info" type="{www.ftn.uns.ac.rs/Saglasnost}TSocijalna_zastita"/>
- *         &lt;element name="Izjava_saglasnosti" type="{www.ftn.uns.ac.rs/Saglasnost}TIzjava_saglasnosti"/>
- *         &lt;element name="Datum" type="{http://www.w3.org/2001/XMLSchema}date"/>
+ *         &lt;element name="Adresa" type="{http://www.ftn.uns.ac.rs/Saglasnost}TAdresa"/>
+ *         &lt;element name="Kontakt" type="{http://www.ftn.uns.ac.rs/Saglasnost}TKontakt"/>
+ *         &lt;element name="Radni_status" type="{http://www.ftn.uns.ac.rs/Saglasnost}TRadni_status"/>
+ *         &lt;element name="Zanimanje" type="{http://www.ftn.uns.ac.rs/Saglasnost}TZanimanje"/>
+ *         &lt;element name="Socijalna_zastita_info" type="{http://www.ftn.uns.ac.rs/Saglasnost}TSocijalna_zastita"/>
+ *         &lt;element name="Izjava_saglasnosti" type="{http://www.ftn.uns.ac.rs/Saglasnost}TIzjava_saglasnosti"/>
+ *         &lt;element name="Datum" type="{http://www.ftn.uns.ac.rs/Saglasnost}TDatumIzdavanja"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -41,7 +41,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TPacijent", namespace = "www.ftn.uns.ac.rs/Saglasnost", propOrder = {
+@XmlType(name = "TPacijent", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", propOrder = {
     "prezime",
     "ime",
     "imeRoditelja",
@@ -58,37 +58,36 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class TPacijent {
 
-    @XmlElement(name = "Prezime", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Prezime", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TPrezime prezime;
-    @XmlElement(name = "Ime", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Ime", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TIme ime;
-    @XmlElement(name = "Ime_roditelja", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Ime_roditelja", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String imeRoditelja;
-    @XmlElement(name = "Pol", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Pol", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     @XmlSchemaType(name = "string")
     protected TPol pol;
-    @XmlElement(name = "Datum_rodjenja", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Datum_rodjenja", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datumRodjenja;
-    @XmlElement(name = "Mesto_rodjenja", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Mesto_rodjenja", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String mestoRodjenja;
-    @XmlElement(name = "Adresa", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Adresa", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TAdresa adresa;
-    @XmlElement(name = "Kontakt", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Kontakt", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TKontakt kontakt;
-    @XmlElement(name = "Radni_status", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Radni_status", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     @XmlSchemaType(name = "string")
     protected TRadniStatus radniStatus;
-    @XmlElement(name = "Zanimanje", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Zanimanje", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     @XmlSchemaType(name = "string")
     protected TZanimanje zanimanje;
-    @XmlElement(name = "Socijalna_zastita_info", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Socijalna_zastita_info", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TSocijalnaZastita socijalnaZastitaInfo;
-    @XmlElement(name = "Izjava_saglasnosti", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Izjava_saglasnosti", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TIzjavaSaglasnosti izjavaSaglasnosti;
-    @XmlElement(name = "Datum", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
-    @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar datum;
+    @XmlElement(name = "Datum", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
+    protected TDatumIzdavanja datum;
 
     /**
      * Gets the value of the prezime property.
@@ -383,10 +382,10 @@ public class TPacijent {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link TDatumIzdavanja }
      *     
      */
-    public XMLGregorianCalendar getDatum() {
+    public TDatumIzdavanja getDatum() {
         return datum;
     }
 
@@ -395,10 +394,10 @@ public class TPacijent {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link TDatumIzdavanja }
      *     
      */
-    public void setDatum(XMLGregorianCalendar value) {
+    public void setDatum(TDatumIzdavanja value) {
         this.datum = value;
     }
 

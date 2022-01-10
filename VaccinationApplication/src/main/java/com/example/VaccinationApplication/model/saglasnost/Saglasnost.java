@@ -19,13 +19,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Drzavljanstvo" type="{www.ftn.uns.ac.rs/Saglasnost}TDrzavljanstvo"/>
- *         &lt;element name="Podaci_o_pacijentu" type="{www.ftn.uns.ac.rs/Saglasnost}TPacijent"/>
- *         &lt;element name="Evidencija_o_vakcinaciji" type="{www.ftn.uns.ac.rs/Saglasnost}TEvidencija"/>
+ *         &lt;element name="Drzavljanstvo" type="{http://www.ftn.uns.ac.rs/Saglasnost}TDrzavljanstvo"/>
+ *         &lt;element name="Podaci_o_pacijentu" type="{http://www.ftn.uns.ac.rs/Saglasnost}TPacijent"/>
+ *         &lt;element name="Evidencija_o_vakcinaciji" type="{http://www.ftn.uns.ac.rs/Saglasnost}TEvidencija"/>
  *       &lt;/sequence>
  *       &lt;attribute name="about" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="href" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="rel" type="{http://www.w3.org/2001/XMLSchema}string" fixed="pred:parentTo" />
+ *       &lt;attribute name="rel" use="required" type="{http://www.w3.org/2001/XMLSchema}string" fixed="pred:fromInteresovanje" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -39,20 +39,20 @@ import javax.xml.bind.annotation.XmlType;
     "podaciOPacijentu",
     "evidencijaOVakcinaciji"
 })
-@XmlRootElement(name = "Saglasnost", namespace = "www.ftn.uns.ac.rs/Saglasnost")
+@XmlRootElement(name = "Saglasnost", namespace = "http://www.ftn.uns.ac.rs/Saglasnost")
 public class Saglasnost {
 
-    @XmlElement(name = "Drzavljanstvo", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Drzavljanstvo", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TDrzavljanstvo drzavljanstvo;
-    @XmlElement(name = "Podaci_o_pacijentu", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Podaci_o_pacijentu", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TPacijent podaciOPacijentu;
-    @XmlElement(name = "Evidencija_o_vakcinaciji", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Evidencija_o_vakcinaciji", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TEvidencija evidencijaOVakcinaciji;
     @XmlAttribute(name = "about", required = true)
     protected String about;
     @XmlAttribute(name = "href")
     protected String href;
-    @XmlAttribute(name = "rel")
+    @XmlAttribute(name = "rel", required = true)
     protected String rel;
 
     /**
@@ -185,7 +185,7 @@ public class Saglasnost {
      */
     public String getRel() {
         if (rel == null) {
-            return "pred:parentTo";
+            return "pred:fromInteresovanje";
         } else {
             return rel;
         }

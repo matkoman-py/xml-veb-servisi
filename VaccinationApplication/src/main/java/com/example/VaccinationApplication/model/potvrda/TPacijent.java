@@ -19,7 +19,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Ime_i_prezime" type="{www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TImeIPrezime"/>
+ *         &lt;element name="Ime_i_prezime" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TImeIPrezime"/>
  *         &lt;element name="Datum_rodjenja" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *         &lt;element name="Pol">
  *           &lt;simpleType>
@@ -29,7 +29,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="Jmbg" type="{www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TJmbg"/>
+ *         &lt;element name="Jmbg" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TJmbg"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -39,7 +39,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TPacijent", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", propOrder = {
+@XmlType(name = "TPacijent", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", propOrder = {
     "imeIPrezime",
     "datumRodjenja",
     "pol",
@@ -47,14 +47,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class TPacijent {
 
-    @XmlElement(name = "Ime_i_prezime", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
+    @XmlElement(name = "Ime_i_prezime", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     protected TImeIPrezime imeIPrezime;
-    @XmlElement(name = "Datum_rodjenja", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
+    @XmlElement(name = "Datum_rodjenja", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datumRodjenja;
-    @XmlElement(name = "Pol", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
+    @XmlElement(name = "Pol", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     protected String pol;
-    @XmlElement(name = "Jmbg", namespace = "www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
+    @XmlElement(name = "Jmbg", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     protected TJmbg jmbg;
 
     /**

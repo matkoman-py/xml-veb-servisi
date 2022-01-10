@@ -35,15 +35,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TIzjava_saglasnosti", namespace = "www.ftn.uns.ac.rs/Saglasnost", propOrder = {
+@XmlType(name = "TIzjava_saglasnosti", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", propOrder = {
     "saglasan",
     "nazivLeka"
 })
 public class TIzjavaSaglasnosti {
 
-    @XmlElement(name = "Saglasan", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Saglasan", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String saglasan;
-    @XmlElement(name = "Naziv_leka", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true, nillable = true)
+    @XmlElement(name = "Naziv_leka", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true, nillable = true)
     protected String nazivLeka;
 
     /**

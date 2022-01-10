@@ -47,18 +47,18 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TKontakt", namespace = "www.ftn.uns.ac.rs/Saglasnost", propOrder = {
+@XmlType(name = "TKontakt", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", propOrder = {
     "fiksni",
     "mobilni",
     "email"
 })
 public class TKontakt {
 
-    @XmlElement(name = "Fiksni", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Fiksni", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String fiksni;
-    @XmlElement(name = "Mobilni", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Mobilni", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String mobilni;
-    @XmlElement(name = "Email", namespace = "www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Email", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected String email;
 
     /**

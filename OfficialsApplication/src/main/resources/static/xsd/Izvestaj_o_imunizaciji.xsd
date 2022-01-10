@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji" version="1.1"
-    xmlns:izv="www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji">
+    targetNamespace="http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji" version="1.1"
+    xmlns:izv="http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji"
+    xmlns:pred="http://www.ftn.uns.ac.rs/predicate">
 
 
     <xs:element name="Izvestaj_o_imunizaciji">
@@ -12,7 +13,7 @@
                 <xs:element name="Zeleni_sertifikat_info" type="izv:TZeleni_sertifikat"/>
                 <xs:element name="Doza_info" type="izv:TDoza_info"/>
                 <xs:element name="Proizvodjaci_info" type="izv:TProizvodjaci_info"/>
-                <xs:element name="Datum_izdavanja" type="xs:date"/>
+                <xs:element name="Datum_izdavanja" type="izv:TDatumIzdavanja"/>
             </xs:sequence>
             <xs:attribute name="about" type="xs:string" use="required"/>
             <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
@@ -67,6 +68,14 @@
             <xs:extension base="xs:date">
                 <xs:attribute name="property" use="required" fixed="pred:datum_do"/>
                 <xs:attribute name="datatype" use="required" fixed="xs:date"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TDatumIzdavanja">
+        <xs:simpleContent>
+            <xs:extension base="xs:dateTime">
+                <xs:attribute name="property" use="required" fixed="pred:datum"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:dateTime"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>

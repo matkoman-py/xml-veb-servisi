@@ -17,8 +17,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Datum_od" type="{www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TDatumOd"/>
- *         &lt;element name="Datum_do" type="{www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TDatumDo"/>
+ *         &lt;element name="Datum_od" type="{http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TDatumOd"/>
+ *         &lt;element name="Datum_do" type="{http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji}TDatumDo"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -28,15 +28,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TPeriod", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", propOrder = {
+@XmlType(name = "TPeriod", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", propOrder = {
     "datumOd",
     "datumDo"
 })
 public class TPeriod {
 
-    @XmlElement(name = "Datum_od", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Datum_od", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     protected TDatumOd datumOd;
-    @XmlElement(name = "Datum_do", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Datum_do", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     protected TDatumDo datumDo;
 
     /**

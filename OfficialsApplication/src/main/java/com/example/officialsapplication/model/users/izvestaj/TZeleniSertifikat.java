@@ -30,16 +30,16 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TZeleni_sertifikat", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", propOrder = {
+@XmlType(name = "TZeleni_sertifikat", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", propOrder = {
     "brojPrimljenihZahteva",
     "brojIzdatihSertifikata"
 })
 public class TZeleniSertifikat {
 
-    @XmlElement(name = "Broj_primljenih_zahteva", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Broj_primljenih_zahteva", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
     protected BigInteger brojPrimljenihZahteva;
-    @XmlElement(name = "Broj_izdatih_sertifikata", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Broj_izdatih_sertifikata", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
     protected BigInteger brojIzdatihSertifikata;
 

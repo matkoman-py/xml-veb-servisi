@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
-    xmlns:zzs="www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata">
+    targetNamespace="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
+    xmlns:zzs="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
+    xmlns:pred="http://www.ftn.uns.ac.rs/predicate">
     <xs:element name="zahtev">
         <xs:complexType>
             <xs:sequence>
@@ -10,7 +11,7 @@
                 <xs:element name="Informacije_o_zahtevu" type="zzs:TInformacije_o_zahtevu"/>
             </xs:sequence>
             <xs:attribute name="about" type="xs:string" use="required"/>
-            <xs:attribute fixed="pred:parentTo" name="rel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="pred:answeredBy" name="rel" type="xs:string" use="optional"/>
             <xs:attribute name="href" type="xs:string"/>
         </xs:complexType>
     </xs:element>
@@ -41,7 +42,7 @@
                 </xs:simpleType>
             </xs:element>
             <xs:element name="Mesto" type="xs:string"/>
-            <xs:element name="Datum_izdavanja" type="xs:date"/>
+            <xs:element name="Datum_izdavanja" type="zzs:TDatumIzdavanja"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TImePrezime">
@@ -65,6 +66,14 @@
             <xs:extension base="xs:string">
                 <xs:attribute name="property" use="required" fixed="pred:broj_pasosa"/>
                 <xs:attribute name="datatype" use="required" fixed="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TDatumIzdavanja">
+        <xs:simpleContent>
+            <xs:extension base="xs:date">
+                <xs:attribute name="property" use="required" fixed="pred:datum_izdavanja"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:date"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>

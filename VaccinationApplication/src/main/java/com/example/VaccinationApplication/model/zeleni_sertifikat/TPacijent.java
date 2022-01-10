@@ -19,7 +19,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="ime_prezime" type="{www.ftn.uns.ac.rs/zelenisertifikat}TImeIPrezime"/>
+ *         &lt;element name="ime_prezime" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TImeIPrezime"/>
  *         &lt;element name="pol">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -29,7 +29,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *           &lt;/simpleType>
  *         &lt;/element>
  *         &lt;element name="datum_rodjenja" type="{http://www.w3.org/2001/XMLSchema}date"/>
- *         &lt;element name="jmbg" type="{www.ftn.uns.ac.rs/zelenisertifikat}TJmbg"/>
+ *         &lt;element name="jmbg" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TJmbg"/>
  *         &lt;element name="broj_pasosa">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -47,7 +47,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TPacijent", namespace = "www.ftn.uns.ac.rs/zelenisertifikat", propOrder = {
+@XmlType(name = "TPacijent", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", propOrder = {
     "imePrezime",
     "pol",
     "datumRodjenja",
@@ -56,16 +56,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class TPacijent {
 
-    @XmlElement(name = "ime_prezime", namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(name = "ime_prezime", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     protected TImeIPrezime imePrezime;
-    @XmlElement(namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     protected String pol;
-    @XmlElement(name = "datum_rodjenja", namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(name = "datum_rodjenja", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datumRodjenja;
-    @XmlElement(namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     protected TJmbg jmbg;
-    @XmlElement(name = "broj_pasosa", namespace = "www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    @XmlElement(name = "broj_pasosa", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     protected String brojPasosa;
 
     /**

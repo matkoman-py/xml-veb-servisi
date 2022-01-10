@@ -19,11 +19,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Podnosilac_zahteva" type="{www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata}TInformacije_o_podnosiocu" form="qualified"/>
- *         &lt;element name="Informacije_o_zahtevu" type="{www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata}TInformacije_o_zahtevu"/>
+ *         &lt;element name="Podnosilac_zahteva" type="{http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata}TInformacije_o_podnosiocu" form="qualified"/>
+ *         &lt;element name="Informacije_o_zahtevu" type="{http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata}TInformacije_o_zahtevu"/>
  *       &lt;/sequence>
  *       &lt;attribute name="about" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="rel" type="{http://www.w3.org/2001/XMLSchema}string" fixed="pred:parentTo" />
+ *       &lt;attribute name="rel" type="{http://www.w3.org/2001/XMLSchema}string" fixed="pred:answeredBy" />
  *       &lt;attribute name="href" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,12 +37,12 @@ import javax.xml.bind.annotation.XmlType;
     "podnosilacZahteva",
     "informacijeOZahtevu"
 })
-@XmlRootElement(name = "zahtev", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata")
+@XmlRootElement(name = "zahtev", namespace = "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata")
 public class Zahtev {
 
-    @XmlElement(name = "Podnosilac_zahteva", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
+    @XmlElement(name = "Podnosilac_zahteva", namespace = "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
     protected TInformacijeOPodnosiocu podnosilacZahteva;
-    @XmlElement(name = "Informacije_o_zahtevu", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
+    @XmlElement(name = "Informacije_o_zahtevu", namespace = "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
     protected TInformacijeOZahtevu informacijeOZahtevu;
     @XmlAttribute(name = "about", required = true)
     protected String about;
@@ -133,7 +133,7 @@ public class Zahtev {
      */
     public String getRel() {
         if (rel == null) {
-            return "pred:parentTo";
+            return "pred:answeredBy";
         } else {
             return rel;
         }

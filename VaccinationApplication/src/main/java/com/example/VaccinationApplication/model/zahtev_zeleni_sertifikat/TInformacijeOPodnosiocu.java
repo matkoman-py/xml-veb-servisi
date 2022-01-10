@@ -19,7 +19,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Ime_i_prezime" type="{www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata}TImePrezime"/>
+ *         &lt;element name="Ime_i_prezime" type="{http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata}TImePrezime"/>
  *         &lt;element name="Datum_rodjenja" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *         &lt;element name="Pol">
  *           &lt;simpleType>
@@ -29,8 +29,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *             &lt;/restriction>
  *           &lt;/simpleType>
  *         &lt;/element>
- *         &lt;element name="Jedinstveni_maticni_broj_gradjana" type="{www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata}TJmbg"/>
- *         &lt;element name="Broj_pasosa" type="{www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata}TBrojPasosa"/>
+ *         &lt;element name="Jedinstveni_maticni_broj_gradjana" type="{http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata}TJmbg"/>
+ *         &lt;element name="Broj_pasosa" type="{http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata}TBrojPasosa"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,7 +40,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TInformacije_o_podnosiocu", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", propOrder = {
+@XmlType(name = "TInformacije_o_podnosiocu", namespace = "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", propOrder = {
     "imeIPrezime",
     "datumRodjenja",
     "pol",
@@ -49,16 +49,16 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class TInformacijeOPodnosiocu {
 
-    @XmlElement(name = "Ime_i_prezime", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
+    @XmlElement(name = "Ime_i_prezime", namespace = "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
     protected TImePrezime imeIPrezime;
-    @XmlElement(name = "Datum_rodjenja", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
+    @XmlElement(name = "Datum_rodjenja", namespace = "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datumRodjenja;
-    @XmlElement(name = "Pol", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
+    @XmlElement(name = "Pol", namespace = "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
     protected String pol;
-    @XmlElement(name = "Jedinstveni_maticni_broj_gradjana", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
+    @XmlElement(name = "Jedinstveni_maticni_broj_gradjana", namespace = "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
     protected TJmbg jedinstveniMaticniBrojGradjana;
-    @XmlElement(name = "Broj_pasosa", namespace = "www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
+    @XmlElement(name = "Broj_pasosa", namespace = "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata", required = true)
     protected TBrojPasosa brojPasosa;
 
     /**

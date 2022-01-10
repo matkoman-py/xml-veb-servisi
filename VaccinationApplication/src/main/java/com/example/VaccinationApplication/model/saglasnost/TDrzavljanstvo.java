@@ -45,18 +45,18 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TDrzavljanstvo", namespace = "www.ftn.uns.ac.rs/Saglasnost", propOrder = {
+@XmlType(name = "TDrzavljanstvo", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", propOrder = {
     "jmbg",
     "naziv",
     "brojPasosaEBS"
 })
 public class TDrzavljanstvo {
 
-    @XmlElement(name = "JMBG", namespace = "www.ftn.uns.ac.rs/Saglasnost")
+    @XmlElement(name = "JMBG", namespace = "http://www.ftn.uns.ac.rs/Saglasnost")
     protected String jmbg;
-    @XmlElement(name = "Naziv", namespace = "www.ftn.uns.ac.rs/Saglasnost")
+    @XmlElement(name = "Naziv", namespace = "http://www.ftn.uns.ac.rs/Saglasnost")
     protected String naziv;
-    @XmlElement(name = "Broj_pasosa_EBS", namespace = "www.ftn.uns.ac.rs/Saglasnost")
+    @XmlElement(name = "Broj_pasosa_EBS", namespace = "http://www.ftn.uns.ac.rs/Saglasnost")
     protected String brojPasosaEBS;
 
     /**

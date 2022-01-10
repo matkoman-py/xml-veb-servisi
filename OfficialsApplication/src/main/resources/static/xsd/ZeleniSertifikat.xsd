@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="www.ftn.uns.ac.rs/zelenisertifikat"
-    xmlns:zel="www.ftn.uns.ac.rs/zelenisertifikat" id="asdasda"
-    xmlns:z="www.ftn.uns.ac.rs/zelenisertifikat">
+    targetNamespace="http://www.ftn.uns.ac.rs/zelenisertifikat"
+    xmlns:zel="http://www.ftn.uns.ac.rs/zelenisertifikat" id="asdasda"
+    xmlns:pred="http://www.ftn.uns.ac.rs/predicate">
 
     <xs:element name="zeleni_sertifikat">
         <xs:complexType>
@@ -14,20 +14,20 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
-                <xs:element name="broj_sertifikata" type="z:TBrojSertifikata"> </xs:element>
-                <xs:element name="datum_izdavanja" type="xs:dateTime"/>
+                <xs:element name="broj_sertifikata" type="zel:TBrojSertifikata"> </xs:element>
+                <xs:element name="datum_izdavanja" type="zel:TDatumIzdavanja"/>
                 <xs:element name="podaci_o_pacijentu" type="zel:TPacijent"/>
                 <xs:element maxOccurs="unbounded" name="podaci_o_vakcinaciji"
                     type="zel:TVakcinacija"/>
             </xs:sequence>
             <xs:attribute name="about" type="xs:string" use="required"/>
-            <xs:attribute fixed="pred:parentTo" name="rel" type="xs:string"/>
+            <xs:attribute fixed="pred:answerTo" name="rel" type="xs:string"/>
             <xs:attribute name="href" type="xs:string"/>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="TPacijent">
         <xs:sequence>
-            <xs:element name="ime_prezime" type="z:TImeIPrezime"> </xs:element>
+            <xs:element name="ime_prezime" type="zel:TImeIPrezime"> </xs:element>
             <xs:element name="pol">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
@@ -37,7 +37,7 @@
                 </xs:simpleType>
             </xs:element>
             <xs:element name="datum_rodjenja" type="xs:date"/>
-            <xs:element name="jmbg" type="z:TJmbg"> </xs:element>
+            <xs:element name="jmbg" type="zel:TJmbg"> </xs:element>
             <xs:element name="broj_pasosa">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
@@ -78,6 +78,14 @@
             <xs:extension base="xs:string">
                 <xs:attribute name="property" use="required" fixed="pred:broj_sertifikata"/>
                 <xs:attribute name="datatype" use="required" fixed="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TDatumIzdavanja">
+        <xs:simpleContent>
+            <xs:extension base="xs:dateTime">
+                <xs:attribute name="property" use="required" fixed="pred:datum"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:dateTime"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>

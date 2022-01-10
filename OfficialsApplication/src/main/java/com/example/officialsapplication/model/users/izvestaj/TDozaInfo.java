@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TDoza_info", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", propOrder = {
+@XmlType(name = "TDoza_info", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", propOrder = {
     "brojDatihDoza",
     "brojDatePrveDoze",
     "brojDateDrugeDoze",
@@ -40,16 +40,16 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TDozaInfo {
 
-    @XmlElement(name = "Broj_datih_doza", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Broj_datih_doza", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
     protected BigInteger brojDatihDoza;
-    @XmlElement(name = "Broj_date_prve_doze", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Broj_date_prve_doze", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
     protected BigInteger brojDatePrveDoze;
-    @XmlElement(name = "Broj_date_druge_doze", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Broj_date_druge_doze", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     @XmlSchemaType(name = "positiveInteger")
     protected BigInteger brojDateDrugeDoze;
-    @XmlElement(name = "Broj_date_trece_doze", namespace = "www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
+    @XmlElement(name = "Broj_date_trece_doze", namespace = "http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji", required = true)
     @XmlSchemaType(name = "nonNegativeInteger")
     protected BigInteger brojDateTreceDoze;
 
