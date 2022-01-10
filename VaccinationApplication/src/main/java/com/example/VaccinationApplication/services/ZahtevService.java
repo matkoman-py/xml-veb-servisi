@@ -1,6 +1,7 @@
 package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
+import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.zahtev_zeleni_sertifikat.Zahtev;
 import java.io.FileNotFoundException;
@@ -13,10 +14,12 @@ public class ZahtevService {
 	private final DataAccessLayer dataAccessLayer;
     private final MultiwayMapper mapper;
     private final String folderId = "/db/vaccination-system/zahtevi";
+    private final MetadataExtractor metadataExtractor;
 
-    public ZahtevService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper) {
+    public ZahtevService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper, MetadataExtractor metadataExtractor) {
         this.dataAccessLayer = dataAccessLayer;
         this.mapper = mapper;
+        this.metadataExtractor = metadataExtractor;
     }
 
     public String getXmlAsText(String documentId)  throws FileNotFoundException, TransformerException {
@@ -35,6 +38,13 @@ public class ZahtevService {
     			Zahtev.class);
         String documentId = zahtev.getPodnosilacZahteva().getJedinstveniMaticniBrojGradjana().getValue() + ".xml";
         dataAccessLayer.saveDocument(zahtev, folderId, documentId, Zahtev.class);
+        try {
+            metadataExtractor.extractAndSave(xmlString,"/zahtevi");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
         return zahtev;
     }
 
