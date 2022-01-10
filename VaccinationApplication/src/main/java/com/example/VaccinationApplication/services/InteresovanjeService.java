@@ -1,9 +1,9 @@
 package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
+import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
-import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import org.springframework.stereotype.Service;
 
 import javax.xml.transform.TransformerException;
@@ -15,10 +15,13 @@ public class InteresovanjeService {
     private final DataAccessLayer dataAccessLayer;
     private final MultiwayMapper mapper;
     private final String folderId = "/db/vaccination-system/interesovanja";
+    private final MetadataExtractor metadataExtractor;
 
-    public InteresovanjeService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper) {
+    public InteresovanjeService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper, MetadataExtractor metadataExtractor) {
         this.dataAccessLayer = dataAccessLayer;
         this.mapper = mapper;
+        this.metadataExtractor = metadataExtractor;
+
     }
 
     public String getXmlText(String documentId){
@@ -37,6 +40,13 @@ public class InteresovanjeService {
                 Interesovanje.class);
         String documentId = interesovanje.getPodaciOPrimaocu().getJMBG().getValue() + ".xml";
         dataAccessLayer.saveDocument(interesovanje, folderId, documentId, Interesovanje.class);
+        try {
+            metadataExtractor.extractAndSave(xmlString,"/interesovanja");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
         return interesovanje;
     }
 

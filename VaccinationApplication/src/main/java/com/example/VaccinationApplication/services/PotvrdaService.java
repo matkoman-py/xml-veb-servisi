@@ -1,9 +1,9 @@
 package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
+import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.potvrda.Potvrda;
-import com.example.VaccinationApplication.model.zeleni_sertifikat.ZeleniSertifikat;
 import org.springframework.stereotype.Service;
 
 import javax.xml.transform.TransformerException;
@@ -14,11 +14,13 @@ public class PotvrdaService {
 
     private final DataAccessLayer dataAccessLayer;
     private final MultiwayMapper mapper;
+    private final MetadataExtractor metadataExtractor;
     private final String folderId = "/db/vaccination-system/potvrde";
 
-    public PotvrdaService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper) {
+    public PotvrdaService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper, MetadataExtractor metadataExtractor) {
         this.dataAccessLayer = dataAccessLayer;
         this.mapper = mapper;
+        this.metadataExtractor = metadataExtractor;
     }
 
     public String getXmlText(String documentId){
@@ -33,10 +35,19 @@ public class PotvrdaService {
     }
 
     public Potvrda saveXmlFromText(String xmlString){
+
         Potvrda potvrda = (Potvrda) mapper.convertToObject(xmlString, "PotvrdaOVakcinaciji",
                 Potvrda.class);
         String documentId = potvrda.getSifraPotvrde() + ".xml";
         dataAccessLayer.saveDocument(potvrda, folderId, documentId, Potvrda.class);
+        try {
+            metadataExtractor.extractAndSave(xmlString,"/potvrde");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+
         return potvrda;
     }
 
