@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="www.ftn.uns.ac.rs/potvrda_o_vakcinaciji"
-    xmlns:pot="www.ftn.uns.ac.rs/potvrda_o_vakcinaciji">
+    targetNamespace="http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji"
+    xmlns:pot="http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji"
+    xmlns:pred="http://www.ftn.uns.ac.rs/predicate">
     <xs:element name="Potvrda">
         <xs:complexType>
             <xs:sequence>
@@ -42,7 +43,7 @@
             <xs:element minOccurs="0" name="Druga_doza" type="pot:TDozaInfo"/>
             <xs:element name="Zdravstvena_ustanova" type="pot:TZdravstvenaUstanova"/>
             <xs:element name="Naziv_vakcine" type="pot:TNazivVakcine"/>
-            <xs:element name="Datum_izdavanja" type="xs:date"/>
+            <xs:element name="Datum_izdavanja" type="pot:TDatumIzdavanja"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TNazivVakcine">
@@ -74,6 +75,14 @@
             <xs:extension base="xs:string">
                 <xs:attribute name="property" use="required" fixed="pred:jmbg"/>
                 <xs:attribute name="datatype" use="required" fixed="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TDatumIzdavanja">
+        <xs:simpleContent>
+            <xs:extension base="xs:date">
+                <xs:attribute name="property" use="required" fixed="pred:datum"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:date"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
