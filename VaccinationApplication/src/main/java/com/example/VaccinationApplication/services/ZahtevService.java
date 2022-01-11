@@ -5,6 +5,9 @@ import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.zahtev_zeleni_sertifikat.Zahtev;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.xml.transform.TransformerException;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +39,14 @@ public class ZahtevService {
     public Zahtev saveXmlFromText(String xmlString)  throws FileNotFoundException, TransformerException {
     	Zahtev zahtev = (Zahtev) mapper.convertToObject(xmlString, "ZahtevZelenogSertifikata",
     			Zahtev.class);
-        String documentId = zahtev.getPodnosilacZahteva().getJedinstveniMaticniBrojGradjana().getValue() + ".xml";
+    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");  
+		LocalDateTime now = LocalDateTime.now();  
+		String dateTime = (String) dtf.format(now);  
+        String documentId = zahtev.getPodnosilacZahteva().getJedinstveniMaticniBrojGradjana().getValue()+"-"+dateTime+ ".xml";
+        if(zahtev.getAbout().trim().equals("")) {
+        	zahtev.setAbout(zahtev.getPodnosilacZahteva().getJedinstveniMaticniBrojGradjana().getValue()+"-"+dateTime);
+        	xmlString = convertToXml(zahtev);
+        }
         dataAccessLayer.saveDocument(zahtev, folderId, documentId, Zahtev.class);
         try {
             metadataExtractor.extractAndSave(xmlString,"/zahtevi");
@@ -61,6 +71,32 @@ public class ZahtevService {
     
     public Zahtev convertToObject(String xmlString) throws FileNotFoundException, TransformerException {
         return (Zahtev) mapper.convertToObject(xmlString, "ZahtevZelenogSertifikata", Zahtev.class);
+    }
+    
+    public void link(String zeleniSertifikatId, String zahtevId) throws FileNotFoundException, TransformerException {
+    	Zahtev updatedZahtev = getXmlAsObject(zahtevId);
+    	
+    	if(updatedZahtev.getHref() == null) {
+    		updatedZahtev.setHref("");
+    	}
+    	
+    	if(!updatedZahtev.getHref().isBlank()) {
+    		return;
+    	}
+    	updatedZahtev.setRel("pred:answeredBy");
+    	updatedZahtev.setHref("http://www.ftn.uns.ac.rs/zelenisertifikat/"+zeleniSertifikatId);
+    	update(updatedZahtev, zahtevId +".xml");
+    }
+    
+    public void update(Zahtev zahtev, String documentId) throws FileNotFoundException, TransformerException {
+    	dataAccessLayer.saveDocument(zahtev, folderId, documentId, Zahtev.class);
+    	try {
+            metadataExtractor.extractAndSave(convertToXml(zahtev),"/zahtevi");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
     
     

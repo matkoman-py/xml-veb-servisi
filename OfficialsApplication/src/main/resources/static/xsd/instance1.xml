@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zel:zeleni_sertifikat xmlns:zel="http://www.ftn.uns.ac.rs/zelenisertifikat"
+ xmlns:pred="http://www.ftn.uns.ac.rs/predicate"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.ftn.uns.ac.rs/zelenisertifikat file:/C:/Users/Petar/Desktop/cetvrta%20godina/xml-veb-servisi/OfficialsApplication/src/main/resources/static/xsd/ZeleniSertifikat.xsd" about="about0">
+    <zel:qr_kod>qr_kod0</zel:qr_kod>
+    <zel:broj_sertifikata property="pred:broj_sertifikata" datatype="xs:string">broj_sertifikata0</zel:broj_sertifikata>
+    <zel:datum_izdavanja property="pred:datum" datatype="xs:dateTime">2006-05-04T18:13:51.0</zel:datum_izdavanja>
+    <zel:podaci_o_pacijentu>
+        <zel:ime_prezime property="pred:ime_i_prezime" datatype="xs:string">ime_prezime0</zel:ime_prezime>
+        <zel:pol>Musko</zel:pol>
+        <zel:datum_rodjenja>2006-05-04</zel:datum_rodjenja>
+        <zel:jmbg property="pred:jmbg" datatype="xs:string">jmbg0</zel:jmbg>
+        <zel:broj_pasosa>0000000000000</zel:broj_pasosa>
+    </zel:podaci_o_pacijentu>
+    <zel:podaci_o_vakcinaciji>
+        <zel:doza>50</zel:doza>
+        <zel:tip>tip0</zel:tip>
+        <zel:proizvodjac_serija>proizvodjac_serija0</zel:proizvodjac_serija>
+        <zel:datum>2006-05-04</zel:datum>
+        <zel:zdravstvena_ustanova>zdravstvena_ustanova0</zel:zdravstvena_ustanova>
+    </zel:podaci_o_vakcinaciji>
+    <zel:podaci_o_vakcinaciji>
+        <zel:doza>50</zel:doza>
+        <zel:tip>tip1</zel:tip>
+        <zel:proizvodjac_serija>proizvodjac_serija1</zel:proizvodjac_serija>
+        <zel:datum>2006-05-04</zel:datum>
+        <zel:zdravstvena_ustanova>zdravstvena_ustanova1</zel:zdravstvena_ustanova>
+    </zel:podaci_o_vakcinaciji>
+</zel:zeleni_sertifikat>

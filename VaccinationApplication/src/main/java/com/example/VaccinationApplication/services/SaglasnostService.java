@@ -30,6 +30,12 @@ public class SaglasnostService {
         Saglasnost saglasnost = (Saglasnost) mapper.convertToObject(xmlString, "Saglasnost",
                 Saglasnost.class);
         String documentId = saglasnost.getDrzavljanstvo().getJMBG() + ".xml";
+        
+        //SAGLASNOST === ZELENI SERTIFIKAT ----> (MORA KAD SE INITUJE SAGLASNOSTS DA SADRZI REFERENCU NA ODGOVARAJUCE INTERESOVANJE)
+        //DODATI INTERESOVANJESERVICE KAO POLJE U OVAJ SERVICE
+        //POZVATI METODU LINK IZ INTERESOVANJESERVICE
+        
+        
         dataAccessLayer.saveDocument(saglasnost, folderId, documentId, Saglasnost.class);
         return saglasnost;
     }

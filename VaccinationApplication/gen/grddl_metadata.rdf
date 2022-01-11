@@ -1,7 +1,17 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-  <!--Could not produce the triple for: string - pred:answeredBy - string-->
-  <!--Could not produce the triple for: string - pred:jmbg - string-->
-  <!--Could not produce the triple for: string - pred:ime - string-->
-  <!--Could not produce the triple for: string - pred:prezime - string-->
-  <!--Could not produce the triple for: string - pred:datum - 2014-09-19-->
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/45555555-55">
+    <pred:answerTo xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:resource="http://www.ftn.uns.ac.rs/zahtev_za_zeleni_sertifikat/8888888888888-2022-01-11-03-53-48"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/45555555-55">
+    <pred:broj_sertifikata xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:datatype="string">45555555/55</pred:broj_sertifikata>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/45555555-55">
+    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:datatype="dateTime">2006-05-04T16:13:51.000Z</pred:datum>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/45555555-55">
+    <pred:ime_i_prezime xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:datatype="string">ime_prezime0</pred:ime_i_prezime>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/45555555-55">
+    <pred:jmbg xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:datatype="string">jmbg0</pred:jmbg>
+  </rdf:Description>
 </rdf:RDF>

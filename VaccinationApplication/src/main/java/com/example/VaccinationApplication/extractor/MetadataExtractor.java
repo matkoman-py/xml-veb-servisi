@@ -24,9 +24,13 @@ public class MetadataExtractor {
 
 	private final TransformerFactory transformerFactory = TransformerFactory.newInstance();
 
-	private static final String XSLT_FILE = "VaccinationApplication/data/xsl/grddl.xsl";
+	//private static final String XSLT_FILE = "VaccinationApplication/data/xsl/grddl.xsl";
+	
+	//private static final String RDF_FILE_PATH = "VaccinationApplication/gen/grddl_metadata.rdf";
+	
+	private static final String XSLT_FILE = "data/xsl/grddl.xsl";
 
-	private static final String RDF_FILE_PATH = "VaccinationApplication/gen/grddl_metadata.rdf";
+	private static final String RDF_FILE_PATH = "gen/grddl_metadata.rdf";
 
 	private final RdfDatabaseConfig rdfConfig;
 
@@ -56,6 +60,7 @@ public class MetadataExtractor {
 	}
 
 	private void extractMetadata(InputStream in, OutputStream out) throws FileNotFoundException, TransformerException {
+			
 			
 			// Create transformation source
 			StreamSource transformSource = new StreamSource(new File(XSLT_FILE));

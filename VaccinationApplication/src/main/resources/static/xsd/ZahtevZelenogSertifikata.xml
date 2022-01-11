@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zzs:zahtev about="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zzs="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata" xsi:schemaLocation="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata ZahtevZelenogSertifikata.xsd ">
+  <zzs:Podnosilac_zahteva>
+    <zzs:Ime_i_prezime datatype="xs:string" property="pred:ime_i_prezime">zzs:Ime_i_prezime</zzs:Ime_i_prezime>
+    <zzs:Datum_rodjenja>2001-01-01</zzs:Datum_rodjenja>
+    <zzs:Pol>Musko</zzs:Pol>
+    <zzs:Jedinstveni_maticni_broj_gradjana datatype="xs:string" property="pred:jmbg">zzs:Jedinstveni_maticni_broj_gradjana</zzs:Jedinstveni_maticni_broj_gradjana>
+    <zzs:Broj_pasosa datatype="xs:string" property="pred:broj_pasosa">zzs:Broj_pasosa</zzs:Broj_pasosa>
+  </zzs:Podnosilac_zahteva>
+  <zzs:Informacije_o_zahtevu>
+    <zzs:Razlog>zzs:Razlog</zzs:Razlog>
+    <zzs:Mesto>zzs:Mesto</zzs:Mesto>
+    <zzs:Datum_izdavanja datatype="xs:date" property="pred:datum_izdavanja">2001-01-01</zzs:Datum_izdavanja>
+  </zzs:Informacije_o_zahtevu>
+</zzs:zahtev>

@@ -21,11 +21,13 @@ public class ZeleniSertifikatService {
     private final MultiwayMapper mapper;
     private final MetadataExtractor metadataExtractor;
     private final String folderId = "/db/vaccination-system/zeleni-sertifikati";
+    private final ZahtevService zahtevService;
 
-    public ZeleniSertifikatService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper, MetadataExtractor metadataExtractor) {
+    public ZeleniSertifikatService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper, MetadataExtractor metadataExtractor, ZahtevService zahtevService) {
         this.dataAccessLayer = dataAccessLayer;
         this.mapper = mapper;
         this.metadataExtractor = metadataExtractor;
+        this.zahtevService = zahtevService;
     }
 
     public String getXmlAsText(String documentId){
@@ -39,11 +41,24 @@ public class ZeleniSertifikatService {
         		ZeleniSertifikat.class);
     }
 
-    public ZeleniSertifikat saveXmlFromText(String xmlString){
+    public ZeleniSertifikat saveXmlFromText(String xmlString) throws FileNotFoundException, TransformerException{
         ZeleniSertifikat zeleniSertifikat = (ZeleniSertifikat) mapper.convertToObject(xmlString, "ZeleniSertifikat",
         		ZeleniSertifikat.class);
         String documentId = zeleniSertifikat.getBrojSertifikata().getValue().replace('/', '-') + ".xml";
+        
         dataAccessLayer.saveDocument(zeleniSertifikat, folderId, documentId, ZeleniSertifikat.class);
+
+        
+        String zahtevId = zeleniSertifikat.getHref().split("/")[4];
+        zahtevService.link(documentId, zahtevId);
+        
+        try {
+            metadataExtractor.extractAndSave(xmlString,"/zeleni-sertifikat");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
         return zeleniSertifikat;
     }
     

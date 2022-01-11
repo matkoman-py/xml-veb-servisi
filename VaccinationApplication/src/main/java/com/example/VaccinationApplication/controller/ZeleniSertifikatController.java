@@ -34,7 +34,7 @@ public class ZeleniSertifikatController {
     }
 
     @PostMapping("saveXmlText")
-    public ResponseEntity<ZeleniSertifikat> saveXmlText(@RequestBody String zeleniSertifikatXml) {
+    public ResponseEntity<ZeleniSertifikat> saveXmlText(@RequestBody String zeleniSertifikatXml) throws FileNotFoundException, TransformerException {
         ZeleniSertifikat retval = zeleniSertifikatService.saveXmlFromText(zeleniSertifikatXml);
         return ResponseEntity.ok(retval);
     }
