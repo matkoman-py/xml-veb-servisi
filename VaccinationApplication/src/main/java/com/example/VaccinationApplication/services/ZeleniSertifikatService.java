@@ -52,6 +52,8 @@ public class ZeleniSertifikatService {
         String zahtevId = zeleniSertifikat.getHref().split("/")[4];
         zahtevService.link(documentId, zahtevId);
         
+        // POSTAVI GRESKU
+        
         try {
             metadataExtractor.extractAndSave(xmlString,"/zeleni-sertifikat");
         } catch (FileNotFoundException e) {

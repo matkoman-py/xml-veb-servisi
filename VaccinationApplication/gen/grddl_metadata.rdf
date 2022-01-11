@@ -1,14 +1,18 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-  <rdf:Description rdf:about="string">
-    <pred:datum_od xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:datatype="date">2008-09-29</pred:datum_od>
+
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/interesovanje/29101999730021">
+    <pred:answeredBy xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:resource="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/0000000000000.xml"/>
   </rdf:Description>
-  <rdf:Description rdf:about="string">
-    <pred:datum_do xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:datatype="date">2014-09-19</pred:datum_do>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/interesovanje/29101999730021">
+    <pred:jmbg xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:datatype="string">29101999730021</pred:jmbg>
   </rdf:Description>
-  <rdf:Description rdf:about="string">
-    <pred:broj_interesovanja xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:datatype="positiveInteger">201</pred:broj_interesovanja>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/interesovanje/29101999730021">
+    <pred:ime xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:datatype="string">int:Ime</pred:ime>
   </rdf:Description>
-  <rdf:Description rdf:about="string">
-    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:datatype="dateTime">2006-08-19T19:27:14+02:00</pred:datum>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/interesovanje/29101999730021">
+    <pred:prezime xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:datatype="string">int:Prezime</pred:prezime>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/interesovanje/29101999730021">
+    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:datatype="date">2001-01-01</pred:datum>
   </rdf:Description>
 </rdf:RDF>

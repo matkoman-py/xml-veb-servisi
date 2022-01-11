@@ -2,6 +2,11 @@ package com.example.VaccinationApplication.controller;
 
 import com.example.VaccinationApplication.model.saglasnost.Saglasnost;
 import com.example.VaccinationApplication.services.SaglasnostService;
+
+import java.io.FileNotFoundException;
+
+import javax.xml.transform.TransformerException;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +33,7 @@ public class SaglasnostController {
     }
 
     @PostMapping("saveXmlText")
-    public ResponseEntity<Saglasnost> saveXmlText(@RequestBody String saglasnostXml) {
+    public ResponseEntity<Saglasnost> saveXmlText(@RequestBody String saglasnostXml) throws FileNotFoundException, TransformerException {
         Saglasnost retval = saglasnostService.saveXmlFromText(saglasnostXml);
         return ResponseEntity.ok(retval);
     }
