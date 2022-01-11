@@ -68,6 +68,32 @@ public class InteresovanjeService {
         return (Interesovanje) mapper.convertToObject(xmlString, "Interesovanje", Interesovanje.class);
     }
     
+    public void link(String saglasnostID, String interesovanjeId) throws FileNotFoundException, TransformerException {
+    	Interesovanje updatedInteresovanje = getXmlAsObject(interesovanjeId);
+    	
+    	if(updatedInteresovanje.getHref() == null) {
+    		updatedInteresovanje.setHref("");
+    	}
+    	
+    	if(!updatedInteresovanje.getHref().isBlank()) {
+    		return;
+    	}
+    	updatedInteresovanje.setRel("pred:answeredBy");
+    	updatedInteresovanje.setHref("http://www.ftn.uns.ac.rs/Saglasnost/"+saglasnostID);
+    	update(updatedInteresovanje, interesovanjeId +".xml");
+    }
+    
+    public void update(Interesovanje interesovanje, String documentId) throws FileNotFoundException, TransformerException {
+    	dataAccessLayer.saveDocument(interesovanje, folderId, documentId, Interesovanje.class);
+    	try {
+            metadataExtractor.extractAndSave(convertToXml(interesovanje),"/interesovanja");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+    
 //    public void link(String zeleniSertifikatId, String zahtevId) throws FileNotFoundException, TransformerException {
 //    	Zahtev updatedZahtev = getXmlAsObject(zahtevId);
 //    	
