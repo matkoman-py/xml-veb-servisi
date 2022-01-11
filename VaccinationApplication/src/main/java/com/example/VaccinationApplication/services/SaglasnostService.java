@@ -11,6 +11,9 @@ import javax.xml.transform.TransformerException;
 
 import org.springframework.stereotype.Service;
 
+import javax.xml.transform.TransformerException;
+import java.io.FileNotFoundException;
+
 @Service
 public class SaglasnostService {
 
@@ -45,6 +48,7 @@ public class SaglasnostService {
         //SAGLASNOST === ZELENI SERTIFIKAT ----> (MORA KAD SE INITUJE SAGLASNOSTS DA SADRZI REFERENCU NA ODGOVARAJUCE INTERESOVANJE)
         //DODATI INTERESOVANJESERVICE KAO POLJE U OVAJ SERVICE
         //POZVATI METODU LINK IZ INTERESOVANJESERVICE
+
         String interesovanjeId = saglasnost.getHref().split("/")[4];
         interesovanjeService.link(documentId, interesovanjeId);
         
@@ -57,6 +61,9 @@ public class SaglasnostService {
         }
         
         dataAccessLayer.saveDocument(saglasnost, folderId, documentId, Saglasnost.class);
+
+       
+
         return saglasnost;
     }
 

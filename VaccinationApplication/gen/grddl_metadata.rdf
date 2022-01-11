@@ -1,4 +1,5 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
+
   <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/interesovanje/29101999730021">
     <pred:answeredBy xmlns:pred="http://www.ftn.uns.ac.rs/predicate" rdf:resource="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/0000000000000.xml"/>
   </rdf:Description>
