@@ -1,9 +1,13 @@
 package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
+import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.saglasnost.Saglasnost;
 import org.springframework.stereotype.Service;
+
+import javax.xml.transform.TransformerException;
+import java.io.FileNotFoundException;
 
 @Service
 public class SaglasnostService {
@@ -11,10 +15,15 @@ public class SaglasnostService {
     private final DataAccessLayer dataAccessLayer;
     private final MultiwayMapper mapper;
     private final String folderId = "/db/vaccination-system/saglasnosti";
+    private final InteresovanjeService interesovanjeService;
+    private final MetadataExtractor metadataExtractor;
 
-    public SaglasnostService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper) {
+    public SaglasnostService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper,
+                             InteresovanjeService interesovanjeService, MetadataExtractor metadataExtractor) {
         this.dataAccessLayer = dataAccessLayer;
         this.mapper = mapper;
+        this.interesovanjeService = interesovanjeService;
+        this.metadataExtractor = metadataExtractor;
     }
 
     public String getXmlAsText(String documentId){
@@ -34,9 +43,15 @@ public class SaglasnostService {
         //SAGLASNOST === ZELENI SERTIFIKAT ----> (MORA KAD SE INITUJE SAGLASNOSTS DA SADRZI REFERENCU NA ODGOVARAJUCE INTERESOVANJE)
         //DODATI INTERESOVANJESERVICE KAO POLJE U OVAJ SERVICE
         //POZVATI METODU LINK IZ INTERESOVANJESERVICE
-        
-        
+
         dataAccessLayer.saveDocument(saglasnost, folderId, documentId, Saglasnost.class);
+
+        try {
+            metadataExtractor.extractAndSave(xmlString, "/saglasnosti");
+        } catch (FileNotFoundException | TransformerException e) {
+            e.printStackTrace();
+        }
+
         return saglasnost;
     }
 

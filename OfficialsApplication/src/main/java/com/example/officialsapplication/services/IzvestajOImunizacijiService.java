@@ -1,20 +1,27 @@
 package com.example.officialsapplication.services;
 
 import com.example.officialsapplication.dao.DataAccessLayer;
+import com.example.officialsapplication.extractor.MetadataExtractor;
 import com.example.officialsapplication.mappers.MultiwayMapper;
 import com.example.officialsapplication.model.users.izvestaj.IzvestajOImunizaciji;
 import org.springframework.stereotype.Service;
+
+import javax.xml.transform.TransformerException;
+import java.io.FileNotFoundException;
 
 @Service
 public class IzvestajOImunizacijiService {
 
     private final DataAccessLayer dataAccessLayer;
     private final MultiwayMapper mapper;
-    private final String folderId = "/db/vaccination-system/izvestaji";
+    private final String folderId = "/db/officials-system/izvestaji";
+    private final MetadataExtractor metadataExtractor;
 
-    public IzvestajOImunizacijiService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper) {
+    public IzvestajOImunizacijiService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper,
+                                       MetadataExtractor metadataExtractor) {
         this.dataAccessLayer = dataAccessLayer;
         this.mapper = mapper;
+        this.metadataExtractor = metadataExtractor;
     }
 
     public String getXmlAsText(String documentId) {
@@ -33,6 +40,13 @@ public class IzvestajOImunizacijiService {
                 IzvestajOImunizaciji.class);
         String documentId = izvestaj.getId() + ".xml";
         dataAccessLayer.saveDocument(izvestaj, folderId, documentId, IzvestajOImunizaciji.class);
+
+        try {
+            metadataExtractor.extractAndSave(xmlString,"/izvestaji");
+        } catch (FileNotFoundException | TransformerException e) {
+            e.printStackTrace();
+        }
+
         return izvestaj;
     }
 
