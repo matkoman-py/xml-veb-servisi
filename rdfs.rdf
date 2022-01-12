@@ -34,12 +34,12 @@
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
     
-    <rdf:Property rdf:ID="datum_izdavanja">
+    <rdf:Property rdf:ID="datum">
         <rdfs:domain rdf:resource="#ZahtevZelenogSertifikata"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
 
-    <rdf:Property rdf:ID="Ime_i_prezime">
+    <rdf:Property rdf:ID="ime_i_prezime">
         <rdfs:domain rdf:resource="#ZahtevZelenogSertifikata"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
@@ -50,53 +50,53 @@
     </rdf:Property>
 
     <!-- Interesovanje -->
-    <rdf:Property rdf:ID="JMBG">
+    <rdf:Property rdf:ID="jmbg">
         <rdfs:domain rdf:resource="#Interesovanje"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
     
-    <rdf:Property rdf:ID="Datum">
+    <rdf:Property rdf:ID="datum">
         <rdfs:domain rdf:resource="#Interesovanje"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
 
-    <rdf:Property rdf:ID="Ime">
+    <rdf:Property rdf:ID="ime">
         <rdfs:domain rdf:resource="#Interesovanje"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
 
-    <rdf:Property rdf:ID="Prezime">
+    <rdf:Property rdf:ID="prezime">
         <rdfs:domain rdf:resource="#Interesovanje"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
     
     <!-- Saglasnost -->
-    <rdf:Property rdf:ID="Opstina">
+    <rdf:Property rdf:ID="opstina">
         <rdfs:domain rdf:resource="#Saglasnost"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
     
-    <rdf:Property rdf:ID="Ime">
+    <rdf:Property rdf:ID="ime">
         <rdfs:domain rdf:resource="#Saglasnost"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
 
-    <rdf:Property rdf:ID="Prezime">
+    <rdf:Property rdf:ID="prezime">
         <rdfs:domain rdf:resource="#Saglasnost"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
     
-    <rdf:Property rdf:ID="Naziv_vakcine">
+    <rdf:Property rdf:ID="naziv_vakcine">
         <rdfs:domain rdf:resource="#Saglasnost"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
 
-    <rdf:Property rdf:ID="Zdravstvena_ustanova">
+    <rdf:Property rdf:ID="zdravstvena_ustanova">
         <rdfs:domain rdf:resource="#Saglasnost"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
 
-    <rdf:Property rdf:ID="Datum">
+    <rdf:Property rdf:ID="datum">
         <rdfs:domain rdf:resource="#Saglasnost"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>
@@ -118,6 +118,11 @@
     </rdf:Property>
 
     <rdf:Property rdf:ID="zdravstvena_ustanova">
+        <rdfs:domain rdf:resource="#Potvrda"/>
+        <rdfs:range rdf:resource="rdfs:Literal"/>
+    </rdf:Property>
+
+    <rdf:Property rdf:ID="ime_i_prezime">
         <rdfs:domain rdf:resource="#Potvrda"/>
         <rdfs:range rdf:resource="rdfs:Literal"/>
     </rdf:Property>

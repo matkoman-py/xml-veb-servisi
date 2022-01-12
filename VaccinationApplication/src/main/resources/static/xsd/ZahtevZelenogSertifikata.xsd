@@ -72,7 +72,7 @@
     <xs:complexType name="TDatumIzdavanja">
         <xs:simpleContent>
             <xs:extension base="xs:date">
-                <xs:attribute name="property" use="required" fixed="pred:datum_izdavanja"/>
+                <xs:attribute name="property" use="required" fixed="pred:datum"/>
                 <xs:attribute name="datatype" use="required" fixed="xs:date"/>
             </xs:extension>
         </xs:simpleContent>
