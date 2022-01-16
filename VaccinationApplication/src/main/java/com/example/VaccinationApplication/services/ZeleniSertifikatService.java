@@ -45,12 +45,19 @@ public class ZeleniSertifikatService {
         ZeleniSertifikat zeleniSertifikat = (ZeleniSertifikat) mapper.convertToObject(xmlString, "ZeleniSertifikat",
         		ZeleniSertifikat.class);
         String documentId = zeleniSertifikat.getBrojSertifikata().getValue().replace('/', '-') + ".xml";
+        if(zeleniSertifikat.getAbout() == null) {
+        	zeleniSertifikat.setAbout("");
+        }
+        
+        if(zeleniSertifikat.getAbout().trim().equals("")) {
+        	zeleniSertifikat.setAbout("http://www.ftn.uns.ac.rs/zelenisertifikat/"+zeleniSertifikat.getBrojSertifikata().getValue().replace('/', '-'));
+        }
         
         dataAccessLayer.saveDocument(zeleniSertifikat, folderId, documentId, ZeleniSertifikat.class);
 
         
         String zahtevId = zeleniSertifikat.getHref().split("/")[4];
-        zahtevService.link(documentId, zahtevId);
+        zahtevService.link(zeleniSertifikat.getBrojSertifikata().getValue().replace('/', '-'), zahtevId);
         
         // POSTAVI GRESKU
         

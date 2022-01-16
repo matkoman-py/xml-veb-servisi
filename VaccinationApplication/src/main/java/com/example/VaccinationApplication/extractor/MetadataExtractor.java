@@ -24,13 +24,13 @@ public class MetadataExtractor {
 
 	private final TransformerFactory transformerFactory = TransformerFactory.newInstance();
 
-	private static final String XSLT_FILE = "OfficialsApplication/data/xsl/grddl.xsl";
+	//private static final String XSLT_FILE = "OfficialsApplication/data/xsl/grddl.xsl";
 	
-	private static final String RDF_FILE_PATH = "OfficialsApplication/gen/grddl_metadata.rdf";
+	//private static final String RDF_FILE_PATH = "OfficialsApplication/gen/grddl_metadata.rdf";
 	
-//	private static final String XSLT_FILE = "data/xsl/grddl.xsl";
+	private static final String XSLT_FILE = "data/xsl/grddl.xsl";
 //
-//	private static final String RDF_FILE_PATH = "gen/grddl_metadata.rdf";
+	private static final String RDF_FILE_PATH = "gen/grddl_metadata.rdf";
 
 	private final RdfDatabaseConfig rdfConfig;
 

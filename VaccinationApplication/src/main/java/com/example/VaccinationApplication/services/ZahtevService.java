@@ -43,10 +43,16 @@ public class ZahtevService {
 		LocalDateTime now = LocalDateTime.now();  
 		String dateTime = (String) dtf.format(now);  
         String documentId = zahtev.getPodnosilacZahteva().getJedinstveniMaticniBrojGradjana().getValue()+"-"+dateTime+ ".xml";
+        
+        if(zahtev.getAbout() == null) {
+        	zahtev.setAbout("");
+        }
+        
         if(zahtev.getAbout().trim().equals("")) {
-        	zahtev.setAbout(zahtev.getPodnosilacZahteva().getJedinstveniMaticniBrojGradjana().getValue()+"-"+dateTime);
+        	zahtev.setAbout("http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/"+zahtev.getPodnosilacZahteva().getJedinstveniMaticniBrojGradjana().getValue()+"-"+dateTime);
         	xmlString = convertToXml(zahtev);
         }
+        
         dataAccessLayer.saveDocument(zahtev, folderId, documentId, Zahtev.class);
         try {
             metadataExtractor.extractAndSave(xmlString,"/zahtevi");

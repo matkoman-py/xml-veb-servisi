@@ -2,7 +2,7 @@
         namespace = "http://www.ftn.uns.ac.rs/predicate/",
         elementFormDefault = XmlNsForm.QUALIFIED,
         xmlns = {
-                @XmlNs(prefix="pred", namespaceURI="http://www.ftn.uns.ac.rs/predicate"),
+                @XmlNs(prefix="pred", namespaceURI="http://www.ftn.uns.ac.rs/predicate/"),
                 @XmlNs(prefix="zzs", namespaceURI="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata")
                         }
                 )

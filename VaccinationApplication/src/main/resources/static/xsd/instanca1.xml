@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zel:zeleni_sertifikat xmlns:zel="http://www.ftn.uns.ac.rs/zelenisertifikat"
+ xmlns:pred="http://www.ftn.uns.ac.rs/predicate"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.ftn.uns.ac.rs/zelenisertifikat ZeleniSertifikat.xsd" about="">
+    <zel:qr_kod>fsdsgffdgfd324sdfasfddf</zel:qr_kod>
+    <zel:broj_sertifikata property="pred:broj_sertifikata" datatype="xs:string">123467/21</zel:broj_sertifikata>
+    <zel:datum_izdavanja property="pred:datum" datatype="xs:dateTime">2021-05-05T18:13:51.0</zel:datum_izdavanja>
+    <zel:podaci_o_pacijentu>
+        <zel:ime_prezime property="pred:ime_i_prezime" datatype="xs:string">Petar Markovic</zel:ime_prezime>
+        <zel:pol>Musko</zel:pol>
+        <zel:datum_rodjenja>1999-10-29</zel:datum_rodjenja>
+        <zel:jmbg property="pred:jmbg" datatype="xs:string">29101999730020</zel:jmbg>
+        <zel:broj_pasosa>2139932102443</zel:broj_pasosa>
+    </zel:podaci_o_pacijentu>
+    <zel:podaci_o_vakcinaciji>
+        <zel:doza>1</zel:doza>
+        <zel:tip>Astro Zenecha</zel:tip>
+        <zel:proizvodjac_serija>ASTRO-ZENECHA TNG</zel:proizvodjac_serija>
+        <zel:datum>2021-05-04</zel:datum>
+        <zel:zdravstvena_ustanova>Dom zdravlja Novo Naselje</zel:zdravstvena_ustanova>
+    </zel:podaci_o_vakcinaciji>
+</zel:zeleni_sertifikat>
