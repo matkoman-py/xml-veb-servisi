@@ -7,12 +7,14 @@ import java.io.FileNotFoundException;
 
 import javax.xml.transform.TransformerException;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.VaccinationApplication.services.ZahtevService;
 
@@ -35,6 +37,18 @@ public class ZahtevController {
     @GetMapping("getXmlObject/{id}")
     public ResponseEntity<Zahtev> getXmlObject(@PathVariable String id) throws FileNotFoundException, TransformerException {
     	Zahtev retval = zahtevService.getXmlAsObject(id);
+        return ResponseEntity.ok(retval);
+    }
+    
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sve() throws Exception {
+    	String retval = zahtevService.getAll();
+        return ResponseEntity.ok(retval);
+    }
+    
+    @RequestMapping(value = "/getForUser/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sveZaUsera(@PathVariable String id) throws Exception {
+    	String retval = zahtevService.getAllForUser(id);
         return ResponseEntity.ok(retval);
     }
     

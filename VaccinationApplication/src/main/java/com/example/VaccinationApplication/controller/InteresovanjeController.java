@@ -3,6 +3,8 @@ package com.example.VaccinationApplication.controller;
 import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
 import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import com.example.VaccinationApplication.services.InteresovanjeService;
+
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,24 @@ public class InteresovanjeController {
 
     public InteresovanjeController(InteresovanjeService interesovanjeService) {
         this.interesovanjeService = interesovanjeService;
+    }
+    
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sve() throws Exception {
+    	String retval = interesovanjeService.getAll();
+        return ResponseEntity.ok(retval);
+    }
+    
+    @RequestMapping(value = "/getForUser/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sveZaUsera(@PathVariable String id) throws Exception {
+    	String retval = interesovanjeService.getAllForUser(id);
+        return ResponseEntity.ok(retval);
+    }
+    
+    @RequestMapping(value = "/getForDate/{dateFrom}/{dateTo}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sveZaDatum(@PathVariable String dateFrom, @PathVariable String dateTo) throws Exception {
+    	String retval = interesovanjeService.getAllForDate(dateFrom,dateTo);
+        return ResponseEntity.ok(retval);
     }
 
     @GetMapping("getXmlText/{id}")

@@ -1,15 +1,18 @@
 package com.example.VaccinationApplication.controller;
 
+import com.example.VaccinationApplication.model.interesovanje.ListaInteresovanja;
 import com.example.VaccinationApplication.model.zeleni_sertifikat.ZeleniSertifikat;
 import com.example.VaccinationApplication.services.ZeleniSertifikatService;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 
 import javax.xml.transform.TransformerException;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.xmldb.api.base.ResourceSet;
 
 @RestController
 @RequestMapping("/api/zelenisertifikati")
@@ -33,6 +36,18 @@ public class ZeleniSertifikatController {
         ZeleniSertifikat retval = zeleniSertifikatService.getXmlAsObject(id);
         return ResponseEntity.ok(retval);
     }
+    
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sve() throws Exception {
+    	String retval = zeleniSertifikatService.getAll();
+        return ResponseEntity.ok(retval);
+    }
+    
+    @RequestMapping(value = "/getForUser/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sveZaUsera(@PathVariable String id) throws Exception {
+    	String retval = zeleniSertifikatService.getAllForUser(id);
+        return ResponseEntity.ok(retval);
+    }
 
     @RequestMapping(value = "/saveXmlText", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ZeleniSertifikat> saveXmlText(@RequestBody String zeleniSertifikatXml) throws FileNotFoundException, TransformerException {
@@ -46,9 +61,9 @@ public class ZeleniSertifikatController {
         return ResponseEntity.ok(retval);
     }
     
-    @RequestMapping(value = "/convertToObject", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ZeleniSertifikat> xmlToObject(@RequestBody String xmlString) throws FileNotFoundException, TransformerException {
-        ZeleniSertifikat retval = zeleniSertifikatService.convertToObject(xmlString);
-        return ResponseEntity.ok(retval);
-    }
+//    @RequestMapping(value = "/convertToObject", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<ZeleniSertifikat> xmlToObject(@RequestBody String xmlString) throws FileNotFoundException, TransformerException {
+//        ZeleniSertifikat retval = zeleniSertifikatService.convertToObject(xmlString);
+//        return ResponseEntity.ok(retval);
+//    }
 }

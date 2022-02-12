@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pot:Potvrda about="" xmlns:pot="http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji PotvrdaOVakcinaciji.xsd ">
+  <pot:Sifra_potvrde>pot:Sifra_potvrde</pot:Sifra_potvrde>
+  <pot:pacijent>
+    <pot:Ime_i_prezime datatype="xs:string" property="pred:ime_i_prezime">pot:Ime_i_prezime</pot:Ime_i_prezime>
+    <pot:Datum_rodjenja>2001-01-01</pot:Datum_rodjenja>
+    <pot:Pol>Musko</pot:Pol>
+    <pot:Jmbg datatype="xs:string" property="pred:jmbg">pot:Jmbg</pot:Jmbg>
+  </pot:pacijent>
+  <pot:Vakcinacija_info>
+    <pot:Prva_doza>
+      <pot:Datum_vakcine>2001-01-01</pot:Datum_vakcine>
+      <pot:Serija_vakcine>pot:Serija_vakcine</pot:Serija_vakcine>
+    </pot:Prva_doza>
+    <pot:Zdravstvena_ustanova datatype="xs:string" property="pred:zdravstvena_ustanova">pot:Zdravstvena_ustanova</pot:Zdravstvena_ustanova>
+    <pot:Naziv_vakcine datatype="xs:string" property="pred:naziv_vakcine">pot:Naziv_vakcine</pot:Naziv_vakcine>
+    <pot:Datum_izdavanja datatype="xs:date" property="pred:datum">2001-01-01</pot:Datum_izdavanja>
+  </pot:Vakcinacija_info>
+  <pot:Qr_kod>pot:Qr_kod</pot:Qr_kod>
+</pot:Potvrda>

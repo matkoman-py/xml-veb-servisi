@@ -3,6 +3,8 @@ package com.example.VaccinationApplication.controller;
 import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import com.example.VaccinationApplication.model.zeleni_sertifikat.ZeleniSertifikat;
 import com.example.VaccinationApplication.services.PotvrdaService;
+
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +26,26 @@ public class PotvrdaController {
         String retval = potvrdaService.getXmlText(id);
         return ResponseEntity.ok(retval);
     }
+    
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sve() throws Exception {
+    	String retval = potvrdaService.getAll();
+        return ResponseEntity.ok(retval);
+    }
+    
+    @RequestMapping(value = "/getForDate/{dateFrom}/{dateTo}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sveZaDatum(@PathVariable String dateFrom, @PathVariable String dateTo) throws Exception {
+    	String retval = potvrdaService.getAllForDate(dateFrom,dateTo);
+        return ResponseEntity.ok(retval);
+    }
+    
+    @RequestMapping(value = "/getForUser/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sveZaUsera(@PathVariable String id) throws Exception {
+    	String retval = potvrdaService.getAllForUser(id);
+        return ResponseEntity.ok(retval);
+    }
+    
+    
 
     @GetMapping("getXmlObject/{id}")
     public ResponseEntity<Potvrda> getXmlObject(@PathVariable String id) {

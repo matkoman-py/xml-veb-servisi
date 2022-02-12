@@ -1,17 +1,17 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-  <rdf:Description rdf:about="">
-    <pred:answerTo xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:resource="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/29101999730020-2022-01-13-12-30-54"/>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/29101999730020-2022-02-12-21-02-41">
+    <pred:answeredBy xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:resource="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/29101999730020-2022-02-12-21-02-41"/>
   </rdf:Description>
-  <rdf:Description rdf:about="">
-    <pred:broj_sertifikata xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">123467/21</pred:broj_sertifikata>
-  </rdf:Description>
-  <rdf:Description rdf:about="">
-    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="dateTime">2021-05-05T16:13:51.000Z</pred:datum>
-  </rdf:Description>
-  <rdf:Description rdf:about="">
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/29101999730020-2022-02-12-21-02-41">
     <pred:ime_i_prezime xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">Petar Markovic</pred:ime_i_prezime>
   </rdf:Description>
-  <rdf:Description rdf:about="">
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/29101999730020-2022-02-12-21-02-41">
     <pred:jmbg xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">29101999730020</pred:jmbg>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/29101999730020-2022-02-12-21-02-41">
+    <pred:broj_pasosa xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">100321032</pred:broj_pasosa>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/29101999730020-2022-02-12-21-02-41">
+    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="date">2021-05-03Z</pred:datum>
   </rdf:Description>
 </rdf:RDF>

@@ -3,11 +3,16 @@ package com.example.VaccinationApplication.services;
 import com.example.VaccinationApplication.dao.DataAccessLayer;
 import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
+import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
+import com.example.VaccinationApplication.model.interesovanje.ListaInteresovanja;
+import com.example.VaccinationApplication.model.potvrda.ListaPotvrda;
 import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import org.springframework.stereotype.Service;
 
 import javax.xml.transform.TransformerException;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PotvrdaService {
@@ -60,9 +65,52 @@ public class PotvrdaService {
     public String convertToXml(Potvrda potvrda){
         return mapper.convertToXml(potvrda,  Potvrda.class);
     }
+    
+    public String convertToXml(ListaPotvrda potvrda){
+        return mapper.convertToXml(potvrda,  ListaPotvrda.class);
+    }
 
     public Potvrda convertToObject(String xmlString) throws FileNotFoundException, TransformerException {
 
         return (Potvrda) mapper.convertToObject(xmlString, "PotvrdaOVakcinaciji", Potvrda.class);
     }
+    
+    public String getAll() throws Exception {
+    	
+    	String xPath = "//Potvrda";
+    	List<Potvrda> potvrde = new ArrayList<Potvrda>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/potvrde", xPath, "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji");
+        for (String string : rezultat) {
+			potvrde.add(convertToObject(string));
+		}
+        ListaPotvrda lp = new ListaPotvrda();
+        lp.setPotvrda(potvrde);
+        return convertToXml(lp);
+    }
+    
+    public String getAllForDate(String dateFrom, String dateTo) throws Exception {
+    	
+    	String xPath = "//Potvrda[Vakcinacija_info/number(translate(Datum_izdavanja,'-','')) >= "+dateFrom.replace("-", "")+" and Vakcinacija_info/number(translate(Datum_izdavanja,'-','')) <="+dateTo.replace("-","")+ "]";
+    	List<Potvrda> potvrde = new ArrayList<Potvrda>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/potvrde", xPath, "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji");
+        for (String string : rezultat) {
+			potvrde.add(convertToObject(string));
+		}
+        ListaPotvrda lp = new ListaPotvrda();
+        lp.setPotvrda(potvrde);
+        return convertToXml(lp);
+    }
+
+    public String getAllForUser(String id) throws Exception {
+	
+    	String xPath = "//Potvrda[pacijent/Jmbg = '"+id+"']";
+    	List<Potvrda> potvrde = new ArrayList<Potvrda>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/potvrde", xPath, "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji");
+        for (String string : rezultat) {
+			potvrde.add(convertToObject(string));
+		}
+        ListaPotvrda lp = new ListaPotvrda();
+        lp.setPotvrda(potvrde);
+        return convertToXml(lp);
+}
 }

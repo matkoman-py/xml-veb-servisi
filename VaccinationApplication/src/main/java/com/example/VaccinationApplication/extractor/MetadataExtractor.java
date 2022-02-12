@@ -56,6 +56,7 @@ public class MetadataExtractor {
 
 		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update,
 				String.join("/", rdfConfig.getEndpoint(), rdfConfig.getDataset(), rdfConfig.getUpdate()));
+		System.out.println(String.join("/", rdfConfig.getEndpoint(), rdfConfig.getDataset(), rdfConfig.getUpdate()) + " DSADSADDSAD");
 		processor.execute();
 	}
 

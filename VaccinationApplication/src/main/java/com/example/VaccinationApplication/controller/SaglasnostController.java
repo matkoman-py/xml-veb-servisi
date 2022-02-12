@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 
 import javax.xml.transform.TransformerException;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,24 @@ public class SaglasnostController {
     @GetMapping("getXmlObject/{id}")
     public ResponseEntity<Saglasnost> getXmlObject(@PathVariable String id) {
         Saglasnost retval = saglasnostService.getXmlAsObject(id);
+        return ResponseEntity.ok(retval);
+    }
+    
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sve() throws Exception {
+    	String retval = saglasnostService.getAll();
+        return ResponseEntity.ok(retval);
+    }
+    
+    @RequestMapping(value = "/getForDate/{dateFrom}/{dateTo}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sveZaDatum(@PathVariable String dateFrom, @PathVariable String dateTo) throws Exception {
+    	String retval = saglasnostService.getAllForDate(dateFrom,dateTo);
+        return ResponseEntity.ok(retval);
+    }
+    
+    @RequestMapping(value = "/getForUser/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sveZaUsera(@PathVariable String id) throws Exception {
+    	String retval = saglasnostService.getAllForUser(id);
         return ResponseEntity.ok(retval);
     }
 
