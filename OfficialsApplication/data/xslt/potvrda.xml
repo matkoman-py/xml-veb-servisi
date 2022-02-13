@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pot:Potvrda xmlns:pot="www.ftn.uns.ac.rs/potvrda_o_vakcinaciji"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <pot:Sifra_potvrde>23532</pot:Sifra_potvrde>
+    <pot:pacijent>
+        <pot:Ime_i_prezime>Petar Markovic</pot:Ime_i_prezime>
+        <pot:Datum_rodjenja>1999-10-29</pot:Datum_rodjenja>
+        <pot:Pol>Musko</pot:Pol>
+        <pot:Jmbg>2910999730020</pot:Jmbg>
+    </pot:pacijent>
+    <pot:Vakcinacija_info>
+        <pot:Prva_doza>
+            <pot:Datum_vakcine>2021-03-04</pot:Datum_vakcine>
+            <pot:Serija_vakcine>EW2243</pot:Serija_vakcine>
+        </pot:Prva_doza>
+        <pot:Zdravstvena_ustanova>Dom zdravlja Novo Naselje</pot:Zdravstvena_ustanova>
+        <pot:Naziv_vakcine>Pfizer BionTech</pot:Naziv_vakcine>
+        <pot:Datum_izdavanja>2021-05-04</pot:Datum_izdavanja>
+    </pot:Vakcinacija_info>
+    <pot:Qr_kod>NSw2LDQsMiw0MjMsNDIzLA==</pot:Qr_kod>
+</pot:Potvrda>

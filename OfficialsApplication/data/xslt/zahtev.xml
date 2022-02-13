@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zzs:zahtev xmlns:zzs="www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <zzs:Podnosilac_zahteva>
+        <zzs:Ime_i_prezime>Petar Markovic</zzs:Ime_i_prezime>
+        <zzs:Datum_rodjenja>1999-10-29</zzs:Datum_rodjenja>
+        <zzs:Pol>Musko</zzs:Pol>
+        <zzs:Jedinstveni_maticni_broj_gradjana>2132142331231</zzs:Jedinstveni_maticni_broj_gradjana>
+        <zzs:Broj_pasosa>1000232224</zzs:Broj_pasosa>
+    </zzs:Podnosilac_zahteva>
+    <zzs:Informacije_o_zahtevu>
+        <zzs:Razlog>Za posao</zzs:Razlog>
+        <zzs:Mesto>Novi Sad</zzs:Mesto>
+        <zzs:Datum_izdavanja>2021-05-04</zzs:Datum_izdavanja>
+    </zzs:Informacije_o_zahtevu>
+</zzs:zahtev>

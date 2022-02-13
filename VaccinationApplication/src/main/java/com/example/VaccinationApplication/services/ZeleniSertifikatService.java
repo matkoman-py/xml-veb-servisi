@@ -114,6 +114,29 @@ public class ZeleniSertifikatService {
         return convertToXml(lzs);
     }
     
+    public String getAllForDate(String dateFrom, String dateTo) throws Exception {
+    	//String xPath = "//zahtev[Informacije_o_zahtevu/number(translate(Datum_izdavanja,'-','')) >= "+dateFrom.replace("-", "")+" and Informacije_o_zahtevu/number(translate(Datum_izdavanja,'-','')) <= "+dateTo.replace("-","")+"]";
+
+    	String xPath = "//zeleni_sertifikat[number(translate(substring-before(datum_izdavanja,'T'),'-','')) >= "+dateFrom.replace("-","")+" and number(translate(substring-before(datum_izdavanja,'T'),'-','')) <= " + dateTo.replace("-", "")+"]";
+    	List<ZeleniSertifikat> zeleniSertifikati = new ArrayList<ZeleniSertifikat>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zeleni-sertifikati", xPath, "http://www.ftn.uns.ac.rs/zelenisertifikat");
+        for (String string : rezultat) {
+			zeleniSertifikati.add(convertToObject(string));
+		}
+        ListaZelenihSertifikata lzs = new ListaZelenihSertifikata();
+        lzs.setIzvestaj(zeleniSertifikati);
+        return convertToXml(lzs);
+    }
+    
+    public int getNumberOfCertificates(String dateFrom, String dateTo) throws Exception {
+    	//String xPath = "//zahtev[Informacije_o_zahtevu/number(translate(Datum_izdavanja,'-','')) >= "+dateFrom.replace("-", "")+" and Informacije_o_zahtevu/number(translate(Datum_izdavanja,'-','')) <= "+dateTo.replace("-","")+"]";
+
+    	String xPath = "//zeleni_sertifikat[number(translate(substring-before(datum_izdavanja,'T'),'-','')) >= "+dateFrom.replace("-","")+" and number(translate(substring-before(datum_izdavanja,'T'),'-','')) <= " + dateTo.replace("-", "")+"]";
+    	List<ZeleniSertifikat> zeleniSertifikati = new ArrayList<ZeleniSertifikat>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zeleni-sertifikati", xPath, "http://www.ftn.uns.ac.rs/zelenisertifikat");
+        return rezultat.size();
+    }
+    
 	public String getAllForUser(String id) throws Exception {
 	    	
 		String xPath = "//zeleni_sertifikat[podaci_o_pacijentu/jmbg = '"+id+"']";

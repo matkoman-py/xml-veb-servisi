@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<izv:Izvestaj_o_imunizaciji about="" id="1" xmlns:izv="http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji Izvestaj_o_imunizaciji.xsd ">
+  <izv:Period>
+    <izv:Datum_od datatype="xs:date" property="pred:datum_od">2001-01-01</izv:Datum_od>
+    <izv:Datum_do datatype="xs:date" property="pred:datum_do">2001-01-01</izv:Datum_do>
+  </izv:Period>
+  <izv:Broj_podnetih_interesovanja datatype="xs:positiveInteger" property="pred:broj_interesovanja">1</izv:Broj_podnetih_interesovanja>
+  <izv:Zeleni_sertifikat_info>
+    <izv:Broj_primljenih_zahteva>0</izv:Broj_primljenih_zahteva>
+    <izv:Broj_izdatih_sertifikata>0</izv:Broj_izdatih_sertifikata>
+  </izv:Zeleni_sertifikat_info>
+  <izv:Doza_info>
+    <izv:Broj_datih_doza>0</izv:Broj_datih_doza>
+    <izv:Broj_date_prve_doze>0</izv:Broj_date_prve_doze>
+    <izv:Broj_date_druge_doze>1</izv:Broj_date_druge_doze>
+    <izv:Broj_date_trece_doze>0</izv:Broj_date_trece_doze>
+  </izv:Doza_info>
+  <izv:Proizvodjaci_info>
+    <izv:Broj_doza_Pfizer_BioNTech>0</izv:Broj_doza_Pfizer_BioNTech>
+    <izv:Broj_doza_Sinopharm>0</izv:Broj_doza_Sinopharm>
+    <izv:Broj_doza_SputnikV>0</izv:Broj_doza_SputnikV>
+    <izv:Broj_doza_AstraZeneca>0</izv:Broj_doza_AstraZeneca>
+  </izv:Proizvodjaci_info>
+  <izv:Datum_izdavanja datatype="xs:dateTime" property="pred:datum">2001-12-31T12:00:00</izv:Datum_izdavanja>
+</izv:Izvestaj_o_imunizaciji>

@@ -2,6 +2,13 @@ package com.example.officialsapplication.controller;
 
 import com.example.officialsapplication.model.users.izvestaj.IzvestajOImunizaciji;
 import com.example.officialsapplication.services.IzvestajOImunizacijiService;
+import com.itextpdf.text.DocumentException;
+
+import java.io.IOException;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +45,14 @@ public class IzvestajOImunizacijiController {
         IzvestajOImunizaciji retval = izvestajService.saveXmlFromObject(izvestaj);
         return ResponseEntity.ok(retval);
     }
+    
+    @RequestMapping(value = "test/{dateFrom}/{dateTo}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> test(@PathVariable String dateFrom,@PathVariable String dateTo) throws DatatypeConfigurationException, IOException, DocumentException {
+    	String retval = izvestajService.test(dateFrom,dateTo);
+        return ResponseEntity.ok(retval);
+    }
 
+    
     @PostMapping("convertToXml")
     public ResponseEntity<String> objectToXml(@RequestBody IzvestajOImunizaciji izvestaj) {
         String retval = izvestajService.convertToXml(izvestaj);

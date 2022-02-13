@@ -46,6 +46,18 @@ public class ZahtevController {
         return ResponseEntity.ok(retval);
     }
     
+    @RequestMapping(value = "/getForDate/{dateFrom}/{dateTo}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sveZaDatum(@PathVariable String dateFrom, @PathVariable String dateTo) throws Exception {
+    	String retval = zahtevService.getAllForDate(dateFrom,dateTo);
+        return ResponseEntity.ok(retval);
+    }
+    
+    @RequestMapping(value = "/getNumberForDate/{dateFrom}/{dateTo}", method = RequestMethod.GET)
+    public ResponseEntity<Integer> sveZaDatumBroj(@PathVariable String dateFrom, @PathVariable String dateTo) throws Exception {
+    	int retval = zahtevService.getNumberOfRequests(dateFrom,dateTo);
+        return ResponseEntity.ok(retval);
+    }
+    
     @RequestMapping(value = "/getForUser/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<String> sveZaUsera(@PathVariable String id) throws Exception {
     	String retval = zahtevService.getAllForUser(id);

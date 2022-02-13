@@ -38,6 +38,12 @@ public class InteresovanjeController {
     	String retval = interesovanjeService.getAllForDate(dateFrom,dateTo);
         return ResponseEntity.ok(retval);
     }
+    
+    @RequestMapping(value = "/getNumberForDate/{dateFrom}/{dateTo}", method = RequestMethod.GET)
+    public ResponseEntity<Integer> sveZaDatumBroj(@PathVariable String dateFrom, @PathVariable String dateTo) throws Exception {
+    	int retval = interesovanjeService.getNumberOfInterests(dateFrom,dateTo);
+        return ResponseEntity.ok(retval);
+    }
 
     @GetMapping("getXmlText/{id}")
     public ResponseEntity<String> getXml(@PathVariable String id) {
