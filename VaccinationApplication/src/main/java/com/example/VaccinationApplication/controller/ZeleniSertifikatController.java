@@ -48,6 +48,18 @@ public class ZeleniSertifikatController {
     	String retval = zeleniSertifikatService.getAllForUser(id);
         return ResponseEntity.ok(retval);
     }
+    
+    @RequestMapping(value = "/getNumberForDate/{dateFrom}/{dateTo}", method = RequestMethod.GET)
+    public ResponseEntity<Integer> sveZaDatumBroj(@PathVariable String dateFrom, @PathVariable String dateTo) throws Exception {
+    	int retval = zeleniSertifikatService.getNumberOfCertificates(dateFrom,dateTo);
+        return ResponseEntity.ok(retval);
+    }
+    
+    @RequestMapping(value = "/getForDate/{dateFrom}/{dateTo}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sveZaDatum(@PathVariable String dateFrom, @PathVariable String dateTo) throws Exception {
+    	String retval = zeleniSertifikatService.getAllForDate(dateFrom,dateTo);
+        return ResponseEntity.ok(retval);
+    }
 
     @RequestMapping(value = "/saveXmlText", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ZeleniSertifikat> saveXmlText(@RequestBody String zeleniSertifikatXml) throws FileNotFoundException, TransformerException {

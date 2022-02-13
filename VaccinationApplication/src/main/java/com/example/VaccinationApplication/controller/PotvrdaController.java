@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.xml.transform.TransformerException;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/potvrde")
@@ -36,6 +37,12 @@ public class PotvrdaController {
     @RequestMapping(value = "/getForDate/{dateFrom}/{dateTo}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<String> sveZaDatum(@PathVariable String dateFrom, @PathVariable String dateTo) throws Exception {
     	String retval = potvrdaService.getAllForDate(dateFrom,dateTo);
+        return ResponseEntity.ok(retval);
+    }
+    
+    @RequestMapping(value = "/getForReportDate/{dateFrom}/{dateTo}", method = RequestMethod.GET)
+    public ResponseEntity<List<Integer>> sveZaIzvDatum(@PathVariable String dateFrom, @PathVariable String dateTo) throws Exception {
+    	List<Integer> retval = potvrdaService.getReportDataForDate(dateFrom,dateTo);
         return ResponseEntity.ok(retval);
     }
     

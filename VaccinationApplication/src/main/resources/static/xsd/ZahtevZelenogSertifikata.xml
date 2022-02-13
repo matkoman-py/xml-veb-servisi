@@ -10,6 +10,6 @@
   <zzs:Informacije_o_zahtevu>
     <zzs:Razlog>zzs:Razlog</zzs:Razlog>
     <zzs:Mesto>zzs:Mesto</zzs:Mesto>
-    <zzs:Datum_izdavanja datatype="xs:date" property="pred:datum_izdavanja">2001-01-01</zzs:Datum_izdavanja>
+    <zzs:Datum_izdavanja datatype="xs:date" property="pred:datum">2001-01-01</zzs:Datum_izdavanja>
   </zzs:Informacije_o_zahtevu>
 </zzs:zahtev>

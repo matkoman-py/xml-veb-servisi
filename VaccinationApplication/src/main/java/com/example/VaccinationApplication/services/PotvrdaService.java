@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.xml.transform.TransformerException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -99,6 +100,50 @@ public class PotvrdaService {
         ListaPotvrda lp = new ListaPotvrda();
         lp.setPotvrda(potvrde);
         return convertToXml(lp);
+    }
+    
+public List<Integer> getReportDataForDate(String dateFrom, String dateTo) throws Exception {
+    	
+    	String xPath = "//Potvrda[Vakcinacija_info/number(translate(Datum_izdavanja,'-','')) >= "+dateFrom.replace("-", "")+" and Vakcinacija_info/number(translate(Datum_izdavanja,'-','')) <="+dateTo.replace("-","")+ "]";
+    	List<Potvrda> potvrde = new ArrayList<Potvrda>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/potvrde", xPath, "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji");
+        int prvaDoza = 0;
+        int drugaDoza = 0;
+        int pfizer = 0;
+        int sinopharm = 0;
+        int sputnik = 0;
+        int astrazenneca = 0;
+        for (String string : rezultat) {
+        	int numDoza = 0;
+        	Potvrda potvrda = convertToObject(string);
+        	System.out.println(potvrda.getVakcinacijaInfo().getNazivVakcine().getValue().length());
+			if(potvrda.getVakcinacijaInfo().getPrvaDoza() != null) {
+				prvaDoza++;
+				numDoza++;
+			}
+			if(potvrda.getVakcinacijaInfo().getDrugaDoza() != null) {
+				drugaDoza++;
+				numDoza++;
+			}
+			
+			
+			if(potvrda.getVakcinacijaInfo().getNazivVakcine().getValue().equals("Pfizer-BioNTech")) {
+				pfizer += numDoza;
+			}
+			else if(potvrda.getVakcinacijaInfo().getNazivVakcine().getValue().equals("SinoPharm")) {
+				System.out.println("USAOOOO");
+				sinopharm += numDoza;
+			}
+			else if(potvrda.getVakcinacijaInfo().getNazivVakcine().getValue().equals("Sputnik V")) {
+				sputnik += numDoza;
+			}
+			else if(potvrda.getVakcinacijaInfo().getNazivVakcine().getValue().equals("AstraZenneca-Oxford")) {
+				astrazenneca += numDoza;
+			}	
+		}
+        List<Integer> data = Arrays.asList(prvaDoza,drugaDoza,pfizer,sinopharm,sputnik,astrazenneca);
+        
+        return data;
     }
 
     public String getAllForUser(String id) throws Exception {

@@ -4,10 +4,56 @@ import com.example.officialsapplication.dao.DataAccessLayer;
 import com.example.officialsapplication.extractor.MetadataExtractor;
 import com.example.officialsapplication.mappers.MultiwayMapper;
 import com.example.officialsapplication.model.users.izvestaj.IzvestajOImunizaciji;
-import org.springframework.stereotype.Service;
+import com.example.officialsapplication.model.users.izvestaj.TBrojPodnetihInteresovanja;
+import com.example.officialsapplication.model.users.izvestaj.TDatumDo;
+import com.example.officialsapplication.model.users.izvestaj.TDatumIzdavanja;
+import com.example.officialsapplication.model.users.izvestaj.TDatumOd;
+import com.example.officialsapplication.model.users.izvestaj.TDozaInfo;
+import com.example.officialsapplication.model.users.izvestaj.TPeriod;
+import com.example.officialsapplication.model.users.izvestaj.TProizvodjaciInfo;
+import com.example.officialsapplication.model.users.izvestaj.TZeleniSertifikat;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.XMLWorkerHelper;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeConstants;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.Duration;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 @Service
 public class IzvestajOImunizacijiService {
@@ -16,6 +62,31 @@ public class IzvestajOImunizacijiService {
     private final MultiwayMapper mapper;
     private final String folderId = "/db/officials-system/izvestaji";
     private final MetadataExtractor metadataExtractor;
+    private RestTemplate restTemplate = new RestTemplate();
+    private static DocumentBuilderFactory documentFactory;
+	
+	private static TransformerFactory transformerFactory;
+	
+	public static final String INPUT_FILE = "data/xslt/izvestaj.xml";
+	
+	public static final String XSL_FILE = "data/xslt/izvestaj.xsl";
+	
+	public static final String HTML_FILE = "gen/itext/izvestaj.html";
+	
+	public static final String OUTPUT_FILE = "gen/itext/izvestaj.pdf";
+	
+	static {
+
+		/* Inicijalizacija DOM fabrike */
+		documentFactory = DocumentBuilderFactory.newInstance();
+		documentFactory.setNamespaceAware(true);
+		documentFactory.setIgnoringComments(true);
+		documentFactory.setIgnoringElementContentWhitespace(false);
+		
+		/* Inicijalizacija Transformer fabrike */
+		transformerFactory = TransformerFactory.newInstance();
+		
+	}
 
     public IzvestajOImunizacijiService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper,
                                        MetadataExtractor metadataExtractor) {
@@ -34,11 +105,58 @@ public class IzvestajOImunizacijiService {
         return (IzvestajOImunizaciji) mapper.convertToObject(xmlString, "Izvestaj_o_imunizaciji",
                 IzvestajOImunizaciji.class);
     }
+    
+    public String test(String dateFrom, String dateTo) throws DatatypeConfigurationException, IOException, DocumentException {
+    	ResponseEntity<Integer> interesovanja
+  	  = restTemplate.getForEntity("http://localhost:8087/api/interesovanja/getNumberForDate/"+dateFrom+"/"+dateTo, Integer.class);
+    	
+    	ResponseEntity<Integer> zahtevi
+  	  = restTemplate.getForEntity("http://localhost:8087/api/zahtevi/getNumberForDate/"+dateFrom+"/"+dateTo, Integer.class);
+    	
+    	ResponseEntity<Integer> zelenisertifikati
+    	  = restTemplate.getForEntity("http://localhost:8087/api/zelenisertifikati/getNumberForDate/"+dateFrom+"/"+dateTo, Integer.class);
+      	
+    	ResponseEntity<Integer[]> vakcine
+    	  = restTemplate.getForEntity("http://localhost:8087/api/potvrde/getForReportDate/"+dateFrom+"/"+dateTo, Integer[].class);
+    	
+    	GregorianCalendar df = new GregorianCalendar(Integer.parseInt(dateFrom.split("-")[0]), Integer.parseInt(dateFrom.split("-")[1])-1, Integer.parseInt(dateFrom.split("-")[2]));
+    	GregorianCalendar dt = new GregorianCalendar(Integer.parseInt(dateTo.split("-")[0]), Integer.parseInt(dateTo.split("-")[1])-1, Integer.parseInt(dateTo.split("-")[2]));
+    	GregorianCalendar dn = new GregorianCalendar();
+    	
+    	IzvestajOImunizaciji izvestaj = new IzvestajOImunizaciji();
+    	izvestaj.setBrojPodnetihInteresovanja(new TBrojPodnetihInteresovanja());
+    	izvestaj.getBrojPodnetihInteresovanja().setValue(BigInteger.valueOf(interesovanja.getBody()));
+    	izvestaj.setZeleniSertifikatInfo(new TZeleniSertifikat());
+    	izvestaj.getZeleniSertifikatInfo().setBrojPrimljenihZahteva(BigInteger.valueOf(zahtevi.getBody()));
+    	izvestaj.getZeleniSertifikatInfo().setBrojIzdatihSertifikata(BigInteger.valueOf(zelenisertifikati.getBody()));
+    	izvestaj.setDozaInfo(new TDozaInfo());
+    	izvestaj.getDozaInfo().setBrojDatihDoza(BigInteger.valueOf(vakcine.getBody()[0] + vakcine.getBody()[1]));
+    	izvestaj.getDozaInfo().setBrojDatePrveDoze(BigInteger.valueOf(vakcine.getBody()[0]));
+    	izvestaj.getDozaInfo().setBrojDateDrugeDoze(BigInteger.valueOf(vakcine.getBody()[1]));
+    	izvestaj.setProizvodjaciInfo(new TProizvodjaciInfo());
+    	izvestaj.getProizvodjaciInfo().setBrojDozaAstraZeneca(BigInteger.valueOf(vakcine.getBody()[5]));
+    	izvestaj.getProizvodjaciInfo().setBrojDozaPfizerBioNTech(BigInteger.valueOf(vakcine.getBody()[2]));
+    	izvestaj.getProizvodjaciInfo().setBrojDozaSinopharm(BigInteger.valueOf(vakcine.getBody()[3]));
+    	izvestaj.getProizvodjaciInfo().setBrojDozaSputnikV(BigInteger.valueOf(vakcine.getBody()[4]));
+    	izvestaj.setDatumIzdavanja(new TDatumIzdavanja());
+    	izvestaj.getDatumIzdavanja().setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(dn.get(Calendar.YEAR), dn.get(Calendar.MONTH)+1, dn.get(Calendar.DAY_OF_MONTH), dn.get(Calendar.HOUR_OF_DAY), dn.get(Calendar.MINUTE), dn.get(Calendar.SECOND), DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED));
+
+    	izvestaj.setPeriod(new TPeriod());
+    	izvestaj.getPeriod().setDatumOd(new TDatumOd());
+    	izvestaj.getPeriod().getDatumOd().setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(df.get(Calendar.YEAR), df.get(Calendar.MONTH)+1, df.get(Calendar.DAY_OF_MONTH), DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED));
+    	izvestaj.getPeriod().setDatumDo(new TDatumDo());
+    	izvestaj.getPeriod().getDatumDo().setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(dt.get(Calendar.YEAR), dt.get(Calendar.MONTH)+1, dt.get(Calendar.DAY_OF_MONTH), DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED));
+    	izvestaj.setAbout("http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji/"+izvestaj.getPeriod().getDatumOd().getValue().toString() +"-"+izvestaj.getPeriod().getDatumDo().getValue().toString());
+    	saveXmlFromObject(izvestaj);
+    	generateHTML(convertToXml(izvestaj), XSL_FILE);
+		generatePDF(OUTPUT_FILE);
+    	return convertToXml(izvestaj);
+    }
 
     public IzvestajOImunizaciji saveXmlFromText(String xmlString) {
         IzvestajOImunizaciji izvestaj = (IzvestajOImunizaciji) mapper.convertToObject(xmlString, "Izvestaj_o_imunizaciji",
                 IzvestajOImunizaciji.class);
-        String documentId = izvestaj.getId() + ".xml";
+        String documentId = izvestaj.getPeriod().getDatumOd().getValue().toString() +"-"+izvestaj.getPeriod().getDatumDo().getValue().toString()+".xml";
         dataAccessLayer.saveDocument(izvestaj, folderId, documentId, IzvestajOImunizaciji.class);
 
         try {
@@ -51,7 +169,7 @@ public class IzvestajOImunizacijiService {
     }
 
     public IzvestajOImunizaciji saveXmlFromObject(IzvestajOImunizaciji izvestaj) {
-        String documentId = izvestaj.getId() + ".xml";
+        String documentId = izvestaj.getPeriod().getDatumOd().getValue().toString() +"-"+izvestaj.getPeriod().getDatumDo().getValue().toString()+".xml";
         dataAccessLayer.saveDocument(izvestaj, folderId, documentId, IzvestajOImunizaciji.class);
         return izvestaj;
     }
@@ -64,4 +182,81 @@ public class IzvestajOImunizacijiService {
         return (IzvestajOImunizaciji) mapper.convertToObject(xmlString, "Izvestaj_o_imunizaciji",
                 IzvestajOImunizaciji.class);
     }
+    
+	public void generatePDF(String filePath) throws IOException, DocumentException {
+	        
+	    	// Step 1
+	    	Document document = new Document();
+	        
+	    	// Step 2
+	        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
+	        
+	       
+	        // Step 3
+	        document.open();
+	        
+	        // Step 4
+	        XMLWorkerHelper.getInstance().parseXHtml(writer, document, new FileInputStream(HTML_FILE));
+	        
+	        // Step 5
+	        document.close();
+	        
+	    }
+	
+	public org.w3c.dom.Document buildDocument(String xml) {
+
+    	org.w3c.dom.Document document = null;
+   
+		try {
+			
+			DocumentBuilder builder = documentFactory.newDocumentBuilder();
+			//document = builder.parse(new File(filePath)); 
+			//OVO JE DODATO
+
+			InputStream is = new ByteArrayInputStream(xml.getBytes());
+			document = builder.parse(is);
+			// DO OVDE
+			
+			
+			if (document != null)
+				System.out.println("[INFO] File parsed with no errors.");
+			else
+				System.out.println("[WARN] Document is null.");
+
+		} catch (Exception e) {
+			return null;
+			
+		} 
+
+		return document;
+	}
+	
+	public void generateHTML(String xmlPath, String xslPath) throws FileNotFoundException {
+	    	
+			try {
+	
+				// Initialize Transformer instance
+				StreamSource transformSource = new StreamSource(new File(xslPath));
+				Transformer transformer = transformerFactory.newTransformer(transformSource);
+				transformer.setOutputProperty("{http://xml.apache.org/xalan}indent-amount", "2");
+				transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+				
+				// Generate XHTML
+				transformer.setOutputProperty(OutputKeys.METHOD, "xhtml");
+	
+				// Transform DOM to HTML
+				DOMSource source = new DOMSource(buildDocument(xmlPath));
+				StreamResult result = new StreamResult(new FileOutputStream(HTML_FILE));
+				transformer.transform(source, result);
+				
+			} catch (TransformerConfigurationException e) {
+				e.printStackTrace();
+			} catch (TransformerFactoryConfigurationError e) {
+				e.printStackTrace();
+			} catch (TransformerException e) {
+				e.printStackTrace();
+			}
+	    
+	    }
+    
 }

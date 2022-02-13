@@ -96,6 +96,7 @@ public class ZahtevService {
     		updatedZahtev.setHref("");
     	}
     	
+
     	if(!updatedZahtev.getHref().isBlank()) {
     		return;
     	}
@@ -128,7 +129,7 @@ public class ZahtevService {
         return convertToXml(lzzs);
     }
     
-public String getAllForUser(String id) throws Exception {
+    public String getAllForUser(String id) throws Exception {
     	
     	String xPath = "//zahtev[Podnosilac_zahteva/Jedinstveni_maticni_broj_gradjana = '"+id+"']";
     	System.out.println(xPath);
@@ -140,6 +141,29 @@ public String getAllForUser(String id) throws Exception {
         ListaZahtevaZelenogSertifikata lzzs = new ListaZahtevaZelenogSertifikata();
         lzzs.setZahtev(zahtevi);
         return convertToXml(lzzs);
+    }
+    
+    public String getAllForDate(String dateFrom, String dateTo) throws Exception {
+    	
+    	//		String xPath = "//Saglasnost[Podaci_o_pacijentu/number(translate(Datum,'-','')) >= "+dateFrom.replace("-", "")+" and Podaci_o_pacijentu/number(translate(Datum,'-','')) <="+dateTo.replace("-","")+ "]";
+    	String xPath = "//zahtev[Informacije_o_zahtevu/number(translate(Datum_izdavanja,'-','')) >= "+dateFrom.replace("-", "")+" and Informacije_o_zahtevu/number(translate(Datum_izdavanja,'-','')) <= "+dateTo.replace("-","")+"]";
+    	System.out.println(xPath);
+    	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zahtevi", xPath, "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata");
+        for (String string : rezultat) {
+			zahtevi.add(convertToObject(string));
+		}
+        ListaZahtevaZelenogSertifikata lzzs = new ListaZahtevaZelenogSertifikata();
+        lzzs.setZahtev(zahtevi);
+        return convertToXml(lzzs);
+    }
+    
+    public int getNumberOfRequests(String dateFrom, String dateTo) throws Exception {
+    	String xPath = "//zahtev[Informacije_o_zahtevu/number(translate(Datum_izdavanja,'-','')) >= "+dateFrom.replace("-", "")+" and Informacije_o_zahtevu/number(translate(Datum_izdavanja,'-','')) <= "+dateTo.replace("-","")+"]";
+    	System.out.println(xPath);
+    	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zahtevi", xPath, "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata");
+        return rezultat.size();
     }
     
     
