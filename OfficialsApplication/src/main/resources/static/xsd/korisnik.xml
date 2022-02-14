@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kor:korisnik xmlns:kor="http://www.ftn.uns.ac.rs/korisnik" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ftn.uns.ac.rs/korisnik Korisnik.xsd ">
+  <kor:drzavljanstvo>Srpsko</kor:drzavljanstvo>
+  <kor:jmbg>2910999730020</kor:jmbg>
+  <kor:broj_pasosa>9321321</kor:broj_pasosa>
+  <kor:ime>Petar</kor:ime>
+  <kor:prezime>Markovic</kor:prezime>
+  <kor:ime_roditelja>Zoran</kor:ime_roditelja>
+  <kor:pol>muski</kor:pol>
+  <kor:datum_rodjenja>1999-10-29</kor:datum_rodjenja>
+  <kor:mesto_rodjenja>Nis</kor:mesto_rodjenja>
+  <kor:adresa>Vladike Cirica 5</kor:adresa>
+  <kor:mesto>Novi Sad</kor:mesto>
+  <kor:grad>Novi Sad</kor:grad>
+  <kor:fiksni_telefon>021493103</kor:fiksni_telefon>
+  <kor:mobilni_telefon>0692910099</kor:mobilni_telefon>
+  <kor:email>radnik@gmail.com</kor:email>
+  <kor:sifra>petar123</kor:sifra>
+  <kor:rola>sluzbenik</kor:rola>
+</kor:korisnik>

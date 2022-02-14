@@ -5,12 +5,17 @@ import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
 import com.example.VaccinationApplication.model.users.korisnik.Korisnik;
+import com.example.VaccinationApplication.model.zahtev_zeleni_sertifikat.ListaZahtevaZelenogSertifikata;
+import com.example.VaccinationApplication.model.zahtev_zeleni_sertifikat.Zahtev;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.xml.transform.TransformerException;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class KorisnikService {
@@ -51,6 +56,15 @@ public class KorisnikService {
 
         return (Korisnik) mapper.convertToObject(xmlString, "Korisnik",
                 Korisnik.class);
+    }
+    
+    public Korisnik getUser(String id) throws Exception {
+    	String xPath = "//korisnik[jmbg = '"+id+"']";
+    	System.out.println(xPath);
+    	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/korisnici", xPath, "http://www.ftn.uns.ac.rs/korisnik");
+        mapper.convertToObject(rezultat.get(0), "Korisnik", Korisnik.class);
+        return  (Korisnik) mapper.convertToObject(rezultat.get(0), "Korisnik", Korisnik.class);
     }
 
 }

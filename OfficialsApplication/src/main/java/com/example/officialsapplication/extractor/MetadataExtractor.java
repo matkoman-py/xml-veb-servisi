@@ -23,13 +23,13 @@ public class MetadataExtractor {
 
 	private final TransformerFactory transformerFactory = TransformerFactory.newInstance();
 
-	private static final String XSLT_FILE = "OfficialsApplication/data/xsl/grddl.xsl";
+//	private static final String XSLT_FILE = "OfficialsApplication/data/xsl/grddl.xsl";
 	
-	private static final String RDF_FILE_PATH = "OfficialsApplication/gen/grddl_metadata.rdf";
+	//private static final String RDF_FILE_PATH = "OfficialsApplication/gen/grddl_metadata.rdf";
 	
-//	private static final String XSLT_FILE = "data/xsl/grddl.xsl";
+	private static final String XSLT_FILE = "data/xsl/grddl.xsl";
 //
-//	private static final String RDF_FILE_PATH = "gen/grddl_metadata.rdf";
+	private static final String RDF_FILE_PATH = "gen/grddl_metadata.rdf";
 
 	private final RdfDatabaseConfig rdfConfig;
 
@@ -38,11 +38,13 @@ public class MetadataExtractor {
 	}
 
 	public void extractAndSave(String xmlFile, String path) throws FileNotFoundException, TransformerException{
+		System.out.println("USAOOOOOO1");
 		this.extractMetadata(new ByteArrayInputStream(xmlFile.getBytes()), new FileOutputStream(RDF_FILE_PATH));
 		this.saveRdf(path);
 	}
 
 	private void saveRdf(String path){
+		System.out.println("USAOOOOO2");
 		Model model = ModelFactory.createDefaultModel();
 		model.read(RDF_FILE_PATH);
 
@@ -55,7 +57,9 @@ public class MetadataExtractor {
 
 		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update,
 				String.join("/", rdfConfig.getEndpoint(), rdfConfig.getDataset(), rdfConfig.getUpdate()));
+		System.out.println(String.join("/", rdfConfig.getEndpoint(), rdfConfig.getDataset(), rdfConfig.getUpdate()));
 		processor.execute();
+		System.out.println("USAOOO3");
 	}
 
 	private void extractMetadata(InputStream in, OutputStream out) throws FileNotFoundException, TransformerException {

@@ -1,6 +1,8 @@
 package com.example.officialsapplication.controller;
 
+import com.example.officialsapplication.model.potvrda.Potvrda;
 import com.example.officialsapplication.model.users.izvestaj.IzvestajOImunizaciji;
+import com.example.officialsapplication.model.users.korisnik.Korisnik;
 import com.example.officialsapplication.services.IzvestajOImunizacijiService;
 import com.itextpdf.text.DocumentException;
 
@@ -11,6 +13,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/api/izvestaji")
@@ -64,4 +67,18 @@ public class IzvestajOImunizacijiController {
         IzvestajOImunizaciji retval = izvestajService.convertToObject(xmlString);
         return ResponseEntity.ok(retval);
     }
+    
+    @GetMapping("test/{id}")
+    public Korisnik test(@PathVariable String id) throws DatatypeConfigurationException, IOException, DocumentException {
+    	RestTemplate restTemplate = new RestTemplate();
+    	ResponseEntity<Korisnik> interesovanja
+    	  = restTemplate.getForEntity("http://localhost:8087/api/korisnici/getUser/"+id, Korisnik.class);
+    	
+    	ResponseEntity<Potvrda> pot
+  	  = restTemplate.getForEntity("http://localhost:8087/api/potvrde/"+id, Potvrda.class);
+      	System.out.println("DASDASDAS " + pot.getBody().getVakcinacijaInfo().getNazivVakcine().getValue());
+      	izvestajService.zeleni(id);
+    	return interesovanja.getBody();
+    }
+    
 }

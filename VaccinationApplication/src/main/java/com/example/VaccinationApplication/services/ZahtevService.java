@@ -97,7 +97,7 @@ public class ZahtevService {
     	}
     	
 
-    	if(!updatedZahtev.getHref().isBlank()) {
+    	if(!updatedZahtev.getHref().trim().equals("")) {
     		return;
     	}
     	updatedZahtev.setRel("pred:answeredBy");

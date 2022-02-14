@@ -63,9 +63,9 @@ public class ZeleniSertifikatService {
         
         dataAccessLayer.saveDocument(zeleniSertifikat, folderId, documentId, ZeleniSertifikat.class);
 
-        
-        String zahtevId = zeleniSertifikat.getHref().split("/")[4];
-        zahtevService.link(zeleniSertifikat.getBrojSertifikata().getValue().replace('/', '-'), zahtevId);
+//        
+//        String zahtevId = zeleniSertifikat.getHref().split("/")[4];
+//        zahtevService.link(zeleniSertifikat.getBrojSertifikata().getValue().replace('/', '-'), zahtevId);
         
         // POSTAVI GRESKU
         
