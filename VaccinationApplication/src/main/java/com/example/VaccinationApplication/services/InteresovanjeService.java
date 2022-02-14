@@ -111,7 +111,7 @@ public class InteresovanjeService {
             updatedInteresovanje.setHref("");
         }
 
-        if (!updatedInteresovanje.getHref().isBlank()) {
+        if (!updatedInteresovanje.getHref().trim().equals("")) {
             return;
         }
         updatedInteresovanje.setRel("pred:answeredBy");
