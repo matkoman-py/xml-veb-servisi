@@ -58,7 +58,7 @@ public class InteresovanjeController {
     }
 
     @PostMapping("saveXmlText")
-    public ResponseEntity<Interesovanje> saveXml(@RequestBody String interesovanjeXml) {
+    public ResponseEntity<Interesovanje> saveXml(@RequestBody String interesovanjeXml) throws Exception {
         Interesovanje retval = interesovanjeService.saveXmlFromText(interesovanjeXml);
         return ResponseEntity.ok(retval);
     }
