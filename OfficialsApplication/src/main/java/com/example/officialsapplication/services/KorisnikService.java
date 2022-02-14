@@ -37,6 +37,7 @@ public class KorisnikService {
 
         dataAccessLayer.saveDocument(korisnik, folderId, documentId, Korisnik.class);
         try {
+        	System.out.println("USAOOOO");
             metadataExtractor.extractAndSave(xmlString,"/korisnici");
         } catch (FileNotFoundException | TransformerException e) {
             e.printStackTrace();

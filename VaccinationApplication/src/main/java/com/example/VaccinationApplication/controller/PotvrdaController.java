@@ -52,6 +52,12 @@ public class PotvrdaController {
         return ResponseEntity.ok(retval);
     }
     
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<Potvrda> getPotvrda(@PathVariable String id) throws Exception {
+    	Potvrda retval = potvrdaService.getPotvrda(id);
+        return ResponseEntity.ok(retval);
+    }
+    
     
 
     @GetMapping("getXmlObject/{id}")

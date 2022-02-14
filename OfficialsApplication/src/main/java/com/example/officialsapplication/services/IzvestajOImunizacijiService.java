@@ -3,6 +3,7 @@ package com.example.officialsapplication.services;
 import com.example.officialsapplication.dao.DataAccessLayer;
 import com.example.officialsapplication.extractor.MetadataExtractor;
 import com.example.officialsapplication.mappers.MultiwayMapper;
+import com.example.officialsapplication.model.potvrda.Potvrda;
 import com.example.officialsapplication.model.users.izvestaj.IzvestajOImunizaciji;
 import com.example.officialsapplication.model.users.izvestaj.TBrojPodnetihInteresovanja;
 import com.example.officialsapplication.model.users.izvestaj.TDatumDo;
@@ -12,6 +13,13 @@ import com.example.officialsapplication.model.users.izvestaj.TDozaInfo;
 import com.example.officialsapplication.model.users.izvestaj.TPeriod;
 import com.example.officialsapplication.model.users.izvestaj.TProizvodjaciInfo;
 import com.example.officialsapplication.model.users.izvestaj.TZeleniSertifikat;
+import com.example.officialsapplication.model.users.korisnik.Korisnik;
+import com.example.officialsapplication.model.zeleni_sertifikat.TBrojSertifikata;
+import com.example.officialsapplication.model.zeleni_sertifikat.TImeIPrezime;
+import com.example.officialsapplication.model.zeleni_sertifikat.TJmbg;
+import com.example.officialsapplication.model.zeleni_sertifikat.TPacijent;
+import com.example.officialsapplication.model.zeleni_sertifikat.TVakcinacija;
+import com.example.officialsapplication.model.zeleni_sertifikat.ZeleniSertifikat;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -48,6 +56,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -258,5 +267,64 @@ public class IzvestajOImunizacijiService {
 			}
 	    
 	    }
+	
+	
+	public String convertToXml(ZeleniSertifikat zeleniSertifikat) {
+        return mapper.convertToXml(zeleniSertifikat, ZeleniSertifikat.class);
+    }
+
+
+	
+	public void zeleni(String id) throws DatatypeConfigurationException, IOException, DocumentException {
+		GregorianCalendar dn = new GregorianCalendar();
+		ResponseEntity<Korisnik> pacijent
+  	  = restTemplate.getForEntity("http://localhost:8087/api/korisnici/getUser/"+id, Korisnik.class);
+  	
+  	ResponseEntity<Potvrda> potvrda
+	  = restTemplate.getForEntity("http://localhost:8087/api/potvrde/"+id, Potvrda.class);
+  	
+  		Korisnik pacijentData = pacijent.getBody();
+  		Potvrda potvrdaData = potvrda.getBody();
+  	
+  		ZeleniSertifikat zs = new ZeleniSertifikat();
+  		zs.setBrojSertifikata(new TBrojSertifikata());
+  		zs.getBrojSertifikata().setValue("202121-21");
+  		zs.setDatumIzdavanja(new com.example.officialsapplication.model.zeleni_sertifikat.TDatumIzdavanja());
+  		zs.getDatumIzdavanja().setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(dn.get(Calendar.YEAR), dn.get(Calendar.MONTH)+1, dn.get(Calendar.DAY_OF_MONTH), dn.get(Calendar.HOUR_OF_DAY), dn.get(Calendar.MINUTE), dn.get(Calendar.SECOND), DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED));
+  		zs.setPodaciOPacijentu(new TPacijent());
+  		zs.getPodaciOPacijentu().setBrojPasosa(pacijentData.getBrojPasosa());
+  		zs.getPodaciOPacijentu().setDatumRodjenja(pacijentData.getDatumRodjenja());
+  		zs.getPodaciOPacijentu().setImePrezime(new TImeIPrezime());
+  		zs.getPodaciOPacijentu().getImePrezime().setValue(pacijentData.getIme() + " " + pacijentData.getPrezime());
+  		zs.getPodaciOPacijentu().setJmbg(new TJmbg());
+  		zs.getPodaciOPacijentu().getJmbg().setValue(pacijentData.getJmbg());
+  		zs.getPodaciOPacijentu().setPol(pacijentData.getPol());
+  		//List<TVakcinacija> vakcinaInfo = new ArrayList<TVakcinacija>();
+  		TVakcinacija prvaDoza = new TVakcinacija();
+  		TVakcinacija drugaDoza = new TVakcinacija();
+  		if(potvrdaData.getVakcinacijaInfo().getPrvaDoza() != null) {
+  			prvaDoza.setDatum(potvrdaData.getVakcinacijaInfo().getPrvaDoza().getDatumVakcine());
+  			prvaDoza.setProizvodjacSerija(potvrdaData.getVakcinacijaInfo().getPrvaDoza().getSerijaVakcine());
+  			prvaDoza.setZdravstvenaUstanova(potvrdaData.getVakcinacijaInfo().getZdravstvenaUstanova().getValue());
+  			prvaDoza.setTip(potvrdaData.getVakcinacijaInfo().getNazivVakcine().getValue());
+  		}
+  		if(potvrdaData.getVakcinacijaInfo().getDrugaDoza() != null) {
+  			drugaDoza.setDatum(potvrdaData.getVakcinacijaInfo().getDrugaDoza().getDatumVakcine());
+  			drugaDoza.setProizvodjacSerija(potvrdaData.getVakcinacijaInfo().getDrugaDoza().getSerijaVakcine());
+  			drugaDoza.setZdravstvenaUstanova(potvrdaData.getVakcinacijaInfo().getZdravstvenaUstanova().getValue());
+  			drugaDoza.setTip(potvrdaData.getVakcinacijaInfo().getNazivVakcine().getValue());
+  		}
+  		System.out.println("DSADSASASDA " + potvrdaData.getVakcinacijaInfo().getNazivVakcine().getValue());
+  		System.out.println("EIIII " + prvaDoza.getTip());
+  		System.out.println("DSADSASASDA " + potvrdaData.getVakcinacijaInfo().getDrugaDoza().getSerijaVakcine());
+  		zs.getPodaciOVakcinaciji().add(prvaDoza);
+  		zs.getPodaciOVakcinaciji().add(drugaDoza);
+
+  		zs.setQrKod("dSADSADKLDNLK");
+  		String res = convertToXml(zs);
+  		generateHTML(res, "data/xslt/zeleni.xsl");
+		generatePDF("gen/itext/izvestaj.pdf");
+  		
+	}
     
 }
