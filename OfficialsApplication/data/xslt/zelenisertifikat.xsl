@@ -110,9 +110,13 @@
             <body>
                 <table>
                     <tr>
-                        <td><p style="text-align:left;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Coat_of_arms_of_Serbia_small.svg/150px-Coat_of_arms_of_Serbia_small.svg.png" width="100" height="100"></img></p>
+                        <td><p style="text-align:left;"><img alt="Embedded Image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Coat_of_arms_of_Serbia_small.svg/150px-Coat_of_arms_of_Serbia_small.svg.png" width="100" height="100"></img></p>
                         </td>
-                        <td><p style="text-align:right;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png" width="100" height="100"></img></p>
+                        <td><p style="text-align:right;"><img width="100" height="100">
+                            <xsl:attribute name="src">
+                                <xsl:value-of select="zel:zeleni_sertifikat/zel:qr_kod"/>
+                            </xsl:attribute>
+                        </img></p>
                         </td>
                     </tr>
                 </table>
@@ -185,7 +189,7 @@
                         <td><b>Datum/Date:</b> <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_vakcinaciji[2]/zel:datum[1]"/></td>
                     </tr>
                     <tr>
-                        <td><b>Zdravstvena ustanova/Healt care Institution:</b></td>
+                        <td><b>Zdravstvena ustanova/Healt care Institution:ššššššššššššššššђђђђђђђђђђђђђђђђђђђђђђђђђђ</b></td>
                         <td><b>Zdravstvena ustanova/Healt care Institution:</b></td>
                     </tr>
                     <tr>

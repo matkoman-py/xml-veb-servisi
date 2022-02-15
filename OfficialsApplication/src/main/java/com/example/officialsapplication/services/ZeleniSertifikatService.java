@@ -1,19 +1,9 @@
 package com.example.officialsapplication.services;
 
-import com.example.officialsapplication.services.MailSenderService;
 import com.example.officialsapplication.dao.DataAccessLayer;
 import com.example.officialsapplication.extractor.MetadataExtractor;
 import com.example.officialsapplication.mappers.MultiwayMapper;
 import com.example.officialsapplication.model.potvrda.Potvrda;
-import com.example.officialsapplication.model.users.izvestaj.IzvestajOImunizaciji;
-import com.example.officialsapplication.model.users.izvestaj.TBrojPodnetihInteresovanja;
-import com.example.officialsapplication.model.users.izvestaj.TDatumDo;
-import com.example.officialsapplication.model.users.izvestaj.TDatumIzdavanja;
-import com.example.officialsapplication.model.users.izvestaj.TDatumOd;
-import com.example.officialsapplication.model.users.izvestaj.TDozaInfo;
-import com.example.officialsapplication.model.users.izvestaj.TPeriod;
-import com.example.officialsapplication.model.users.izvestaj.TProizvodjaciInfo;
-import com.example.officialsapplication.model.users.izvestaj.TZeleniSertifikat;
 import com.example.officialsapplication.model.users.korisnik.Korisnik;
 import com.example.officialsapplication.model.zeleni_sertifikat.TBrojSertifikata;
 import com.example.officialsapplication.model.zeleni_sertifikat.TImeIPrezime;
@@ -21,6 +11,11 @@ import com.example.officialsapplication.model.zeleni_sertifikat.TJmbg;
 import com.example.officialsapplication.model.zeleni_sertifikat.TPacijent;
 import com.example.officialsapplication.model.zeleni_sertifikat.TVakcinacija;
 import com.example.officialsapplication.model.zeleni_sertifikat.ZeleniSertifikat;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -34,9 +29,7 @@ import javax.mail.MessagingException;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.Duration;
-import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.namespace.QName;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -50,29 +43,26 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+
 import java.nio.charset.Charset;
-import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
-import java.util.Date;
+
 import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
+
 
 @Service
-public class IzvestajOImunizacijiService {
+public class ZeleniSertifikatService {
 
     private final DataAccessLayer dataAccessLayer;
     private final MultiwayMapper mapper;
-    private final String folderId = "/db/officials-system/izvestaji";
     private final MetadataExtractor metadataExtractor;
     private RestTemplate restTemplate = new RestTemplate();
     private final MailSenderService mailSenderService;
@@ -80,13 +70,13 @@ public class IzvestajOImunizacijiService {
 	
 	private static TransformerFactory transformerFactory;
 	
-	public static final String INPUT_FILE = "data/xslt/izvestaj.xml";
+	public static final String INPUT_FILE = "data/xslt/zelenisertifikat.xml";
 	
-	public static final String XSL_FILE = "data/xslt/izvestaj.xsl";
+	public static final String XSL_FILE = "data/xslt/zelenisertifikat.xsl";
 	
-	public static final String HTML_FILE = "gen/itext/izvestaj.html";
+	public static final String HTML_FILE = "gen/itext/zelenisertifikat.html";
 	
-	public static final String OUTPUT_FILE = "gen/itext/izvestaj.pdf";
+	public static final String OUTPUT_FILE = "gen/itext/zelenisertifikat.pdf";
 	
 	static {
 
@@ -101,7 +91,7 @@ public class IzvestajOImunizacijiService {
 		
 	}
 
-    public IzvestajOImunizacijiService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper,
+    public ZeleniSertifikatService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper,
                                        MetadataExtractor metadataExtractor, MailSenderService mailSenderService) {
         this.dataAccessLayer = dataAccessLayer;
         this.mapper = mapper;
@@ -109,93 +99,15 @@ public class IzvestajOImunizacijiService {
         this.mailSenderService = mailSenderService;
     }
 
-    public String getXmlAsText(String documentId) {
-        return dataAccessLayer.getDocument(folderId, documentId).get();
-    }
-
-    public IzvestajOImunizaciji getXmlAsObject(String documentId) {
-        String xmlString = dataAccessLayer.getDocument(folderId, documentId).get();
-
-        return (IzvestajOImunizaciji) mapper.convertToObject(xmlString, "Izvestaj_o_imunizaciji",
-                IzvestajOImunizaciji.class);
-    }
     
-    public String test(String dateFrom, String dateTo) throws DatatypeConfigurationException, IOException, DocumentException {
-    	ResponseEntity<Integer> interesovanja
-  	  = restTemplate.getForEntity("http://localhost:8087/api/interesovanja/getNumberForDate/"+dateFrom+"/"+dateTo, Integer.class);
-    	
-    	ResponseEntity<Integer> zahtevi
-  	  = restTemplate.getForEntity("http://localhost:8087/api/zahtevi/getNumberForDate/"+dateFrom+"/"+dateTo, Integer.class);
-    	
-    	ResponseEntity<Integer> zelenisertifikati
-    	  = restTemplate.getForEntity("http://localhost:8087/api/zelenisertifikati/getNumberForDate/"+dateFrom+"/"+dateTo, Integer.class);
-      	
-    	ResponseEntity<Integer[]> vakcine
-    	  = restTemplate.getForEntity("http://localhost:8087/api/potvrde/getForReportDate/"+dateFrom+"/"+dateTo, Integer[].class);
-    	
-    	GregorianCalendar df = new GregorianCalendar(Integer.parseInt(dateFrom.split("-")[0]), Integer.parseInt(dateFrom.split("-")[1])-1, Integer.parseInt(dateFrom.split("-")[2]));
-    	GregorianCalendar dt = new GregorianCalendar(Integer.parseInt(dateTo.split("-")[0]), Integer.parseInt(dateTo.split("-")[1])-1, Integer.parseInt(dateTo.split("-")[2]));
-    	GregorianCalendar dn = new GregorianCalendar();
-    	
-    	IzvestajOImunizaciji izvestaj = new IzvestajOImunizaciji();
-    	izvestaj.setBrojPodnetihInteresovanja(new TBrojPodnetihInteresovanja());
-    	izvestaj.getBrojPodnetihInteresovanja().setValue(BigInteger.valueOf(interesovanja.getBody()));
-    	izvestaj.setZeleniSertifikatInfo(new TZeleniSertifikat());
-    	izvestaj.getZeleniSertifikatInfo().setBrojPrimljenihZahteva(BigInteger.valueOf(zahtevi.getBody()));
-    	izvestaj.getZeleniSertifikatInfo().setBrojIzdatihSertifikata(BigInteger.valueOf(zelenisertifikati.getBody()));
-    	izvestaj.setDozaInfo(new TDozaInfo());
-    	izvestaj.getDozaInfo().setBrojDatihDoza(BigInteger.valueOf(vakcine.getBody()[0] + vakcine.getBody()[1]));
-    	izvestaj.getDozaInfo().setBrojDatePrveDoze(BigInteger.valueOf(vakcine.getBody()[0]));
-    	izvestaj.getDozaInfo().setBrojDateDrugeDoze(BigInteger.valueOf(vakcine.getBody()[1]));
-    	izvestaj.setProizvodjaciInfo(new TProizvodjaciInfo());
-    	izvestaj.getProizvodjaciInfo().setBrojDozaAstraZeneca(BigInteger.valueOf(vakcine.getBody()[5]));
-    	izvestaj.getProizvodjaciInfo().setBrojDozaPfizerBioNTech(BigInteger.valueOf(vakcine.getBody()[2]));
-    	izvestaj.getProizvodjaciInfo().setBrojDozaSinopharm(BigInteger.valueOf(vakcine.getBody()[3]));
-    	izvestaj.getProizvodjaciInfo().setBrojDozaSputnikV(BigInteger.valueOf(vakcine.getBody()[4]));
-    	izvestaj.setDatumIzdavanja(new TDatumIzdavanja());
-    	izvestaj.getDatumIzdavanja().setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(dn.get(Calendar.YEAR), dn.get(Calendar.MONTH)+1, dn.get(Calendar.DAY_OF_MONTH), dn.get(Calendar.HOUR_OF_DAY), dn.get(Calendar.MINUTE), dn.get(Calendar.SECOND), DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED));
+    
+   
 
-    	izvestaj.setPeriod(new TPeriod());
-    	izvestaj.getPeriod().setDatumOd(new TDatumOd());
-    	izvestaj.getPeriod().getDatumOd().setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(df.get(Calendar.YEAR), df.get(Calendar.MONTH)+1, df.get(Calendar.DAY_OF_MONTH), DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED));
-    	izvestaj.getPeriod().setDatumDo(new TDatumDo());
-    	izvestaj.getPeriod().getDatumDo().setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(dt.get(Calendar.YEAR), dt.get(Calendar.MONTH)+1, dt.get(Calendar.DAY_OF_MONTH), DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED));
-    	izvestaj.setAbout("http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji/"+izvestaj.getPeriod().getDatumOd().getValue().toString() +"-"+izvestaj.getPeriod().getDatumDo().getValue().toString());
-    	saveXmlFromObject(izvestaj);
-    	generateHTML(convertToXml(izvestaj), XSL_FILE);
-		generatePDF(OUTPUT_FILE);
-    	return convertToXml(izvestaj);
-    }
+    
 
-    public IzvestajOImunizaciji saveXmlFromText(String xmlString) {
-        IzvestajOImunizaciji izvestaj = (IzvestajOImunizaciji) mapper.convertToObject(xmlString, "Izvestaj_o_imunizaciji",
-                IzvestajOImunizaciji.class);
-        String documentId = izvestaj.getPeriod().getDatumOd().getValue().toString() +"-"+izvestaj.getPeriod().getDatumDo().getValue().toString()+".xml";
-        dataAccessLayer.saveDocument(izvestaj, folderId, documentId, IzvestajOImunizaciji.class);
+    
 
-        try {
-            metadataExtractor.extractAndSave(xmlString,"/izvestaji");
-        } catch (FileNotFoundException | TransformerException e) {
-            e.printStackTrace();
-        }
-
-        return izvestaj;
-    }
-
-    public IzvestajOImunizaciji saveXmlFromObject(IzvestajOImunizaciji izvestaj) {
-        String documentId = izvestaj.getPeriod().getDatumOd().getValue().toString() +"-"+izvestaj.getPeriod().getDatumDo().getValue().toString()+".xml";
-        dataAccessLayer.saveDocument(izvestaj, folderId, documentId, IzvestajOImunizaciji.class);
-        return izvestaj;
-    }
-
-    public String convertToXml(IzvestajOImunizaciji izvestaj) {
-        return mapper.convertToXml(izvestaj, IzvestajOImunizaciji.class);
-    }
-
-    public IzvestajOImunizaciji convertToObject(String xmlString) {
-        return (IzvestajOImunizaciji) mapper.convertToObject(xmlString, "Izvestaj_o_imunizaciji",
-                IzvestajOImunizaciji.class);
-    }
+    
     
 	public void generatePDF(String filePath) throws IOException, DocumentException {
 	        
@@ -284,7 +196,7 @@ public class IzvestajOImunizacijiService {
 
 
 	
-	public void zeleni(String id) throws DatatypeConfigurationException, IOException, DocumentException, MessagingException {
+	public void zeleni(String id) throws DatatypeConfigurationException, IOException, DocumentException, MessagingException, WriterException {
 		GregorianCalendar dn = new GregorianCalendar();
 		ResponseEntity<Korisnik> pacijent
   	  = restTemplate.getForEntity("http://localhost:8087/api/korisnici/getUser/"+id, Korisnik.class);
@@ -323,16 +235,21 @@ public class IzvestajOImunizacijiService {
   			drugaDoza.setZdravstvenaUstanova(potvrdaData.getVakcinacijaInfo().getZdravstvenaUstanova().getValue());
   			drugaDoza.setTip(potvrdaData.getVakcinacijaInfo().getNazivVakcine().getValue());
   		}
-  		System.out.println("DSADSASASDA " + potvrdaData.getVakcinacijaInfo().getNazivVakcine().getValue());
-  		System.out.println("EIIII " + prvaDoza.getTip());
-  		System.out.println("DSADSASASDA " + potvrdaData.getVakcinacijaInfo().getDrugaDoza().getSerijaVakcine());
+
   		zs.getPodaciOVakcinaciji().add(prvaDoza);
   		zs.getPodaciOVakcinaciji().add(drugaDoza);
 
-  		zs.setQrKod("dSADSADKLDNLK");
+  		
+  		QRCodeWriter qrCodeWriter = new QRCodeWriter();
+  		BitMatrix bitMatrix = qrCodeWriter.encode("Neka poruka", BarcodeFormat.QR_CODE, 100, 100);    
+  		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+  		MatrixToImageWriter.writeToStream(bitMatrix,"png", outputStream);
+
+  		String base64 = new String(Base64.getEncoder().encode(outputStream.toByteArray()));
+  		zs.setQrKod("data:image/png;base64, "+base64);
   		String res = convertToXml(zs);
-  		generateHTML(res, "data/xslt/zeleni.xsl");
-		generatePDF("gen/itext/izvestaj.pdf");
+  		generateHTML(res, XSL_FILE);
+		generatePDF(OUTPUT_FILE);
 		mailSenderService.odobrenZeleni(pacijentData);
   		
 	}

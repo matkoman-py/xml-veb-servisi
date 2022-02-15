@@ -13,6 +13,15 @@
             <xs:attribute name="about" type="xs:string" use="required"/>
             <xs:attribute fixed="pred:answeredBy" name="rel" type="xs:string" use="optional"/>
             <xs:attribute name="href" type="xs:string"/>
+            <xs:attribute name="accepted" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="waiting"/>
+                        <xs:enumeration value="yes"/>
+                        <xs:enumeration value="no"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="TInformacije_o_podnosiocu">

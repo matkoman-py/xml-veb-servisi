@@ -8,6 +8,7 @@ import com.itextpdf.text.DocumentException;
 
 import java.io.IOException;
 
+import javax.mail.MessagingException;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.springframework.http.MediaType;
@@ -69,7 +70,7 @@ public class IzvestajOImunizacijiController {
     }
     
     @GetMapping("test/{id}")
-    public Korisnik test(@PathVariable String id) throws DatatypeConfigurationException, IOException, DocumentException {
+    public Korisnik test(@PathVariable String id) throws DatatypeConfigurationException, IOException, DocumentException, MessagingException {
     	RestTemplate restTemplate = new RestTemplate();
     	ResponseEntity<Korisnik> interesovanja
     	  = restTemplate.getForEntity("http://localhost:8087/api/korisnici/getUser/"+id, Korisnik.class);
