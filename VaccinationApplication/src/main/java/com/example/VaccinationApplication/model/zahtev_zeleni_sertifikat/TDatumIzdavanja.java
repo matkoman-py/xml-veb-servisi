@@ -19,7 +19,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * &lt;complexType name="TDatumIzdavanja">
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>date">
- *       &lt;attribute name="property" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" fixed="pred:datum_izdavanja" />
+ *       &lt;attribute name="property" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" fixed="pred:datum" />
  *       &lt;attribute name="datatype" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" fixed="xs:date" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
@@ -78,7 +78,7 @@ public class TDatumIzdavanja {
      */
     public String getProperty() {
         if (property == null) {
-            return "pred:datum_izdavanja";
+            return "pred:datum";
         } else {
             return property;
         }
