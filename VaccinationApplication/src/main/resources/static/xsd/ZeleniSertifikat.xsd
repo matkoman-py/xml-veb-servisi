@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://www.ftn.uns.ac.rs/zelenisertifikat"
     xmlns:zel="http://www.ftn.uns.ac.rs/zelenisertifikat" id="asdasda"
-    xmlns:pred="http://www.ftn.uns.ac.rs/predicate">
+    xmlns:pred="http://www.ftn.uns.ac.rs/predicate/">
 
     <xs:element name="zeleni_sertifikat">
         <xs:complexType>
@@ -38,14 +38,7 @@
             </xs:element>
             <xs:element name="datum_rodjenja" type="xs:date"/>
             <xs:element name="jmbg" type="zel:TJmbg"> </xs:element>
-            <xs:element name="broj_pasosa">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:length value="13"/>
-                        <xs:pattern value="\d+"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="broj_pasosa" type="xs:string"> </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TVakcinacija">

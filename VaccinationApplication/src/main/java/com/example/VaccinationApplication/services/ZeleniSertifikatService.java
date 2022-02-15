@@ -52,23 +52,12 @@ public class ZeleniSertifikatService {
     public ZeleniSertifikat saveXmlFromText(String xmlString) throws FileNotFoundException, TransformerException{
         ZeleniSertifikat zeleniSertifikat = (ZeleniSertifikat) mapper.convertToObject(xmlString, "ZeleniSertifikat",
         		ZeleniSertifikat.class);
-        String documentId = zeleniSertifikat.getBrojSertifikata().getValue().replace('/', '-') + ".xml";
-        if(zeleniSertifikat.getAbout() == null) {
-        	zeleniSertifikat.setAbout("");
-        }
-        
-        if(zeleniSertifikat.getAbout().trim().equals("")) {
-        	zeleniSertifikat.setAbout("http://www.ftn.uns.ac.rs/zelenisertifikat/"+zeleniSertifikat.getBrojSertifikata().getValue().replace('/', '-'));
-        }
-        
+        String documentId = zeleniSertifikat.getBrojSertifikata().getValue() + ".xml";
         dataAccessLayer.saveDocument(zeleniSertifikat, folderId, documentId, ZeleniSertifikat.class);
-
-//        
-//        String zahtevId = zeleniSertifikat.getHref().split("/")[4];
-//        zahtevService.link(zeleniSertifikat.getBrojSertifikata().getValue().replace('/', '-'), zahtevId);
-        
-        // POSTAVI GRESKU
-        
+    
+        String zahtevId = zeleniSertifikat.getHref().split("/")[4];
+        zahtevService.link(zahtevId, "yes");
+                
         try {
             metadataExtractor.extractAndSave(xmlString,"/zeleni-sertifikat");
         } catch (FileNotFoundException e) {

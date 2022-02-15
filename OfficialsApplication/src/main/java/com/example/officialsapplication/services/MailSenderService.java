@@ -50,4 +50,20 @@ public class MailSenderService {
     	message.setContent(multipart);
     	javaMailSender.send(message);
     }
+    
+    @Async
+    public void odbijenZeleni(Korisnik k, String razlog) throws MessagingException, IOException {
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        Multipart multipart = new MimeMultipart();
+
+    	MimeBodyPart messageBodyPart = new MimeBodyPart();
+    	messageBodyPart.setContent(razlog, "text/html");
+    	
+    	multipart.addBodyPart(messageBodyPart);
+    	message.setRecipients(RecipientType.TO,k.getEmail());
+    	message.setSubject("Odgovor na zahtev za odobrenje");
+    	message.setContent(multipart);
+    	javaMailSender.send(message);
+    }
 }

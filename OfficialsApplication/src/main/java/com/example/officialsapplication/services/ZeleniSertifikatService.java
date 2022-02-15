@@ -1,10 +1,13 @@
 package com.example.officialsapplication.services;
 
 import com.example.officialsapplication.dao.DataAccessLayer;
+import com.example.officialsapplication.exceptions.EntityNotFoundException;
+import com.example.officialsapplication.exceptions.RequestAlreadyAnsweredException;
 import com.example.officialsapplication.extractor.MetadataExtractor;
 import com.example.officialsapplication.mappers.MultiwayMapper;
 import com.example.officialsapplication.model.potvrda.Potvrda;
 import com.example.officialsapplication.model.users.korisnik.Korisnik;
+import com.example.officialsapplication.model.zahtev_zeleni_sertifikat.Zahtev;
 import com.example.officialsapplication.model.zeleni_sertifikat.TBrojSertifikata;
 import com.example.officialsapplication.model.zeleni_sertifikat.TImeIPrezime;
 import com.example.officialsapplication.model.zeleni_sertifikat.TJmbg;
@@ -16,11 +19,17 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.itextpdf.html2pdf.HtmlConverter;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -50,7 +59,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
+import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.Calendar;
@@ -112,24 +121,25 @@ public class ZeleniSertifikatService {
 	public void generatePDF(String filePath) throws IOException, DocumentException {
 	        
 	    	// Step 1
-	    	Document document = new Document();
+	    	//Document document = new Document();
 	        
 	    	// Step 2
-	        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
+	        //PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
 	        
 	       
 	        // Step 3
-	        document.open();
+	        //document.open();
 	        
 	       
 	        
 	        // Step 4
 	        
-	        XMLWorkerHelper.getInstance().parseXHtml(writer, document, new FileInputStream(HTML_FILE), Charset.forName("UTF-8"));
-
+	        //XMLWorkerHelper.getInstance().parseXHtml(writer, document, new FileInputStream(HTML_FILE));
+	        
+	        HtmlConverter.convertToPdf(new File(HTML_FILE), new File(OUTPUT_FILE));
 	        
 	        // Step 5
-	        document.close();
+	       // document.close();
 	        
 	    }
 	
@@ -195,41 +205,102 @@ public class ZeleniSertifikatService {
     }
 
 
+	public void odbijZeleni(String id, String razlog) throws MessagingException, IOException {
+		
+		ResponseEntity<Korisnik> pacijent;
+		try {
+			pacijent
+		  	  = restTemplate.getForEntity("http://localhost:8087/api/korisnici/getUser/"+id.split("-")[0], Korisnik.class);
+			
+
+		} catch (Exception e) {
+			throw new EntityNotFoundException("Korisnik sa JMBG " + id.split("-")[0] + " Nije pronadjen");
+		}
+		ResponseEntity<Zahtev> zahtev;
+	  	try {
+	  		zahtev
+	  		= restTemplate.getForEntity("http://localhost:8087/api/zahtevi/"+id, Zahtev.class);
+	  	} catch (Exception e) {
+			throw new EntityNotFoundException("Zahtev sa sifrom " + id + " ne postoji");
+		}
+	  		
+	  		if(!zahtev.getBody().getAccepted().equals("waiting")) {
+	  			throw new RequestAlreadyAnsweredException("Zahtev sa sifrom " + id + " je vec dobio odgovor");
+	  		}
+	  	mailSenderService.odbijenZeleni(pacijent.getBody(), razlog);
+		ResponseEntity<String> res = restTemplate.exchange("http://localhost:8087/api/zahtevi/requestDenied/"+id, HttpMethod.PUT, null, String.class);
+	}
 	
-	public void zeleni(String id) throws DatatypeConfigurationException, IOException, DocumentException, MessagingException, WriterException {
+	public String prihvatiZeleni(String id) throws DatatypeConfigurationException, IOException, DocumentException, MessagingException, WriterException {
 		GregorianCalendar dn = new GregorianCalendar();
-		ResponseEntity<Korisnik> pacijent
-  	  = restTemplate.getForEntity("http://localhost:8087/api/korisnici/getUser/"+id, Korisnik.class);
+		ResponseEntity<Korisnik> pacijent;
+		try {
+			pacijent
+		  	  = restTemplate.getForEntity("http://localhost:8087/api/korisnici/getUser/"+id.split("-")[0], Korisnik.class);
+		} catch (Exception e) {
+			throw new EntityNotFoundException("Korisnik sa JMBG " + id.split("-")[0] + " Nije pronadjen");
+		}
+		
   	
-  	ResponseEntity<Potvrda> potvrda
-	  = restTemplate.getForEntity("http://localhost:8087/api/potvrde/"+id, Potvrda.class);
+  	ResponseEntity<Potvrda> potvrda;
+  	try {
+  		potvrda
+  		= restTemplate.getForEntity("http://localhost:8087/api/potvrde/"+id.split("-")[0], Potvrda.class);	
+  		} catch (Exception e) {
+		throw new EntityNotFoundException("Potvrda za korisnika sa JMBG " + id.split("-")[0] + " Nije pronadjena, samim tim sertifikat ne moze da se generise");
+	}
+  	
+  	ResponseEntity<Zahtev> zahtev;
+  	try {
+  		zahtev
+  		= restTemplate.getForEntity("http://localhost:8087/api/zahtevi/"+id, Zahtev.class);
+  	} catch (Exception e) {
+		throw new EntityNotFoundException("Zahtev sa sifrom " + id + " ne postoji");
+	}
+  		
+  		if(!zahtev.getBody().getAccepted().equals("waiting")) {
+  			throw new RequestAlreadyAnsweredException("Zahtev sa sifrom " + id + " je vec dobio odgovor");
+  		}
+  		
   	
   		Korisnik pacijentData = pacijent.getBody();
   		Potvrda potvrdaData = potvrda.getBody();
   	
   		ZeleniSertifikat zs = new ZeleniSertifikat();
   		zs.setBrojSertifikata(new TBrojSertifikata());
-  		zs.getBrojSertifikata().setValue("202121-21");
+  		zs.getBrojSertifikata().setValue(java.util.UUID.randomUUID().toString());
+  		zs.getBrojSertifikata().setProperty("pred:broj_sertifikata");
+  		zs.getBrojSertifikata().setDatatype("xs:string");
   		zs.setDatumIzdavanja(new com.example.officialsapplication.model.zeleni_sertifikat.TDatumIzdavanja());
   		zs.getDatumIzdavanja().setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(dn.get(Calendar.YEAR), dn.get(Calendar.MONTH)+1, dn.get(Calendar.DAY_OF_MONTH), dn.get(Calendar.HOUR_OF_DAY), dn.get(Calendar.MINUTE), dn.get(Calendar.SECOND), DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED));
+  		zs.getDatumIzdavanja().setDatatype("xs:dateTime");
+  		zs.getDatumIzdavanja().setProperty("pred:datum");
   		zs.setPodaciOPacijentu(new TPacijent());
   		zs.getPodaciOPacijentu().setBrojPasosa(pacijentData.getBrojPasosa());
   		zs.getPodaciOPacijentu().setDatumRodjenja(pacijentData.getDatumRodjenja());
   		zs.getPodaciOPacijentu().setImePrezime(new TImeIPrezime());
   		zs.getPodaciOPacijentu().getImePrezime().setValue(pacijentData.getIme() + " " + pacijentData.getPrezime());
+  		zs.getPodaciOPacijentu().getImePrezime().setProperty("pred:ime_i_prezime");
+  		zs.getPodaciOPacijentu().getImePrezime().setDatatype("xs:string");
   		zs.getPodaciOPacijentu().setJmbg(new TJmbg());
   		zs.getPodaciOPacijentu().getJmbg().setValue(pacijentData.getJmbg());
-  		zs.getPodaciOPacijentu().setPol(pacijentData.getPol());
+  		zs.getPodaciOPacijentu().getJmbg().setProperty("pred:jmbg");
+  		zs.getPodaciOPacijentu().getJmbg().setDatatype("xs:string");
+  		zs.getPodaciOPacijentu().setPol("Musko"); ///CEEKKKKKKKKKKK
+  		zs.setAbout("http://www.ftn.uns.ac.rs/zelenisertifikat/"+zs.getBrojSertifikata().getValue());
+  		zs.setHref("http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/"+id);
   		//List<TVakcinacija> vakcinaInfo = new ArrayList<TVakcinacija>();
   		TVakcinacija prvaDoza = new TVakcinacija();
   		TVakcinacija drugaDoza = new TVakcinacija();
   		if(potvrdaData.getVakcinacijaInfo().getPrvaDoza() != null) {
+  			prvaDoza.setDoza(BigInteger.valueOf(1));
   			prvaDoza.setDatum(potvrdaData.getVakcinacijaInfo().getPrvaDoza().getDatumVakcine());
   			prvaDoza.setProizvodjacSerija(potvrdaData.getVakcinacijaInfo().getPrvaDoza().getSerijaVakcine());
   			prvaDoza.setZdravstvenaUstanova(potvrdaData.getVakcinacijaInfo().getZdravstvenaUstanova().getValue());
   			prvaDoza.setTip(potvrdaData.getVakcinacijaInfo().getNazivVakcine().getValue());
   		}
   		if(potvrdaData.getVakcinacijaInfo().getDrugaDoza() != null) {
+  			drugaDoza.setDoza(BigInteger.valueOf(2));
   			drugaDoza.setDatum(potvrdaData.getVakcinacijaInfo().getDrugaDoza().getDatumVakcine());
   			drugaDoza.setProizvodjacSerija(potvrdaData.getVakcinacijaInfo().getDrugaDoza().getSerijaVakcine());
   			drugaDoza.setZdravstvenaUstanova(potvrdaData.getVakcinacijaInfo().getZdravstvenaUstanova().getValue());
@@ -241,16 +312,19 @@ public class ZeleniSertifikatService {
 
   		
   		QRCodeWriter qrCodeWriter = new QRCodeWriter();
-  		BitMatrix bitMatrix = qrCodeWriter.encode("Neka poruka", BarcodeFormat.QR_CODE, 100, 100);    
+  		BitMatrix bitMatrix = qrCodeWriter.encode("http://www.ftn.uns.ac.rs/zelenisertifikat/"+zs.getBrojSertifikata().getValue(), BarcodeFormat.QR_CODE, 100, 100);    
   		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
   		MatrixToImageWriter.writeToStream(bitMatrix,"png", outputStream);
 
-  		String base64 = new String(Base64.getEncoder().encode(outputStream.toByteArray()));
+  		String base64 = new String(Base64.getEncoder().encode(outputStream.toByteArray()), "UTF-8");
   		zs.setQrKod("data:image/png;base64, "+base64);
   		String res = convertToXml(zs);
   		generateHTML(res, XSL_FILE);
 		generatePDF(OUTPUT_FILE);
 		mailSenderService.odobrenZeleni(pacijentData);
+		ResponseEntity<ZeleniSertifikat> response = restTemplate.postForEntity("http://localhost:8087/api/zelenisertifikati/saveXmlText", convertToXml(zs), ZeleniSertifikat.class);
+		return convertToXml(response.getBody());
+		
   		
 	}
     

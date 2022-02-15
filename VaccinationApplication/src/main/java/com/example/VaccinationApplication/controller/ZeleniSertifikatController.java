@@ -24,6 +24,8 @@ public class ZeleniSertifikatController {
         this.zeleniSertifikatService = zeleniSertifikatService;
     }
     
+    
+    
 
     @RequestMapping(value = "/getXmlText/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<String> getXmlText(@PathVariable String id) {
@@ -61,7 +63,8 @@ public class ZeleniSertifikatController {
         return ResponseEntity.ok(retval);
     }
 
-    @RequestMapping(value = "/saveXmlText", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    //OVDEEEEEEEEEEEE
+    @RequestMapping(value = "/saveXmlText", method = RequestMethod.POST)
     public ResponseEntity<ZeleniSertifikat> saveXmlText(@RequestBody String zeleniSertifikatXml) throws FileNotFoundException, TransformerException {
         ZeleniSertifikat retval = zeleniSertifikatService.saveXmlFromText(zeleniSertifikatXml);
         return ResponseEntity.ok(retval);
