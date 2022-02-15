@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
-    xmlns:zzs="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
-    xmlns:pred="http://www.ftn.uns.ac.rs/predicate">
+           targetNamespace="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
+           xmlns:zzs="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
+           xmlns:pred="http://www.ftn.uns.ac.rs/predicate">
     <xs:element name="zahtev">
         <xs:complexType>
             <xs:sequence>
                 <xs:element form="qualified" name="Podnosilac_zahteva"
-                    type="zzs:TInformacije_o_podnosiocu"/>
+                            type="zzs:TInformacije_o_podnosiocu"/>
                 <xs:element name="Informacije_o_zahtevu" type="zzs:TInformacije_o_zahtevu"/>
             </xs:sequence>
             <xs:attribute name="about" type="xs:string" use="required"/>

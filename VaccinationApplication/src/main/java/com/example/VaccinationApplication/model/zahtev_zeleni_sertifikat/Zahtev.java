@@ -25,6 +25,15 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="about" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="rel" type="{http://www.w3.org/2001/XMLSchema}string" fixed="pred:answeredBy" />
  *       &lt;attribute name="href" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="accepted" use="required">
+ *         &lt;simpleType>
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *             &lt;enumeration value="waiting"/>
+ *             &lt;enumeration value="yes"/>
+ *             &lt;enumeration value="no"/>
+ *           &lt;/restriction>
+ *         &lt;/simpleType>
+ *       &lt;/attribute>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -50,6 +59,8 @@ public class Zahtev {
     protected String rel;
     @XmlAttribute(name = "href")
     protected String href;
+    @XmlAttribute(name = "accepted", required = true)
+    protected String accepted;
 
     /**
      * Gets the value of the podnosilacZahteva property.
@@ -173,6 +184,30 @@ public class Zahtev {
      */
     public void setHref(String value) {
         this.href = value;
+    }
+
+    /**
+     * Gets the value of the accepted property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getAccepted() {
+        return accepted;
+    }
+
+    /**
+     * Sets the value of the accepted property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAccepted(String value) {
+        this.accepted = value;
     }
 
 }
