@@ -20,6 +20,11 @@ public class DataAccessLayer {
         return documentId;
     }
 
+    public String deleteDocument(Object object, String folderId, String documentId, Class<?> classOfObject) {
+        dbConnection.deleteOne(folderId, object, documentId, classOfObject);
+        return documentId;
+    }
+
     public Optional<String> getDocument(String folderId, String documentId) {
         String resourceContent = dbConnection.getOne(folderId, documentId);
         if (resourceContent.equals(""))

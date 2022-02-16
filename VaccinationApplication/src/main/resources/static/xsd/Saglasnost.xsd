@@ -8,7 +8,8 @@
             <xs:sequence>
                 <xs:element name="Drzavljanstvo" type="sag:TDrzavljanstvo"/>
                 <xs:element name="Podaci_o_pacijentu" type="sag:TPacijent"/>
-                <xs:element name="Evidencija_o_vakcinaciji" type="sag:TEvidencija"/>
+                <xs:element name="Evidencija_o_vakcinaciji" type="sag:TEvidencija" minOccurs="0"
+                    nillable="true"/>
             </xs:sequence>
             <xs:attribute name="about" type="xs:string" use="required"/>
             <xs:attribute name="href" type="xs:string"/>

@@ -9,6 +9,7 @@ import com.example.VaccinationApplication.model.potvrda.ListaPotvrda;
 import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import org.springframework.stereotype.Service;
 
+import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -22,11 +23,13 @@ public class PotvrdaService {
     private final MultiwayMapper mapper;
     private final MetadataExtractor metadataExtractor;
     private final String folderId = "/db/vaccination-system/potvrde";
-
-    public PotvrdaService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper, MetadataExtractor metadataExtractor) {
+    private final TerminService terminService;
+    public PotvrdaService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper, MetadataExtractor metadataExtractor,
+                          TerminService terminService) {
         this.dataAccessLayer = dataAccessLayer;
         this.mapper = mapper;
         this.metadataExtractor = metadataExtractor;
+        this.terminService = terminService;
     }
 
     public String getXmlText(String documentId){
@@ -40,11 +43,12 @@ public class PotvrdaService {
                 Potvrda.class);
     }
 
-    public Potvrda saveXmlFromText(String xmlString){
+    public Potvrda saveXmlFromText(String xmlString) throws Exception {
 
         Potvrda potvrda = (Potvrda) mapper.convertToObject(xmlString, "PotvrdaOVakcinaciji",
                 Potvrda.class);
         String documentId = potvrda.getSifraPotvrde() + ".xml";
+
         dataAccessLayer.saveDocument(potvrda, folderId, documentId, Potvrda.class);
         try {
             metadataExtractor.extractAndSave(xmlString,"/potvrde");

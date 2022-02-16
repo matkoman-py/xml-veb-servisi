@@ -5,7 +5,7 @@
     <xs:element name="Termin">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="datumVreme" type="xs:dateTime"/>
+                <xs:element name="datumVreme" type="xs:dateTime" nillable="true"/>
                 <xs:element name="jmbg" type="xs:string"/>
                 <xs:element name="vakcina" type="xs:string"/>
             </xs:sequence>
