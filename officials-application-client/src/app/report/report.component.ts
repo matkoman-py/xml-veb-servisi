@@ -14,6 +14,8 @@ export class ReportComponent implements OnInit {
 
   df: Date|null = null;
   dt: Date|null = null;
+  isMade: boolean = false;
+  fileName: string = "";
   izvestaj: IzvIzvestajOImunizaciji = {
     Period: {
       Datum_od: '',
@@ -43,16 +45,21 @@ export class ReportComponent implements OnInit {
      
   }
 
-  
+
+  check(): boolean {
+    return this.isMade;
+  }
 
   onSave(): void {
     console.log(this.izvestaj);
     if(this.df === null || this.dt === null) {
       this.messageService.add({key:'tc', severity:'error', summary:'Greska', detail:'Datumi ne smeju biti prazni!'});
+      this.isMade = false;
       return;
     }
     if(this.df.getTime() > this.dt.getTime()) {
       this.messageService.add({key:'tc', severity:'error', summary:'Greska', detail:'Prvi datum ne sme biti veci od drugoga!'});
+      this.isMade = false;
       return;
     }
     this.messageService.add({severity:'success', summary:'Greska', detail:'Datumi ne smeju biti prazni'});
@@ -62,6 +69,7 @@ export class ReportComponent implements OnInit {
     this.reportService.getReport(dfString,dtString).subscribe(res => {
       let parseString = require('xml2js').parseString;
       let self = this;
+      this.fileName = dfString+"-"+dtString;
       parseString(res, function (err: any, result: any) {
         self.izvestaj.Broj_podnetih_interesovanja = result["izv:Izvestaj_o_imunizaciji"]["izv:Broj_podnetih_interesovanja"][0];
         self.izvestaj.Datum_izdavanja = result["izv:Izvestaj_o_imunizaciji"]["izv:Datum_izdavanja"][0];
@@ -78,6 +86,9 @@ export class ReportComponent implements OnInit {
         self.izvestaj.Zeleni_sertifikat_info.Broj_primljenih_zahteva = result["izv:Izvestaj_o_imunizaciji"]["izv:Zeleni_sertifikat_info"][0]["izv:Broj_primljenih_zahteva"][0];
 
     });
+    this.messageService.add({key:'tc', severity:'success', summary:'Uspeh', detail:'Izvestaj uspesno kreiran!'});
+
+    this.isMade = true;
 
     });
   }

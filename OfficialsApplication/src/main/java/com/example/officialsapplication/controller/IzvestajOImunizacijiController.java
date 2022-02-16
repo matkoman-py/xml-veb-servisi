@@ -4,13 +4,18 @@ import com.example.officialsapplication.model.potvrda.Potvrda;
 import com.example.officialsapplication.model.users.izvestaj.IzvestajOImunizaciji;
 import com.example.officialsapplication.model.users.korisnik.Korisnik;
 import com.example.officialsapplication.services.IzvestajOImunizacijiService;
+import com.example.officialsapplication.services.PdfGeneratorService;
 import com.itextpdf.text.DocumentException;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import javax.mail.MessagingException;
 import javax.xml.datatype.DatatypeConfigurationException;
 
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +26,11 @@ import org.springframework.web.client.RestTemplate;
 public class IzvestajOImunizacijiController {
 
     private final IzvestajOImunizacijiService izvestajService;
+    private final PdfGeneratorService pdfGeneratorService;
 
-    public IzvestajOImunizacijiController(IzvestajOImunizacijiService izvestajService) {
+    public IzvestajOImunizacijiController(IzvestajOImunizacijiService izvestajService, PdfGeneratorService pdfGeneratorService) {
         this.izvestajService = izvestajService;
+        this.pdfGeneratorService = pdfGeneratorService;
     }
 
     @GetMapping("getXmlText/{id}")
@@ -55,6 +62,8 @@ public class IzvestajOImunizacijiController {
     	String retval = izvestajService.test(dateFrom,dateTo);
         return ResponseEntity.ok(retval);
     }
+    
+    
 
     
     @PostMapping("convertToXml")
@@ -69,17 +78,21 @@ public class IzvestajOImunizacijiController {
         return ResponseEntity.ok(retval);
     }
     
-    @GetMapping("test/{id}")
-    public Korisnik test(@PathVariable String id) throws DatatypeConfigurationException, IOException, DocumentException, MessagingException {
-    	RestTemplate restTemplate = new RestTemplate();
-    	ResponseEntity<Korisnik> interesovanja
-    	  = restTemplate.getForEntity("http://localhost:8087/api/korisnici/getUser/"+id, Korisnik.class);
-    	
-    	ResponseEntity<Potvrda> pot
-  	  = restTemplate.getForEntity("http://localhost:8087/api/potvrde/"+id, Potvrda.class);
-      	System.out.println("DASDASDAS " + pot.getBody().getVakcinacijaInfo().getNazivVakcine().getValue());
-      	izvestajService.zeleni(id);
-    	return interesovanja.getBody();
+    @GetMapping("pdf/{id}")
+    public ResponseEntity<byte[]> test(@PathVariable String id) throws Exception {
+    	ByteArrayInputStream bi = izvestajService.getPdf(id);
+    		
+    	HttpHeaders headers = new HttpHeaders();
+
+        headers.setContentType(MediaType.parseMediaType("application/pdf"));
+        String filename = "izvestaj.pdf";
+
+        headers.add("Content-Disposition", "inline; filename=" + "example.pdf");
+
+        headers.setContentDispositionFormData(filename, filename);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        
+        return new ResponseEntity<byte[]>(IOUtils.toByteArray(bi), headers, HttpStatus.OK);
     }
     
 }

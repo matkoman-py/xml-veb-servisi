@@ -16,14 +16,9 @@
     </div>
 </div>
 
-<div class="card">
+<div class="card" *ngIf="isMade">
     <div class="mx-auto w-9">
-        <p>Izvestaj se odnosi na period od {{izvestaj.Period.Datum_od}} do {{izvestaj.Period.Datum_do}}</p> 
-        <p>U napomenutom vremenskom intervalu je:</p>
-            <ul>
-                <li>Podneto $ dokumenta o interesovanju za vakcinu</li>
-                <li>Primeljeno $ zahteva za digitalni zeleni sertifikat, od kojih je 6 izdato</li>
-            </ul>
+        <p>Izvestaj je uspesno generisan. Mozete ga preuzeti na ovom <a href="api/izvestaji/pdf/{{fileName}}">linku</a>
         
     </div>
 </div>

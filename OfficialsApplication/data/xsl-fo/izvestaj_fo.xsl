@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:b="www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji"
+    xmlns:izv="http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji"
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
     
     <xsl:template match="/">
@@ -21,13 +21,13 @@
                             Izvestaj se odnosi na period od
                         </fo:inline>
                         <fo:inline font-weight="bold">
-                            <xsl:value-of select="b:Izvestaj_o_imunizaciji/b:Period/b:Datum_od"/>
+                            <xsl:value-of select="izv:Izvestaj_o_imunizaciji/izv:Period/izv:Datum_od"/>
                         </fo:inline>
                         <fo:inline>
                             do
                         </fo:inline>
                         <fo:inline font-weight="bold">
-                            <xsl:value-of select="b:Izvestaj_o_imunizaciji/b:Period/b:Datum_do"/>
+                            <xsl:value-of select="izv:Izvestaj_o_imunizaciji/izv:Period/izv:Datum_do"/>
                         </fo:inline>
                     </fo:block>
                     <fo:block>
@@ -35,22 +35,22 @@
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="7px" text-indent="12mm">
                         •   Podneto <fo:inline font-weight="bold">
-                            <xsl:value-of select="b:Izvestaj_o_imunizaciji/b:Broj_podnetih_interesovanja"/>
+                            <xsl:value-of select="izv:Izvestaj_o_imunizaciji/izv:Broj_podnetih_interesovanja"/>
                         </fo:inline> dokumenta o interesovanju za vakcinu
                      
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="7px" text-indent="12mm">
                         •   Primljeno <fo:inline font-weight="bold">
-                            <xsl:value-of select="b:Izvestaj_o_imunizaciji/b:Zeleni_sertifikat_info/b:Broj_primljenih_zahteva"/>
+                            <xsl:value-of select="izv:Izvestaj_o_imunizaciji/izv:Zeleni_sertifikat_info/izv:Broj_primljenih_zahteva"/>
                         </fo:inline> zahteva za digitalni zeleni sertifikat, od kojih je izdato <fo:inline font-weight="bold">
-                            <xsl:value-of select="b:Izvestaj_o_imunizaciji/b:Zeleni_sertifikat_info/b:Broj_izdatih_zahteva"/>
+                            <xsl:value-of select="izv:Izvestaj_o_imunizaciji/izv:Zeleni_sertifikat_info/izv:Broj_izdatih_sertifikata"/>
                         </fo:inline>
                         
                     </fo:block>
                     
                     <fo:block>
                         Dato je <fo:inline font-weight="bold">
-                            <xsl:value-of select="b:Izvestaj_o_imunizaciji/b:Doza_info/b:Broj_datih_doza"/>
+                            <xsl:value-of select="izv:Izvestaj_o_imunizaciji/izv:Doza_info/izv:Broj_datih_doza"/>
                         </fo:inline> doza vakcine protiv covid-19 virusa u sledecoj kolicini:
                     </fo:block>
                     
@@ -71,7 +71,7 @@
                                         <fo:block>1</fo:block>
                                     </fo:table-cell >
                                     <fo:table-cell border="solid 0.1mm black" padding="30px" text-align="center">
-                                        <fo:block><xsl:value-of select="b:Izvestaj_o_imunizaciji/b:Doza_info/b:Broj_date_prve_doze"/></fo:block>
+                                        <fo:block><xsl:value-of select="izv:Izvestaj_o_imunizaciji/izv:Doza_info/izv:Broj_date_prve_doze"/></fo:block>
                                     </fo:table-cell>
                                 </fo:table-row>
                                 <fo:table-row>
@@ -79,7 +79,7 @@
                                         <fo:block>2</fo:block>
                                     </fo:table-cell >
                                     <fo:table-cell border="solid 0.1mm black" padding="30px" text-align="center">
-                                        <fo:block><xsl:value-of select="b:Izvestaj_o_imunizaciji/b:Doza_info/b:Broj_date_prve_doze"/></fo:block>
+                                        <fo:block><xsl:value-of select="izv:Izvestaj_o_imunizaciji/izv:Doza_info/izv:Broj_date_druge_doze"/></fo:block>
                                     </fo:table-cell>
                                 </fo:table-row>
                             </fo:table-body>
@@ -90,27 +90,27 @@
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="7px" text-indent="12mm">
                         •    <fo:inline font-weight="bold">
-                            Pfizer, BioNTech - <xsl:value-of select="b:Izvestaj_o_imunizaciji/b:Proizvodjaci_info/b:Broj_doza_Pfizer_BioNTech"/>
+                            Pfizer, BioNTech - <xsl:value-of select="izv:Izvestaj_o_imunizaciji/izv:Proizvodjaci_info/izv:Broj_doza_Pfizer_BioNTech"/>
                         </fo:inline> doza
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="7px" text-indent="12mm">
                         •    <fo:inline font-weight="bold">
-                            Sinopharm - <xsl:value-of select="b:Izvestaj_o_imunizaciji/b:Proizvodjaci_info/b:Broj_doza_Sinopharm"/>
+                            Sinopharm - <xsl:value-of select="izv:Izvestaj_o_imunizaciji/izv:Proizvodjaci_info/izv:Broj_doza_Sinopharm"/>
                         </fo:inline> doza
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="7px" text-indent="12mm">
                         •    <fo:inline font-weight="bold">
-                            Sputnik V - <xsl:value-of select="b:Izvestaj_o_imunizaciji/b:Proizvodjaci_info/b:Broj_doza_SputnikV"/>
+                            Sputnik V - <xsl:value-of select="izv:Izvestaj_o_imunizaciji/izv:Proizvodjaci_info/izv:Broj_doza_SputnikV"/>
                         </fo:inline> doza
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="7px" text-indent="12mm">
                         •    <fo:inline font-weight="bold">
-                            AstraZenece, Oxford - <xsl:value-of select="b:Izvestaj_o_imunizaciji/b:Proizvodjaci_info/b:Broj_doza_AstraZeneca"/>
+                            AstraZenece, Oxford - <xsl:value-of select="izv:Izvestaj_o_imunizaciji/izv:Proizvodjaci_info/izv:Broj_doza_AstraZeneca"/>
                         </fo:inline> doza
                     </fo:block>
                     <fo:block>
                         Datum izdavanja: <fo:inline text-decoration="underline">
-                            <xsl:value-of select="b:Izvestaj_o_imunizaciji/b:Datum_izdavanja"/>
+                            <xsl:value-of select="izv:Izvestaj_o_imunizaciji/substring-before(izv:Datum_izdavanja, 'T')"/>
                         </fo:inline> godine
                     </fo:block>
                 </fo:flow>

@@ -15,6 +15,7 @@ import {ButtonModule} from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {CardModule} from 'primeng/card';
 import {ToastModule} from 'primeng/toast';
+import { CommonModule } from '@angular/common';  
 
 
 
@@ -30,7 +31,8 @@ import {ToastModule} from 'primeng/toast';
       ButtonModule, 
       BrowserAnimationsModule,
       CardModule,
-      ToastModule],
+      ToastModule,
+      CommonModule],
   providers: [],
   bootstrap: [AppComponent],
 })
