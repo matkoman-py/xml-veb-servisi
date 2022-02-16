@@ -146,7 +146,7 @@
                     </tr>
                     <tr>
                         <td><div style="height: 30px; overflow:hidden; font-size:15px; text-align:left;">
-                            Pol/Gener: <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:pol[1]"/>
+                            Pol/Gender: <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:pol[1]"/>
                         </div></td>
                     </tr>
                     <tr>

@@ -51,7 +51,7 @@ public class ZeleniSertifikatController {
 
     
     @RequestMapping(value = "/prihvatiZahtev/{zahtevId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<String> prihvati(@PathVariable String zahtevId) throws DatatypeConfigurationException, IOException, DocumentException, MessagingException, WriterException {
+    public ResponseEntity<String> prihvati(@PathVariable String zahtevId) throws Exception {
     	
     	
       	String zeleniSertifikat = zeleniSertifikatService.prihvatiZeleni(zahtevId);
@@ -59,7 +59,7 @@ public class ZeleniSertifikatController {
     }
     
     @RequestMapping(value = "/odbijZahtev/{zahtevId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<String> prihvati(@PathVariable String zahtevId, @RequestBody String razlog) throws DatatypeConfigurationException, IOException, DocumentException, MessagingException, WriterException {
+    public ResponseEntity<String> prihvati(@PathVariable String zahtevId, @RequestBody String razlog) throws Exception {
     	
     	
       	zeleniSertifikatService.odbijZeleni(zahtevId, razlog);

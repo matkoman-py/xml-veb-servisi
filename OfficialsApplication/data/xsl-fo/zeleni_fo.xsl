@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:b="www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji"
+    xmlns:zel="http://www.ftn.uns.ac.rs/zelenisertifikat"
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
     
     <xsl:template match="/">
@@ -17,7 +17,9 @@
                         
                         <fo:external-graphic src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Coat_of_arms_of_Serbia_small.svg/150px-Coat_of_arms_of_Serbia_small.svg.png" width="100px" content-width="100px" content-height="100px" height="100px"/> 
                         <fo:leader leader-pattern="space" />
-                        <fo:external-graphic src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQAAAABYmaj5AAABNElEQVR4Xt3SMZKEIBAFUEjkCpLI1cZEr6DJCIleARK4GiaQbggJLFUyO/YUe4Eh8lld/bsVlG/nB32/OA40PRfEGjLxcPSM2TQkqX1SH0VbxmGl/pElblqbKglhFeqddxMvLZSSf3PelbMPQ3l+7XcX76mblmnaWho6LJ9jqj2BsmRpjI7VnkA+kcT2WbWk8bFj2dVKqJj1mIZ+uhKg8ukTPWx3TQbFyaGZpTUBSkXhz+iGqxIqG0kTGl1NADJKWWJ0/RJQ+3bK/oHPKwEqh9mhtbxsSPiAU7faKwFKolVvgteNoIybo7JrTYDSj9F1CyKmoWISsKm3B4rjI7BE62RQJnrZk1cllKT7A0fe1ak/JJlFE74m+5Rwm1Cu7gdkotGs/NC6HxDHotxIol9z3vU+X69f/0f3JOKplTAAAAAASUVORK5CYII=" width="100px" content-width="100px" content-height="100px" height="100px"/>
+                        <fo:external-graphic width="100px" height="100px" content-height="100px" content-width="100px">
+                            <xsl:attribute name="src"><xsl:value-of select="zel:zeleni_sertifikat/zel:qr_kod"/></xsl:attribute>
+                        </fo:external-graphic>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="2em" font-weight="bold"  text-align="center" margin-bottom="1px">
                         DIGITALNI ZELENI SERTIFIKAT
@@ -36,25 +38,25 @@
                         Certificate of vaccination against COVID-19 and test results
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="5px" margin-top="6px" margin-bottom="10px">
-                        Broj sertifikata/Certificate ID: POPUNI
+                        Broj sertifikata/Certificate ID: <xsl:value-of select="/zel:zeleni_sertifikat/zel:broj_sertifikata[1]"/>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="5px" margin-top="6px">
-                        Datum i vreme izdavanja sertifikata/Certificate issuing date and time: 2000-01-01T23:33:33
+                        Datum i vreme izdavanja sertifikata/Certificate issuing date and time: <xsl:value-of select="substring-before(/zel:zeleni_sertifikat/zel:datum_izdavanja, 'T')"/> <xsl:text> </xsl:text> <xsl:value-of select="substring-after(/zel:zeleni_sertifikat/zel:datum_izdavanja, 'T')"/>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="5px" margin-top="6px">
-                        Ime i prezime/Name and surname: POPUNI
+                        Ime i prezime/Name and surname: <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:ime_prezime[1]"/>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="5px" margin-top="6px">
-                        Pol/Gener: POPUNI
+                        Pol/Gender: <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:pol[1]"/>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="5px" margin-top="6px">
-                        Datum rodjenja/Date of birth: POPUNI
+                        Datum rodjenja/Date of birth: <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:datum_rodjenja[1]"/>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="5px" margin-top="6px">
-                        JMBG/Personal No./EBS: POPUNI
+                        JMBG/Personal No./EBS: <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:jmbg[1]"/>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="5px" margin-top="6px">
-                        Broj pasosa/Passport No.: POPUNI
+                        Broj pasosa/Passport No.: <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:broj_pasosa"/>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-weight="bold" font-size="1em" text-align="center" border-top="2px solid black" padding="5px" margin-top="6px">
                         Vakcinacija/Vaccination
@@ -69,7 +71,7 @@
                                 <fo:table-cell 
                                      ><fo:block font-weight="bold" text-align="center">Doza/Dose: 1/2</fo:block></fo:table-cell>
                                 <fo:table-cell 
-                                      text-align="center"><fo:block font-weight="bold">Doza/Dose: 1/2</fo:block></fo:table-cell>
+                                      text-align="center"><fo:block font-weight="bold">Doza/Dose: 2/2</fo:block></fo:table-cell>
                             
                             </fo:table-row>
                             <fo:table-row>
@@ -81,16 +83,16 @@
                             </fo:table-row>
                             <fo:table-row>
                                 <fo:table-cell margin-top="6px" margin-bottom="10px"
-                                     ><fo:block text-align="center">POPUNI</fo:block></fo:table-cell>
+                                    ><fo:block text-align="center"><xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_vakcinaciji[1]/zel:tip[1]"/></fo:block></fo:table-cell>
                                 <fo:table-cell 
-                                      text-align="center"><fo:block>POPUNI</fo:block></fo:table-cell>
+                                    text-align="center"><fo:block><xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_vakcinaciji[2]/zel:tip[1]"/></fo:block></fo:table-cell>
                                 
                             </fo:table-row>
                             <fo:table-row>
                                 <fo:table-cell 
-                                     ><fo:block text-align="center"><fo:inline font-weight="bold">Datum/Date:</fo:inline>POPUNI</fo:block></fo:table-cell>
+                                    ><fo:block text-align="center"><fo:inline font-weight="bold">Datum/Date:</fo:inline><xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_vakcinaciji[1]/zel:datum[1]"/></fo:block></fo:table-cell>
                                 <fo:table-cell 
-                                      text-align="center"><fo:block ><fo:inline font-weight="bold">Datum/Date:</fo:inline>POPUNI</fo:block></fo:table-cell>
+                                    text-align="center"><fo:block ><fo:inline font-weight="bold">Datum/Date:</fo:inline><xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_vakcinaciji[2]/zel:datum[1]"/></fo:block></fo:table-cell>
                                 
                             </fo:table-row>
                             <fo:table-row>
@@ -102,9 +104,9 @@
                             </fo:table-row>
                             <fo:table-row>
                                 <fo:table-cell 
-                                     ><fo:block text-align="center">POPUNI</fo:block></fo:table-cell>
+                                    ><fo:block text-align="center"><xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_vakcinaciji[1]/zel:zdravstvena_ustanova[1]"/></fo:block></fo:table-cell>
                                 <fo:table-cell 
-                                      text-align="center"><fo:block >OUGA BOUGA121DSADAD21</fo:block></fo:table-cell>
+                                    text-align="center"><fo:block ><xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_vakcinaciji[2]/zel:zdravstvena_ustanova[1]"/></fo:block></fo:table-cell>
                                 
                             </fo:table-row>
                         </fo:table-body>
@@ -162,7 +164,7 @@
                                         
                                     </fo:block>
                                     <fo:block text-align="left">
-                                        Datum: DODAJ
+                                        Datum: <xsl:value-of select="substring-before(/zel:zeleni_sertifikat/zel:datum_izdavanja, 'T')"/>
                                         
                                     </fo:block></fo:table-cell>
                             </fo:table-row>

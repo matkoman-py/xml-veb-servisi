@@ -25,6 +25,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -73,6 +74,9 @@ public class ZeleniSertifikatService {
     private final DataAccessLayer dataAccessLayer;
     private final MultiwayMapper mapper;
     private final MetadataExtractor metadataExtractor;
+    private PdfGeneratorService pdfGeneratorService;
+    private HtmlGeneratorService htmlGeneratorService;
+
     private RestTemplate restTemplate = new RestTemplate();
     private final MailSenderService mailSenderService;
     private static DocumentBuilderFactory documentFactory;
@@ -101,11 +105,13 @@ public class ZeleniSertifikatService {
 	}
 
     public ZeleniSertifikatService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper,
-                                       MetadataExtractor metadataExtractor, MailSenderService mailSenderService) {
+                                       MetadataExtractor metadataExtractor, MailSenderService mailSenderService, PdfGeneratorService pdfGeneratorService, HtmlGeneratorService htmlGeneratorService) {
         this.dataAccessLayer = dataAccessLayer;
         this.mapper = mapper;
         this.metadataExtractor = metadataExtractor;
         this.mailSenderService = mailSenderService;
+        this.pdfGeneratorService = pdfGeneratorService;
+        this.htmlGeneratorService = htmlGeneratorService;
     }
 
     
@@ -142,6 +148,8 @@ public class ZeleniSertifikatService {
 	       // document.close();
 	        
 	    }
+	
+	
 	
 	public org.w3c.dom.Document buildDocument(String xml) {
 
@@ -205,8 +213,7 @@ public class ZeleniSertifikatService {
     }
 
 
-	public void odbijZeleni(String id, String razlog) throws MessagingException, IOException {
-		
+	public void odbijZeleni(String id, String razlog) throws Exception {
 		ResponseEntity<Korisnik> pacijent;
 		try {
 			pacijent
@@ -231,7 +238,7 @@ public class ZeleniSertifikatService {
 		ResponseEntity<String> res = restTemplate.exchange("http://localhost:8087/api/zahtevi/requestDenied/"+id, HttpMethod.PUT, null, String.class);
 	}
 	
-	public String prihvatiZeleni(String id) throws DatatypeConfigurationException, IOException, DocumentException, MessagingException, WriterException {
+	public String prihvatiZeleni(String id) throws Exception {
 		GregorianCalendar dn = new GregorianCalendar();
 		ResponseEntity<Korisnik> pacijent;
 		try {
@@ -318,10 +325,12 @@ public class ZeleniSertifikatService {
 
   		String base64 = new String(Base64.getEncoder().encode(outputStream.toByteArray()), "UTF-8");
   		zs.setQrKod("data:image/png;base64, "+base64);
+
   		String res = convertToXml(zs);
-  		generateHTML(res, XSL_FILE);
-		generatePDF(OUTPUT_FILE);
-		mailSenderService.odobrenZeleni(pacijentData);
+  		ByteArrayInputStream is = pdfGeneratorService.generatePDF(convertToXml(zs), "data/xsl-fo/zeleni_fo.xsl");
+  		ByteArrayInputStream is1 =  htmlGeneratorService.generateHTML(convertToXml(zs), "data/xslt/zelenisertifikat.xsl");
+		mailSenderService.odobrenZeleni2(pacijentData, IOUtils.toByteArray(is), IOUtils.toByteArray(is1));
+
 		ResponseEntity<ZeleniSertifikat> response = restTemplate.postForEntity("http://localhost:8087/api/zelenisertifikati/saveXmlText", convertToXml(zs), ZeleniSertifikat.class);
 		return convertToXml(response.getBody());
 		
