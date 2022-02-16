@@ -7,6 +7,7 @@ import com.example.officialsapplication.model.users.BrojVakcina;
 import com.example.officialsapplication.model.users.ListaBrojVakcina;
 import com.example.officialsapplication.model.users.izvestaj.IzvestajOImunizaciji;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.xml.transform.TransformerException;
 import java.io.FileNotFoundException;
@@ -19,6 +20,7 @@ public class BrojVakcinaServis {
     private final MultiwayMapper mapper;
     private final String folderId = "/db/officials-system/broj-vakcina";
     private final MetadataExtractor metadataExtractor;
+    private RestTemplate restTemplate = new RestTemplate();
 
     public BrojVakcinaServis(DataAccessLayer dataAccessLayer, MultiwayMapper mapper,
                                        MetadataExtractor metadataExtractor) {
@@ -33,6 +35,7 @@ public class BrojVakcinaServis {
         String documentId = brVak.getVakcina()+".xml";
         dataAccessLayer.saveDocument(brVak, folderId, documentId, BrojVakcina.class);
 
+        restTemplate.getForEntity("http://localhost:8087/api/termini/upisiNaCekanju/"+brVak.getVakcina(), String.class);
         return brVak;
     }
 

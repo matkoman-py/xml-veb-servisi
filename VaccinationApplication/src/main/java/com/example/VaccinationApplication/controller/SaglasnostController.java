@@ -51,8 +51,14 @@ public class SaglasnostController {
         return ResponseEntity.ok(retval);
     }
 
+    @RequestMapping(value = "/getZaEvidentiranje/{id}/{doza}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> saglasnostZaEvidentiranje(@PathVariable String id, @PathVariable String doza) throws Exception {
+        String retval = saglasnostService.getSaglasnostZaEvidentiranje(id, doza);
+        return ResponseEntity.ok(retval);
+    }
+
     @PostMapping("saveXmlText")
-    public ResponseEntity<Saglasnost> saveXmlText(@RequestBody String saglasnostXml) throws FileNotFoundException, TransformerException {
+    public ResponseEntity<Saglasnost> saveXmlText(@RequestBody String saglasnostXml) throws Exception {
         Saglasnost retval = saglasnostService.saveXmlFromText(saglasnostXml);
         return ResponseEntity.ok(retval);
     }

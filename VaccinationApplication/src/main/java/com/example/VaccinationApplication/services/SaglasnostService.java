@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.xml.transform.TransformerException;
 import java.io.FileNotFoundException;
+import java.util.Optional;
 
 @Service
 public class SaglasnostService {
@@ -27,12 +28,14 @@ public class SaglasnostService {
     private final String folderId = "/db/vaccination-system/saglasnosti";
     private final MetadataExtractor metadataExtractor;
     private final InteresovanjeService interesovanjeService;
-
-    public SaglasnostService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper, MetadataExtractor metadataExtractor, InteresovanjeService interesovanjeService) {
+    private final TerminService terminService;
+    public SaglasnostService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper, MetadataExtractor metadataExtractor
+            , InteresovanjeService interesovanjeService, TerminService terminService) {
         this.dataAccessLayer = dataAccessLayer;
         this.mapper = mapper;
         this.metadataExtractor = metadataExtractor;
         this.interesovanjeService = interesovanjeService;
+        this.terminService = terminService;
         
     }
 
@@ -45,15 +48,16 @@ public class SaglasnostService {
         return (Saglasnost) mapper.convertToObject(xmlString, "Saglasnost", Saglasnost.class);
     }
 
-    public Saglasnost saveXmlFromText(String xmlString) throws FileNotFoundException, TransformerException {
+    public Saglasnost saveXmlFromText(String xmlString) throws Exception {
+
         Saglasnost saglasnost = (Saglasnost) mapper.convertToObject(xmlString, "Saglasnost",
                 Saglasnost.class);
-        String documentId = saglasnost.getDrzavljanstvo().getJMBG() + ".xml";
+        String doza = terminService.proveriTermin(saglasnost.getDrzavljanstvo().getJMBG());
+        if(doza.equals("")){
+            throw new FileNotFoundException();
+        }
+        String documentId = saglasnost.getDrzavljanstvo().getJMBG() + doza + ".xml";
         
-        //SAGLASNOST === ZELENI SERTIFIKAT ----> (MORA KAD SE INITUJE SAGLASNOSTS DA SADRZI REFERENCU NA ODGOVARAJUCE INTERESOVANJE)
-        //DODATI INTERESOVANJESERVICE KAO POLJE U OVAJ SERVICE
-        //POZVATI METODU LINK IZ INTERESOVANJESERVICE
-
         String interesovanjeId = saglasnost.getHref().split("/")[4];
         interesovanjeService.link(documentId, interesovanjeId);
         
@@ -66,9 +70,6 @@ public class SaglasnostService {
         }
         
         dataAccessLayer.saveDocument(saglasnost, folderId, documentId, Saglasnost.class);
-
-       
-
         return saglasnost;
     }
 
@@ -128,4 +129,12 @@ public class SaglasnostService {
         ls.setSaglasnost(saglasnosti);
         return convertToXml(ls);
 	}
+
+    public String getSaglasnostZaEvidentiranje(String id, String doza) throws FileNotFoundException {
+        Optional<String> saglasnost = dataAccessLayer.getDocument(folderId, id+"-"+doza+"-doza");
+        if(saglasnost.isEmpty()){
+            throw new FileNotFoundException();
+        }
+        return saglasnost.get();
+    }
 }

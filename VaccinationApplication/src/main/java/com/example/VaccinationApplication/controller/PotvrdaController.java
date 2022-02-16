@@ -67,7 +67,7 @@ public class PotvrdaController {
     }
 
     @PostMapping("saveXmlText")
-    public ResponseEntity<Potvrda> saveXml(@RequestBody String potvrdaXml) {
+    public ResponseEntity<Potvrda> saveXml(@RequestBody String potvrdaXml) throws Exception {
         Potvrda retval = potvrdaService.saveXmlFromText(potvrdaXml);
         return ResponseEntity.ok(retval);
     }

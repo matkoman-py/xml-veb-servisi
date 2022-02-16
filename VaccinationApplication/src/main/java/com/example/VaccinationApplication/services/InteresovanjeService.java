@@ -10,7 +10,11 @@ import com.example.VaccinationApplication.model.zahtev_zeleni_sertifikat.Zahtev;
 import com.example.VaccinationApplication.model.zeleni_sertifikat.ListaZelenihSertifikata;
 import com.example.VaccinationApplication.model.zeleni_sertifikat.ZeleniSertifikat;
 
+import org.apache.jena.base.Sys;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -27,7 +31,6 @@ public class InteresovanjeService {
     private final String folderId = "/db/vaccination-system/interesovanja";
     private final TerminService terminService;
     private final MailSenderService mailSenderService;
-
     private final MetadataExtractor metadataExtractor;
 
     public InteresovanjeService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper, MetadataExtractor metadataExtractor,
@@ -59,14 +62,15 @@ public class InteresovanjeService {
         termin.setJmbg(interesovanje.getPodaciOPrimaocu().getJMBG().getValue());
         termin.setVakcina(interesovanje.getOdabirVakcine());
 
-        if (!vaccineNumberCheck()) {
+        if (!terminService.proveriBrojVakcina(termin.getVakcina())) {
             terminService.saveZaCekanje(termin);
             mailSenderService.posaljiDaJeNaCekanju(interesovanje.getPodaciOPrimaocu().getKontakt().getAdresaElektronskePoste());
         } else {
             Termin sacuvani = terminService.saveRezervisani(termin);
             mailSenderService.posaljiRezervisan(interesovanje.getPodaciOPrimaocu().getKontakt().getAdresaElektronskePoste(),
-                    sacuvani);
-            //smanji broj vakcina
+                    sacuvani, interesovanje);
+            terminService.smanjiBrojVakcina(termin.getVakcina());
+            terminService.smanjiBrojVakcina(termin.getVakcina());
         }
 
         dataAccessLayer.saveDocument(interesovanje, folderId, documentId, Interesovanje.class);
@@ -81,9 +85,7 @@ public class InteresovanjeService {
         return interesovanje;
     }
 
-    private boolean vaccineNumberCheck() {
-        return true;
-    }
+
 
     public Interesovanje saveXmlFromObject(Interesovanje interesovanje) {
         String documentId = interesovanje.getPodaciOPrimaocu().getJMBG().getValue() + ".xml";
@@ -154,6 +156,12 @@ public class InteresovanjeService {
         ListaInteresovanja li = new ListaInteresovanja();
         li.setIzvestaj(interesovanja);
         return convertToXml(li);
+    }
+
+    public Interesovanje getOneForUser(String id) throws Exception {
+        String xPath = "//interesovanje[Podaci_o_primaocu/JMBG = '" + id + "']";
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/interesovanja", xPath, "http://www.ftn.uns.ac.rs/interesovanje");
+        return convertToObject(rezultat.get(0));
     }
 
     public String getAllForDate(String dateFrom, String dateTo) throws Exception {
