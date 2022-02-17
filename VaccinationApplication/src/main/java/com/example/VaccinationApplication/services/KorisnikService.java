@@ -109,9 +109,9 @@ public class KorisnikService {
 		ArrayList<String> results = new ArrayList<String>();
 		
 		if(interesovanjeService.getInteresovanje(id) != "") results.add(interesovanjeService.getInteresovanje(id));
-		if(potvrdaService.getPotvrda(id) != "") results.add(potvrdaService.getPotvrda(id));
+		if(potvrdaService.getPotvrdaString(id) != "") results.add(potvrdaService.getPotvrdaString(id));
 		if(saglasnostService.getSaglasnost(id) != "") results.add(saglasnostService.getSaglasnost(id));
-		if(zahtevService.getZahtev(id) != "") results.add(zahtevService.getZahtev(id));
+		if(zahtevService.getZahtevString(id) != "") results.add(zahtevService.getZahtevString(id));
 		if(zeleniSertifikatService.getZeleniSertifikat(id) != "") results.add(zeleniSertifikatService.getZeleniSertifikat(id));
 
 		return results;

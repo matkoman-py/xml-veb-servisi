@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
       icon: 'pi pi-fw pi-sign-in',
       routerLink: '/login'
     },
+    {
       label: 'Report',
       icon: 'pi pi-fw pi-table',
       routerLink: '/report',

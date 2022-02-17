@@ -176,7 +176,7 @@ public List<Integer> getReportDataForDate(String dateFrom, String dateTo) throws
         return convertToXml(lp);
     }
     
-    public String getPotvrda(String id) throws Exception {
+    public String getPotvrdaString(String id) throws Exception {
     	
     	String xPath = "//Potvrda[pacijent/Jmbg = '"+id+"']";
     	List<Potvrda> potvrde = new ArrayList<Potvrda>();
@@ -187,6 +187,18 @@ public List<Integer> getReportDataForDate(String dateFrom, String dateTo) throws
         
         if(potvrde.size() == 0) return "";
         return "Potvrda";
+    }
+    
+public Potvrda getPotvrda(String id) throws Exception {
+    	
+    	String xPath = "//Potvrda[pacijent/Jmbg = '"+id+"']";
+    	List<Potvrda> potvrde = new ArrayList<Potvrda>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/potvrde", xPath, "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji");
+        for (String string : rezultat) {
+			potvrde.add(convertToObject(string));
+        }
+        
+        return potvrde.get(0);
     }
 
     public String searchPotvrdaContaining(String search) throws Exception {

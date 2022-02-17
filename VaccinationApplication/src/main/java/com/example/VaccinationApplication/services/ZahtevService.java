@@ -164,7 +164,7 @@ public String getForUser(String id) throws Exception {
         return rezultat.size();
     }
     
-    public String getZahtev(String id) throws Exception {
+    public String getZahtevString(String id) throws Exception {
     	
     	String xPath = "//zahtev[Podnosilac_zahteva/Jedinstveni_maticni_broj_gradjana = '"+id+"']";
     	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
@@ -175,20 +175,20 @@ public String getForUser(String id) throws Exception {
         if(zahtevi.size() == 0) return "";
         return "Zahtev";
     }
-// public Zahtev getZahtev(String id) throws Exception {
+    public Zahtev getZahtev(String id) throws Exception {
     	
-//     	String xPath = "/zahtev[@about = 'http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/"+id+"']";
-//     	System.out.println(xPath);
-//     	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
-//         List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zahtevi", xPath, "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata");
-//         for (String string : rezultat) {
-// 			zahtevi.add(convertToObject(string));
-//         }
-//         System.out.println(zahtevi.get(0).getAbout() + " DASDASDAD");
-//         System.out.println(zahtevi.get(0).getPodnosilacZahteva().getImeIPrezime().getValue() + " DASDASDAD");
+     	String xPath = "/zahtev[@about = 'http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/"+id+"']";
+     	System.out.println(xPath);
+     	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
+         List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zahtevi", xPath, "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata");
+         for (String string : rezultat) {
+ 			zahtevi.add(convertToObject(string));
+         }
+         System.out.println(zahtevi.get(0).getAbout() + " DASDASDAD");
+         System.out.println(zahtevi.get(0).getPodnosilacZahteva().getImeIPrezime().getValue() + " DASDASDAD");
 
-//         return zahtevi.get(0);
-//     }
+         return zahtevi.get(0);
+     }
 
 public String getAllWaiting() throws Exception {
 	

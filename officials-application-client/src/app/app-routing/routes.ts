@@ -18,7 +18,9 @@ export const routes: Routes = [
   },
   {
     path: 'logout',
-    component: LogoutComponent
+    component: LogoutComponent,
+  },
+  {
     path: 'report',
     component: ReportComponent,
   },

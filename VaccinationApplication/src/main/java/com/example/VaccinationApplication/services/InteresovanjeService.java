@@ -189,19 +189,7 @@ public String getInteresovanje(String id) throws Exception {
     return "Interesovanje";
 }
 
-public String getAllForDate(String dateFrom, String dateTo) throws Exception {
-	
-	String xPath = "//interesovanje[number(translate(Datum,'-','')) >= "+dateFrom.replace("-", "")+" and number(translate(Datum,'-','')) <="+dateTo.replace("-","")+ "]";
-	System.out.println(xPath);
-	List<Interesovanje> interesovanja = new ArrayList<Interesovanje>();
-    List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/interesovanja", xPath, "http://www.ftn.uns.ac.rs/interesovanje");
-    for (String string : rezultat) {
-		interesovanja.add(convertToObject(string));
-	}
-    ListaInteresovanja li = new ListaInteresovanja();
-    li.setIzvestaj(interesovanja);
-    return convertToXml(li);
-}
+
 
 	public int getNumberOfInterests(String dateFrom, String dateTo) throws Exception {
 		String xPath = "//interesovanje[number(translate(Datum,'-','')) >= "+dateFrom.replace("-", "")+" and number(translate(Datum,'-','')) <="+dateTo.replace("-","")+ "]";
@@ -230,11 +218,4 @@ public String getAllForDate(String dateFrom, String dateTo) throws Exception {
         return convertToXml(li);
     }
 
-    public int getNumberOfInterests(String dateFrom, String dateTo) throws Exception {
-        String xPath = "//interesovanje[number(translate(Datum,'-','')) >= " + dateFrom.replace("-", "") + " and number(translate(Datum,'-','')) <=" + dateTo.replace("-", "") + "]";
-        System.out.println(xPath);
-        List<Interesovanje> interesovanja = new ArrayList<Interesovanje>();
-        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/interesovanja", xPath, "http://www.ftn.uns.ac.rs/interesovanje");
-        return rezultat.size();
-    }
 }
