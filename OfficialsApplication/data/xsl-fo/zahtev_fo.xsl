@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:zzs="www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
+    xmlns:zzs="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
     xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
     
     <xsl:template match="/">
@@ -17,7 +17,7 @@
                         ZAHTEV
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1.5em" font-weight="bold" padding="10px" text-align="center">
-                        ZA IZDAVANJE ZELENOG SERTIF
+                        ZA IZDAVANJE ZELENOG SERTIFIKATA
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="10px">
                         U skladu sa odredbom Republike Srbije o izdavanju digitalnog zelenog sertifikata kao potvrde o izvrsenoj vakcinaciji protiv COVID-19, rezultatima testiranja na zaraznu bolest SARS-CoV-2 ili oporavku od bolesti COVID-19, podnosim zahtev za izdavanje digitalnog zelenog sertifikata.

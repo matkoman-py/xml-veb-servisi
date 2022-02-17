@@ -15,13 +15,16 @@ import {ButtonModule} from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {CardModule} from 'primeng/card';
 import {ToastModule} from 'primeng/toast';
-import { CommonModule } from '@angular/common';  
-
+import { CommonModule } from '@angular/common';
+import { ZeleniSertifikatComponent } from './zeleni-sertifikat/zeleni-sertifikat.component';  
+import {TableModule} from 'primeng/table';
+import {DialogModule} from 'primeng/dialog';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NavbarComponent, ReportComponent],
+  declarations: [AppComponent, HomeComponent, NavbarComponent, ReportComponent, ZeleniSertifikatComponent],
   imports: [BrowserModule,
       AppRoutingModule,
       MenubarModule,
@@ -32,7 +35,11 @@ import { CommonModule } from '@angular/common';
       BrowserAnimationsModule,
       CardModule,
       ToastModule,
-      CommonModule],
+      CommonModule,
+      TableModule,
+      DialogModule,
+      InputTextareaModule
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })

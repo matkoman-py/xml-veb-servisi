@@ -132,7 +132,7 @@ public class SaglasnostService {
 
     public String getSaglasnostZaEvidentiranje(String id, String doza) throws FileNotFoundException {
         Optional<String> saglasnost = dataAccessLayer.getDocument(folderId, id+"-"+doza+"-doza");
-        if(saglasnost.isEmpty()){
+        if(!saglasnost.isPresent()){
             throw new FileNotFoundException();
         }
         return saglasnost.get();

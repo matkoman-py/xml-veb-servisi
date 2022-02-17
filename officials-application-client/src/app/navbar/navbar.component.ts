@@ -15,8 +15,13 @@ export class NavbarComponent implements OnInit {
     },
     {
       label: 'Report',
+      icon: 'pi pi-fw pi-table',
+      routerLink: '/report',
+    },
+    {
+      label: 'Zeleni sertifikati',
       icon: 'pi pi-fw pi-file',
-      routerLink: '/Report',
+      routerLink: '/zeleni',
     },
   ];
 
