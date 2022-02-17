@@ -71,6 +71,7 @@ export class ReportComponent implements OnInit {
       let self = this;
       this.fileName = dfString+"-"+dtString;
       parseString(res, function (err: any, result: any) {
+        console.log(result);
         self.izvestaj.Broj_podnetih_interesovanja = result["izv:Izvestaj_o_imunizaciji"]["izv:Broj_podnetih_interesovanja"][0];
         self.izvestaj.Datum_izdavanja = result["izv:Izvestaj_o_imunizaciji"]["izv:Datum_izdavanja"][0];
         self.izvestaj.Doza_info.Broj_date_prve_doze = result["izv:Izvestaj_o_imunizaciji"]["izv:Doza_info"][0]["izv:Broj_date_prve_doze"][0];

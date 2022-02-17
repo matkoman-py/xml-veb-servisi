@@ -163,6 +163,20 @@ public Zahtev getZahtev(String id) throws Exception {
 
         return zahtevi.get(0);
     }
+
+public String getAllWaiting() throws Exception {
+	
+	String xPath = "/zahtev[@accepted = 'waiting']";
+	System.out.println(xPath);
+	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
+    List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zahtevi", xPath, "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata");
+    for (String string : rezultat) {
+		zahtevi.add(convertToObject(string));
+	}
+    ListaZahtevaZelenogSertifikata lzzs = new ListaZahtevaZelenogSertifikata();
+    lzzs.setZahtev(zahtevi);
+    return convertToXml(lzzs);
+}
     
     
 }

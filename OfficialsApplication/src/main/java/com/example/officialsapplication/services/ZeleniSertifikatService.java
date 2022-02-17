@@ -7,6 +7,7 @@ import com.example.officialsapplication.extractor.MetadataExtractor;
 import com.example.officialsapplication.mappers.MultiwayMapper;
 import com.example.officialsapplication.model.potvrda.Potvrda;
 import com.example.officialsapplication.model.users.korisnik.Korisnik;
+import com.example.officialsapplication.model.zahtev_zeleni_sertifikat.ListaZahtevaZelenogSertifikata;
 import com.example.officialsapplication.model.zahtev_zeleni_sertifikat.Zahtev;
 import com.example.officialsapplication.model.zeleni_sertifikat.TBrojSertifikata;
 import com.example.officialsapplication.model.zeleni_sertifikat.TImeIPrezime;
@@ -213,6 +214,12 @@ public class ZeleniSertifikatService {
     }
 
 
+	public ByteArrayInputStream getPdfRequest(String xmlName) throws Exception {
+		ResponseEntity<String> res =
+		restTemplate.getForEntity("http://localhost:8087/api/zahtevi/getXmlText/"+xmlName, String.class);
+    	return pdfGeneratorService.generatePDF(res.getBody(), "data/xsl-fo/zahtev_fo.xsl");
+    }
+	
 	public void odbijZeleni(String id, String razlog) throws Exception {
 		ResponseEntity<Korisnik> pacijent;
 		try {
@@ -236,6 +243,12 @@ public class ZeleniSertifikatService {
 	  		}
 	  	mailSenderService.odbijenZeleni(pacijent.getBody(), razlog);
 		ResponseEntity<String> res = restTemplate.exchange("http://localhost:8087/api/zahtevi/requestDenied/"+id, HttpMethod.PUT, null, String.class);
+	}
+	
+	public String getZahtevi() {
+		ResponseEntity<String> zahtevi 
+	  		= restTemplate.getForEntity("http://localhost:8087/api/zahtevi/getAllWaiting", String.class);
+		return zahtevi.getBody();
 	}
 	
 	public String prihvatiZeleni(String id) throws Exception {
@@ -325,6 +338,7 @@ public class ZeleniSertifikatService {
 
   		String base64 = new String(Base64.getEncoder().encode(outputStream.toByteArray()), "UTF-8");
   		zs.setQrKod("data:image/png;base64, "+base64);
+  		zs.setRel("pred:answerTo");
 
   		String res = convertToXml(zs);
   		ByteArrayInputStream is = pdfGeneratorService.generatePDF(convertToXml(zs), "data/xsl-fo/zeleni_fo.xsl");

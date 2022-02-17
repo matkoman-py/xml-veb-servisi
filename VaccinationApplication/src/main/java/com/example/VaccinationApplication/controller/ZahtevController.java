@@ -54,6 +54,14 @@ public class ZahtevController {
         return ResponseEntity.ok(retval);
     }
     
+    @RequestMapping(value = "/getAllWaiting", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sveCekanje() throws Exception {
+    	String retval = zahtevService.getAllWaiting();
+        return ResponseEntity.ok(retval);
+    }
+    
+    
+    
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<Zahtev> getZahtev(@PathVariable String id) throws Exception {
     	Zahtev retval = zahtevService.getZahtev(id);

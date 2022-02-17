@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { ReportComponent } from '../report/report.component';
 import { VaccineStockComponent } from '../vaccine-stock/vaccine-stock.component';
+import { ZeleniSertifikatComponent } from '../zeleni-sertifikat/zeleni-sertifikat.component';
 
 export const routes: Routes = [
   {
@@ -16,4 +17,8 @@ export const routes: Routes = [
     path: 'vaccine-stock',
     component: VaccineStockComponent,
   },
+  {
+    path: 'zeleni',
+    component:ZeleniSertifikatComponent,
+  }
 ];

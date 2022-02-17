@@ -137,12 +137,13 @@ public class SaglasnostService {
         return convertToXml(ls);
 	}
 
+  
     public String getSaglasnostZaEvidentiranje(String id) throws FileNotFoundException {
         Optional<String> saglasnost = dataAccessLayer.getDocument(folderId, id+"-druga-doza");
-        if(saglasnost.isEmpty()){
+        if(!saglasnost.isPresent()){
             saglasnost =  dataAccessLayer.getDocument(folderId, id+"-prva-doza");
         }
-        if(saglasnost.isEmpty()){
+        if(!saglasnost.isPresent()){
             throw new SaglasnostNijeIskazanaException("Pacijent nije iskazao saglasnost! Vakcinacija nije moguca!");
         }
         return saglasnost.get();

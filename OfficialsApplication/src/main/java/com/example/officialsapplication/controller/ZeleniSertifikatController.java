@@ -11,6 +11,7 @@ import com.example.officialsapplication.services.ZeleniSertifikatService;
 import com.google.zxing.WriterException;
 import com.itextpdf.text.DocumentException;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -18,6 +19,7 @@ import javax.mail.MessagingException;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -59,12 +61,34 @@ public class ZeleniSertifikatController {
     }
     
     @RequestMapping(value = "/odbijZahtev/{zahtevId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<String> prihvati(@PathVariable String zahtevId, @RequestBody String razlog) throws Exception {
+    public ResponseEntity<String> odbij(@PathVariable String zahtevId, @RequestBody String razlog) throws Exception {
     	
     	
       	zeleniSertifikatService.odbijZeleni(zahtevId, razlog);
       	return ResponseEntity.ok("OK");
     }
     
+    @GetMapping("pdf/{id}")
+    public ResponseEntity<byte[]> test(@PathVariable String id) throws Exception {
+    	ByteArrayInputStream bi = zeleniSertifikatService.getPdfRequest(id);
+    		
+    	HttpHeaders headers = new HttpHeaders();
+
+        headers.setContentType(MediaType.parseMediaType("application/pdf"));
+        String filename = "izvestaj.pdf";
+
+        headers.add("Content-Disposition", "inline; filename=" + "example.pdf");
+
+        headers.setContentDispositionFormData(filename, filename);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        
+        return new ResponseEntity<byte[]>(IOUtils.toByteArray(bi), headers, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/getAllWaiting", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> sveCekanje() throws Exception {
+    	String retval = zeleniSertifikatService.getZahtevi();
+        return ResponseEntity.ok(retval);
+    }
     
 }
