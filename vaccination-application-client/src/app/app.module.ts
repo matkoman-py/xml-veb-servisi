@@ -19,21 +19,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenubarModule } from 'primeng/menubar';
 import { PasswordModule } from 'primeng/password';
 import { InteresovanjeComponent } from './interesovanje/interesovanje.component';
-import { InputTextModule } from 'primeng/inputtext';
-import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
-import { HttpClientModule } from '@angular/common/http';
 import { SaglasnostComponent } from './saglasnost/saglasnost.component';
 import { CalendarModule } from 'primeng/calendar';
 import { EvidencijaVakcinacijeComponent } from './evidencija-vakcinacije/evidencija-vakcinacije.component';
-
 
 @NgModule({
   declarations: [
@@ -44,7 +39,8 @@ import { EvidencijaVakcinacijeComponent } from './evidencija-vakcinacije/evidenc
     SaglasnostComponent,
     EvidencijaVakcinacijeComponent,
     UserDocumentsComponent,
-    SendRequestComponent
+    SendRequestComponent,
+    LoginComponent,
   ],
   imports: [
     CalendarModule,

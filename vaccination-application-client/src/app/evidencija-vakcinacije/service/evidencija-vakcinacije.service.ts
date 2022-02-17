@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SaglasnostDTO } from 'app/model/saglasnost';
+import { SelectType } from 'app/model/select';
 import { Observable } from 'rxjs';
-import { SaglasnostDTO } from 'src/app/model/saglasnost';
-import { SelectType } from 'src/app/model/select';
 
 @Injectable({
   providedIn: 'root',

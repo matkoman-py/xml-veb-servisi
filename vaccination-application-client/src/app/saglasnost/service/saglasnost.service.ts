@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SaglasnostDTO } from 'app/model/saglasnost';
 import { Observable } from 'rxjs';
-import { SaglasnostDTO } from 'src/app/model/saglasnost';
 
 @Injectable({
   providedIn: 'root',

@@ -22,13 +22,14 @@ export const routes: Routes = [
     component: SendRequestComponent,
   },
   {
-   path: 'login',
+    path: 'login',
     component: LoginComponent,
   },
   {
     path: 'logout',
-    component: LogoutComponent
+    component: LogoutComponent,
   },
+  {
     path: 'interesovanje',
     component: InteresovanjeComponent,
   },

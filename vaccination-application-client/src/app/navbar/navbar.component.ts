@@ -31,8 +31,9 @@ export class NavbarComponent implements OnInit {
     {
       label: 'Login',
       icon: 'pi pi-fw pi-sign-in',
-      routerLink: '/login'
+      routerLink: '/login',
     },
+    {
       label: 'Iskazi interesovanje',
       icon: 'pi pi-fw pi-home',
       routerLink: '/interesovanje',
@@ -69,25 +70,24 @@ export class NavbarComponent implements OnInit {
         {
           label: 'Login',
           icon: 'pi pi-fw pi-sign-in',
-          routerLink: '/login'
-        }
-      ]
-    }
-    else {
+          routerLink: '/login',
+        },
+      ];
+    } else {
       this.items = [
         {
           label: 'Home',
           icon: 'pi pi-fw pi-home',
           routerLink: '/home',
         },
-        { 
-          label: 'Logout', 
+        {
+          label: 'Logout',
           icon: 'pi pi-sign-out',
-          routerLink: '/logout'
-        }
-      ]
+          routerLink: '/logout',
+        },
+      ];
     }
-  }
+  };
 
   setLogoutItems = () => {
     this.items = [
