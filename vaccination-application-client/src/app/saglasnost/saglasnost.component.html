@@ -1,0 +1,173 @@
+<br />
+<p-toast position="top-center" key="tc"></p-toast>
+<div class="p-formgroup-inline">
+  <div class="p-field">
+    <label>Ime: </label>
+    <input
+      type="text"
+      pInputText
+      class="p-inputtext-sm"
+      [(ngModel)]="saglasnost.ime"
+    />
+  </div>
+  <div class="p-field">
+    <label>Prezime: </label>
+    <input
+      type="text"
+      pInputText
+      class="p-inputtext-sm"
+      [(ngModel)]="saglasnost.prezime"
+    />
+  </div>
+  <div class="p-field">
+    <label>Ime roditelja: </label>
+    <input
+      type="text"
+      pInputText
+      class="p-inputtext-sm"
+      [(ngModel)]="saglasnost.imeRoditelja"
+    />
+  </div>
+  <div class="p-field">
+    <label>JMBG: </label>
+    <input
+      type="text"
+      pInputText
+      class="p-inputtext-sm"
+      [(ngModel)]="saglasnost.jmbg"
+    />
+  </div>
+  <div class="p-field">
+    <label>Pol: </label>
+    <p-dropdown
+      optionLabel="name"
+      [options]="polovi"
+      placeholder="Pol"
+      id="type-input"
+      [(ngModel)]="saglasnost.pol"
+    ></p-dropdown>
+  </div>
+  <div class="p-field">
+    <label>Datum rodjenja: </label>
+    <p-calendar [(ngModel)]="saglasnost.datumRodjenja"></p-calendar>
+  </div>
+  <div class="p-field">
+    <label>Mesto rodjenja: </label>
+    <input
+      type="text"
+      pInputText
+      class="p-inputtext-sm"
+      [(ngModel)]="saglasnost.mestoRodjenja"
+    />
+  </div>
+  <div class="p-field">
+    <label>Ulica i broj: </label>
+    <input
+      type="text"
+      pInputText
+      class="p-inputtext-sm"
+      [(ngModel)]="saglasnost.ulicaIBroj"
+    />
+  </div>
+  <div class="p-field">
+    <label>Mesto zivota: </label>
+    <input
+      type="text"
+      pInputText
+      class="p-inputtext-sm"
+      [(ngModel)]="saglasnost.mestoZivota"
+    />
+  </div>
+  <div class="p-field">
+    <label>Opstina: </label>
+    <input
+      type="text"
+      pInputText
+      class="p-inputtext-sm"
+      [(ngModel)]="saglasnost.opstina"
+    />
+  </div>
+  <div class="p-field">
+    <label>E-mail: </label>
+    <input
+      type="text"
+      pInputText
+      class="p-inputtext-sm"
+      [(ngModel)]="saglasnost.email"
+    />
+  </div>
+  <div class="p-field">
+    <label>Fiksni telefon: </label>
+    <input
+      type="text"
+      pInputText
+      class="p-inputtext-sm"
+      [(ngModel)]="saglasnost.fiksni"
+    />
+  </div>
+  <div class="p-field">
+    <label>Mobilni telefon: </label>
+    <input
+      type="text"
+      pInputText
+      class="p-inputtext-sm"
+      [(ngModel)]="saglasnost.mobilni"
+    />
+  </div>
+  <div class="p-field">
+    <label>Radni status: </label>
+    <p-dropdown
+      optionLabel="name"
+      [options]="radniStatusi"
+      placeholder="Radni status"
+      id="type-input"
+      [(ngModel)]="saglasnost.radniStatus"
+    ></p-dropdown>
+  </div>
+  <div class="p-field">
+    <label>Zanimanje: </label>
+    <p-dropdown
+      optionLabel="name"
+      [options]="zanimanja"
+      [(ngModel)]="saglasnost.zanimanje"
+      placeholder="Zanimanje"
+      id="type-input"
+    ></p-dropdown>
+  </div>
+  <div class="p-field">
+    <label>Primalac socijalne zastite: </label>
+    <p-checkbox
+      [(ngModel)]="checked"
+      [binary]="true"
+      inputId="binary"
+    ></p-checkbox>
+  </div>
+  <div class="p-field">
+    <label>Naziv sedista: </label>
+    <input
+      type="text"
+      pInputText
+      class="p-inputtext-sm"
+      [(ngModel)]="saglasnost.sedisteSocZastite"
+    />
+  </div>
+  <div class="p-field">
+    <label>Saglasan sam sa primanjem vakcine: </label>
+    <p-dropdown
+      [options]="vakcine"
+      optionLabel="name"
+      placeholder="Vakcina"
+      id="type-input"
+      [(ngModel)]="saglasnost.vakcina"
+    ></p-dropdown>
+  </div>
+  <div class="p-field">
+    <button
+      pButton
+      type="button"
+      label="Iskazite saglasnost"
+      id="submit-search"
+      (click)="iskazi()"
+    ></button>
+  </div>
+</div>

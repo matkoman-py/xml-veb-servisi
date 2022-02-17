@@ -1,6 +1,8 @@
 package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
+import com.example.VaccinationApplication.exceptions.SaglasnostNijeIskazanaException;
+import com.example.VaccinationApplication.exceptions.TerminNePostojiException;
 import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
@@ -54,8 +56,13 @@ public class SaglasnostService {
                 Saglasnost.class);
         String doza = terminService.proveriTermin(saglasnost.getDrzavljanstvo().getJMBG());
         if(doza.equals("")){
-            throw new FileNotFoundException();
+            throw new TerminNePostojiException("Ne mozete iskazati saglasnost bez prethodno dobijenog termina vakcinacije!");
         }
+        String vakcina = terminService.proveriVakcinu(saglasnost.getDrzavljanstvo().getJMBG());
+        if(!vakcina.equals(saglasnost.getPodaciOPacijentu().getIzjavaSaglasnosti().getNazivLeka())){
+            throw new TerminNePostojiException("Vakcina za koju ste izjavili saglasnost nije ista kao ona sa interesovanja!");
+        }
+
         String documentId = saglasnost.getDrzavljanstvo().getJMBG() + doza + ".xml";
         
         String interesovanjeId = saglasnost.getHref().split("/")[4];
@@ -130,11 +137,35 @@ public class SaglasnostService {
         return convertToXml(ls);
 	}
 
-    public String getSaglasnostZaEvidentiranje(String id, String doza) throws FileNotFoundException {
-        Optional<String> saglasnost = dataAccessLayer.getDocument(folderId, id+"-"+doza+"-doza");
+    public String getSaglasnostZaEvidentiranje(String id) throws FileNotFoundException {
+        Optional<String> saglasnost = dataAccessLayer.getDocument(folderId, id+"-druga-doza");
         if(saglasnost.isEmpty()){
-            throw new FileNotFoundException();
+            saglasnost =  dataAccessLayer.getDocument(folderId, id+"-prva-doza");
+        }
+        if(saglasnost.isEmpty()){
+            throw new SaglasnostNijeIskazanaException("Pacijent nije iskazao saglasnost! Vakcinacija nije moguca!");
         }
         return saglasnost.get();
+    }
+
+    public Saglasnost updateSaglasnost(String doza, String xmlString) throws Exception {
+
+        Saglasnost saglasnost = (Saglasnost) mapper.convertToObject(xmlString, "Saglasnost",
+                Saglasnost.class);
+        String documentId = saglasnost.getDrzavljanstvo().getJMBG() +"-"+ doza+"-doza" + ".xml";
+
+        String interesovanjeId = saglasnost.getHref().split("/")[4];
+        interesovanjeService.link(documentId, interesovanjeId);
+
+        try {
+            metadataExtractor.extractAndSave(convertToXml(saglasnost),"/saglasnosti");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+
+        dataAccessLayer.saveDocument(saglasnost, folderId, documentId, Saglasnost.class);
+        return saglasnost;
     }
 }

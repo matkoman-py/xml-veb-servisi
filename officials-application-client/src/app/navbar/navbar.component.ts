@@ -18,6 +18,11 @@ export class NavbarComponent implements OnInit {
       icon: 'pi pi-fw pi-file',
       routerLink: '/Report',
     },
+    {
+      label: 'Vaccine Stock',
+      icon: 'pi pi-fw pi-file',
+      routerLink: '/vaccine-stock',
+    },
   ];
 
   constructor() {}
