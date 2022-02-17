@@ -147,10 +147,11 @@
             <xs:element name="Naziv_ustanove" type="sag:TZdravstvenaUstanova"/>
             <xs:element name="Vakcinacijski_punkt" type="xs:string"/>
             <xs:element name="Podaci_lekar" type="xs:string"/>
-            <xs:element name="Vakcinacija" type="sag:TVakcinacija"/>
-            <xs:element name="Revakcinacija" type="sag:TVakcinacija"/>
-            <xs:element name="Privremene_kontraindikacije" type="xs:string" nillable="true"/>
-            <xs:element name="Odluka_komisije" type="xs:string" nillable="true"/>
+            <xs:element name="Vakcinacija" type="sag:TVakcinacija" minOccurs="0" nillable="true"/>
+            <xs:element name="Revakcinacija" type="sag:TVakcinacija" minOccurs="0" nillable="true"/>
+            <xs:element name="Privremene_kontraindikacije" type="xs:string" nillable="true"
+                minOccurs="0"/>
+            <xs:element name="Odluka_komisije" type="xs:string" nillable="true" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TVakcinacija">

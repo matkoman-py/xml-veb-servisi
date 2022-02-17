@@ -1,9 +1,11 @@
 package com.example.VaccinationApplication.controller;
 
+import com.example.VaccinationApplication.exceptions.InteresovanjeAlreadyExistsException;
 import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
 import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import com.example.VaccinationApplication.services.InteresovanjeService;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +22,12 @@ public class InteresovanjeController {
     public InteresovanjeController(InteresovanjeService interesovanjeService) {
         this.interesovanjeService = interesovanjeService;
     }
-    
+
+    @ExceptionHandler(value = InteresovanjeAlreadyExistsException.class)
+    public ResponseEntity handleInteresovanjeAlreadyExists(InteresovanjeAlreadyExistsException nullArticlesException) {
+        return new ResponseEntity(nullArticlesException.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @RequestMapping(value = "/getAll", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<String> sve() throws Exception {
     	String retval = interesovanjeService.getAll();

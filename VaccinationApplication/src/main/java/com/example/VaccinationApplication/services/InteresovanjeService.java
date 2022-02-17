@@ -1,6 +1,7 @@
 package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
+import com.example.VaccinationApplication.exceptions.InteresovanjeAlreadyExistsException;
 import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.Termin;
@@ -57,6 +58,10 @@ public class InteresovanjeService {
         Interesovanje interesovanje = (Interesovanje) mapper.convertToObject(xmlString, "Interesovanje",
                 Interesovanje.class);
         String documentId = interesovanje.getPodaciOPrimaocu().getJMBG().getValue() + ".xml";
+
+        if(dataAccessLayer.getDocument(folderId, interesovanje.getPodaciOPrimaocu().getJMBG().getValue()).isPresent()){
+            throw new InteresovanjeAlreadyExistsException("Ne mozete vise puta iskazivati interesovanje!");
+        }
 
         Termin termin = new Termin();
         termin.setJmbg(interesovanje.getPodaciOPrimaocu().getJMBG().getValue());
