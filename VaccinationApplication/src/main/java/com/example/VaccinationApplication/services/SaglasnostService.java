@@ -5,6 +5,8 @@ import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
 import com.example.VaccinationApplication.model.interesovanje.ListaInteresovanja;
+import com.example.VaccinationApplication.model.potvrda.ListaPotvrda;
+import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import com.example.VaccinationApplication.model.saglasnost.ListaSaglasnosti;
 import com.example.VaccinationApplication.model.saglasnost.Saglasnost;
 
@@ -36,7 +38,7 @@ public class SaglasnostService {
         this.metadataExtractor = metadataExtractor;
         this.interesovanjeService = interesovanjeService;
         this.terminService = terminService;
-        
+
     }
 
     public String getXmlAsText(String documentId){
@@ -57,7 +59,7 @@ public class SaglasnostService {
             throw new FileNotFoundException();
         }
         String documentId = saglasnost.getDrzavljanstvo().getJMBG() + doza + ".xml";
-        
+
         String interesovanjeId = saglasnost.getHref().split("/")[4];
         interesovanjeService.link(documentId, interesovanjeId);
         
@@ -136,5 +138,74 @@ public class SaglasnostService {
             throw new FileNotFoundException();
         }
         return saglasnost.get();
+    }
+
+    public String searchSaglasnostContaining(String search) throws Exception {
+        String searchQuery = String.format("xquery version \"3.1\";\n" +
+                "\n" +
+                "declare namespace sag=\"http://www.ftn.uns.ac.rs/Saglasnost\";\n" +
+                "import module namespace functx=\"http://www.functx.com\";\n" +
+                "\n" +
+                "declare function local:search($keyword as xs:string)\n" +
+                "{\n" +
+                "    let $kolekcija := collection(\"/db/vaccination-system/saglasnosti\")\n" +
+                "    let $rezultat :=\n" +
+                "    (\n" +
+                "        $kolekcija//sag:Saglasnost[contains(., $keyword)]\n" +
+                "    )\n" +
+                "\n" +
+                " return\n" +
+                "    functx:distinct-nodes($rezultat)\n" +
+                "};\n" +
+                "\n" +
+                "local:search(\"%s\")", search);
+
+        List<String> found = dataAccessLayer.izvrsiXPathIzraz(folderId, searchQuery, "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji");
+        List<Saglasnost> rezultat = new ArrayList<>();
+
+        for(String item : found) {
+            rezultat.add(convertToObject(item));
+        }
+
+        ListaSaglasnosti ls = new ListaSaglasnosti();
+        ls.setSaglasnost(rezultat);
+        return convertToXml(ls);
+    }
+
+    public String getSaglasnostAdvanced(String ime, String prezime, String ustanova, String datum) {
+        String condition = "";
+        String predicate;
+        if(!ime.trim().equals("")) {
+            condition += "?s <http://www.ftn.uns.ac.rs/predicate/ime> \"" + ime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;";
+        }
+        if(!prezime.trim().equals("")) {
+            condition += "?s <http://www.ftn.uns.ac.rs/predicate/prezime> \"" + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;";
+        }
+        if(!ustanova.trim().equals("")) {
+            condition += "?s <http://www.ftn.uns.ac.rs/predicate/zdravstvena_ustanova> \"" + ustanova + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> .";
+        }
+        if(!datum.trim().equals("")) {
+            condition += "?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/date> ;";
+        }
+        if(condition.equals("")) {
+            condition += "?s <http://www.ftn.uns.ac.rs/predicate/ime> ?o";
+        }
+
+        StringBuilder str = new StringBuilder();
+        str.append("<listaSaglasnosti>");
+
+        for(String s : metadataExtractor.filterFromRdf("/saglasnosti", condition)) {
+            String id = s.split("/")[4];
+
+            dataAccessLayer.getDocument(folderId, id);
+//            str.append("<saglasnost>");
+            str.append(dataAccessLayer.getDocument(folderId, id).get());
+//            str.append("<id>").append(id).append("</id>");
+//            str.append("</saglasnost>");
+        }
+
+        str.append(("</listaSaglasnosti>"));
+
+        return str.toString();
     }
 }

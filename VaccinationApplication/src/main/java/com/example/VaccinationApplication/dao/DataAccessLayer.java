@@ -35,5 +35,12 @@ public class DataAccessLayer {
     public List<String> izvrsiXPathIzraz(String folderId, String xpathExp, String namespace) throws Exception {
     	return dbConnection.izvrsiXPathIzraz(folderId, xpathExp, namespace);
     }
+
+//    public Optional<String> getSearchQuery(String folderId, String documentId) {
+//        String resourceContent = dbConnection.getOneSearchQuery(folderId, documentId);
+//        if (resourceContent.equals(""))
+//            return Optional.empty();
+//        return Optional.of(resourceContent);
+//    }
 }
 
