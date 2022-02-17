@@ -55,7 +55,8 @@ public class TerminService {
         calendar.add(Calendar.DAY_OF_MONTH, 21);
         termin.setDatumVreme(DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar));
         dataAccessLayer.saveDocument(termin, rezervisaniFolderId, termin.getJmbg() + "-druga-doza.xml", Termin.class);
-
+        calendar.add(Calendar.DAY_OF_MONTH, -21);
+        termin.setDatumVreme(DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar));
         return termin;
     }
 
@@ -201,11 +202,20 @@ public class TerminService {
         Optional<String> drugaDoza = dataAccessLayer.getDocument(rezervisaniFolderId, id+"-druga-doza");
 
         if(drugaDoza.isPresent()){
+            Termin terminPrve = convertToObjectTermin(prvaDoza.get());
+            Termin terminDruge = convertToObjectTermin(drugaDoza.get());
+            Date dt = new Date();
+            Calendar c = Calendar.getInstance();
+            c.setTime(dt);
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.setTime(dt);
+            int result = terminPrve.getDatumVreme().toGregorianCalendar().compareTo(gc);
+            if(result > 0){
+                return "-prva-doza";
+            }
             return "-druga-doza";
         }
-        if(prvaDoza.isPresent()){
-            return "-prva-doza";
-        }
+
 
         return "";
     }
@@ -220,4 +230,14 @@ public class TerminService {
         return (Interesovanje) mapper.convertToObject(xmlString, "Interesovanje", Interesovanje.class);
     }
 
+    public String proveriVakcinu(String jmbg) throws FileNotFoundException, TransformerException {
+        Optional<String> prvaDoza = dataAccessLayer.getDocument(rezervisaniFolderId, jmbg+"-prva-doza");
+        Optional<String> drugaDoza = dataAccessLayer.getDocument(rezervisaniFolderId, jmbg+"-druga-doza");
+
+        if(drugaDoza.isPresent()){
+            Termin terminPrve = convertToObjectTermin(prvaDoza.get());
+            return terminPrve.getVakcina();
+        }
+        return "";
+    }
 }

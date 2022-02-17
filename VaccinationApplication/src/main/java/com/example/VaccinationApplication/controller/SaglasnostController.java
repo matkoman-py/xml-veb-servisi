@@ -1,5 +1,8 @@
 package com.example.VaccinationApplication.controller;
 
+import com.example.VaccinationApplication.exceptions.InteresovanjeAlreadyExistsException;
+import com.example.VaccinationApplication.exceptions.SaglasnostNijeIskazanaException;
+import com.example.VaccinationApplication.exceptions.TerminNePostojiException;
 import com.example.VaccinationApplication.model.saglasnost.Saglasnost;
 import com.example.VaccinationApplication.services.SaglasnostService;
 
@@ -7,6 +10,7 @@ import java.io.FileNotFoundException;
 
 import javax.xml.transform.TransformerException;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +23,16 @@ public class SaglasnostController {
 
     public SaglasnostController(SaglasnostService saglasnostService) {
         this.saglasnostService = saglasnostService;
+    }
+
+    @ExceptionHandler(value = TerminNePostojiException.class)
+    public ResponseEntity handleInteresovanjeAlreadyExists(TerminNePostojiException nullArticlesException) {
+        return new ResponseEntity(nullArticlesException.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = SaglasnostNijeIskazanaException.class)
+    public ResponseEntity handleNemaSaglasnosti(SaglasnostNijeIskazanaException nullArticlesException) {
+        return new ResponseEntity(nullArticlesException.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @GetMapping("getXmlText/{id}")
@@ -51,9 +65,9 @@ public class SaglasnostController {
         return ResponseEntity.ok(retval);
     }
 
-    @RequestMapping(value = "/getZaEvidentiranje/{id}/{doza}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<String> saglasnostZaEvidentiranje(@PathVariable String id, @PathVariable String doza) throws Exception {
-        String retval = saglasnostService.getSaglasnostZaEvidentiranje(id, doza);
+    @RequestMapping(value = "/getZaEvidentiranje/{id}", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> saglasnostZaEvidentiranje(@PathVariable String id) throws Exception {
+        String retval = saglasnostService.getSaglasnostZaEvidentiranje(id);
         return ResponseEntity.ok(retval);
     }
 
@@ -73,6 +87,12 @@ public class SaglasnostController {
     @PostMapping("saveXmlText")
     public ResponseEntity<Saglasnost> saveXmlText(@RequestBody String saglasnostXml) throws Exception {
         Saglasnost retval = saglasnostService.saveXmlFromText(saglasnostXml);
+        return ResponseEntity.ok(retval);
+    }
+
+    @PostMapping("updateSaglasnost/{doza}")
+    public ResponseEntity<Saglasnost> updateSaglasnost(@PathVariable String doza, @RequestBody String saglasnostXml) throws Exception {
+        Saglasnost retval = saglasnostService.updateSaglasnost(doza,saglasnostXml);
         return ResponseEntity.ok(retval);
     }
 
