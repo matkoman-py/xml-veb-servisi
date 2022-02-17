@@ -24,6 +24,8 @@ public class ZeleniSertifikatController {
         this.zeleniSertifikatService = zeleniSertifikatService;
     }
     
+    
+    
 
     @RequestMapping(value = "/getXmlText/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<String> getXmlText(@PathVariable String id) {
@@ -61,7 +63,8 @@ public class ZeleniSertifikatController {
         return ResponseEntity.ok(retval);
     }
 
-    @RequestMapping(value = "/saveXmlText", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    //OVDEEEEEEEEEEEE
+    @RequestMapping(value = "/saveXmlText", method = RequestMethod.POST)
     public ResponseEntity<ZeleniSertifikat> saveXmlText(@RequestBody String zeleniSertifikatXml) throws FileNotFoundException, TransformerException {
         ZeleniSertifikat retval = zeleniSertifikatService.saveXmlFromText(zeleniSertifikatXml);
         return ResponseEntity.ok(retval);
@@ -71,6 +74,20 @@ public class ZeleniSertifikatController {
     public ResponseEntity<String> objectToXml(@RequestBody ZeleniSertifikat zeleniSertifikat) {
         String retval = zeleniSertifikatService.convertToXml(zeleniSertifikat);
         return ResponseEntity.ok(retval);
+    }
+
+    @RequestMapping(value = "/search/{search}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> searchSertifikatContaining(@PathVariable String search) throws Exception {
+        return ResponseEntity.ok(zeleniSertifikatService.searchSertifikatContaining(search));
+    }
+
+    @RequestMapping(value = "/advanced-search", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> getSErtifikatAdvanced(@RequestParam(required = false) String ime,
+                                                        @RequestParam(required = false) String prezime,
+                                                        @RequestParam(required = false) String ustanova,
+                                                        @RequestParam(required = false) String datum) {
+        return ResponseEntity.ok(zeleniSertifikatService.getSertifikatAdvanced(ime, prezime, ustanova, datum));
+
     }
     
 //    @RequestMapping(value = "/convertToObject", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

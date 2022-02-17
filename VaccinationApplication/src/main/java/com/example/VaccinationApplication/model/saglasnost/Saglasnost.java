@@ -46,7 +46,7 @@ public class Saglasnost {
     protected TDrzavljanstvo drzavljanstvo;
     @XmlElement(name = "Podaci_o_pacijentu", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
     protected TPacijent podaciOPacijentu;
-    @XmlElement(name = "Evidencija_o_vakcinaciji", namespace = "http://www.ftn.uns.ac.rs/Saglasnost", required = true)
+    @XmlElement(name = "Evidencija_o_vakcinaciji", namespace = "http://www.ftn.uns.ac.rs/Saglasnost")
     protected TEvidencija evidencijaOVakcinaciji;
     @XmlAttribute(name = "about", required = true)
     protected String about;

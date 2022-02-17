@@ -67,7 +67,7 @@ public class PotvrdaController {
     }
 
     @PostMapping("saveXmlText")
-    public ResponseEntity<Potvrda> saveXml(@RequestBody String potvrdaXml) {
+    public ResponseEntity<Potvrda> saveXml(@RequestBody String potvrdaXml) throws Exception {
         Potvrda retval = potvrdaService.saveXmlFromText(potvrdaXml);
         return ResponseEntity.ok(retval);
     }
@@ -88,5 +88,18 @@ public class PotvrdaController {
     public ResponseEntity<Potvrda> xmlToObject(@RequestBody String xmlString) throws FileNotFoundException, TransformerException {
         Potvrda retval = potvrdaService.convertToObject(xmlString);
         return ResponseEntity.ok(retval);
+    }
+
+    @GetMapping("search/{search}")
+    public ResponseEntity<String> searchPotvrdaContaining(@PathVariable String search) throws Exception {
+        return ResponseEntity.ok(potvrdaService.searchPotvrdaContaining(search));
+    }
+
+    @RequestMapping(value = "/advanced-search", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> getPotvrdaAdvanced(@RequestParam(required = false) String ime,
+                                                     @RequestParam(required = false) String prezime,
+                                                     @RequestParam(required = false) String ustanova,
+                                                     @RequestParam(required = false) String datum) {
+        return ResponseEntity.ok(potvrdaService.getPotvrdaAdvanced(ime, prezime, ustanova, datum));
     }
 }

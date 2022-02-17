@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zel:zeleni_sertifikat about="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zel="http://www.ftn.uns.ac.rs/zelenisertifikat" xsi:schemaLocation="http://www.ftn.uns.ac.rs/zelenisertifikat ZeleniSertifikat.xsd ">
+  <zel:qr_kod>zel:qr_kod</zel:qr_kod>
+  <zel:broj_sertifikata datatype="xs:string" property="pred:broj_sertifikata">zel:broj_sertifikata</zel:broj_sertifikata>
+  <zel:datum_izdavanja datatype="xs:dateTime" property="pred:datum">2001-12-31T12:00:00</zel:datum_izdavanja>
+  <zel:podaci_o_pacijentu>
+    <zel:ime_prezime datatype="xs:string" property="pred:ime_i_prezime">zel:ime_prezime</zel:ime_prezime>
+    <zel:pol>Musko</zel:pol>
+    <zel:datum_rodjenja>2001-01-01</zel:datum_rodjenja>
+    <zel:jmbg datatype="xs:string" property="pred:jmbg">zel:jmbg</zel:jmbg>
+    <zel:broj_pasosa>zel:broj_pasosa</zel:broj_pasosa>
+  </zel:podaci_o_pacijentu>
+  <zel:podaci_o_vakcinaciji>
+    <zel:doza>1</zel:doza>
+    <zel:tip>zel:tip</zel:tip>
+    <zel:proizvodjac_serija>zel:proizvodjac_serija</zel:proizvodjac_serija>
+    <zel:datum>2001-01-01</zel:datum>
+    <zel:zdravstvena_ustanova>zel:zdravstvena_ustanova</zel:zdravstvena_ustanova>
+  </zel:podaci_o_vakcinaciji>
+</zel:zeleni_sertifikat>
