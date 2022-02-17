@@ -3,8 +3,6 @@ package com.example.VaccinationApplication.services;
 import com.example.VaccinationApplication.dao.DataAccessLayer;
 import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
-import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
-import com.example.VaccinationApplication.model.interesovanje.ListaInteresovanja;
 import com.example.VaccinationApplication.model.potvrda.ListaPotvrda;
 import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import org.springframework.stereotype.Service;
@@ -159,7 +157,21 @@ public List<Integer> getReportDataForDate(String dateFrom, String dateTo) throws
         return convertToXml(lp);
     }
     
-    public Potvrda getPotvrda(String id) throws Exception {
+    public String getForUser(String id) throws Exception {
+    	
+    	String xPath = "//Potvrda[pacijent/Jmbg = '"+id+"']";
+    	List<Potvrda> potvrde = new ArrayList<Potvrda>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/potvrde", xPath, "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji");
+        for (String string : rezultat) {
+        	return convertToXml(convertToObject(string));
+//			potvrde.add(convertToObject(string));
+		}
+        ListaPotvrda lp = new ListaPotvrda();
+        lp.setPotvrda(potvrde);
+        return convertToXml(lp);
+    }
+    
+    public String getPotvrda(String id) throws Exception {
     	
     	String xPath = "//Potvrda[pacijent/Jmbg = '"+id+"']";
     	List<Potvrda> potvrde = new ArrayList<Potvrda>();
@@ -167,6 +179,8 @@ public List<Integer> getReportDataForDate(String dateFrom, String dateTo) throws
         for (String string : rezultat) {
 			potvrde.add(convertToObject(string));
         }
-        return potvrde.get(0);
+        
+        if(potvrde.size() == 0) return "";
+        return "Potvrda";
     }
 }

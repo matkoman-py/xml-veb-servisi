@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:Izvestaj_o_imunizaciji xmlns:b="www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="50">
+    <b:Period>
+        <b:Datum_od>2021-05-04</b:Datum_od>
+        <b:Datum_do>2021-07-24</b:Datum_do>
+    </b:Period>
+    <b:Broj_podnetih_interesovanja>450</b:Broj_podnetih_interesovanja>
+    <b:Zeleni_sertifikat_info>
+        <b:Broj_primljenih_zahteva>330</b:Broj_primljenih_zahteva>
+        <b:Broj_izdatih_sertifikata>300</b:Broj_izdatih_sertifikata>
+    </b:Zeleni_sertifikat_info>
+    <b:Doza_info>
+        <b:Broj_datih_doza>6000</b:Broj_datih_doza>
+        <b:Broj_date_prve_doze>3000</b:Broj_date_prve_doze>
+        <b:Broj_date_druge_doze>2000</b:Broj_date_druge_doze>
+        <b:Broj_date_trece_doze>1000</b:Broj_date_trece_doze>
+    </b:Doza_info>
+    <b:Proizvodjaci_info>
+        <b:Broj_doza_Pfizer_BioNTech>4500</b:Broj_doza_Pfizer_BioNTech>
+        <b:Broj_doza_Sinopharm>1000</b:Broj_doza_Sinopharm>
+        <b:Broj_doza_SputnikV>300</b:Broj_doza_SputnikV>
+        <b:Broj_doza_AstraZeneca>200</b:Broj_doza_AstraZeneca>
+    </b:Proizvodjaci_info>
+    <b:Datum_izdavanja>2021-06-04</b:Datum_izdavanja>
+</b:Izvestaj_o_imunizaciji>

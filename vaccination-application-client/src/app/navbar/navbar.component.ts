@@ -13,6 +13,16 @@ export class NavbarComponent implements OnInit {
       icon: 'pi pi-fw pi-home',
       routerLink: '/home',
     },
+    {
+      label: 'Documents',
+      icon: 'pi pi-fw pi-home',
+      routerLink: '/user-documents',
+    },
+    {
+      label: 'Send request',
+      icon: 'pi pi-fw pi-home',
+      routerLink: '/send-request',
+    },
   ];
 
   constructor() {}

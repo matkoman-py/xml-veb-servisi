@@ -123,11 +123,38 @@ public String getAllForUser(String id) throws Exception {
         List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/interesovanja", xPath, "http://www.ftn.uns.ac.rs/interesovanje");
         for (String string : rezultat) {
 			interesovanja.add(convertToObject(string));
+			convertToXml(convertToObject(string));
 		}
         ListaInteresovanja li = new ListaInteresovanja();
         li.setIzvestaj(interesovanja);
         return convertToXml(li);
     }
+
+public String getForUser(String id) throws Exception {
+	
+	String xPath = "//interesovanje[Podaci_o_primaocu/JMBG = '"+id+"']";
+	List<Interesovanje> interesovanja = new ArrayList<Interesovanje>();
+    List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/interesovanja", xPath, "http://www.ftn.uns.ac.rs/interesovanje");
+    for (String string : rezultat) {
+		//interesovanja.add(convertToObject(string));
+		return convertToXml(convertToObject(string));
+	}
+    ListaInteresovanja li = new ListaInteresovanja();
+    li.setIzvestaj(interesovanja);
+    return convertToXml(li);
+}
+
+public String getInteresovanje(String id) throws Exception {
+	
+	String xPath = "//interesovanje[Podaci_o_primaocu/JMBG = '"+id+"']";
+	List<Interesovanje> interesovanja = new ArrayList<Interesovanje>();
+    List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/interesovanja", xPath, "http://www.ftn.uns.ac.rs/interesovanje");
+    for (String string : rezultat) {
+    	interesovanja.add(convertToObject(string));
+    }
+    if(interesovanja.size() == 0) return "";
+    return "Interesovanje";
+}
 
 public String getAllForDate(String dateFrom, String dateTo) throws Exception {
 	
@@ -150,30 +177,4 @@ public String getAllForDate(String dateFrom, String dateTo) throws Exception {
 	    List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/interesovanja", xPath, "http://www.ftn.uns.ac.rs/interesovanje");
 	    return rezultat.size();
 	}
-    
-//    public void link(String zeleniSertifikatId, String zahtevId) throws FileNotFoundException, TransformerException {
-//    	Zahtev updatedZahtev = getXmlAsObject(zahtevId);
-//    	
-//    	if(updatedZahtev.getHref() == null) {
-//    		updatedZahtev.setHref("");
-//    	}
-//    	
-//    	if(!updatedZahtev.getHref().isBlank()) {
-//    		return;
-//    	}
-//    	updatedZahtev.setRel("pred:answeredBy");
-//    	updatedZahtev.setHref("http://www.ftn.uns.ac.rs/zelenisertifikat/"+zeleniSertifikatId);
-//    	update(updatedZahtev, zahtevId +".xml");
-//    }
-//    
-//    public void update(Zahtev zahtev, String documentId) throws FileNotFoundException, TransformerException {
-//    	dataAccessLayer.saveDocument(zahtev, folderId, documentId, Zahtev.class);
-//    	try {
-//            metadataExtractor.extractAndSave(convertToXml(zahtev),"/zahtevi");
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (TransformerException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
