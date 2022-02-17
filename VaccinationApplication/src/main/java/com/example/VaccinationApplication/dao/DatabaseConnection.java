@@ -15,6 +15,7 @@ import org.xmldb.api.modules.XPathQueryService;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.transform.OutputKeys;
+import javax.xml.xquery.XQSequence;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -180,5 +181,34 @@ public class DatabaseConnection {
         } else
             return col;
     }
-    
+
+//    public String getOneSearchQuery(String folderId, String documentId) {
+//
+//        XQSequence res;
+//        Collection col = null;
+//        String responseContent = "";
+//
+//        try {
+//            Class<?> cl = Class.forName(databaseConfig.getDbDriver());
+//            Database database = (Database) cl.newInstance();
+//            database.setProperty("create-database", "true");
+//            DatabaseManager.registerDatabase(database);
+//            col = DatabaseManager.getCollection(databaseConfig.getDbUrl() + folderId, databaseConfig.getUsername(), databaseConfig.getPassword());
+//            col.setProperty(OutputKeys.INDENT, "yes");
+//
+//            res = col.getResource(documentId + ".xd");
+//            if (res != null)
+//                responseContent = (String) res.getContent();
+//        } catch (Exception ignored) {
+//        } finally {
+//            if (col != null) {
+//                try {
+//                    col.close();
+//                } catch (XMLDBException ex) {
+//                    ex.printStackTrace();
+//                }
+//            }
+//        }
+//        return responseContent;
+//    }
 }

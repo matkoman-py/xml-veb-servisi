@@ -71,6 +71,19 @@ public class SaglasnostController {
         return ResponseEntity.ok(retval);
     }
 
+    @RequestMapping(value = "/search/{search}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> searchSaglasnostContaining(@PathVariable String search) throws Exception {
+        return ResponseEntity.ok(saglasnostService.searchSaglasnostContaining(search));
+    }
+
+    @RequestMapping(value = "/advanced-search", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> getSaglasnostAdvanced(@RequestParam(required = false) String ime,
+                                                        @RequestParam(required = false) String prezime,
+                                                        @RequestParam(required = false) String ustanova,
+                                                        @RequestParam(required = false) String datum) {
+        return ResponseEntity.ok(saglasnostService.getSaglasnostAdvanced(ime, prezime, ustanova, datum));
+    }
+
     @PostMapping("saveXmlText")
     public ResponseEntity<Saglasnost> saveXmlText(@RequestBody String saglasnostXml) throws Exception {
         Saglasnost retval = saglasnostService.saveXmlFromText(saglasnostXml);
@@ -100,4 +113,5 @@ public class SaglasnostController {
         Saglasnost retval = saglasnostService.convertToObject(xmlString);
         return ResponseEntity.ok(retval);
     }
+
 }

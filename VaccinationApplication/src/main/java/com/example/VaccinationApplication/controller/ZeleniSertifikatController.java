@@ -75,6 +75,20 @@ public class ZeleniSertifikatController {
         String retval = zeleniSertifikatService.convertToXml(zeleniSertifikat);
         return ResponseEntity.ok(retval);
     }
+
+    @RequestMapping(value = "/search/{search}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> searchSertifikatContaining(@PathVariable String search) throws Exception {
+        return ResponseEntity.ok(zeleniSertifikatService.searchSertifikatContaining(search));
+    }
+
+    @RequestMapping(value = "/advanced-search", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> getSErtifikatAdvanced(@RequestParam(required = false) String ime,
+                                                        @RequestParam(required = false) String prezime,
+                                                        @RequestParam(required = false) String ustanova,
+                                                        @RequestParam(required = false) String datum) {
+        return ResponseEntity.ok(zeleniSertifikatService.getSertifikatAdvanced(ime, prezime, ustanova, datum));
+
+    }
     
 //    @RequestMapping(value = "/convertToObject", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<ZeleniSertifikat> xmlToObject(@RequestBody String xmlString) throws FileNotFoundException, TransformerException {

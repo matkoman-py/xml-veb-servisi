@@ -89,4 +89,17 @@ public class PotvrdaController {
         Potvrda retval = potvrdaService.convertToObject(xmlString);
         return ResponseEntity.ok(retval);
     }
+
+    @GetMapping("search/{search}")
+    public ResponseEntity<String> searchPotvrdaContaining(@PathVariable String search) throws Exception {
+        return ResponseEntity.ok(potvrdaService.searchPotvrdaContaining(search));
+    }
+
+    @RequestMapping(value = "/advanced-search", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<String> getPotvrdaAdvanced(@RequestParam(required = false) String ime,
+                                                     @RequestParam(required = false) String prezime,
+                                                     @RequestParam(required = false) String ustanova,
+                                                     @RequestParam(required = false) String datum) {
+        return ResponseEntity.ok(potvrdaService.getPotvrdaAdvanced(ime, prezime, ustanova, datum));
+    }
 }
