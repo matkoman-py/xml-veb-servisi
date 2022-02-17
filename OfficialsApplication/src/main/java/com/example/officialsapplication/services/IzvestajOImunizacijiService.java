@@ -1,5 +1,6 @@
 package com.example.officialsapplication.services;
 
+import com.example.officialsapplication.services.MailSenderService;
 import com.example.officialsapplication.dao.DataAccessLayer;
 import com.example.officialsapplication.extractor.MetadataExtractor;
 import com.example.officialsapplication.mappers.MultiwayMapper;
@@ -29,6 +30,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.mail.MessagingException;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
@@ -56,6 +58,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -72,6 +75,8 @@ public class IzvestajOImunizacijiService {
     private final String folderId = "/db/officials-system/izvestaji";
     private final MetadataExtractor metadataExtractor;
     private RestTemplate restTemplate = new RestTemplate();
+    private PdfGeneratorService pdfGeneratorService;
+    private final MailSenderService mailSenderService;
     private static DocumentBuilderFactory documentFactory;
 	
 	private static TransformerFactory transformerFactory;
@@ -98,10 +103,12 @@ public class IzvestajOImunizacijiService {
 	}
 
     public IzvestajOImunizacijiService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper,
-                                       MetadataExtractor metadataExtractor) {
+                                       MetadataExtractor metadataExtractor, MailSenderService mailSenderService, PdfGeneratorService pdfGeneratorService) {
         this.dataAccessLayer = dataAccessLayer;
         this.mapper = mapper;
         this.metadataExtractor = metadataExtractor;
+        this.mailSenderService = mailSenderService;
+        this.pdfGeneratorService = pdfGeneratorService;
     }
 
     public String getXmlAsText(String documentId) {
@@ -182,6 +189,11 @@ public class IzvestajOImunizacijiService {
         dataAccessLayer.saveDocument(izvestaj, folderId, documentId, IzvestajOImunizaciji.class);
         return izvestaj;
     }
+    
+    public ByteArrayInputStream getPdf(String xmlName) throws Exception {
+    	String xml = getXmlAsText(xmlName);
+    	return pdfGeneratorService.generatePDF(xml, "data/xsl-fo/izvestaj_fo.xsl");
+    }
 
     public String convertToXml(IzvestajOImunizaciji izvestaj) {
         return mapper.convertToXml(izvestaj, IzvestajOImunizaciji.class);
@@ -204,8 +216,12 @@ public class IzvestajOImunizacijiService {
 	        // Step 3
 	        document.open();
 	        
+	       
+	        
 	        // Step 4
-	        XMLWorkerHelper.getInstance().parseXHtml(writer, document, new FileInputStream(HTML_FILE));
+	        
+	        XMLWorkerHelper.getInstance().parseXHtml(writer, document, new FileInputStream(HTML_FILE), Charset.forName("UTF-8"));
+
 	        
 	        // Step 5
 	        document.close();
@@ -275,7 +291,7 @@ public class IzvestajOImunizacijiService {
 
 
 	
-	public void zeleni(String id) throws DatatypeConfigurationException, IOException, DocumentException {
+	public void zeleni(String id) throws DatatypeConfigurationException, IOException, DocumentException, MessagingException {
 		GregorianCalendar dn = new GregorianCalendar();
 		ResponseEntity<Korisnik> pacijent
   	  = restTemplate.getForEntity("http://localhost:8087/api/korisnici/getUser/"+id, Korisnik.class);
@@ -324,6 +340,7 @@ public class IzvestajOImunizacijiService {
   		String res = convertToXml(zs);
   		generateHTML(res, "data/xslt/zeleni.xsl");
 		generatePDF("gen/itext/izvestaj.pdf");
+		mailSenderService.odobrenZeleni(pacijentData);
   		
 	}
     

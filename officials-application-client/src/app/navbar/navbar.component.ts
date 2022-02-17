@@ -22,7 +22,21 @@ export class NavbarComponent implements OnInit {
       label: 'Login',
       icon: 'pi pi-fw pi-sign-in',
       routerLink: '/login'
-    }
+    },
+      label: 'Report',
+      icon: 'pi pi-fw pi-table',
+      routerLink: '/report',
+    },
+    {
+      label: 'Zeleni sertifikati',
+      icon: 'pi pi-fw pi-file',
+      routerLink: '/zeleni',
+    },
+    {
+      label: 'Vaccine Stock',
+      icon: 'pi pi-fw pi-file',
+      routerLink: '/vaccine-stock',
+    },
   ];
 
   constructor(

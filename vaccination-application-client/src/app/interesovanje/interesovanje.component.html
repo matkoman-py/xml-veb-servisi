@@ -1,0 +1,98 @@
+<br />
+<p-toast position="top-center" key="tc"></p-toast>
+
+<div class="p-input-filled flex">
+  <span class="p-float-label item">
+    <input
+      id="float-input"
+      type="text"
+      pInputText
+      [(ngModel)]="interesovanje.ime"
+    />
+    <label for="float-input">Ime</label>
+  </span>
+  <span class="p-float-label item">
+    <input
+      id="float-input"
+      type="text"
+      pInputText
+      [(ngModel)]="interesovanje.prezime"
+    />
+    <label for="float-input">Prezime</label>
+  </span>
+  <span class="p-float-label item">
+    <input
+      id="float-input"
+      type="text"
+      pInputText
+      [(ngModel)]="interesovanje.drzavljanstvo"
+    />
+    <label for="float-input">Drzavljanstvo</label>
+  </span>
+  <span class="p-float-label item">
+    <input
+      id="float-input"
+      type="text"
+      pInputText
+      [(ngModel)]="interesovanje.jmbg"
+    />
+    <label for="float-input">JMBG</label>
+  </span>
+  <span class="p-float-label item">
+    <input
+      id="float-input"
+      type="text"
+      pInputText
+      [(ngModel)]="interesovanje.email"
+    />
+    <label for="float-input">E-mail</label>
+  </span>
+  <span class="p-float-label item">
+    <input
+      id="float-input"
+      type="text"
+      pInputText
+      [(ngModel)]="interesovanje.mobilni"
+    />
+    <label for="float-input">Mobilni telefon</label>
+  </span>
+  <span class="p-float-label item">
+    <input
+      id="float-input"
+      type="text"
+      pInputText
+      [(ngModel)]="interesovanje.fiksni"
+    />
+    <label for="float-input">Fiksni telefon</label>
+  </span>
+  <span class="p-float-label item">
+    <p-dropdown
+      [options]="vakcine"
+      optionLabel="name"
+      [(ngModel)]="selectedVakcina"
+      placeholder="Izaberite vakcinu"
+      id="type-input"
+    ></p-dropdown>
+  </span>
+  <span class="p-float-label item">
+    <div class="field-checkbox">
+      <p-checkbox
+        [(ngModel)]="checked"
+        [binary]="true"
+        inputId="binary"
+      ></p-checkbox>
+      <label for="binary">{{
+        checked ? "Donirao sam krv" : "Nisam donirao sam krv"
+      }}</label>
+    </div>
+  </span>
+  <span class="p-float-label item">
+    <button
+      pButton
+      type="button"
+      label="Iskazite interesovanje"
+      (click)="iskazi()"
+      id="submit-search"
+    ></button>
+  </span>
+</div>

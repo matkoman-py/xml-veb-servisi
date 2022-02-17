@@ -11,7 +11,7 @@
         <zel:pol>Musko</zel:pol>
         <zel:datum_rodjenja>2006-05-04</zel:datum_rodjenja>
         <zel:jmbg property="pred:jmbg" datatype="xs:string">jmbg0</zel:jmbg>
-        <zel:broj_pasosa>0000000000000</zel:broj_pasosa>
+        <zel:broj_pasosa>broj_pasosa0</zel:broj_pasosa>
     </zel:podaci_o_pacijentu>
     <zel:podaci_o_vakcinaciji>
         <zel:doza>50</zel:doza>

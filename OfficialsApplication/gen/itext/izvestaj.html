@@ -1,242 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?><html xmlns:zel="http://www.ftn.uns.ac.rs/zelenisertifikat">
+<?xml version="1.0" encoding="UTF-8"?><html xmlns:izv="http://www.ftn.uns.ac.rs/Izvestaj_o_imunizaciji">
   <head>
-    <META http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Zahtev (XSLT)</title>
+    <title>Izvestaj (XSLT)</title>
     <style type="text/css">
-                    h1 {text-align: center; margin:5px;}
-                    h2 {
-                    text-align: center; 
-                    margin:5px;
-                    font-size:30px;
-                    }
-                    h3 {
-                    text-align:center;
-                    color:gray;
-                    text-size:10px;
-                    margin-top:5px;
-                    text-size:15px;
-                    }
+                    h1 {text-align: center;}
                     table {
-                    width: 100%;
+                    font-family: serif;
+                    border-collapse: collapse;
+                    margin: 50px auto 50px auto;
+                    width: 90%;
                     }
-                    
-                    td 
-                    {
-                    text-align: center; 
-                    vertical-align: middle;
+                    th, td {
+                    text-align: left;
+                    padding: 30px;
+                    border: 1px solid darkgrey;
                     }
-                    
-                    
-                    body { font-family: Arial, sans-serif;
-                    
+                    th {
+                    font-family: sans-serif;
+                    color: white;
+                    border: 1px solid darkgrey;
                     }
-                    u {    
-                    text-decoration:underline;
-                    text-decoration-style: dotted;
-                    }
-                    p.small {
-                    font-size:12px;
-                    margin-top: 2px;
-                    color:gray;
-                    }
-                    
-                    .header img {
-                    float: left;
-                    width: 100px;
-                    height: 100px;
-                    background: #555;
-                    }
-                    
-                    .header h1 {
-                    position: relative;
-                    top: 18px;
-                    left: 10px;
-                    }
-                    
-                    p.header {
-                    text-align:right;
-                    font-size:12px;
-                    font-weight: bold;
-                    }
-                    .header div {
-                    text-align: center;
-                    vertical-align: middle;
-                    line-height: 90px;
-                    }
-                    p.form {
-                    margin-bottom:5px;
-                    }
-                    
-                    .icon-small i {
-                    float: left;
-                    margin-right: 10px;
-                    /* ... */
-                    }
-                    
-                    .underline{border-bottom:1px solid #000000; width:200px; padding-bottom:5px;}
-                    
-                    #header
-                    {
-                    position:relative;
-                    min-width: 200px;
-                    }
-                    
-                    #left
-                    {
-                    position:absolute;
-                    width: 100px;
-                    top: 0;
-                    left: 0;
-                    }
-                    
-                    #right
-                    {
-                    position:absolute;
-                    width: 100px;    
-                    top: 0;
-                    right: 0;
-                    }
-                    
-                    table.mid td + td { border-left:2px solid black; }
-                    
+                    tr { border: 1px solid darkgrey; }
+                    body { font-family: sans-serif; }
                     
                 </style>
   </head>
   <body>
-    <table>
-      <tr>
-        <td>
-          <p style="text-align:left;">
-            <img height="100" width="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Coat_of_arms_of_Serbia_small.svg/150px-Coat_of_arms_of_Serbia_small.svg.png"/>
-          </p>
-        </td>
-        <td>
-          <p style="text-align:right;">
-            <img height="100" width="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png"/>
-          </p>
-        </td>
-      </tr>
-    </table>
-    <h1>DIGITALNI ZELENI SERTIFIKAT</h1>
-    <h3>Potvrda o izvrsenoj vakcinaciji protiv COVID-19 i rezultatima testiranja</h3>
-    <h1>DIGITAL GREEN CERTIFICATE</h1>
-    <h3>Certiicate of vaccination against COVID-19 and test results</h3>
-    <br/>
-    <table>
-      <tr>
-        <td>
-          <div style="height: 50px; overflow:hidden; font-size:12px; text-align:left;">
-                            Broj sertifikata/Certificate ID: 202121-21</div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div style="height: 50px; overflow:hidden; font-size:12px; text-align:left;">
-                            Datum i vreme izdavanja sertifikata/Certificate isuing date and time: 2022-02-14 12:26:11</div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div style="height: 50px; overflow:hidden; font-size:12px; text-align:left;">
-                            Ime i prezime/Name and surname: Petar Markovic</div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div style="height: 50px; overflow:hidden; font-size:12px; text-align:left;">
-                            Pol/Gener: muski</div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div style="height: 50px; overflow:hidden; font-size:12px; text-align:left;">
-                            Datum rodjenja/Date of birth: 1999-10-29</div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div style="height: 50px; overflow:hidden; font-size:12px; text-align:left;">
-                            JMBG/Personal No./EBS: 696969696969696</div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <div style="height: 50px; overflow:hidden; font-size:12px; text-align:left;">
-                            Broj pasosa/Passport No.: 9321321</div>
-        </td>
-      </tr>
-    </table>
-    <table>
-      <tr>
-        <th style="border-top:2px solid black; text-align:center">Vakcinacija/Vaccination</th>
-      </tr>
-    </table>
-    <table class="mid">
-      <tr>
-        <td>
-          <b>Doza/Dose: 1/2</b>
-        </td>
-        <td>
-          <b>Doza/Dose: 2/2</b>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding-bottom:10px">
-          <b>Tip/Type:</b>
-        </td>
-        <td style="padding-bottom:10px">
-          <b>Tip/Type:</b>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding-bottom:10px">SinoPharm</td>
-        <td style="padding-bottom:10px">SinoPharm</td>
-      </tr>
-      <tr>
-        <td>
-          <b>Datum/Date:</b>2021-03-04</td>
-        <td>
-          <b>Datum/Date:</b>2021-04-05</td>
-      </tr>
-      <tr>
-        <td>
-          <b>Zdravstvena ustanova/Healt care Institution:</b>
-        </td>
-        <td>
-          <b>Zdravstvena ustanova/Healt care Institution:</b>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding-bottom:10px; border-bottom:2px solid black">pot:Zdravstvena_ustanova</td>
-        <td style="padding-bottom:10px; border-bottom:2px solid black">pot:Zdravstvena_ustanova</td>
-      </tr>
-    </table>
-    <p style="text-align:right">
-      <b>Digitalni potpis/Digitally signed by:</b>
+    <h1>Izvestaj o imunizaciji</h1>
+    <p>Izvestaj se odnosi na period od <b>2022-02-01</b> do <b>2022-02-19</b>
     </p>
-    <table>
+    <p>U napomenutom vremenskom intervalu je:</p>
+    <ul>
+      <li>Podneto <b>0</b> dokumenta o interesovanju za vakcinu</li>
+      <li>Primeljeno <b>0</b> zahteva za digitalni zeleni sertifikat, od kojih je <b>31</b> izdato</li>
+    </ul>
+    <p>Dato je <b>0</b> doza vakcine protiv covid-19 virusa u sledecoj kolicini:</p>
+    <table style="border: 1px">
       <tr>
-        <td style="width:100px; padding-right:5px;">
-          <p style="text-align:left;">
-            <img height="75" width="75" src="https://data.gov.rs/s/avatars/2e/7864606e35474b98eb147395fecb72-100.png"/>
-          </p>
+        <td>
+          <b>Redni broj doze</b>
         </td>
         <td>
-          <p style="text-align:left; font-size:10px">
-            <b>Sertifikat izdaje:</b>
-            <br/>Institut za javno zdravlje Srbije<br/>"Dr Milan Jovanovic Batut"<br/>
-            <b>Certificate issued by:</b>
-            <br/>Institute of Public Health of Serbia<br/>"Dr Milan Jovanovic Batut"</p>
-        </td>
-        <td>
-          <p style="text-align:left;">
-            <img height="75" width="75" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Coat_of_arms_of_Serbia_small.svg/150px-Coat_of_arms_of_Serbia_small.svg.png"/>
-          </p>
-        </td>
-        <td>
-          <p style="text-align:left; font-size:10px">REPUBLIKA SRBIJA<br/>Vlada Republike Srbije<br/>Kancelarija za informacione<br/>tehnologije i elektronsku upravu<br/>Nemanjina 11, BEOGRAD <br/>Datum:2022-02-14</p>
+          <b>Broj datih doza</b>
         </td>
       </tr>
+      <tr>
+        <td>1</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>0</td>
+      </tr>
     </table>
+    <p>Raspodela po proizvodjacima je:</p>
+    <ul>
+      <li>
+        <b>Pfizer, BioNTech - 0</b>doza</li>
+      <li>
+        <b>Sinopharm - 0</b> doza</li>
+      <li>
+        <b>Sputnik V - 0</b> doza</li>
+      <li>
+        <b>AstraZenece, Oxford - 0</b>  doza</li>
+    </ul>
+    <p>Datum izdavanja: <u>2022-02-17</u> godine</p>
   </body>
 </html>

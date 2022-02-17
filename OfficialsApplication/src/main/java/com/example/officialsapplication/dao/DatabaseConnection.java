@@ -3,17 +3,18 @@ package com.example.officialsapplication.dao;
 import com.example.officialsapplication.config.DatabaseConfig;
 import org.springframework.stereotype.Component;
 import org.xmldb.api.DatabaseManager;
-import org.xmldb.api.base.Collection;
-import org.xmldb.api.base.Database;
-import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.base.*;
 import org.xmldb.api.modules.CollectionManagementService;
 import org.xmldb.api.modules.XMLResource;
+import org.xmldb.api.modules.XPathQueryService;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.transform.OutputKeys;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class DatabaseConnection {
@@ -22,6 +23,47 @@ public class DatabaseConnection {
 
     public DatabaseConnection(DatabaseConfig databaseConfig) {
         this.databaseConfig = databaseConfig;
+    }
+
+    public List<String> izvrsiXPathIzraz(String folderId, String xpathExp, String namespace) throws Exception {
+
+        ResourceSet res = null;
+        Collection col = null;
+        String responseContent = "";
+        List<String> resources = new ArrayList<String>();
+
+        try {
+            Class<?> cl = Class.forName(databaseConfig.getDbDriver());
+            Database database = (Database) cl.newInstance();
+            database.setProperty("create-database", "true");
+            DatabaseManager.registerDatabase(database);
+            col = DatabaseManager.getCollection(databaseConfig.getDbUrl() + folderId, databaseConfig.getUsername(), databaseConfig.getPassword());
+            col.setProperty(OutputKeys.INDENT, "yes");
+
+            XPathQueryService xpathService = (XPathQueryService) col.getService("XPathQueryService", "2.0");
+            xpathService.setProperty("indent", "yes");
+
+            xpathService.setNamespace("", namespace);
+            res = xpathService.query(xpathExp);
+            ResourceIterator i = res.getIterator();
+            XMLResource resource = null;
+            while (i.hasMoreResources()) {
+                resource = (XMLResource) i.nextResource();
+                resources.add((String) resource.getContent());
+            }
+        } catch (Exception ignored) {
+        } finally {
+            if (col != null) {
+                try {
+                    col.close();
+                } catch (XMLDBException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+
+        return resources;
+
     }
 
     public String getOne(String folderId, String documentId) {

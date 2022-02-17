@@ -2,6 +2,7 @@ package com.example.officialsapplication.dao;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -25,5 +26,8 @@ public class DataAccessLayer {
         return Optional.of(resourceContent);
     }
 
+    public List<String> izvrsiXPathIzraz(String folderId, String xpathExp, String namespace) throws Exception {
+        return dbConnection.izvrsiXPathIzraz(folderId, xpathExp, namespace);
+    }
 }
 

@@ -1,0 +1,34 @@
+<p-toast position="top-center" key="tc"></p-toast>
+<h1 class="header">
+    Stranica za rad sa zelenim sertifikatima
+</h1>
+
+<p-table [value]="zahtevi" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Sifra zahteva</th>
+            <th>Ime pacijenta</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-zahtev let-rowIndex="rowIndex">
+        <tr>
+            <td><button pButton  type="button"   (click)="displayPdf(zahtev.about.split('/')[4])" class="p-button-help p-button-text">{{zahtev.about.split("/")[4]}}</button></td>
+            <td>{{zahtev.Podnosilac_zahteva.Ime_i_prezime}}</td>
+            <td><button pButton  (click)="accept(zahtev.about.split('/')[4])" type="button" icon="pi pi-check" label="Odobri zahtev" class="p-button-raised p-button-success"></button></td>
+            <td><button pButton  type="button" icon="pi pi-times" label="Odbij zahtev" (click)="showDialog(zahtev.about.split('/')[4])" class="p-button-raised p-button-danger"></button></td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog header="Odbijanje zahteva sa sifrom {{denyId}}" [(visible)]="display" [modal]="true" style="align-content: center; white-space: pre;">
+    <div style="margin:auto; width:50%; white-space: pre;">
+        <textarea [rows]="8" [cols]="30" [autoResize]="true" [(ngModel)]="text" style="white-space: pre;" pInputTextarea></textarea>
+    </div>
+    <div class="mt-5 w-3 mx-auto">
+        <p-button icon="pi pi-send" (click)="closeDialog()"  label="Posalji mejl"></p-button>
+    </div>
+</p-dialog>
+
+

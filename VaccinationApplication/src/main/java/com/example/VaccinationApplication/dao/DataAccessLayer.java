@@ -20,6 +20,11 @@ public class DataAccessLayer {
         return documentId;
     }
 
+    public String deleteDocument(Object object, String folderId, String documentId, Class<?> classOfObject) {
+        dbConnection.deleteOne(folderId, object, documentId, classOfObject);
+        return documentId;
+    }
+
     public Optional<String> getDocument(String folderId, String documentId) {
         String resourceContent = dbConnection.getOne(folderId, documentId);
         if (resourceContent.equals(""))
@@ -30,5 +35,12 @@ public class DataAccessLayer {
     public List<String> izvrsiXPathIzraz(String folderId, String xpathExp, String namespace) throws Exception {
     	return dbConnection.izvrsiXPathIzraz(folderId, xpathExp, namespace);
     }
+
+//    public Optional<String> getSearchQuery(String folderId, String documentId) {
+//        String resourceContent = dbConnection.getOneSearchQuery(folderId, documentId);
+//        if (resourceContent.equals(""))
+//            return Optional.empty();
+//        return Optional.of(resourceContent);
+//    }
 }
 
