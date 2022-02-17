@@ -86,8 +86,9 @@ public class ZahtevController {
         return ResponseEntity.ok(retval);
     }
     
-    @PostMapping("saveXmlText")
+    @PostMapping(value = "saveXmlText")
     public ResponseEntity<Zahtev> saveXmlText(@RequestBody String zahtevXml) throws FileNotFoundException, TransformerException {
+    	System.out.println(zahtevXml);
     	Zahtev retval = zahtevService.saveXmlFromText(zahtevXml);
         return ResponseEntity.ok(retval);
     }

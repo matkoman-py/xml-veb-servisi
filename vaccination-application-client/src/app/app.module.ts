@@ -7,6 +7,15 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UserDocumentsComponent } from './user-documents/user-documents.component';
+import { TableModule } from 'primeng/table';
+import { QuillModule } from 'ngx-quill';
+import { SendRequestComponent } from './send-request/send-request.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenubarModule } from 'primeng/menubar';
 import { PasswordModule } from 'primeng/password';
 import { InteresovanjeComponent } from './interesovanje/interesovanje.component';
@@ -34,6 +43,8 @@ import { EvidencijaVakcinacijeComponent } from './evidencija-vakcinacije/evidenc
     InteresovanjeComponent,
     SaglasnostComponent,
     EvidencijaVakcinacijeComponent,
+    UserDocumentsComponent,
+    SendRequestComponent
   ],
   imports: [
     CalendarModule,
@@ -46,13 +57,16 @@ import { EvidencijaVakcinacijeComponent } from './evidencija-vakcinacije/evidenc
     DropdownModule,
     CheckboxModule,
     FormsModule,
+    InputNumberModule,
     RippleModule,
     ToastModule,
     MessagesModule,
     MessageModule,
     HttpClientModule,
     PasswordModule,
+    TableModule,
     ReactiveFormsModule,
+    QuillModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

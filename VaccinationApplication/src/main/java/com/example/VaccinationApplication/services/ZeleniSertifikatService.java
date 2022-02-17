@@ -140,6 +140,31 @@ public class ZeleniSertifikatService {
         lzs.setIzvestaj(zeleniSertifikati);
         return convertToXml(lzs);
 	    }
+	public String getForUser(String id) throws Exception {
+    	
+		String xPath = "//zeleni_sertifikat[podaci_o_pacijentu/jmbg = '"+id+"']";
+    	List<ZeleniSertifikat> zeleniSertifikati = new ArrayList<ZeleniSertifikat>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zeleni-sertifikati", xPath, "http://www.ftn.uns.ac.rs/zelenisertifikat");
+        for (String string : rezultat) {
+        	return convertToXml(convertToObject(string));
+			//zeleniSertifikati.add(convertToObject(string));
+		}
+        ListaZelenihSertifikata lzs = new ListaZelenihSertifikata();
+        lzs.setIzvestaj(zeleniSertifikati);
+        return convertToXml(lzs);
+	    }
+	
+	public String getZeleniSertifikat(String id) throws Exception {
+		
+		String xPath = "//zeleni_sertifikat[podaci_o_pacijentu/jmbg = '"+id+"']";
+    	List<ZeleniSertifikat> zeleniSertifikati = new ArrayList<ZeleniSertifikat>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zeleni-sertifikati", xPath, "http://www.ftn.uns.ac.rs/zelenisertifikat");
+	    for (String string : rezultat) {
+	    	zeleniSertifikati.add(convertToObject(string));
+	    }
+	    if(zeleniSertifikati.size() == 0) return "";
+	    return "Zeleni sertifikat";
+	}
 
     public String searchSertifikatContaining(String search) throws Exception {
         String searchQuery = String.format("xquery version \"3.1\";\n" +
