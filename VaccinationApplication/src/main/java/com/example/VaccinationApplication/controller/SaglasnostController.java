@@ -80,8 +80,9 @@ public class SaglasnostController {
     public ResponseEntity<String> getSaglasnostAdvanced(@RequestParam(required = false) String ime,
                                                         @RequestParam(required = false) String prezime,
                                                         @RequestParam(required = false) String ustanova,
-                                                        @RequestParam(required = false) String datum) {
-        return ResponseEntity.ok(saglasnostService.getSaglasnostAdvanced(ime, prezime, ustanova, datum));
+                                                        @RequestParam(required = false) String datum,
+                                                        @RequestParam(required = false) boolean poklapanje) {
+        return ResponseEntity.ok(saglasnostService.getSaglasnostAdvanced(ime, prezime, ustanova, datum, poklapanje));
     }
 
     @PostMapping("saveXmlText")

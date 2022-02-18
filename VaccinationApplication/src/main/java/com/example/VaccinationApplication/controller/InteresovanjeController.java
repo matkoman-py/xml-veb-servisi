@@ -87,4 +87,6 @@ public class InteresovanjeController {
         Interesovanje retval = interesovanjeService.convertToObject(xmlString);
         return ResponseEntity.ok(retval);
     }
+
+
 }

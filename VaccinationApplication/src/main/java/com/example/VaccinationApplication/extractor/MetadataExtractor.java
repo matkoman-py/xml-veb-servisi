@@ -1,9 +1,7 @@
 package com.example.VaccinationApplication.extractor;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -93,8 +91,8 @@ public class MetadataExtractor {
 			
 		}
 
-	public List<String> filterFromRdf(String path, String condition) {
-		List<String> retval = new ArrayList<>();
+	public HashSet<String> filterFromRdf(String path, String condition) {
+		HashSet<String> retval = new HashSet<>();
 
 		String queryEndpoint = String.join("/", rdfConfig.getEndpoint().trim(), rdfConfig.getDataset().trim(), rdfConfig.getQuery().trim());
 		String sparqlQuery = SparqlUtil.selectData(rdfConfig.getEndpoint().trim() + path, condition);

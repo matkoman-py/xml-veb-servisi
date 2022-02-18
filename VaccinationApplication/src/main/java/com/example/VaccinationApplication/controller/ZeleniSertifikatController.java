@@ -23,9 +23,6 @@ public class ZeleniSertifikatController {
     public ZeleniSertifikatController(ZeleniSertifikatService zeleniSertifikatService) {
         this.zeleniSertifikatService = zeleniSertifikatService;
     }
-    
-    
-    
 
     @RequestMapping(value = "/getXmlText/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<String> getXmlText(@PathVariable String id) {
@@ -82,11 +79,12 @@ public class ZeleniSertifikatController {
     }
 
     @RequestMapping(value = "/advanced-search", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<String> getSErtifikatAdvanced(@RequestParam(required = false) String ime,
+    public ResponseEntity<String> getSertifikatAdvanced(@RequestParam(required = false) String ime,
                                                         @RequestParam(required = false) String prezime,
                                                         @RequestParam(required = false) String ustanova,
-                                                        @RequestParam(required = false) String datum) {
-        return ResponseEntity.ok(zeleniSertifikatService.getSertifikatAdvanced(ime, prezime, ustanova, datum));
+                                                        @RequestParam(required = false) String datum,
+                                                        @RequestParam(required = false) boolean poklapanje) throws FileNotFoundException, TransformerException {
+        return ResponseEntity.ok(zeleniSertifikatService.getSertifikatAdvanced(ime, prezime, ustanova, datum, poklapanje));
 
     }
     

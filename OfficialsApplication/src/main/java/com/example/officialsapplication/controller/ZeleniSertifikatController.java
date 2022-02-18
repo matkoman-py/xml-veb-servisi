@@ -82,13 +82,47 @@ public class ZeleniSertifikatController {
         headers.setContentDispositionFormData(filename, filename);
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
         
-        return new ResponseEntity<byte[]>(IOUtils.toByteArray(bi), headers, HttpStatus.OK);
+        return new ResponseEntity<>(IOUtils.toByteArray(bi), headers, HttpStatus.OK);
     }
     
     @RequestMapping(value = "/getAllWaiting", method = RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<String> sveCekanje() throws Exception {
     	String retval = zeleniSertifikatService.getZahtevi();
         return ResponseEntity.ok(retval);
+    }
+
+    @RequestMapping(value = "/getPdf/{id}",method = RequestMethod.GET)
+    public ResponseEntity<byte[]> getPdf(@PathVariable String id) throws Exception {
+        ByteArrayInputStream stream = zeleniSertifikatService.getPdf(id);
+
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.setContentType(MediaType.parseMediaType("application/pdf"));
+        String filename = "zeleni_sertifikat.pdf";
+
+//        headers.add("Content-Disposition", "inline; filename=" + "sertifikat.pdf");
+
+        headers.setContentDispositionFormData(filename, filename);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+
+        return new ResponseEntity<>(IOUtils.toByteArray(stream), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("getHtml/{id}")
+    public ResponseEntity<byte[]> getHtml(@PathVariable String id) throws Exception {
+        ByteArrayInputStream bi = zeleniSertifikatService.getHtml(id);
+
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.setContentType(MediaType.parseMediaType("application/html"));
+        String filename = "zeleni_sertifikat.html";
+
+        headers.add("Content-Disposition", "inline; filename=" + "zeleni_sertifikat.html");
+
+        headers.setContentDispositionFormData(filename, filename);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+
+        return new ResponseEntity<>(IOUtils.toByteArray(bi), headers, HttpStatus.OK);
     }
     
 }

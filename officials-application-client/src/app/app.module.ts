@@ -20,9 +20,13 @@ import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
-import { VaccineStockComponent } from './vaccine-stock/vaccine-stock.component';
-import {InputTextareaModule} from 'primeng/inputtextarea';
 import { ZeleniSertifikatComponent } from './zeleni-sertifikat/zeleni-sertifikat.component';  
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputTextModule } from 'primeng/inputtext';
+import { SearchDocumentsComponent } from './search-documents/search-documents.component';
+import {ToggleButtonModule} from 'primeng/togglebutton';
+import { VaccineStockComponent } from './vaccine-stock/vaccine-stock.component';
+
 
 
 @NgModule({
@@ -32,8 +36,10 @@ import { ZeleniSertifikatComponent } from './zeleni-sertifikat/zeleni-sertifikat
     ReportComponent,
     VaccineStockComponent,
     ZeleniSertifikatComponent,
+    SearchDocumentsComponent,
     NavbarComponent, 
-    LoginComponent, LogoutComponent
+    LoginComponent, 
+    LogoutComponent
   ],
 
   imports: [
@@ -52,8 +58,8 @@ import { ZeleniSertifikatComponent } from './zeleni-sertifikat/zeleni-sertifikat
     CardModule,
     ToastModule,
     CommonModule,
+    ToggleButtonModule,
     DialogModule,
-    InputTextareaModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

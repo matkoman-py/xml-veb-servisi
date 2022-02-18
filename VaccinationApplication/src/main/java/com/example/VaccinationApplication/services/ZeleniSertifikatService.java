@@ -14,6 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.xml.transform.TransformerException;
@@ -188,20 +189,36 @@ public class ZeleniSertifikatService {
         List<String> found = dataAccessLayer.izvrsiXPathIzraz(folderId, searchQuery, "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji");
         List<ZeleniSertifikat> rezultat = new ArrayList<>();
 
+        StringBuilder str = new StringBuilder();
+        str.append("<listaSertifikata>\n");
+
         for(String item : found) {
-            rezultat.add(convertToObject(item));
+            str.append("<sertifikat>\n");
+            ZeleniSertifikat sertifikat = convertToObject(item);
+
+            str.append("<sifraSertifikata>");
+            str.append(sertifikat.getBrojSertifikata().getValue());
+            str.append("</sifraSertifikata>\n");
+
+            str.append("<linkedDocNamespace>");
+            str.append(sertifikat.getHref().split("/")[3]);
+            str.append("</linkedDocNamespace>\n");
+
+            str.append("<linkedDocName>");
+            str.append(sertifikat.getHref().split("/")[4]);
+            str.append("</linkedDocName>\n");
+            str.append("</sertifikat>\n");
         }
 
-        ListaZelenihSertifikata lzs = new ListaZelenihSertifikata();
-        lzs.setIzvestaj(rezultat);
-        return convertToXml(lzs);
+        str.append("</listaSertifikata>\n");
+        return str.toString();
     }
 
-    public String getSertifikatAdvanced(String ime, String prezime, String ustanova, String datum) {
-        String condition = "";
+    public String getSertifikatAdvanced(String ime, String prezime, String ustanova, String datum, boolean poklapanje) throws FileNotFoundException, TransformerException {
+        ArrayList<String> conditions = new ArrayList<>();
 
         if(!ime.trim().equals("")) {
-            condition += "?s <http://www.ftn.uns.ac.rs/predicate/ime_i_prezime> \"" + ime + " " + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;";
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime_i_prezime> \"" + ime + " " + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;");
         }
 //        if(!prezime.trim().equals("")) {
 //            condition += "?s <http://www.ftn.uns.ac.rs/predicate/prezime> \"" + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;";
@@ -212,24 +229,54 @@ public class ZeleniSertifikatService {
 //        if(!datum.trim().equals("")) {
 //            condition += "?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/date> ;";
 //        }
-        if(condition.equals("")) {
-            condition += "?s <http://www.ftn.uns.ac.rs/predicate/ime_i_prezime> ?o";
+        if(conditions.isEmpty()) {
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime_i_prezime> ?o");
+        }
+
+        HashSet<String> results = new HashSet<>();
+
+        for(String condition : conditions) {
+            HashSet<String> result = metadataExtractor.filterFromRdf("/zeleni-sertifikat", condition);
+            if(poklapanje) {
+                if(conditions.indexOf(condition) == 0) {
+                    results.addAll(result);
+                }
+                else {
+                    results.retainAll(result);
+                }
+            } else {
+                results.addAll(result);
+            }
         }
 
         StringBuilder str = new StringBuilder();
-        str.append("<listaSertifikata>");
+        str.append("<listaSertifikata>\n");
 
-        for(String s : metadataExtractor.filterFromRdf("/zeleni-sertifikat", condition)) {
+        for(String s : results) {
             String id = s.split("/")[4];
 
             dataAccessLayer.getDocument(folderId, id);
-//            str.append("<saglasnost>");
-            str.append(dataAccessLayer.getDocument(folderId, id).get());
-//            str.append("<id>").append(id).append("</id>");
-//            str.append("</saglasnost>");
+//            str.append(dataAccessLayer.getDocument(folderId, id).get());
+
+            ZeleniSertifikat sertifikat = convertToObject(dataAccessLayer.getDocument(folderId, id).get());
+            str.append("<sertifikat>\n");
+
+            str.append("<sifraSertifikata>");
+            str.append(sertifikat.getBrojSertifikata().getValue());
+            str.append("</sifraSertifikata>\n");
+
+            str.append("<linkedDocNamespace>");
+            str.append(sertifikat.getHref().split("/")[3]);
+            str.append("</linkedDocNamespace>\n");
+
+            str.append("<linkedDocName>");
+            str.append(sertifikat.getHref().split("/")[4]);
+            str.append("</linkedDocName>\n");
+            str.append("</sertifikat>\n");
+
         }
 
-        str.append(("</listaSertifikata>"));
+        str.append(("</listaSertifikata>\n"));
 
         return str.toString();
     }

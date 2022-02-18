@@ -1,0 +1,106 @@
+<div>
+    <span class="p-input-icon-left center search">
+        <i class="pi pi-search"></i>
+        <input [(ngModel)]="search" type="text" pInputText class="search-field" />
+        <button (click)="basicSearch()" [disabled]="disableBasicSearch" pButton type="button">Search</button>
+    </span>
+</div>
+<div class="center advanced-search">
+    <span class="p-float-label search">
+        <input [(ngModel)]="ime" id="float-input" class="param-field" type="text" pInputText> 
+        <label for="float-input">Ime</label>
+    </span>
+    <span class="p-float-label search">
+        <input [(ngModel)]="prezime" id="float-input" class="param-field" type="text" pInputText> 
+        <label for="float-input">Prezime</label>
+    </span>
+    <span class="p-float-label search">
+        <input [(ngModel)]="ustanova" id="float-input" class="param-field" type="text" pInputText> 
+        <label for="float-input">Ustanova</label>
+    </span>
+    <div class="field search calendar">
+        <p-calendar [(ngModel)]="datum" [showIcon]="true" inputId="icon" dateFormat="yy-mm-dd"></p-calendar>
+    </div>
+</div>
+<div class="center advanced-search">
+    <button [disabled]="disableAdvancedSearch" (click)="advancedSearch()" pButton type="button" class="advanced-search-button">Advanced Search</button>
+    <p-toggleButton [(ngModel)]="includeAll" onLabel="All relevant for each doc" offLabel="Any relevant" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width': '15rem'}"></p-toggleButton>
+</div>
+
+<h2 *ngIf="saglasnosti !== null">Saglasnosti za vakcinaciju</h2>
+<p-table *ngIf="saglasnosti !== null" [columns]="cols" [value]="saglasnosti" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let saglasnost of saglasnosti">
+                {{saglasnost.saglasnost[0].sifraSaglasnosti[0]}}
+            </td>
+            <td *ngFor="let saglasnost of saglasnosti">
+                {{parseSaglasnost(saglasnost.saglasnost[0])}}
+            </td>
+            <td *ngFor="let saglasnost of saglasnosti">
+                <button (click)="getSaglasnostPdf(saglasnost.saglasnost[0].sifraSaglasnosti)" pButton pRipple type="button" label="PDF" class="p-button-danger" style="margin-right: 0.5rem;"></button>
+                <button (click)="getSaglasnostHtml(saglasnost.saglasnost[0].sifraSaglasnosti)" pButton pRipple type="button" label="HTML" class="p-button-info"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+    
+<h2 *ngIf="potvrde !== null">Potvrde o vakcinaciji</h2>
+<p-table *ngIf="potvrde !== null" [columns]="cols" [value]="potvrde" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let potvrda of potvrde">
+                {{potvrda.potvrda[0].sifraPotvrde[0]}}
+            </td>
+            <td *ngFor="let potvrda of potvrde">
+                {{parsePotvrda(potvrda.potvrda[0])}}
+            </td>
+            <td *ngFor="let potvrda of potvrde">
+                <button pButton pRipple (click)="getPotvrdaPdf(potvrda.potvrda[0].sifraPotvrde)" type="button" label="PDF" class="p-button-danger" style="margin-right: 0.5rem;"></button>
+                <button pButton pRipple (click)="getPotvrdaHtml(potvrda.potvrda[0].sifraPotvrde)" type="button" label="HTML" class="p-button-info"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>
+
+<h2 *ngIf="sertifikati !== null">Zeleni sertifikati</h2>
+<p-table *ngIf="sertifikati !== null" [columns]="cols" [value]="sertifikati" responsiveLayout="scroll">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let sertifikat of sertifikati">
+                {{sertifikat.sertifikat[0].sifraSertifikata[0]}}
+            </td>
+            <td *ngFor="let sertifikat of sertifikati">
+                {{parseSertifikat(sertifikat.sertifikat[0])}}
+            </td>
+            <td *ngFor="let sertifikat of sertifikati">
+                <button pButton pRipple (click)="getSertifikatPdf(sertifikat.sertifikat[0].sifraSertifikata)" type="button" label="PDF" class="p-button-danger" style="margin-right: 0.5rem;"></button>
+                <button pButton pRipple (click)="getSertifikatHtml(sertifikat.sertifikat[0].sifraSertifikata)" type="button" label="HTML" class="p-button-info"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>

@@ -99,7 +99,8 @@ public class PotvrdaController {
     public ResponseEntity<String> getPotvrdaAdvanced(@RequestParam(required = false) String ime,
                                                      @RequestParam(required = false) String prezime,
                                                      @RequestParam(required = false) String ustanova,
-                                                     @RequestParam(required = false) String datum) {
-        return ResponseEntity.ok(potvrdaService.getPotvrdaAdvanced(ime, prezime, ustanova, datum));
+                                                     @RequestParam(required = false) String datum,
+                                                     @RequestParam(required = false) boolean poklapanje) throws FileNotFoundException, TransformerException {
+        return ResponseEntity.ok(potvrdaService.getPotvrdaAdvanced(ime, prezime, ustanova, datum, poklapanje));
     }
 }
