@@ -50,6 +50,28 @@ export class ReportComponent implements OnInit {
     return this.isMade;
   }
 
+  displayPdf(): void {
+    this.reportService.getPdf(this.fileName).subscribe(res => {
+      var file = new Blob([res], {type: 'application/pdf'});
+      var fileURL = URL.createObjectURL(file);
+      window.open(fileURL);
+    }, err =>{
+      this.messageService.add({key:'tc', severity:'error', summary:'Neispravna datoteka', detail:`Zahtev sa sifrom  nije moguce procitati`});
+    })
+  }
+
+  displayHtml(): void {
+    window.open("api/izvestaji/html/"+this.fileName);
+    // this.reportService.getPdf(this.fileName).subscribe(res => {
+    //   var file = new Blob([res], {type: 'application/html'});
+    //   var fileURL = URL.createObjectURL(file);
+    //   window.open("api/izvestaji/html/"+this.fileName);
+    // }, err =>{
+    //   this.messageService.add({key:'tc', severity:'error', summary:'Neispravna datoteka', detail:`Zahtev sa sifrom  nije moguce procitati`});
+    // })
+  }
+
+
   onSave(): void {
     console.log(this.izvestaj);
     if(this.df === null || this.dt === null) {

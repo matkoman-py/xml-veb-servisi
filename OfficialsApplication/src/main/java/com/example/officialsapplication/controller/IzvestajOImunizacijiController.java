@@ -95,4 +95,21 @@ public class IzvestajOImunizacijiController {
         return new ResponseEntity<byte[]>(IOUtils.toByteArray(bi), headers, HttpStatus.OK);
     }
     
+    @GetMapping("html/{id}")
+    public ResponseEntity<byte[]> test1(@PathVariable String id) throws Exception {
+    	ByteArrayInputStream bi = izvestajService.getHtml(id);
+    		
+    	HttpHeaders headers = new HttpHeaders();
+
+        headers.setContentType(MediaType.parseMediaType("application/html"));
+        String filename = "izvestaj.html";
+
+        headers.add("Content-Disposition", "inline; filename=" + "example.html");
+
+        headers.setContentDispositionFormData(filename, filename);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        
+        return new ResponseEntity<byte[]>(IOUtils.toByteArray(bi), headers, HttpStatus.OK);
+    }
+    
 }

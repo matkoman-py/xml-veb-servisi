@@ -15,5 +15,8 @@ export class ReportService {
 
     return this.http.get('/api/izvestaji/test/'+dateFrom+'/'+dateTo, {responseType: 'text'});
   }
+  getPdf(id: string) {
+    return this.http.get('api/izvestaji/pdf/'+id, {responseType: 'arraybuffer'});
+  }
 
 }
