@@ -72,6 +72,11 @@ export class NavbarComponent implements OnInit {
           icon: 'pi pi-fw pi-sign-in',
           routerLink: '/login',
         },
+        {
+          label: 'Registracija',
+          icon: 'pi pi-fw pi-user',
+          routerLink: '/registracija',
+        },
       ];
     } else {
       this.items = [
@@ -79,38 +84,37 @@ export class NavbarComponent implements OnInit {
           label: 'Documents',
           icon: 'pi pi-fw pi-home',
           routerLink: '/user-documents',
-          visible: this.role === 'gradjanin'
+          visible: this.role === 'gradjanin',
         },
         {
           label: 'Send request',
           icon: 'pi pi-fw pi-send',
           routerLink: '/send-request',
-          visible: this.role === 'gradjanin'
+          visible: this.role === 'gradjanin',
         },
         {
           label: 'Iskazi interesovanje',
           icon: 'pi pi-fw pi-exclamation-triangle',
           routerLink: '/interesovanje',
-          visible: this.role === 'gradjanin'
+          visible: this.role === 'gradjanin',
         },
         {
           label: 'Iskazi saglasnost',
           icon: 'pi pi-fw pi-file-o',
           routerLink: '/saglasnost',
-          visible: this.role === 'gradjanin'
-
+          visible: this.role === 'gradjanin',
         },
         {
           label: 'Evidencija vakcinacije',
           icon: 'pi pi-fw pi-home',
           routerLink: '/evidencija-vakcinacije',
-          visible: this.role === 'zdravstveni_radnik'
+          visible: this.role === 'zdravstveni_radnik',
         },
         {
           label: 'Logout',
           icon: 'pi pi-fw pi-sign-out',
           routerLink: '/logout',
-        }
+        },
       ];
     }
   };
@@ -121,6 +125,11 @@ export class NavbarComponent implements OnInit {
         label: 'Login',
         icon: 'pi pi-fw pi-sign-in',
         routerLink: '/login',
+      },
+      {
+        label: 'Registracija',
+        icon: 'pi pi-fw pi-user',
+        routerLink: '/registracija',
       },
     ];
   };

@@ -8,6 +8,7 @@ import { UserDocumentsComponent } from '../user-documents/user-documents.compone
 import { InteresovanjeComponent } from '../interesovanje/interesovanje.component';
 import { SaglasnostComponent } from '../saglasnost/saglasnost.component';
 import { AuthGuard } from './auth.guard';
+import { RegistracijaComponent } from 'app/registracija/registracija.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,10 @@ export const routes: Routes = [
     data: {
       expectedRoles: ['gradjanin'],
     },
+  },
+  {
+    path: 'registracija',
+    component: RegistracijaComponent,
   },
   {
     path: 'login',
