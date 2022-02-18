@@ -30,6 +30,7 @@ import { SaglasnostComponent } from './saglasnost/saglasnost.component';
 import { CalendarModule } from 'primeng/calendar';
 import { EvidencijaVakcinacijeComponent } from './evidencija-vakcinacije/evidencija-vakcinacije.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { RegistracijaComponent } from './registracija/registracija.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     UserDocumentsComponent,
     SendRequestComponent,
     LoginComponent,
+    RegistracijaComponent,
   ],
   imports: [
     CalendarModule,
