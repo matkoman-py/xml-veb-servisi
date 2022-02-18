@@ -1,17 +1,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/cec7c2d3-0691-462b-b529-0e1934fbc8a0">
-    <pred:answerTo xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:resource="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/696969696969696-2022-02-17-11-54-43"/>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/2206999810092-2022-02-18-15-25-28">
+    <pred:ime_i_prezime xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">Marko markovic</pred:ime_i_prezime>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/cec7c2d3-0691-462b-b529-0e1934fbc8a0">
-    <pred:broj_sertifikata xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">cec7c2d3-0691-462b-b529-0e1934fbc8a0</pred:broj_sertifikata>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/2206999810092-2022-02-18-15-25-28">
+    <pred:jmbg xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">2206999810092</pred:jmbg>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/cec7c2d3-0691-462b-b529-0e1934fbc8a0">
-    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="dateTime">2022-02-17T20:31:05</pred:datum>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/2206999810092-2022-02-18-15-25-28">
+    <pred:broj_pasosa xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">dsadsad</pred:broj_pasosa>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/cec7c2d3-0691-462b-b529-0e1934fbc8a0">
-    <pred:ime_i_prezime xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">Petar Markovic</pred:ime_i_prezime>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/cec7c2d3-0691-462b-b529-0e1934fbc8a0">
-    <pred:jmbg xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">696969696969696</pred:jmbg>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/2206999810092-2022-02-18-15-25-28">
+    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="date">2022-02-18</pred:datum>
   </rdf:Description>
 </rdf:RDF>

@@ -111,7 +111,7 @@ public class KorisnikService {
 		if(interesovanjeService.getInteresovanje(id) != "") results.add(interesovanjeService.getInteresovanje(id));
 		if(potvrdaService.getPotvrdaString(id) != "") results.add(potvrdaService.getPotvrdaString(id));
 		if(saglasnostService.getSaglasnost(id) != "") results.add(saglasnostService.getSaglasnost(id));
-		if(zahtevService.getZahtevString(id) != "") results.add(zahtevService.getZahtevString(id));
+		if(zahtevService.getZahtevString(id) != null) results.addAll(zahtevService.getZahtevString(id));
 		if(zeleniSertifikatService.getZeleniSertifikat(id) != "") results.add(zeleniSertifikatService.getZeleniSertifikat(id));
 
 		return results;
@@ -131,7 +131,7 @@ public class KorisnikService {
 		if(docType.equals("interesovanje")) return htmlTransformerService.generateHTML(interesovanjeService.getForUser(jmbg), "data/xslt/interesovanje.xsl");
 		else if(docType.equals("potvrda")) return htmlTransformerService.generateHTML(potvrdaService.getForUser(jmbg), "data/xslt/potvrda.xsl");
 		else if(docType.equals("saglasnost")) return htmlTransformerService.generateHTML(saglasnostService.getForUser(jmbg), "data/xslt/saglasnost.xsl");
-		else if(docType.equals("zahtev")) return htmlTransformerService.generateHTML(zahtevService.getForUser(jmbg), "data/xslt/zahtev.xsl");
+		else if(docType.startsWith("zahtev")) return htmlTransformerService.generateHTML(zahtevService.getForUser(jmbg), "data/xslt/zahtev.xsl");
 		else if(docType.equals("zeleni")) return htmlTransformerService.generateHTML(zeleniSertifikatService.getForUser(jmbg), "data/xslt/zeleni.xsl");
 		
 		return null;

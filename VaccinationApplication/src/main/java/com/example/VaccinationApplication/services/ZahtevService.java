@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.xml.transform.TransformerException;
 import org.springframework.stereotype.Service;
@@ -128,7 +129,7 @@ public class ZahtevService {
     
 public String getForUser(String id) throws Exception {
     	
-    	String xPath = "//zahtev[Podnosilac_zahteva/Jedinstveni_maticni_broj_gradjana = '"+id+"']";
+    	String xPath = "//zahtev[@about='http://www.ftn..uns.ac.rs/zahtev_zelenog_sertifikata/"+id+"']";
     	System.out.println(xPath);
     	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
         List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zahtevi", xPath, "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata");
@@ -164,7 +165,7 @@ public String getForUser(String id) throws Exception {
         return rezultat.size();
     }
     
-    public String getZahtevString(String id) throws Exception {
+    public List<String> getZahtevString(String id) throws Exception {
     	
     	String xPath = "//zahtev[Podnosilac_zahteva/Jedinstveni_maticni_broj_gradjana = '"+id+"']";
     	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
@@ -172,8 +173,8 @@ public String getForUser(String id) throws Exception {
         for (String string : rezultat) {
         	zahtevi.add(convertToObject(string));
         }
-        if(zahtevi.size() == 0) return "";
-        return "Zahtev";
+        if(zahtevi.size() == 0) return null;
+        return (List<String>) zahtevi.stream().map(z -> "Zahtev " + z.getAbout().split("/")[4]).collect(Collectors.toList());
     }
     public Zahtev getZahtev(String id) throws Exception {
     	

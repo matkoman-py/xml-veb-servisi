@@ -98,16 +98,16 @@ export class SendRequestComponent implements OnInit {
     console.log(startingIndices.length);
     let richText: string = this.text.split("<br>").join("<br></br>").toString();
 
-    let xml = `<zzs:zahtev xmlns:zzs="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata" xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" about="">
+    let xml = `<zzs:zahtev xmlns:zzs="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata" xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" about="" accepted="waiting">
     <zzs:Podnosilac_zahteva>
         <zzs:Ime_i_prezime property="pred:ime_i_prezime" datatype="xs:string">${this.ime_i_prezime}</zzs:Ime_i_prezime>
         <zzs:Datum_rodjenja>${day}</zzs:Datum_rodjenja>
         <zzs:Pol>${this.pol.name}</zzs:Pol>
-        <zzs:Jedinstveni_maticni_broj_gradjana property="pred:jmbg" datatype="xs:string">313131313131</zzs:Jedinstveni_maticni_broj_gradjana>
+        <zzs:Jedinstveni_maticni_broj_gradjana property="pred:jmbg" datatype="xs:string">2206999810092</zzs:Jedinstveni_maticni_broj_gradjana>
         <zzs:Broj_pasosa property="pred:broj_pasosa" datatype="xs:string">${this.broj_pasosa}</zzs:Broj_pasosa>
     </zzs:Podnosilac_zahteva>
     <zzs:Informacije_o_zahtevu>
-        <zzs:Razlog>aefasfa</zzs:Razlog>
+        <zzs:Razlog>POPUNI</zzs:Razlog>
         <zzs:Mesto>${this.mesto}</zzs:Mesto>
         <zzs:Datum_izdavanja property="pred:datum" datatype="xs:date">${datum_izdavanja}</zzs:Datum_izdavanja>
     </zzs:Informacije_o_zahtevu>

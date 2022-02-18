@@ -82,7 +82,7 @@ export class UserDocumentsComponent implements OnInit {
     if(docName === 'Interesovanje') return 'interesovanje';
     if(docName === 'Potvrda') return 'potvrda';
     if(docName === 'Saglasnost') return 'saglasnost';
-    if(docName === 'Zahtev') return 'zahtev';
+    if(docName.startsWith('Zahtev')) return 'zahtev';
     if(docName === 'Zeleni sertifikat') return 'zeleni';
     return '';
   }
