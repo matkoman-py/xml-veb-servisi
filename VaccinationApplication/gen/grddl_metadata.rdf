@@ -1,1 +1,17 @@
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml"/>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/fb49e2da-b41a-4a9b-a5df-c0f9f6400ab1">
+    <pred:answerTo xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:resource="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/313131313131-2022-02-18-15-19-25"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/fb49e2da-b41a-4a9b-a5df-c0f9f6400ab1">
+    <pred:broj_sertifikata xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">fb49e2da-b41a-4a9b-a5df-c0f9f6400ab1</pred:broj_sertifikata>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/fb49e2da-b41a-4a9b-a5df-c0f9f6400ab1">
+    <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="dateTime">2022-02-18T18:52:36</pred:datum>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/fb49e2da-b41a-4a9b-a5df-c0f9f6400ab1">
+    <pred:ime_i_prezime xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">Petar Markovic</pred:ime_i_prezime>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zelenisertifikat/fb49e2da-b41a-4a9b-a5df-c0f9f6400ab1">
+    <pred:jmbg xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">313131313131</pred:jmbg>
+  </rdf:Description>
+</rdf:RDF>

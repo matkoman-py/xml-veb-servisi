@@ -325,10 +325,12 @@ public class ZeleniSertifikatService {
   			drugaDoza.setProizvodjacSerija(potvrdaData.getVakcinacijaInfo().getDrugaDoza().getSerijaVakcine());
   			drugaDoza.setZdravstvenaUstanova(potvrdaData.getVakcinacijaInfo().getZdravstvenaUstanova().getValue());
   			drugaDoza.setTip(potvrdaData.getVakcinacijaInfo().getNazivVakcine().getValue());
+  		} else {
+  			throw new EntityNotFoundException("Nije moguce izdati sertifikat posto pacijent nema obe doze");
   		}
-
+  		
   		zs.getPodaciOVakcinaciji().add(prvaDoza);
-  		zs.getPodaciOVakcinaciji().add(drugaDoza);
+  	  	zs.getPodaciOVakcinaciji().add(drugaDoza);
 
   		
   		QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -343,6 +345,7 @@ public class ZeleniSertifikatService {
   		String res = convertToXml(zs);
   		ByteArrayInputStream is = pdfGeneratorService.generatePDF(convertToXml(zs), "data/xsl-fo/zeleni_fo.xsl");
   		ByteArrayInputStream is1 =  htmlGeneratorService.generateHTML(convertToXml(zs), "data/xslt/zelenisertifikat.xsl");
+  		System.out.println(convertToXml(zs));
 		mailSenderService.odobrenZeleni2(pacijentData, IOUtils.toByteArray(is), IOUtils.toByteArray(is1));
 
 		ResponseEntity<ZeleniSertifikat> response = restTemplate.postForEntity("http://localhost:8087/api/zelenisertifikati/saveXmlText", convertToXml(zs), ZeleniSertifikat.class);
