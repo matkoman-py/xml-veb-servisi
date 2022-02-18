@@ -85,16 +85,6 @@
                         </fo:inline>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="7px">
-                        <fo:inline>
-                            Odaberite lokaciju gde zelite da primite vakcinu (unesite opstinu):
-                        </fo:inline> 
-                    </fo:block>
-                    <fo:block font-family="sans-serif" font-size="1em" padding="7px">
-                        <fo:inline border-bottom-style="dotted">
-                            OVDE FALI!
-                        </fo:inline>
-                    </fo:block>
-                    <fo:block font-family="sans-serif" font-size="1em" padding="7px">
                         Iskazujem interesovanje da primim iskljucivo vakcinu sledecih proizvodjaca za koji Agencija za lekove i medicinska sredstva potvrdi bezbednost, efikasnost i kvalitet i izda dozvolu za upotrebu leka:
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="7px" text-indent="24mm">

@@ -45,7 +45,11 @@ export class EvidencijaVakcinacijeService {
     punkt: string,
     kontraindikacije: string,
     odluka: string,
-    ustanova: string
+    ustanova: string,
+    proizvodjac: string,
+    serija: string,
+    ekstremitet: string,
+    nezeljenaReakcija: string
   ): Observable<String> {
     var today = new Date();
     var todayFormatiran = this.formatirajDatum(today);
@@ -108,18 +112,18 @@ export class EvidencijaVakcinacijeService {
             ? `<sag:Vakcinacija>
             <sag:Naziv_vakcine property="pred:naziv_vakcine" datatype="xs:string">${saglasnost.vakcina}</sag:Naziv_vakcine>
             <sag:Datum_vakcinacije>${todayFormatiran}</sag:Datum_vakcinacije>
-            <sag:Ekstremitet>lr</sag:Ekstremitet>
-            <sag:Lot>Lot0</sag:Lot>
-            <sag:Proizvodjac>Proizvodjac0</sag:Proizvodjac>
-            <sag:Nezeljena_reakcija>Nezeljena_reakcija0</sag:Nezeljena_reakcija>
+            <sag:Ekstremitet>${ekstremitet}</sag:Ekstremitet>
+            <sag:Lot>${serija}</sag:Lot>
+            <sag:Proizvodjac>${proizvodjac}</sag:Proizvodjac>
+            <sag:Nezeljena_reakcija>${nezeljenaReakcija}</sag:Nezeljena_reakcija>
         </sag:Vakcinacija>`
             : `<sag:Revakcinacija>
             <sag:Naziv_vakcine property="pred:naziv_vakcine" datatype="xs:string">${saglasnost.vakcina}</sag:Naziv_vakcine>
             <sag:Datum_vakcinacije>${todayFormatiran}</sag:Datum_vakcinacije>
-            <sag:Ekstremitet>lr</sag:Ekstremitet>
-            <sag:Lot>Lot1</sag:Lot>
-            <sag:Proizvodjac>Proizvodjac1</sag:Proizvodjac>
-            <sag:Nezeljena_reakcija>Nezeljena_reakcija1</sag:Nezeljena_reakcija>
+            <sag:Ekstremitet>${ekstremitet}</sag:Ekstremitet>
+            <sag:Lot>${serija}</sag:Lot>
+            <sag:Proizvodjac>${proizvodjac}</sag:Proizvodjac>
+            <sag:Nezeljena_reakcija>${nezeljenaReakcija}</sag:Nezeljena_reakcija>
         </sag:Revakcinacija>`
         }
         

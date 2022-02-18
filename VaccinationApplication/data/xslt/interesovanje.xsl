@@ -79,10 +79,6 @@
                 <p><u><xsl:value-of select="i:interesovanje/i:Podaci_o_primaocu/i:Kontakt/i:Broj_fiksnog_telefona"/></u></p>
                 <br></br>
 
-                <p>Odaberite lokaciju gde zelite da primite vakcinu (unesite opstinu):</p>
-                <p><u>OVDE FALI!!!!!!!!!!</u></p>
-                <br></br>
-                
                 <p>Iskazujem interesovanje da primim iskljucivo vakcinu sledecih proizvodjaca za
                     koji Agencija za lekove i medicinska sredstva potvrdi bezbednost, efikasnost i
                     kvalitet i izda dozvolu za upotrebu leka: 

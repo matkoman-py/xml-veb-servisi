@@ -5,11 +5,11 @@
       <input
         id="float-username"
         type="text"
-        class="p-invalid login-input"
+        class="p-invalid"
         [(ngModel)]="username"
         pInputText
       />
-      <label for="float-username">Username</label>
+      <label for="float-username" class="login-input">Username</label>
     </span>
 
     <span class="p-float-label">
@@ -19,7 +19,7 @@
         [feedback]="false"
         [(ngModel)]="password"
       ></p-password>
-      <label for="float-password">Password</label>
+      <label for="float-password" class="login-input">Password</label>
     </span>
 
     <div

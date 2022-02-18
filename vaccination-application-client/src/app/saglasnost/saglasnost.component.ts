@@ -32,9 +32,14 @@ export class SaglasnostComponent implements OnInit {
     vakcina: undefined,
   };
   checked = false;
+  izabranaDoza: SelectType = { name: '', value: '' };
   polovi: SelectType[] = [
     { name: 'muski', value: 'muski' },
     { name: 'zenski', value: 'zenski' },
+  ];
+  doze: SelectType[] = [
+    { name: 'prva', value: 'prva' },
+    { name: 'druga', value: 'druga' },
   ];
   vakcine: SelectType[] = [
     { name: 'SputnikV', value: 'SputnikV' },
@@ -74,6 +79,16 @@ export class SaglasnostComponent implements OnInit {
       this.saglasnost.sedisteSocZastite = 'nema';
     }
 
+    if (this.izabranaDoza.value === '') {
+      this.messageService.add({
+        key: 'tc',
+        severity: 'error',
+        summary: 'Error',
+        detail: `Morate izabrati dozu!`,
+      });
+      return;
+    }
+
     for (const value of Object.values(this.saglasnost)) {
       if (value === undefined || value === '') {
         this.messageService.add({
@@ -86,22 +101,24 @@ export class SaglasnostComponent implements OnInit {
       }
     }
 
-    this.saglasnostService.postSaglasnost(this.saglasnost).subscribe(
-      (res) =>
-        this.messageService.add({
-          key: 'tc',
-          severity: 'success',
-          summary: 'Success',
-          detail: `Uspesno ste iskazali saglasnost!`,
-        }),
-      (err) => {
-        this.messageService.add({
-          key: 'tc',
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error,
-        });
-      }
-    );
+    this.saglasnostService
+      .postSaglasnost(this.saglasnost, this.izabranaDoza.value)
+      .subscribe(
+        (res) =>
+          this.messageService.add({
+            key: 'tc',
+            severity: 'success',
+            summary: 'Success',
+            detail: `Uspesno ste iskazali saglasnost!`,
+          }),
+        (err) => {
+          this.messageService.add({
+            key: 'tc',
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error,
+          });
+        }
+      );
   }
 }

@@ -45,6 +45,10 @@ export class EvidencijaVakcinacijeComponent implements OnInit {
   lekar: string = '';
   kontraindikacije: string = '';
   odluka: string = '';
+  proizvodjac: string = '';
+  serija: string = '';
+  ekstremitet: string = '';
+  nezeljenaReakcija: string = '';
 
   constructor(
     private messageService: MessageService,
@@ -150,6 +154,10 @@ export class EvidencijaVakcinacijeComponent implements OnInit {
         this.lekar = '';
         this.odluka = '';
         this.kontraindikacije = '';
+        this.proizvodjac = '';
+        this.serija = '';
+        this.ekstremitet = '';
+        this.nezeljenaReakcija = '';
       },
       (err) => {
         this.messageService.add({
@@ -167,13 +175,16 @@ export class EvidencijaVakcinacijeComponent implements OnInit {
       this.doza === '' ||
       this.punkt === '' ||
       this.lekar === '' ||
-      this.ustanova === ''
+      this.ustanova === '' ||
+      this.proizvodjac === '' ||
+      this.ekstremitet === '' ||
+      this.serija === ''
     ) {
       this.messageService.add({
         key: 'tc',
         severity: 'error',
         summary: 'Error',
-        detail: `Morate popuniti obavezna polja! (Lekar, Ustanova, Punkt, Vakcina, Doza)`,
+        detail: `Morate popuniti obavezna polja! (Lekar, Ustanova, Punkt, Vakcina, Doza, Serija, Proizvodjac, Ekstremitet)`,
       });
       return;
     }
@@ -187,7 +198,11 @@ export class EvidencijaVakcinacijeComponent implements OnInit {
         this.punkt,
         this.kontraindikacije,
         this.odluka,
-        this.ustanova
+        this.ustanova,
+        this.proizvodjac,
+        this.serija,
+        this.ekstremitet,
+        this.nezeljenaReakcija
       )
       .subscribe(
         (res) => {

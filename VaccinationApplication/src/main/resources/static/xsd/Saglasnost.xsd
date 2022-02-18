@@ -132,14 +132,7 @@
         <xs:sequence>
             <xs:element name="Naziv_vakcine" type="sag:TNazivVakcine"/>
             <xs:element name="Datum_vakcinacije" type="xs:date"/>
-            <xs:element name="Ekstremitet">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="lr"/>
-                        <xs:enumeration value="dr"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="Ekstremitet" type="xs:string"> </xs:element>
             <xs:element name="Lot" type="xs:string"/>
             <xs:element name="Proizvodjac" type="xs:string"/>
             <xs:element name="Nezeljena_reakcija" type="xs:string" nillable="true"/>

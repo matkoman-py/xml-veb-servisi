@@ -132,7 +132,7 @@ public class KorisnikService {
 		
 		if(interesovanjeService.getInteresovanje(id) != "") results.add(interesovanjeService.getInteresovanje(id));
 		if(potvrdaService.getPotvrdaString(id) != "") results.add(potvrdaService.getPotvrdaString(id));
-		if(saglasnostService.getSaglasnost(id) != "") results.add(saglasnostService.getSaglasnost(id));
+		if(saglasnostService.getSaglasnost(id) != null) results.addAll(saglasnostService.getSaglasnost(id));
 		if(zahtevService.getZahtevString(id) != null) results.addAll(zahtevService.getZahtevString(id));
 		if(zeleniSertifikatService.getZeleniSertifikat(id) != "") results.add(zeleniSertifikatService.getZeleniSertifikat(id));
 

@@ -7,7 +7,8 @@
       <label>Ime: </label>
       <input
         type="text"
-        pInputText disabled
+        pInputText
+        disabled
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.ime"
       />
@@ -17,7 +18,8 @@
       <label>Prezime: </label>
       <input
         type="text"
-        pInputText disabled
+        pInputText
+        disabled
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.prezime"
       />
@@ -28,7 +30,8 @@
       <label>Ime roditelja: </label>
       <input
         type="text"
-        pInputText disabled
+        pInputText
+        disabled
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.imeRoditelja"
       />
@@ -39,7 +42,8 @@
       <label>JMBG: </label>
       <input
         type="text"
-        pInputText disabled
+        pInputText
+        disabled
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.jmbg"
       />
@@ -50,7 +54,8 @@
       <label>Pol: </label>
       <input
         type="text"
-        pInputText disabled
+        pInputText
+        disabled
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.pol"
       />
@@ -61,7 +66,8 @@
       <label>Datum rodjenja: </label>
       <input
         type="text"
-        pInputText disabled
+        pInputText
+        disabled
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.datumRodjenja"
       />
@@ -72,7 +78,8 @@
       <label>Mesto rodjenja: </label>
       <input
         type="text"
-        pInputText disabled
+        pInputText
+        disabled
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.mestoRodjenja"
       />
@@ -83,7 +90,8 @@
       <label>Ulica i broj: </label>
       <input
         type="text"
-        pInputText disabled
+        pInputText
+        disabled
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.ulicaIBroj"
       />
@@ -94,7 +102,8 @@
       <label>Mesto zivota: </label>
       <input
         type="text"
-        pInputText disabled
+        pInputText
+        disabled
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.mestoZivota"
       />
@@ -107,7 +116,8 @@
       <label>Opstina: </label>
       <input
         type="text"
-        pInputText disabled
+        pInputText
+        disabled
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.opstina"
       />
@@ -118,7 +128,8 @@
       <label>E-mail: </label>
       <input
         type="text"
-        pInputText disabled
+        pInputText
+        disabled
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.email"
       />
@@ -129,7 +140,8 @@
       <label>Fiksni telefon: </label>
       <input
         type="text"
-        pInputText disabled
+        pInputText
+        disabled
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.fiksni"
       />
@@ -140,7 +152,8 @@
       <label>Mobilni telefon: </label>
       <input
         type="text"
-        pInputText disabled
+        pInputText
+        disabled
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.mobilni"
       />
@@ -185,7 +198,7 @@
       <label>Naziv sedista: </label>
       <input
         type="text"
-        pInputText 
+        pInputText
         class="p-inputtext-sm"
         [(ngModel)]="saglasnost.sedisteSocZastite"
       />
@@ -203,6 +216,16 @@
       ></p-dropdown>
     </div>
     <br />
+    <div class="p-field">
+      <label>Doza: </label>
+      <p-dropdown
+        [options]="doze"
+        optionLabel="name"
+        placeholder="Doza"
+        id="type-input"
+        [(ngModel)]="izabranaDoza"
+      ></p-dropdown>
+    </div>
   </div>
 </div>
 <div class="buttonFlex">

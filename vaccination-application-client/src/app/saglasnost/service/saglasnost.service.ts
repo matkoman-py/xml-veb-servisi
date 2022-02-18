@@ -24,7 +24,7 @@ export class SaglasnostService {
     var date = datum.getFullYear() + '-' + monthString + '-' + dayString;
     return date;
   }
-  postSaglasnost(saglasnost: SaglasnostDTO): Observable<String> {
+  postSaglasnost(saglasnost: SaglasnostDTO, doza: string): Observable<String> {
     var today = new Date();
     var todayFormatiran = this.formatirajDatum(today);
     //var datumRodjenjaFormatiran = this.formatirajDatum(
@@ -34,7 +34,7 @@ export class SaglasnostService {
 <sag:Saglasnost xmlns:sag="http://www.ftn.uns.ac.rs/Saglasnost"
  xmlns:pred="http://www.ftn.uns.ac.rs/predicate"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.ftn.uns.ac.rs/Saglasnost file:/D:/Faks/CetvrtaDina/XMLVebServisi/xml-veb-servisi/VaccinationApplication/src/main/resources/static/xsd/Saglasnost.xsd" about="http://www.ftn.uns.ac.rs/Saglasnost/${saglasnost.jmbg}-prva-doza" rel="pred:fromInteresovanje"
+ xsi:schemaLocation="http://www.ftn.uns.ac.rs/Saglasnost file:/D:/Faks/CetvrtaDina/XMLVebServisi/xml-veb-servisi/VaccinationApplication/src/main/resources/static/xsd/Saglasnost.xsd" about="http://www.ftn.uns.ac.rs/Saglasnost/${saglasnost.jmbg}-${doza}-doza" rel="pred:fromInteresovanje"
     href="http://www.ftn.uns.ac.rs/interesovanje/${saglasnost.jmbg}">
     <sag:Drzavljanstvo>
         <sag:JMBG>${saglasnost.jmbg}</sag:JMBG>
@@ -69,6 +69,6 @@ export class SaglasnostService {
         <sag:Datum property="pred:datum" datatype="xs:date">${todayFormatiran}</sag:Datum>
     </sag:Podaci_o_pacijentu>
 </sag:Saglasnost>`;
-    return this.http.post<String>('/api/saglasnost/saveXmlText', xml);
+    return this.http.post<String>(`/api/saglasnost/saveXmlText/${doza}`, xml);
   }
 }

@@ -85,9 +85,9 @@ public class SaglasnostController {
         return ResponseEntity.ok(saglasnostService.getSaglasnostAdvanced(ime, prezime, ustanova, datum, poklapanje));
     }
 
-    @PostMapping("saveXmlText")
-    public ResponseEntity<Saglasnost> saveXmlText(@RequestBody String saglasnostXml) throws Exception {
-        Saglasnost retval = saglasnostService.saveXmlFromText(saglasnostXml);
+    @PostMapping("saveXmlText/{doza}")
+    public ResponseEntity<Saglasnost> saveXmlText(@PathVariable String doza, @RequestBody String saglasnostXml) throws Exception {
+        Saglasnost retval = saglasnostService.saveXmlFromText(saglasnostXml, doza);
         return ResponseEntity.ok(retval);
     }
 

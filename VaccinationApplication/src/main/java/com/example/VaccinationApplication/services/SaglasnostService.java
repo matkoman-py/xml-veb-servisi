@@ -30,6 +30,7 @@ import org.springframework.stereotype.Service;
 
 import javax.xml.transform.TransformerException;
 import java.io.FileNotFoundException;
+import java.util.stream.Collectors;
 
 @Service
 public class SaglasnostService {
@@ -61,7 +62,7 @@ public class SaglasnostService {
         return (Saglasnost) mapper.convertToObject(xmlString, "Saglasnost", Saglasnost.class);
     }
 
-    public Saglasnost saveXmlFromText(String xmlString) throws Exception {
+    public Saglasnost saveXmlFromText(String xmlString, String dozaSaglasnosti) throws Exception {
 
         Saglasnost saglasnost = (Saglasnost) mapper.convertToObject(xmlString, "Saglasnost",
                 Saglasnost.class);
@@ -74,7 +75,37 @@ public class SaglasnostService {
             throw new TerminNePostojiException("Vakcina za koju ste izjavili saglasnost nije ista kao ona sa interesovanja!");
         }
 
-        String documentId = saglasnost.getDrzavljanstvo().getJMBG() + doza + ".xml";
+        if(dozaSaglasnosti.equals("druga")){
+            Optional<String> saglasnostPrvaString =
+                    dataAccessLayer.getDocument(folderId, saglasnost.getDrzavljanstvo().getJMBG() + "-prva-doza");
+            if (!saglasnostPrvaString.isPresent()) {
+                throw new SaglasnostNijeIskazanaException("Ne mozete iskazati saglasnost za drugu dozu pre prve doze!");
+            }
+            Saglasnost saglasnostPrva = convertToObject(saglasnostPrvaString.get());
+            if(saglasnostPrva.getEvidencijaOVakcinaciji() == null){
+                throw new SaglasnostNijeIskazanaException("Ne mozete iskazati saglasnost za drugu dozu pre primanja prve doze!");
+            }
+
+            Optional<String> saglasnostDrugaString =
+                    dataAccessLayer.getDocument(folderId, saglasnost.getDrzavljanstvo().getJMBG() + "-druga-doza");
+            if (saglasnostDrugaString.isPresent()) {
+                Saglasnost saglasnostDruga = convertToObject(saglasnostDrugaString.get());
+                if(saglasnostDruga.getEvidencijaOVakcinaciji() != null){
+                    throw new SaglasnostNijeIskazanaException("Vakcinisani ste sa obe doze! Molimo Vas da ne iskazujete vise saglasnosti!");
+                }
+            }
+        }else{
+            Optional<String> saglasnostPrvaString =
+                    dataAccessLayer.getDocument(folderId, saglasnost.getDrzavljanstvo().getJMBG() + "-prva-doza");
+            if (saglasnostPrvaString.isPresent()) {
+                Saglasnost saglasnostPrva = convertToObject(saglasnostPrvaString.get());
+                if(saglasnostPrva.getEvidencijaOVakcinaciji() != null){
+                    throw new SaglasnostNijeIskazanaException("Vec ste primili prvu dozu! Molimo Vas iskazite saglasnost za drugu dozu!");
+                }
+            }
+        }
+
+        String documentId = saglasnost.getDrzavljanstvo().getJMBG() +"-" +dozaSaglasnosti + "-doza" + ".xml";
 
         String interesovanjeId = saglasnost.getHref().split("/")[4];
         interesovanjeService.link(documentId, interesovanjeId);
@@ -136,17 +167,8 @@ public class SaglasnostService {
     }
 
     public String getForUser(String id) throws Exception {
-
-        String xPath = "//Saglasnost[Drzavljanstvo/JMBG = '" + id + "' or Drzavljanstvo/Broj_pasosa_EBS = '" + id + "']";
-        List<Saglasnost> saglasnosti = new ArrayList<Saglasnost>();
-        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/saglasnosti", xPath, "http://www.ftn.uns.ac.rs/Saglasnost");
-        for (String string : rezultat) {
-            return convertToXml(convertToObject(string));
-            //saglasnosti.add(convertToObject(string));
-        }
-        ListaSaglasnosti ls = new ListaSaglasnosti();
-        ls.setSaglasnost(saglasnosti);
-        return convertToXml(ls);
+        Optional<String> saglasnostString = dataAccessLayer.getDocument(folderId, id);
+        return saglasnostString.get();
     }
 
     public String getAllForDate(String dateFrom, String dateTo) throws Exception {
@@ -162,7 +184,7 @@ public class SaglasnostService {
         return convertToXml(ls);
     }
 
-    public String getSaglasnost(String id) throws Exception {
+    public List<String> getSaglasnost(String id) throws Exception {
 
         String xPath = "//Saglasnost[Drzavljanstvo/JMBG = '" + id + "' or Drzavljanstvo/Broj_pasosa_EBS = '" + id + "']";
         List<Saglasnost> saglasnosti = new ArrayList<Saglasnost>();
@@ -170,8 +192,8 @@ public class SaglasnostService {
         for (String string : rezultat) {
             saglasnosti.add(convertToObject(string));
         }
-        if (saglasnosti.size() == 0) return "";
-        return "Saglasnost";
+        if (saglasnosti.size() == 0) return null;
+        return saglasnosti.stream().map(z -> "Saglasnost " + z.getAbout().split("/")[4]).collect(Collectors.toList());
     }
 
     public String getSaglasnostZaEvidentiranje(String id) throws FileNotFoundException {
@@ -384,6 +406,18 @@ public class SaglasnostService {
             staraPotvrda.getVakcinacijaInfo().setDrugaDoza(drugaDoza);
             potvrdaService.saveXmlFromObject(staraPotvrda);
 
+            Optional<String> saglasnostPrvaString =
+                    dataAccessLayer.getDocument(folderId, saglasnost.getDrzavljanstvo().getJMBG() + "-prva-doza");
+            Saglasnost saglasnostPrva = convertToObject(saglasnostPrvaString.get());
+            com.example.VaccinationApplication.model.saglasnost.TVakcinacija prvaDoza = new com.example.VaccinationApplication.model.saglasnost.TVakcinacija();
+            prvaDoza.setEkstremitet(saglasnostPrva.getEvidencijaOVakcinaciji().getVakcinacija().getEkstremitet());
+            prvaDoza.setDatumVakcinacije(saglasnostPrva.getEvidencijaOVakcinaciji().getVakcinacija().getDatumVakcinacije());
+            prvaDoza.setNezeljenaReakcija(saglasnostPrva.getEvidencijaOVakcinaciji().getVakcinacija().getNezeljenaReakcija());
+            prvaDoza.setLot(saglasnostPrva.getEvidencijaOVakcinaciji().getVakcinacija().getLot());
+            prvaDoza.setProizvodjac(saglasnostPrva.getEvidencijaOVakcinaciji().getVakcinacija().getProizvodjac());
+            prvaDoza.setNazivVakcine(saglasnostPrva.getEvidencijaOVakcinaciji().getVakcinacija().getNazivVakcine());
+
+            saglasnost.getEvidencijaOVakcinaciji().setVakcinacija(prvaDoza);
         }
 
 

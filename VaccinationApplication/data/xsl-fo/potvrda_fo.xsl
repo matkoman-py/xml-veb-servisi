@@ -103,7 +103,9 @@
                     </fo:block>
                     <fo:block text-align-last="justify" font-weight="bold" font-size="10px">
                         <fo:leader leader-pattern="space" />
-                        <fo:external-graphic src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAGQAAABkAQAAAABYmaj5AAABNElEQVR4Xt3SMZKEIBAFUEjkCpLI1cZEr6DJCIleARK4GiaQbggJLFUyO/YUe4Eh8lld/bsVlG/nB32/OA40PRfEGjLxcPSM2TQkqX1SH0VbxmGl/pElblqbKglhFeqddxMvLZSSf3PelbMPQ3l+7XcX76mblmnaWho6LJ9jqj2BsmRpjI7VnkA+kcT2WbWk8bFj2dVKqJj1mIZ+uhKg8ukTPWx3TQbFyaGZpTUBSkXhz+iGqxIqG0kTGl1NADJKWWJ0/RJQ+3bK/oHPKwEqh9mhtbxsSPiAU7faKwFKolVvgteNoIybo7JrTYDSj9F1CyKmoWISsKm3B4rjI7BE62RQJnrZk1cllKT7A0fe1ak/JJlFE74m+5Rwm1Cu7gdkotGs/NC6HxDHotxIol9z3vU+X69f/0f3JOKplTAAAAAASUVORK5CYII=" width="100px" content-width="100px" content-height="100px" height="100px"/>
+                        <fo:external-graphic width="100px" height="100px" content-height="100px" content-width="100px">
+                            <xsl:attribute name="src"><xsl:value-of select="/pot:Potvrda/pot:Qr_kod[1]"/></xsl:attribute>
+                        </fo:external-graphic>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em">
                         Ova potvrda vazi bez potpisa i pecata

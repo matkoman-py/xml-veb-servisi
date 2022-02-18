@@ -113,7 +113,11 @@
                 
                 <p class="header"><b><xsl:value-of select="/pot:Potvrda/pot:Vakcinacija_info[1]/pot:Zdravstvena_ustanova[1]"/></b></p>
                 <p class="header small">Medical institution</p>
-                <p class="header"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png"></img></p>
+                <p style="text-align:right;"><img width="100" height="100">
+                    <xsl:attribute name="src">
+                        <xsl:value-of select="/pot:Potvrda/pot:Qr_kod[1]"/>
+                    </xsl:attribute>
+                </img></p>
                 <p class="form">Ova potvrda vazi bez potpisa i pecata</p>
                 <p class="small">This certificate is valid without signatures and seals</p>
             </body>

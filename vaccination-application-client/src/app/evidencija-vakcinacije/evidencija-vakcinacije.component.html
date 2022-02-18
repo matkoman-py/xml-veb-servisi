@@ -16,7 +16,7 @@
       <button
         pButton
         type="button"
-        label="Iskazite saglasnost"
+        label="Pretrazite saglasnosti"
         id="submit-search"
         (click)="pretraziSaglasnost()"
       ></button>
@@ -63,6 +63,46 @@
     <br />
     <div class="p-field">
       <label> Vakcina: {{ saglasnost.vakcina }}</label>
+    </div>
+    <br />
+    <div class="p-field">
+      <label>Prozivodjac: </label>
+      <input
+        type="text"
+        pInputText
+        class="p-inputtext-sm"
+        [(ngModel)]="proizvodjac"
+      />
+    </div>
+    <br />
+    <div class="p-field">
+      <label>Serija vakcine: </label>
+      <input
+        type="text"
+        pInputText
+        class="p-inputtext-sm"
+        [(ngModel)]="serija"
+      />
+    </div>
+    <br />
+    <div class="p-field">
+      <label>Ekstremitet: </label>
+      <input
+        type="text"
+        pInputText
+        class="p-inputtext-sm"
+        [(ngModel)]="ekstremitet"
+      />
+    </div>
+    <br />
+    <div class="p-field">
+      <label>Nezeljena reakcija: </label>
+      <input
+        type="text"
+        pInputText
+        class="p-inputtext-sm"
+        [(ngModel)]="nezeljenaReakcija"
+      />
     </div>
     <br />
     <div class="p-field">
