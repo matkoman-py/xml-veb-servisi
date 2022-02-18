@@ -1,80 +1,98 @@
 <br />
 <p-toast position="top-center" key="tc"></p-toast>
-<div class="p-formgroup-inline">
-  <div class="p-field">
-    <label>Unesite jmbg: </label>
-    <input
-      type="text"
-      pInputText
-      class="p-inputtext-sm"
-      [(ngModel)]="jmbgUneti"
-    />
+<div class="center">
+  <div class="p-formgroup-inline">
+    <div class="p-field">
+      <label>Unesite jmbg: </label>
+      <input
+        type="text"
+        pInputText
+        class="p-inputtext-sm"
+        [(ngModel)]="jmbgUneti"
+      />
+    </div>
+    <br />
+    <div class="p-field">
+      <button
+        pButton
+        type="button"
+        label="Iskazite saglasnost"
+        id="submit-search"
+        (click)="pretraziSaglasnost()"
+      ></button>
+    </div>
   </div>
   <br />
-  <div class="p-field">
-    <button
-      pButton
-      type="button"
-      label="Iskazite saglasnost"
-      id="submit-search"
-      (click)="pretraziSaglasnost()"
-    ></button>
-  </div>
-</div>
-<br />
-<div
-  class="p-formgroup-inline"
-  [style.visibility]="postoji ? 'visible' : 'hidden'"
->
-  <div class="p-field">
-    <label>Ustanova: </label>
-    <input
-      type="text"
-      pInputText
-      class="p-inputtext-sm"
-      [(ngModel)]="ustanova"
-    />
-  </div>
-  <div class="p-field">
-    <label>Punkt: </label>
-    <input type="text" pInputText class="p-inputtext-sm" [(ngModel)]="punkt" />
-  </div>
-  <div class="p-field">
-    <label>Lekar: </label>
-    <input type="text" pInputText class="p-inputtext-sm" [(ngModel)]="lekar" />
-  </div>
-  <div class="p-field">
-    <label>Doza: </label>
-    <p-dropdown
-      [options]="doze"
-      optionLabel="name"
-      placeholder="Doza"
-      id="type-input"
-      [(ngModel)]="doza"
-    ></p-dropdown>
-    <label> Vakcina: {{ saglasnost.vakcina }}</label>
-  </div>
-  <div class="p-field">
-    <label>Privremene kontraindikacije: </label>
-    <input
-      type="text"
-      pInputText
-      class="p-inputtext-sm"
-      [(ngModel)]="kontraindikacije"
-    />
-  </div>
-  <div class="p-field">
-    <label>Odluka komisije: </label>
-    <input type="text" pInputText class="p-inputtext-sm" [(ngModel)]="odluka" />
-  </div>
-  <br />
-  <div class="p-field">
-    <button
-      pButton
-      type="button"
-      label="Evidentiraj"
-      id="submit-search"
-      (click)="evidentiraj()"
-    ></button>
+  <div
+    class="p-formgroup-inline"
+    [style.visibility]="postoji ? 'visible' : 'hidden'"
+  >
+    <div class="p-field">
+      <label>Ustanova: </label>
+      <input
+        type="text"
+        pInputText
+        class="p-inputtext-sm"
+        [(ngModel)]="ustanova"
+      />
+    </div>
+    <br />
+    <div class="p-field">
+      <label>Punkt: </label>
+      <input
+        type="text"
+        pInputText
+        class="p-inputtext-sm"
+        [(ngModel)]="punkt"
+      />
+    </div>
+    <br />
+    <div class="p-field">
+      <label>Lekar: </label>
+      <input
+        type="text"
+        pInputText
+        class="p-inputtext-sm"
+        [(ngModel)]="lekar"
+      />
+    </div>
+    <br />
+    <div class="p-field">
+      <label>Doza koja se treba primiti: {{ doza }}</label>
+    </div>
+    <br />
+    <div class="p-field">
+      <label> Vakcina: {{ saglasnost.vakcina }}</label>
+    </div>
+    <br />
+    <div class="p-field">
+      <label>Privremene kontraindikacije: </label>
+      <input
+        type="text"
+        pInputText
+        class="p-inputtext-sm"
+        [(ngModel)]="kontraindikacije"
+      />
+    </div>
+    <br />
+    <div class="p-field">
+      <label>Odluka komisije: </label>
+      <input
+        type="text"
+        pInputText
+        class="p-inputtext-sm"
+        [(ngModel)]="odluka"
+      />
+    </div>
+    <br />
+    <div class="p-field">
+      <button
+        pButton
+        type="button"
+        label="Evidentiraj"
+        id="submit-search"
+        (click)="evidentiraj()"
+      ></button>
+    </div>
   </div>
 </div>

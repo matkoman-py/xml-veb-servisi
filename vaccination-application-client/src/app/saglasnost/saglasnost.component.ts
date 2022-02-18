@@ -72,6 +72,7 @@ export class SaglasnostComponent implements OnInit {
       this.saglasnost.socijalnaZastita = 'da';
     } else {
       this.saglasnost.socijalnaZastita = 'ne';
+      this.saglasnost.sedisteSocZastite = 'nema';
     }
 
     for (const value of Object.values(this.saglasnost)) {

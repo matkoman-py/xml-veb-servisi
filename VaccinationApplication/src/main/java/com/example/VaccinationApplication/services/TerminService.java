@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.mail.MessagingException;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -239,5 +240,13 @@ public class TerminService {
             return terminPrve.getVakcina();
         }
         return "";
+    }
+
+    public void posaljiMejlZaDrugiTermin(String jmbg) throws FileNotFoundException, TransformerException, MessagingException {
+        Optional<String> drugaDoza = dataAccessLayer.getDocument(rezervisaniFolderId, jmbg+"-druga-doza");
+        Optional<String> interesovanjeString = dataAccessLayer.getDocument("/db/vaccination-system/interesovanja", jmbg);
+        Interesovanje interesovanje = convertToObject(interesovanjeString.get());
+        Termin terminDruge = convertToObjectTermin(drugaDoza.get());
+        mailSenderService.posaljiRezervisan(interesovanje.getPodaciOPrimaocu().getKontakt().getAdresaElektronskePoste(), terminDruge,interesovanje);
     }
 }
