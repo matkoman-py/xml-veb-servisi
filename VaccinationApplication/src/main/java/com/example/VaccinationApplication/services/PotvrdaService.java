@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PotvrdaService {
@@ -194,51 +191,96 @@ public List<Integer> getReportDataForDate(String dateFrom, String dateTo) throws
                 "};\n" +
                 "\n" +
                 "local:search(\"%s\")", search);
+
         List<String> found = dataAccessLayer.izvrsiXPathIzraz(folderId, searchQuery, "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji");
         List<Potvrda> rezultat = new ArrayList<>();
 
+        StringBuilder str = new StringBuilder();
+        str.append("<listaPotvrda>\n");
+
         for(String item : found) {
-            rezultat.add(convertToObject(item));
+            Potvrda potvrda = convertToObject(item);
+
+            str.append("<potvrda>\n");
+            str.append("<sifraPotvrde>");
+            str.append(potvrda.getSifraPotvrde());
+            str.append("</sifraPotvrde>\n");
+
+            str.append("<linkedDocNamespace>");
+            str.append(potvrda.getHref().split("/")[3]);
+            str.append("</linkedDocNamespace>\n");
+
+            str.append("<linkedDocName>");
+            str.append(potvrda.getHref().split("/")[4]);
+            str.append("</linkedDocName>\n");
+            str.append("</potvrda>\n");
         }
 
-        ListaPotvrda lp = new ListaPotvrda();
-        lp.setPotvrda(rezultat);
-        return convertToXml(lp);
+        str.append("</listaPotvrda>\n");
+        return str.toString();
     }
 
-    public String getPotvrdaAdvanced(String ime, String prezime, String ustanova, String datum) {
-        String condition = "";
+    public String getPotvrdaAdvanced(String ime, String prezime, String ustanova, String datum, boolean poklapanje) throws FileNotFoundException, TransformerException {
+        ArrayList<String> conditions = new ArrayList<>();
         String predicate;
         if(!ime.trim().equals("")) {
-            condition += "?s <http://www.ftn.uns.ac.rs/predicate/ime_i_prezime> \"" + ime + " " + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;";
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime_i_prezime> \"" + ime + " " + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;");
         }
 //        if(!prezime.trim().equals("")) {
 //            condition += "?s <http://www.ftn.uns.ac.rs/predicate/prezime_i_prezime> \"" + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;";
 //        }
         if(!ustanova.trim().equals("")) {
-            condition += "?s <http://www.ftn.uns.ac.rs/predicate/zdravstvena_ustanova> \"" + ustanova + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> .";
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/zdravstvena_ustanova> \"" + ustanova + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> .");
         }
         if(!datum.trim().equals("")) {
-            condition += "?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/date> ;";
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/date> ;");
         }
-        if(condition.equals("")) {
-            condition += "?s <http://www.ftn.uns.ac.rs/predicate/ime_i_prezime> ?o";
+        if(conditions.isEmpty()) {
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime_i_prezime> ?o");
+        }
+
+        HashSet<String> results = new HashSet<>();
+
+        for(String condition : conditions) {
+            HashSet<String> result = metadataExtractor.filterFromRdf("/potvrde", condition);
+            if(poklapanje) {
+                if(conditions.indexOf(condition) == 0) {
+                    results.addAll(result);
+                }
+                else {
+                    results.retainAll(result);
+                }
+            } else {
+                results.addAll(result);
+            }
         }
 
         StringBuilder str = new StringBuilder();
-        str.append("<listaPotvrda>");
+        str.append("<listaPotvrda>\n");
 
-        for(String s : metadataExtractor.filterFromRdf("/potvrde", condition)) {
+        for(String s : results) {
             String id = s.split("/")[4];
 
             dataAccessLayer.getDocument(folderId, id);
-//            str.append("<saglasnost>");
-            str.append(dataAccessLayer.getDocument(folderId, id).get());
-//            str.append("<id>").append(id).append("</id>");
-//            str.append("</saglasnost>");
+//            str.append(dataAccessLayer.getDocument(folderId, id).get());
+            Potvrda potvrda = convertToObject(dataAccessLayer.getDocument(folderId, id).get());
+            str.append("<potvrda>\n");
+
+            str.append("<sifraPotvrde>");
+            str.append(potvrda.getSifraPotvrde());
+            str.append("</sifraPotvrde>\n");
+
+            str.append("<linkedDocNamespace>");
+            str.append(potvrda.getHref().split("/")[3]);
+            str.append("</linkedDocNamespace>\n");
+
+            str.append("<linkedDocName>");
+            str.append(potvrda.getHref().split("/")[4]);
+            str.append("</linkedDocName>\n");
+            str.append("</potvrda>\n");
         }
 
-        str.append(("</listaPotvrda>"));
+        str.append(("</listaPotvrda>\n"));
 
         return str.toString();
     }

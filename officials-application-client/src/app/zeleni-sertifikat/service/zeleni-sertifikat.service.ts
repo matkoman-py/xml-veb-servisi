@@ -15,14 +15,14 @@ export class ZeleniSertifikatService {
   }
 
   approveRequest(id: string) {
-    return this.http.post('api/zelenisertifikati/prihvatiZahtev/'+id, null, {responseType: 'text'});
+    return this.http.post('/api/zelenisertifikati/prihvatiZahtev/'+id, null, {responseType: 'text'});
   }
 
   denyRequest(id: string, text: string) {
-    return this.http.post('api/zelenisertifikati/odbijZahtev/'+id, text, {responseType: 'text'});
+    return this.http.post('/api/zelenisertifikati/odbijZahtev/'+id, text, {responseType: 'text'});
   }
 
   getPdf(id: string) {
-    return this.http.get('api/zelenisertifikati/pdf/'+id, {responseType: 'arraybuffer'});
+    return this.http.get('/api/zelenisertifikati/pdf/'+id, {responseType: 'arraybuffer'});
   }
 }

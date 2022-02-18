@@ -18,7 +18,10 @@ import { CommonModule } from '@angular/common';
 import { VaccineStockComponent } from './vaccine-stock/vaccine-stock.component';
 import { DialogModule } from 'primeng/dialog';
 import { ZeleniSertifikatComponent } from './zeleni-sertifikat/zeleni-sertifikat.component';  
-import {InputTextareaModule} from 'primeng/inputtextarea';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputTextModule } from 'primeng/inputtext';
+import { SearchDocumentsComponent } from './search-documents/search-documents.component';
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     ReportComponent,
     VaccineStockComponent,
     ZeleniSertifikatComponent,
+    SearchDocumentsComponent,
   ],
   imports: [
     InputTextareaModule,
@@ -44,6 +48,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     ToastModule,
     CommonModule,
     TableModule,
+    InputTextModule,
+    ToggleButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -14,6 +14,7 @@ import com.example.VaccinationApplication.model.saglasnost.Saglasnost;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.xml.transform.TransformerException;
@@ -174,48 +175,93 @@ public class SaglasnostService {
         List<String> found = dataAccessLayer.izvrsiXPathIzraz(folderId, searchQuery, "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji");
         List<Saglasnost> rezultat = new ArrayList<>();
 
+        StringBuilder str = new StringBuilder();
+        str.append("<listaSaglasnosti>\n");
+
         for(String item : found) {
-            rezultat.add(convertToObject(item));
+            Saglasnost saglasnost = convertToObject(item);
+
+            str.append("<saglasnost>\n");
+            str.append("<sifraSaglasnosti>");
+            saglasnost.getDrzavljanstvo().getJMBG();
+            str.append("</sifraSaglasnosti>\n");
+
+            str.append("<linkedDocNamespace>");
+            str.append(saglasnost.getHref().split("/")[3]);
+            str.append("</linkedDocNamespace>\n");
+
+            str.append("<linkedDocName>");
+            str.append(saglasnost.getHref().split("/")[4]);
+            str.append("</linkedDocName>\n");
+            str.append("</saglasnost>\n");
         }
 
-        ListaSaglasnosti ls = new ListaSaglasnosti();
-        ls.setSaglasnost(rezultat);
-        return convertToXml(ls);
+        str.append("</listaSaglasnosti>\n");
+        return str.toString();
     }
 
-    public String getSaglasnostAdvanced(String ime, String prezime, String ustanova, String datum) {
-        String condition = "";
+    public String getSaglasnostAdvanced(String ime, String prezime, String ustanova, String datum, boolean poklapanje) {
+        ArrayList<String> conditions = new ArrayList<>();
         String predicate;
         if(!ime.trim().equals("")) {
-            condition += "?s <http://www.ftn.uns.ac.rs/predicate/ime> \"" + ime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;";
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime> \"" + ime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;");
         }
         if(!prezime.trim().equals("")) {
-            condition += "?s <http://www.ftn.uns.ac.rs/predicate/prezime> \"" + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;";
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/prezime> \"" + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;");
         }
         if(!ustanova.trim().equals("")) {
-            condition += "?s <http://www.ftn.uns.ac.rs/predicate/zdravstvena_ustanova> \"" + ustanova + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> .";
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/zdravstvena_ustanova> \"" + ustanova + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> .");
         }
         if(!datum.trim().equals("")) {
-            condition += "?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/date> ;";
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/date> ;");
         }
-        if(condition.equals("")) {
-            condition += "?s <http://www.ftn.uns.ac.rs/predicate/ime> ?o";
+        if(conditions.isEmpty()) {
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime> ?o");
+        }
+
+        HashSet<String> results = new HashSet<>();
+
+        for(String condition : conditions) {
+            HashSet<String> result = metadataExtractor.filterFromRdf("/saglasnosti", condition);
+            if(poklapanje) {
+                if(conditions.indexOf(condition) == 0) {
+                    results.addAll(result);
+                }
+                else {
+                    results.retainAll(result);
+                }
+            } else {
+                results.addAll(result);
+            }
         }
 
         StringBuilder str = new StringBuilder();
-        str.append("<listaSaglasnosti>");
+        str.append("<listaSaglasnosti>\n");
 
-        for(String s : metadataExtractor.filterFromRdf("/saglasnosti", condition)) {
+        for(String s : results) {
             String id = s.split("/")[4];
 
             dataAccessLayer.getDocument(folderId, id);
-//            str.append("<saglasnost>");
-            str.append(dataAccessLayer.getDocument(folderId, id).get());
-//            str.append("<id>").append(id).append("</id>");
-//            str.append("</saglasnost>");
+//            str.append(dataAccessLayer.getDocument(folderId, id).get());
+            Saglasnost saglasnost = convertToObject(dataAccessLayer.getDocument(folderId, id).get());
+            str.append("<saglasnost>\n");
+
+            str.append("<sifraSaglasnosti>");
+            str.append(saglasnost.getAbout().split("/")[4]);
+            str.append("</sifraSaglasnosti>\n");
+
+            str.append("<linkedDocNamespace>");
+            str.append(saglasnost.getHref().split("/")[3]);
+            str.append("</linkedDocNamespace>\n");
+
+            str.append("<linkedDocName>");
+            str.append(saglasnost.getHref().split("/")[4]);
+            str.append("</linkedDocName>\n");
+            str.append("</saglasnost>\n");
+
         }
 
-        str.append(("</listaSaglasnosti>"));
+        str.append(("</listaSaglasnosti>\n"));
 
         return str.toString();
     }
