@@ -76,6 +76,8 @@ public class IzvestajOImunizacijiService {
     private final MetadataExtractor metadataExtractor;
     private RestTemplate restTemplate = new RestTemplate();
     private PdfGeneratorService pdfGeneratorService;
+    private HtmlGeneratorService htmlGeneratorService;
+
     private final MailSenderService mailSenderService;
     private static DocumentBuilderFactory documentFactory;
 	
@@ -103,12 +105,13 @@ public class IzvestajOImunizacijiService {
 	}
 
     public IzvestajOImunizacijiService(DataAccessLayer dataAccessLayer, MultiwayMapper mapper,
-                                       MetadataExtractor metadataExtractor, MailSenderService mailSenderService, PdfGeneratorService pdfGeneratorService) {
+                                       MetadataExtractor metadataExtractor, MailSenderService mailSenderService, PdfGeneratorService pdfGeneratorService, HtmlGeneratorService htmlGeneratorService) {
         this.dataAccessLayer = dataAccessLayer;
         this.mapper = mapper;
         this.metadataExtractor = metadataExtractor;
         this.mailSenderService = mailSenderService;
         this.pdfGeneratorService = pdfGeneratorService;
+        this.htmlGeneratorService = htmlGeneratorService;
     }
 
     public String getXmlAsText(String documentId) {
@@ -193,6 +196,11 @@ public class IzvestajOImunizacijiService {
     public ByteArrayInputStream getPdf(String xmlName) throws Exception {
     	String xml = getXmlAsText(xmlName);
     	return pdfGeneratorService.generatePDF(xml, "data/xsl-fo/izvestaj_fo.xsl");
+    }
+    
+    public ByteArrayInputStream getHtml(String xmlName) throws Exception {
+    	String xml = getXmlAsText(xmlName);
+    	return htmlGeneratorService.generateHTML(xml, "data/xslt/izvestaj.xsl");
     }
 
     public String convertToXml(IzvestajOImunizaciji izvestaj) {

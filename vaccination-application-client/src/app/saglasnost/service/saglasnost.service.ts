@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SaglasnostDTO } from 'app/model/saglasnost';
 import { Observable } from 'rxjs';
-import { SaglasnostDTO } from 'src/app/model/saglasnost';
 
 @Injectable({
   providedIn: 'root',
@@ -27,9 +27,9 @@ export class SaglasnostService {
   postSaglasnost(saglasnost: SaglasnostDTO): Observable<String> {
     var today = new Date();
     var todayFormatiran = this.formatirajDatum(today);
-    var datumRodjenjaFormatiran = this.formatirajDatum(
-      saglasnost.datumRodjenja ? saglasnost.datumRodjenja : new Date()
-    );
+    //var datumRodjenjaFormatiran = this.formatirajDatum(
+      //saglasnost.datumRodjenja ? saglasnost.datumRodjenja : new Date()
+    //);
     var xml = `<?xml version="1.0" encoding="UTF-8"?>
 <sag:Saglasnost xmlns:sag="http://www.ftn.uns.ac.rs/Saglasnost"
  xmlns:pred="http://www.ftn.uns.ac.rs/predicate"
@@ -43,8 +43,8 @@ export class SaglasnostService {
         <sag:Prezime property="pred:prezime" datatype="xs:string">${saglasnost.prezime}</sag:Prezime>
         <sag:Ime property="pred:ime" datatype="xs:string">${saglasnost.ime}</sag:Ime>
         <sag:Ime_roditelja>${saglasnost.imeRoditelja}</sag:Ime_roditelja>
-        <sag:Pol>${saglasnost.pol?.name}</sag:Pol>
-        <sag:Datum_rodjenja>${datumRodjenjaFormatiran}</sag:Datum_rodjenja>
+        <sag:Pol>${saglasnost.pol}</sag:Pol>
+        <sag:Datum_rodjenja>${saglasnost.datumRodjenja}</sag:Datum_rodjenja>
         <sag:Mesto_rodjenja>${saglasnost.mestoRodjenja}</sag:Mesto_rodjenja>
         <sag:Adresa>
             <sag:Ulica_i_broj>${saglasnost.ulicaIBroj}</sag:Ulica_i_broj>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<i:interesovanje xmlns:i="www.ftn.uns.ac.rs/interesovanje"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <i:Podaci_o_primaocu>
+        <i:Drzavljanstvo>Drzavljanin Republike Srbije </i:Drzavljanstvo>
+        <i:JMBG>2910999730020</i:JMBG>
+        <i:Ime>Petar</i:Ime>
+        <i:Prezime>Markovic</i:Prezime>
+        <i:Kontakt>
+            <i:Adresa_elektronske_poste>petarns99@gmail.com</i:Adresa_elektronske_poste>
+            <i:Broj_mobilnog_telefona>0692910099</i:Broj_mobilnog_telefona>
+            <i:Broj_fiksnog_telefona>021493103</i:Broj_fiksnog_telefona>
+        </i:Kontakt>
+        <i:Davalac_krvi>Da</i:Davalac_krvi>
+    </i:Podaci_o_primaocu>
+    <i:Odabir_vakcine>Pfizer-BioNTech </i:Odabir_vakcine>
+    <i:Datum>2021-05-04</i:Datum>
+</i:interesovanje>

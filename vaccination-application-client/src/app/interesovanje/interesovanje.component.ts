@@ -16,20 +16,22 @@ export class InteresovanjeComponent implements OnInit {
     { name: 'Pfizer-BioNTech', value: 'Pfizer-BioNTech' },
     { name: 'Sinopharm', value: 'Sinopharm' },
     { name: 'AstraZeneca', value: 'AstraZeneca' },
-    { name: 'Moderna', value: 'Moderna' },
   ];
 
   selectedVakcina: SelectType = { name: '', value: '' };
   checked: boolean = false;
 
   interesovanje: InteresovanjeDTO = {
-    drzavljanstvo: '',
-    jmbg: '',
-    ime: '',
-    prezime: '',
-    email: '',
-    mobilni: '',
-    fiksni: '',
+    drzavljanstvo:
+      localStorage.getItem('drzavljanstvo')! === 'Srpsko'
+        ? 'Drzavljanin Republike Srbije'
+        : 'Strani drzavljanin sa boravkom u RS',
+    jmbg: localStorage.getItem('jmbg')!,
+    ime: localStorage.getItem('ime')!,
+    prezime: localStorage.getItem('prezime')!,
+    email: localStorage.getItem('email')!,
+    mobilni: localStorage.getItem('mobilni_telefon')!,
+    fiksni: localStorage.getItem('fiksni_telefon')!,
     davalacKrvi: '',
     vakcina: '',
   };

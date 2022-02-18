@@ -11,9 +11,9 @@
                 <xs:element name="Odabir_vakcine">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
-                            <xs:enumeration value="Pfizer-BioNTech "/>
+                            <xs:enumeration value="Pfizer-BioNTech"/>
                             <xs:enumeration value="Sinopharm"/>
-                            <xs:enumeration value="Sputnik V"/>
+                            <xs:enumeration value="SputnikV"/>
                             <xs:enumeration value="AstraZeneca"/>
                             <xs:enumeration value="Moderna"/>
                         </xs:restriction>

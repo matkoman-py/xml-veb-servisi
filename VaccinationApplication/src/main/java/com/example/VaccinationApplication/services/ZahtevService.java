@@ -3,17 +3,14 @@ package com.example.VaccinationApplication.services;
 import com.example.VaccinationApplication.dao.DataAccessLayer;
 import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
-import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import com.example.VaccinationApplication.model.zahtev_zeleni_sertifikat.ListaZahtevaZelenogSertifikata;
 import com.example.VaccinationApplication.model.zahtev_zeleni_sertifikat.Zahtev;
-import com.example.VaccinationApplication.model.zeleni_sertifikat.ListaZelenihSertifikata;
-import com.example.VaccinationApplication.model.zeleni_sertifikat.ZeleniSertifikat;
-
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.xml.transform.TransformerException;
 import org.springframework.stereotype.Service;
@@ -50,7 +47,6 @@ public class ZahtevService {
     	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");  
 		LocalDateTime now = LocalDateTime.now();  
 		String dateTime = (String) dtf.format(now);  
-		System.out.println(zahtev.getAccepted());
         String documentId = zahtev.getPodnosilacZahteva().getJedinstveniMaticniBrojGradjana().getValue()+"-"+dateTime+ ".xml";
         
         if(zahtev.getAbout() == null) {
@@ -126,6 +122,23 @@ public class ZahtevService {
         return convertToXml(lzzs);
     }
     
+public String getForUser(String id) throws Exception {
+    	
+    	String xPath = "//zahtev[@about='http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/"+id+"']";
+    	System.out.println(xPath);
+    	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zahtevi", xPath, "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata");
+    	System.out.println(rezultat.size());
+        for (String string : rezultat) {
+        	System.out.println(string);
+        	return convertToXml(convertToObject(string));
+			//zahtevi.add(convertToObject(string));
+		}
+        ListaZahtevaZelenogSertifikata lzzs = new ListaZahtevaZelenogSertifikata();
+        lzzs.setZahtev(zahtevi);
+        return convertToXml(lzzs);
+    }
+    
     public String getAllForDate(String dateFrom, String dateTo) throws Exception {
     	
     	//		String xPath = "//Saglasnost[Podaci_o_pacijentu/number(translate(Datum,'-','')) >= "+dateFrom.replace("-", "")+" and Podaci_o_pacijentu/number(translate(Datum,'-','')) <="+dateTo.replace("-","")+ "]";
@@ -149,20 +162,31 @@ public class ZahtevService {
         return rezultat.size();
     }
     
-public Zahtev getZahtev(String id) throws Exception {
+    public List<String> getZahtevString(String id) throws Exception {
     	
-    	String xPath = "/zahtev[@about = 'http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/"+id+"']";
-    	System.out.println(xPath);
+    	String xPath = "//zahtev[Podnosilac_zahteva/Jedinstveni_maticni_broj_gradjana = '"+id+"']";
     	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
         List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zahtevi", xPath, "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata");
         for (String string : rezultat) {
-			zahtevi.add(convertToObject(string));
+        	zahtevi.add(convertToObject(string));
         }
-        System.out.println(zahtevi.get(0).getAbout() + " DASDASDAD");
-        System.out.println(zahtevi.get(0).getPodnosilacZahteva().getImeIPrezime().getValue() + " DASDASDAD");
-
-        return zahtevi.get(0);
+        if(zahtevi.size() == 0) return null;
+        return (List<String>) zahtevi.stream().map(z -> "Zahtev " + z.getAbout().split("/")[4]).collect(Collectors.toList());
     }
+    public Zahtev getZahtev(String id) throws Exception {
+    	
+     	String xPath = "/zahtev[@about = 'http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/"+id+"']";
+     	System.out.println(xPath);
+     	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
+         List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zahtevi", xPath, "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata");
+         for (String string : rezultat) {
+ 			zahtevi.add(convertToObject(string));
+         }
+         System.out.println(zahtevi.get(0).getAbout() + " DASDASDAD");
+         System.out.println(zahtevi.get(0).getPodnosilacZahteva().getImeIPrezime().getValue() + " DASDASDAD");
+
+         return zahtevi.get(0);
+     }
 
 public String getAllWaiting() throws Exception {
 	
@@ -177,6 +201,4 @@ public String getAllWaiting() throws Exception {
     lzzs.setZahtev(zahtevi);
     return convertToXml(lzzs);
 }
-    
-    
 }

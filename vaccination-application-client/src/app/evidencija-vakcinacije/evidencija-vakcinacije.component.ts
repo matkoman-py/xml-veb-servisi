@@ -39,7 +39,7 @@ export class EvidencijaVakcinacijeComponent implements OnInit {
   postoji: boolean = false;
   datum: string = '';
 
-  doza: SelectType = { name: '', value: '' };
+  doza: string = '';
   ustanova: string = '';
   punkt: string = '';
   lekar: string = '';
@@ -65,6 +65,12 @@ export class EvidencijaVakcinacijeComponent implements OnInit {
         let parseString = require('xml2js').parseString;
         let self = this;
         parseString(res, function (err: any, result: any) {
+          console.log(result);
+          if (result['sag:Saglasnost']['sag:Evidencija_o_vakcinaciji']) {
+            self.doza = 'druga';
+          } else {
+            self.doza = 'prva';
+          }
           self.saglasnost.jmbg =
             result['sag:Saglasnost']['sag:Drzavljanstvo'][0]['sag:JMBG'][0];
           self.saglasnost.prezime =
@@ -142,7 +148,6 @@ export class EvidencijaVakcinacijeComponent implements OnInit {
         this.ustanova = '';
         this.punkt = '';
         this.lekar = '';
-        this.doza = { name: '', value: '' };
         this.odluka = '';
         this.kontraindikacije = '';
       },
@@ -159,7 +164,7 @@ export class EvidencijaVakcinacijeComponent implements OnInit {
 
   evidentiraj(): void {
     if (
-      this.doza.value === '' ||
+      this.doza === '' ||
       this.punkt === '' ||
       this.lekar === '' ||
       this.ustanova === ''
@@ -185,13 +190,16 @@ export class EvidencijaVakcinacijeComponent implements OnInit {
         this.ustanova
       )
       .subscribe(
-        (res) =>
+        (res) => {
           this.messageService.add({
             key: 'tc',
             severity: 'success',
             summary: 'Success',
             detail: `Uspesno ste popunili evidenciju!`,
-          }),
+          });
+          this.postoji = false;
+          this.jmbgUneti = '';
+        },
         (err) => {
           this.messageService.add({
             key: 'tc',

@@ -12,19 +12,19 @@ import { SaglasnostService } from './service/saglasnost.service';
 })
 export class SaglasnostComponent implements OnInit {
   saglasnost: SaglasnostDTO = {
-    ime: undefined,
-    prezime: undefined,
-    imeRoditelja: undefined,
-    jmbg: undefined,
-    pol: undefined,
-    datumRodjenja: undefined,
-    mestoRodjenja: undefined,
-    ulicaIBroj: undefined,
-    mestoZivota: undefined,
-    opstina: undefined,
-    email: undefined,
-    mobilni: undefined,
-    fiksni: undefined,
+    ime: localStorage.getItem('ime')!,
+    prezime: localStorage.getItem('prezime')!,
+    imeRoditelja: localStorage.getItem('ime_roditelja')!,
+    jmbg: localStorage.getItem('jmbg')!,
+    pol: localStorage.getItem('pol')!,
+    datumRodjenja: localStorage.getItem('datum_rodjenja')!,
+    mestoRodjenja: localStorage.getItem('mesto_rodjenja')!,
+    ulicaIBroj: localStorage.getItem('adresa')!,
+    mestoZivota: localStorage.getItem('grad')!,
+    opstina: localStorage.getItem('mesto')!,
+    email: localStorage.getItem('email')!,
+    mobilni: localStorage.getItem('mobilni_telefon')!,
+    fiksni: localStorage.getItem('fiksni_telefon')!,
     zanimanje: undefined,
     radniStatus: undefined,
     socijalnaZastita: undefined,
@@ -72,6 +72,7 @@ export class SaglasnostComponent implements OnInit {
       this.saglasnost.socijalnaZastita = 'da';
     } else {
       this.saglasnost.socijalnaZastita = 'ne';
+      this.saglasnost.sedisteSocZastite = 'nema';
     }
 
     for (const value of Object.values(this.saglasnost)) {

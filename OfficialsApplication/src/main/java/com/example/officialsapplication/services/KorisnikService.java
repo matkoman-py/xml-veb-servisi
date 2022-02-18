@@ -16,7 +16,7 @@ public class KorisnikService {
 
     private final DataAccessLayer dataAccessLayer;
     private final MultiwayMapper mapper;
-    private final String folderId = "/db/vaccination-system/korisnici";
+    private final String folderId = "/db/officials-system/korisnici";
     private final MetadataExtractor metadataExtractor;
 
     @Autowired
