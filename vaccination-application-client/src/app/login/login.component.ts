@@ -58,12 +58,10 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('mobilni_telefon', result.korisnik.mobilni_telefon[0]);
                 localStorage.setItem('pol', result.korisnik.pol[0]);
                 localStorage.setItem('prezime', result.korisnik.prezime[0]);
-
-              });
-
+              }); 
             })
 
-            this.router.navigate(['user-documents']);
+            this.router.navigate(['send-request']);
           } else if(role === 'zdravstveni_radnik') {
             this.router.navigate(['evidencija-vakcinacije']);
           }

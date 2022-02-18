@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate {
       if (tokenPayload === 'zdravstveni_radnik') {
         this.router.navigate(['evidencija-vakcinacije']);
       } else {
-        this.router.navigate(['user-documents']);
+        this.router.navigate(['send-request']);
 
       }
       return false;

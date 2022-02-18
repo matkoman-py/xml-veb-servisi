@@ -116,7 +116,7 @@ export class SendRequestComponent implements OnInit {
         <zzs:Ime_i_prezime property="pred:ime_i_prezime" datatype="xs:string">${this.ime_i_prezime}</zzs:Ime_i_prezime>
         <zzs:Datum_rodjenja>${day}</zzs:Datum_rodjenja>
         <zzs:Pol>${this.pol.name}</zzs:Pol>
-        <zzs:Jedinstveni_maticni_broj_gradjana property="pred:jmbg" datatype="xs:string">2206999810092</zzs:Jedinstveni_maticni_broj_gradjana>
+        <zzs:Jedinstveni_maticni_broj_gradjana property="pred:jmbg" datatype="xs:string">${localStorage.getItem('jmbg')}</zzs:Jedinstveni_maticni_broj_gradjana>
         <zzs:Broj_pasosa property="pred:broj_pasosa" datatype="xs:string">${this.broj_pasosa}</zzs:Broj_pasosa>
     </zzs:Podnosilac_zahteva>
     <zzs:Informacije_o_zahtevu>

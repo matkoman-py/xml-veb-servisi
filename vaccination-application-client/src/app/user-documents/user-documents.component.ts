@@ -21,7 +21,7 @@ export class UserDocumentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userDocumentsService.getAllDocuments('2206999810092').subscribe((data) => {
+    this.userDocumentsService.getAllDocuments(localStorage.getItem('jmbg')!).subscribe((data) => {
       this.documentNames = data;
     });
   }
@@ -30,7 +30,7 @@ export class UserDocumentsComponent implements OnInit {
     let forSend: string = "";
 
     if(docName.startsWith("Zahtev")) forSend = docName.split(' ')[1];
-    else forSend = '2206999810092';
+    else forSend = localStorage.getItem('jmbg')!;
 
     this.userDocumentsService.getPDF(forSend, this.getDocType(docName)).subscribe((data) => {
       this.blob = new Blob([data], {
@@ -56,7 +56,7 @@ export class UserDocumentsComponent implements OnInit {
     let forSend: string = "";
 
     if(docName.startsWith("Zahtev")) forSend = docName.split(' ')[1];
-    else forSend = '2206999810092';
+    else forSend = localStorage.getItem('jmbg')!;
     
     this.userDocumentsService.getHTML(forSend, this.getDocType(docName)).subscribe((data) => {
       this.blob = new Blob([data], {
@@ -82,7 +82,7 @@ export class UserDocumentsComponent implements OnInit {
     let forSend: string = "";
 
     if(docName.startsWith("Zahtev")) forSend = docName.split(' ')[1];
-    else forSend = '2206999810092';
+    else forSend = localStorage.getItem('jmbg')!;
 
     this.userDocumentsService.getPDF(forSend, this.getDocType(docName)).subscribe((data) => {
       this.blob = new Blob([data], {
