@@ -1,6 +1,7 @@
 package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
+import com.example.VaccinationApplication.exceptions.KorisnikPostojiException;
 import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
@@ -37,6 +38,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class KorisnikService {
@@ -71,9 +73,20 @@ public class KorisnikService {
 		this.htmlTransformerService = htmlTransformerService;
 	}
 
-	public Korisnik saveXmlFromText(String xmlString) {
+	public Korisnik saveXmlFromText(String xmlString) throws Exception {
 		Korisnik korisnik = (Korisnik) mapper.convertToObject(xmlString, "Korisnik", Korisnik.class);
 		String documentId = korisnik.getEmail() + ".xml";
+
+		Optional<String> proveraString = dataAccessLayer.getDocument(folderId, korisnik.getEmail());
+		if(proveraString.isPresent()){
+			throw new KorisnikPostojiException("Korisnik sa unetim emailom vec postoji!");
+		}
+
+		String xPath = "//korisnik[jmbg = '"+korisnik.getJmbg()+"']";
+		List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/korisnici", xPath, "http://www.ftn.uns.ac.rs/korisnik");
+		if(rezultat.size() > 0){
+			throw new KorisnikPostojiException("Korisnik sa unetim JMBG-om vec postoji!");
+		}
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPassword = encoder.encode(korisnik.getSifra());

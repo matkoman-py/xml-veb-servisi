@@ -19,24 +19,10 @@
     </xs:element>
     <xs:complexType name="TDrzavljanstvo">
         <xs:choice>
-            <xs:element name="JMBG">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:whiteSpace value="collapse"/>
-                        <xs:length value="13"/>
-                        <xs:pattern value="[0-9]{13}"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="JMBG" type="xs:string"> </xs:element>
             <xs:sequence>
                 <xs:element name="Naziv" type="xs:string" form="qualified"/>
-                <xs:element name="Broj_pasosa_EBS">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:pattern value="[0-9]+"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:element>
+                <xs:element name="Broj_pasosa_EBS" type="xs:string"> </xs:element>
             </xs:sequence>
         </xs:choice>
     </xs:complexType>
@@ -72,20 +58,8 @@
     </xs:complexType>
     <xs:complexType name="TKontakt">
         <xs:sequence>
-            <xs:element name="Fiksni">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="[+]?[0-9]+"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="Mobilni">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="[+]?[0-9]+"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="Fiksni" type="xs:string"> </xs:element>
+            <xs:element name="Mobilni" type="xs:string"> </xs:element>
             <xs:element name="Email">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
