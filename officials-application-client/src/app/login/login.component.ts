@@ -9,23 +9,20 @@ import jwt_decode from 'jwt-decode';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class LoginComponent implements OnInit {
-  
   username: string;
   password: string;
 
   validLogin: boolean = true;
 
-  constructor(
-    private loginService: LoginService,
-    private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) {}
 
   onLogin = () => {
     const auth: Login = {
       username: this.username,
-      password: this.password
+      password: this.password,
     };
 
     this.loginService.userLogin(auth).subscribe(
@@ -34,17 +31,19 @@ export class LoginComponent implements OnInit {
         if (role !== undefined) {
           localStorage.setItem('role', role);
           localStorage.setItem('isLoggedIn', 'true');
-          localStorage.setItem('token', response.body.accessToken)
+          localStorage.setItem('token', response.body.accessToken);
 
-          this.loginService.emitLogin() 
+          this.loginService.emitLogin();
 
-          console.log(role + " je uloga");
+          console.log(role + ' je uloga');
+          this.router.navigate(['report']);
         }
       },
       () => {
         this.validLogin = false;
-      })
-  }
+      }
+    );
+  };
 
   findUserRole(token: any) {
     let user: any;
@@ -68,7 +67,5 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

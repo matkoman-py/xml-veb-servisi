@@ -9,27 +9,47 @@ import { ZeleniSertifikatComponent } from '../zeleni-sertifikat/zeleni-sertifika
 
 export const routes: Routes = [
   {
-    path: 'home',
-    component: HomeComponent,
-  },
-  {
     path: 'login',
     component: LoginComponent,
   },
   {
     path: 'logout',
     component: LogoutComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRoles: ['sluzbenik'],
+    },
   },
   {
     path: 'report',
     component: ReportComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRoles: ['sluzbenik'],
+    },
   },
   {
     path: 'vaccine-stock',
     component: VaccineStockComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRoles: ['sluzbenik'],
+    },
   },
   {
     path: 'zeleni',
-    component:ZeleniSertifikatComponent,
-  }
+    component: ZeleniSertifikatComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRoles: ['sluzbenik'],
+    },
+  },
+  {
+    path: '**',
+    canActivate: [AuthGuard],
+    component: LoginComponent,
+    data: {
+      expectedRoles: [],
+    },
+  },
 ];

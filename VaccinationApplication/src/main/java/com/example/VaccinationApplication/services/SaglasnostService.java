@@ -11,18 +11,20 @@ import com.example.VaccinationApplication.model.potvrda.*;
 import com.example.VaccinationApplication.model.saglasnost.ListaSaglasnosti;
 import com.example.VaccinationApplication.model.saglasnost.Saglasnost;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.transform.TransformerException;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import org.springframework.stereotype.Service;
 
 import javax.xml.transform.TransformerException;
 import java.io.FileNotFoundException;
-import java.util.Optional;
 
 @Service
 public class SaglasnostService {
@@ -282,7 +284,13 @@ public class SaglasnostService {
         potvrda.setPacijent(tPacijent);
 
         //qr kod?
-        potvrda.setQrKod("qrcakod");
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = qrCodeWriter.encode("http://www.ftn.uns.ac.rs/potvrda/"+potvrda.getSifraPotvrde(), BarcodeFormat.QR_CODE, 100, 100);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        MatrixToImageWriter.writeToStream(bitMatrix,"png", outputStream);
+
+        String base64 = new String(Base64.getEncoder().encode(outputStream.toByteArray()), "UTF-8");
+        potvrda.setQrKod("data:image/png;base64, "+base64);
 
         XMLGregorianCalendar prvaDozaDatum;
         String prvaDozaSerija;
