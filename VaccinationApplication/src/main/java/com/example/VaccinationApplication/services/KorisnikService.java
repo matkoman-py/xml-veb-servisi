@@ -88,6 +88,15 @@ public class KorisnikService {
 
 		return korisnik;
 	}
+	
+	public String getDataForUser(String email) throws Exception {
+		String xPath = "//korisnik[email = '"+email+"']";
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/korisnici", xPath, "http://www.ftn.uns.ac.rs/korisnik");
+        for (String string : rezultat) {
+			return string;
+		}
+		return "NOT FOUND";
+	}
 
 	public Korisnik getXmlAsObject(String documentId) {
 		String xmlString = dataAccessLayer.getDocument(folderId, documentId).get();

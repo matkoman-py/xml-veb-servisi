@@ -23,8 +23,11 @@ export class AuthGuard implements CanActivate {
       return false;
     }
     if (!expectedRole.includes(tokenPayload)) {
-      if (tokenPayload === 'sluzbenik') {
-        this.router.navigate(['home']);
+      if (tokenPayload === 'zdravstveni_radnik') {
+        this.router.navigate(['evidencija-vakcinacije']);
+      } else {
+        this.router.navigate(['user-documents']);
+
       }
       return false;
     }

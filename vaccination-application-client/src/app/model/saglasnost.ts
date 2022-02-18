@@ -5,8 +5,8 @@ export interface SaglasnostDTO {
   prezime?: string;
   imeRoditelja?: string;
   jmbg?: string;
-  pol?: SelectType;
-  datumRodjenja?: Date;
+  pol?: string;
+  datumRodjenja?: string;
   mestoRodjenja?: string;
   ulicaIBroj?: string;
   mestoZivota?: string;

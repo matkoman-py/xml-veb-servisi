@@ -76,15 +76,41 @@ export class NavbarComponent implements OnInit {
     } else {
       this.items = [
         {
-          label: 'Home',
+          label: 'Documents',
           icon: 'pi pi-fw pi-home',
-          routerLink: '/home',
+          routerLink: '/user-documents',
+          visible: this.role === 'gradjanin'
+        },
+        {
+          label: 'Send request',
+          icon: 'pi pi-fw pi-send',
+          routerLink: '/send-request',
+          visible: this.role === 'gradjanin'
+        },
+        {
+          label: 'Iskazi interesovanje',
+          icon: 'pi pi-fw pi-exclamation-triangle',
+          routerLink: '/interesovanje',
+          visible: this.role === 'gradjanin'
+        },
+        {
+          label: 'Iskazi saglasnost',
+          icon: 'pi pi-fw pi-file-o',
+          routerLink: '/saglasnost',
+          visible: this.role === 'gradjanin'
+
+        },
+        {
+          label: 'Evidencija vakcinacije',
+          icon: 'pi pi-fw pi-home',
+          routerLink: '/evidencija-vakcinacije',
+          visible: this.role === 'zdravstveni_radnik'
         },
         {
           label: 'Logout',
-          icon: 'pi pi-sign-out',
+          icon: 'pi pi-fw pi-sign-out',
           routerLink: '/logout',
-        },
+        }
       ];
     }
   };

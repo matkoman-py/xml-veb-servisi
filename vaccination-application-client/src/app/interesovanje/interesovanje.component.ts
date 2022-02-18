@@ -23,13 +23,13 @@ export class InteresovanjeComponent implements OnInit {
   checked: boolean = false;
 
   interesovanje: InteresovanjeDTO = {
-    drzavljanstvo: '',
-    jmbg: '',
-    ime: '',
-    prezime: '',
-    email: '',
-    mobilni: '',
-    fiksni: '',
+    drzavljanstvo: localStorage.getItem('drzavljanstvo')!,
+    jmbg: localStorage.getItem('jmbg')!,
+    ime: localStorage.getItem('ime')!,
+    prezime: localStorage.getItem('prezime')!,
+    email: localStorage.getItem('email')!,
+    mobilni: localStorage.getItem('mobilni_telefon')!,
+    fiksni: localStorage.getItem('fiksni_telefon')!,
     davalacKrvi: '',
     vakcina: '',
   };

@@ -47,6 +47,11 @@ public class KorisnikController {
         Korisnik retval = korisnikService.getUser(id);
         return ResponseEntity.ok(retval);
     }
+    
+    @RequestMapping(value="getUserData/{email}", method = RequestMethod.GET)
+    public ResponseEntity<String> getUserData(@PathVariable String email) throws Exception {
+        return ResponseEntity.ok(korisnikService.getDataForUser(email));
+    }
 
     @RequestMapping(value="getPDF/{jmbg}/{docType}", method = RequestMethod.GET)
     public ResponseEntity<InputStreamResource> getPDF(@PathVariable String jmbg, @PathVariable String docType) throws Exception {

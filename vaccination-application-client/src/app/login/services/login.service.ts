@@ -24,4 +24,8 @@ export class LoginService {
     this.getUserRole.emit();
   }
 
+  getData(email: string) {
+    return this.http.get("api/korisnici/getUserData/"+email, {responseType: 'text'});
+  }
+
 }
