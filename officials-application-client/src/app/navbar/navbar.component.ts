@@ -9,7 +9,6 @@ import { LogoutService } from '../logout/services/logout.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-
   role: string | null = '';
 
   items: MenuItem[] = [
@@ -21,7 +20,7 @@ export class NavbarComponent implements OnInit {
     {
       label: 'Login',
       icon: 'pi pi-fw pi-sign-in',
-      routerLink: '/login'
+      routerLink: '/login',
     },
     {
       label: 'Report',
@@ -60,25 +59,34 @@ export class NavbarComponent implements OnInit {
         {
           label: 'Login',
           icon: 'pi pi-fw pi-sign-in',
-          routerLink: '/login'
-        }
-      ]
-    }
-    else {
+          routerLink: '/login',
+        },
+      ];
+    } else {
       this.items = [
         {
-          label: 'Home',
-          icon: 'pi pi-fw pi-home',
-          routerLink: '/home',
+          label: 'Report',
+          icon: 'pi pi-fw pi-table',
+          routerLink: '/report',
         },
-        { 
-          label: 'Logout', 
+        {
+          label: 'Zeleni sertifikati',
+          icon: 'pi pi-fw pi-file',
+          routerLink: '/zeleni',
+        },
+        {
+          label: 'Vaccine Stock',
+          icon: 'pi pi-fw pi-file',
+          routerLink: '/vaccine-stock',
+        },
+        {
+          label: 'Logout',
           icon: 'pi pi-sign-out',
-          routerLink: '/logout'
-        }
-      ]
+          routerLink: '/logout',
+        },
+      ];
     }
-  }
+  };
 
   setLogoutItems = () => {
     this.items = [

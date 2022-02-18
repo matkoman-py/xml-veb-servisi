@@ -23,7 +23,10 @@ export class InteresovanjeComponent implements OnInit {
   checked: boolean = false;
 
   interesovanje: InteresovanjeDTO = {
-    drzavljanstvo: localStorage.getItem('drzavljanstvo')!,
+    drzavljanstvo:
+      localStorage.getItem('drzavljanstvo')! === 'Srpsko'
+        ? 'Drzavljanin Republike Srbije'
+        : 'Strani drzavljanin sa boravkom u RS',
     jmbg: localStorage.getItem('jmbg')!,
     ime: localStorage.getItem('ime')!,
     prezime: localStorage.getItem('prezime')!,
