@@ -3,13 +3,8 @@ package com.example.VaccinationApplication.services;
 import com.example.VaccinationApplication.dao.DataAccessLayer;
 import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
-import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
-import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import com.example.VaccinationApplication.model.zahtev_zeleni_sertifikat.ListaZahtevaZelenogSertifikata;
 import com.example.VaccinationApplication.model.zahtev_zeleni_sertifikat.Zahtev;
-import com.example.VaccinationApplication.model.zeleni_sertifikat.ListaZelenihSertifikata;
-import com.example.VaccinationApplication.model.zeleni_sertifikat.ZeleniSertifikat;
-
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -129,11 +124,13 @@ public class ZahtevService {
     
 public String getForUser(String id) throws Exception {
     	
-    	String xPath = "//zahtev[@about='http://www.ftn..uns.ac.rs/zahtev_zelenog_sertifikata/"+id+"']";
+    	String xPath = "//zahtev[@about='http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/"+id+"']";
     	System.out.println(xPath);
     	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
         List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zahtevi", xPath, "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata");
+    	System.out.println(rezultat.size());
         for (String string : rezultat) {
+        	System.out.println(string);
         	return convertToXml(convertToObject(string));
 			//zahtevi.add(convertToObject(string));
 		}

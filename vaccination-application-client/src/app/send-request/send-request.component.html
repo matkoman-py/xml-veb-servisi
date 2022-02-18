@@ -1,16 +1,17 @@
+<p-toast position="top-center" key="tc"></p-toast>
 <div class="card">
     <p>Posaljite zahtev</p>
     <div class="p-formgroup-inline">
       <div class="p-field">
-        <input type="text" pInputText [(ngModel)]="ime_i_prezime" placeholder="Ime i Prezime">
+        <input type="text" required pInputText [(ngModel)]="ime_i_prezime" placeholder="Ime i Prezime">
       </div>
       <br>
       <div class="p-field">
-        <input type="text" pInputText [(ngModel)]="mesto" placeholder="Mesto">
+        <input type="text" required pInputText [(ngModel)]="mesto" placeholder="Mesto">
       </div>
       <br>
       <div class="p-field">
-        <input type="text" pInputText [(ngModel)]="broj_pasosa" placeholder="Broj Pasosa">
+        <input type="text" required pInputText [(ngModel)]="broj_pasosa" placeholder="Broj Pasosa">
       </div>
       <br>
       <div class="p-field">
@@ -23,7 +24,7 @@
       </div>
       <br>
       <div class="p-field">
-        <quill-editor [modules]="config" [(ngModel)]="text"></quill-editor>
+        <textarea pInputTextarea [(ngModel)]="text"></textarea>
       </div>
     </div>
     <br>
