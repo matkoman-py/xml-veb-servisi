@@ -133,12 +133,12 @@ public class PotvrdaService {
 
             if (potvrda.getVakcinacijaInfo().getNazivVakcine().getValue().equals("Pfizer-BioNTech")) {
                 pfizer += numDoza;
-            } else if (potvrda.getVakcinacijaInfo().getNazivVakcine().getValue().equals("SinoPharm")) {
+            } else if (potvrda.getVakcinacijaInfo().getNazivVakcine().getValue().equals("Sinopharm")) {
                 System.out.println("USAOOOO");
                 sinopharm += numDoza;
-            } else if (potvrda.getVakcinacijaInfo().getNazivVakcine().getValue().equals("Sputnik V")) {
+            } else if (potvrda.getVakcinacijaInfo().getNazivVakcine().getValue().equals("SputnikV")) {
                 sputnik += numDoza;
-            } else if (potvrda.getVakcinacijaInfo().getNazivVakcine().getValue().equals("AstraZenneca-Oxford")) {
+            } else if (potvrda.getVakcinacijaInfo().getNazivVakcine().getValue().equals("AstraZeneca")) {
                 astrazenneca += numDoza;
             }
         }
