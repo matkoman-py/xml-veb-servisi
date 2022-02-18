@@ -1,0 +1,17 @@
+.bigFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.smallFlex {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.buttonFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}

@@ -40,7 +40,7 @@ export class EvidencijaVakcinacijeService {
   postSaglasnost(
     saglasnost: SaglasnostDTO,
     datum: string,
-    doza: SelectType,
+    doza: string,
     lekar: string,
     punkt: string,
     kontraindikacije: string,
@@ -54,7 +54,7 @@ export class EvidencijaVakcinacijeService {
  xmlns:pred="http://www.ftn.uns.ac.rs/predicate"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.ftn.uns.ac.rs/Saglasnost file:/D:/Faks/CetvrtaDina/XMLVebServisi/xml-veb-servisi/VaccinationApplication/src/main/resources/static/xsd/Saglasnost.xsd" about="about0" rel="pred:fromInteresovanje"
-    href="http://www.ftn.uns.ac.rs/interesovanje/1111111111111">
+    href="http://www.ftn.uns.ac.rs/interesovanje/${saglasnost.jmbg}">
     <sag:Drzavljanstvo>
         <sag:JMBG>${saglasnost.jmbg}</sag:JMBG>
     </sag:Drzavljanstvo>
@@ -102,7 +102,7 @@ export class EvidencijaVakcinacijeService {
         <sag:Vakcinacijski_punkt>${punkt}</sag:Vakcinacijski_punkt>
         <sag:Podaci_lekar>${lekar}</sag:Podaci_lekar>
         ${
-          doza.value === 'prva'
+          doza === 'prva'
             ? `<sag:Vakcinacija>
             <sag:Naziv_vakcine property="pred:naziv_vakcine" datatype="xs:string">${saglasnost.vakcina}</sag:Naziv_vakcine>
             <sag:Datum_vakcinacije>${todayFormatiran}</sag:Datum_vakcinacije>
@@ -136,7 +136,7 @@ export class EvidencijaVakcinacijeService {
 </sag:Saglasnost>`;
 
     return this.http.post<String>(
-      `/api/saglasnost/updateSaglasnost/${doza.value}`,
+      `/api/saglasnost/updateSaglasnost/${doza}`,
       xml
     );
   }
