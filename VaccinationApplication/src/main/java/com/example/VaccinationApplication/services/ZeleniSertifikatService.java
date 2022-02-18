@@ -219,16 +219,16 @@ public class ZeleniSertifikatService {
         ArrayList<String> conditions = new ArrayList<>();
 
         if(!ime.trim().equals("")) {
-            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime> \"" + ime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/string> ;");
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime> \"" + ime + "\"^^<file:///D:/Faks/xml-veb-servisi/VaccinationApplication/gen/string> ;");
         }
         if(!prezime.trim().equals("")) {
-            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/prezime> \"" + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/string> ;");
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/prezime> \"" + prezime + "\"^^<file:///D:/Faks/xml-veb-servisi/VaccinationApplication/gen/string> ;");
         }
 //        if(!ustanova.trim().equals("")) {
 //            condition += "?s <http://www.ftn.uns.ac.rs/predicate/zdravstvena_ustanova> \"" + ustanova + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> .";
 //        }
         if(!datum.trim().equals("")) {
-            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/date> ;");
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "T00:00:00.000Z\"^^<file:///D:/Faks/xml-veb-servisi/VaccinationApplication/gen/dateTime> .");
         }
         if(conditions.isEmpty()) {
             conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime> ?o");

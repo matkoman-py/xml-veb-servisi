@@ -37,7 +37,7 @@
                         
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" margin-top="20px">
-                        Ime i prezime: <xsl:value-of select="pot:Potvrda/pot:pacijent[1]/pot:Ime_i_prezime"/>
+                        Ime i prezime: <xsl:value-of select="pot:Potvrda/pot:pacijent[1]/pot:ime"/> <xsl:text> </xsl:text> <xsl:value-of select="pot:Potvrda/pot:pacijent[1]/pot:prezime"/>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="0.66em" color="gray" margin-bottom="15px">
                         First and Last Name:

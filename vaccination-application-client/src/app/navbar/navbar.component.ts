@@ -19,12 +19,12 @@ export class NavbarComponent implements OnInit {
       routerLink: '/home',
     },
     {
-      label: 'Documents',
+      label: 'Dokumenti',
       icon: 'pi pi-fw pi-home',
       routerLink: '/user-documents',
     },
     {
-      label: 'Send request',
+      label: 'Posalji zahtev',
       icon: 'pi pi-fw pi-home',
       routerLink: '/send-request',
     },

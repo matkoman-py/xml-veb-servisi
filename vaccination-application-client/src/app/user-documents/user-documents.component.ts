@@ -76,6 +76,50 @@ export class UserDocumentsComponent implements OnInit {
       });
   }
 
+  exportMetadataJson(tip: string) {
+    switch (tip) {
+      case 'Interesovanje':
+        window.open(
+          'api/interesovanja/getMetadataJson/' + localStorage.getItem('jmbg')!
+        );
+        break;
+      case 'Potvrda':
+        window.open(
+          'api/potvrde/getMetadataJson/' + localStorage.getItem('jmbg')!
+        );
+        break;
+      default:
+        if (tip.startsWith('Zahtev')) {
+          window.open('api/zahtevi/getMetadataJson/' + tip.split(' ')[1]);
+        }
+        if (tip.startsWith('Saglasnost')) {
+          window.open('api/saglasnost/getMetadataJson/' + tip.split(' ')[1]);
+        }
+    }
+  }
+
+  exportMetadataRdf(tip: string) {
+    switch (tip) {
+      case 'Interesovanje':
+        window.open(
+          'api/interesovanja/getMetadataRdf/' + localStorage.getItem('jmbg')!
+        );
+        break;
+      case 'Potvrda':
+        window.open(
+          'api/potvrde/getMetadataRdf/' + localStorage.getItem('jmbg')!
+        );
+        break;
+      default:
+        if (tip.startsWith('Zahtev')) {
+          window.open('api/zahtevi/getMetadataRdf/' + tip.split(' ')[1]);
+        }
+        if (tip.startsWith('Saglasnost')) {
+          window.open('api/saglasnost/getMetadataRdf/' + tip.split(' ')[1]);
+        }
+    }
+  }
+
   display(docName: string): void {
     let forSend: string = '';
 

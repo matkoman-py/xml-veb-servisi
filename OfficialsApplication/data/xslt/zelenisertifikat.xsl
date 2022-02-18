@@ -136,12 +136,12 @@
                     </tr>
                     <tr>
                         <td><div style="height: 30px; overflow:hidden; font-size:15px; text-align:left;">
-                            Datum i vreme izdavanja sertifikata/Certificate isuing date and time: <xsl:value-of select="substring-before(/zel:zeleni_sertifikat/zel:datum_izdavanja, 'T')"/> <xsl:text> </xsl:text> <xsl:value-of select="substring-after(/zel:zeleni_sertifikat/zel:datum_izdavanja, 'T')"/>
+                            Datum i vreme izdavanja sertifikata/Certificate isuing date and time: <xsl:value-of select="substring-before(/zel:zeleni_sertifikat/zel:datum_izdavanja, 'T')"/>
                         </div></td>
                     </tr>
                     <tr>
                         <td><div style="height: 30px; overflow:hidden; font-size:15px; text-align:left;">
-                            Ime i prezime/Name and surname: <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:ime_prezime[1]"/>
+                            Ime i prezime/Name and surname: <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:ime"/> <xsl:text> </xsl:text> <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:prezime"/>
                         </div></td>
                     </tr>
                     <tr>

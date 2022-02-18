@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:pot="http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji"
-                xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
-
+    xmlns:pot="http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji"
+    xmlns:fo="http://www.w3.org/1999/XSL/Format" version="2.0">
+    
     <xsl:template match="/">
         <fo:root>
             <fo:layout-master-set>
@@ -10,7 +10,7 @@
                     <fo:region-body margin="0.75in"/>
                 </fo:simple-page-master>
             </fo:layout-master-set>
-
+            
             <fo:page-sequence master-reference="bookstore-page">
                 <fo:flow flow-name="xsl-region-body">
                     <fo:block text-align-last="justify" font-weight="bold" font-size="10px">
@@ -25,19 +25,19 @@
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="0.66em" color="gray" margin-bottom="15px">
                         Confirmation code:
-
-
+                        
+                        
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="2em" font-weight="bold"  text-align="center" margin-bottom="1px">
                         POTVRDA O IZVRESNOJ VAKCINACIJI PROTIV COVID-19
-
+                        
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1.17em" font-weight="bold" color="gray" text-align="center" margin-top="1px">
                         CONFIRMATION OF THE COVID-19 VACCINATION
-
+                        
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" margin-top="20px">
-                        Ime i prezime: <xsl:value-of select="pot:Potvrda/pot:pacijent[1]/pot:Ime_i_prezime"/>
+                        Ime i prezime: <xsl:value-of select="pot:Potvrda/pot:pacijent[1]/pot:ime"/> <xsl:text> </xsl:text> <xsl:value-of select="pot:Potvrda/pot:pacijent[1]/pot:prezime"/>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="0.66em" color="gray" margin-bottom="15px">
                         First and Last Name:
@@ -47,50 +47,50 @@
                     </fo:block>
                     <xsl:if test="pot:Potvrda/pot:pacijent/pot:Pol='Musko'">
                         <fo:block font-family="sans-serif" font-size="0.66em" color="gray" margin-bottom="15px">
-
+                            
                             Gender: Male
                         </fo:block>
                     </xsl:if>
                     <xsl:if test="pot:Potvrda/pot:pacijent/pot:Pol='Zensko'">
                         <fo:block font-family="sans-serif" font-size="0.66em" color="gray" margin-bottom="15px">
-
+                            
                             Gender: Female
                         </fo:block>
                     </xsl:if>
-
+                    
                     <fo:block font-family="sans-serif" font-size="1em">
                         Datum davanja i broj serije prve doze vakcine: <xsl:value-of select="/pot:Potvrda/pot:Vakcinacija_info[1]/pot:Prva_doza[1]/pot:Datum_vakcine[1]"/>, serija: <xsl:value-of select="/pot:Potvrda/pot:Vakcinacija_info[1]/pot:Prva_doza[1]/pot:Serija_vakcine"/>
 
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="0.66em" color="gray" margin-bottom="15px">
                         Vaccination Date:
-
+                        
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em">
                         Datum davanja i broj serije druge doze vakcine: <xsl:value-of select="/pot:Potvrda/pot:Vakcinacija_info[1]/pot:Druga_doza[1]/pot:Datum_vakcine[1]"/>, serija: <xsl:value-of select="/pot:Potvrda/pot:Vakcinacija_info[1]/pot:Druga_doza[1]/pot:Serija_vakcine"/>
-
+                        
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="0.66em" color="gray" margin-bottom="15px">
                         Second Vaccination Date:
-
+                        
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em">
                         Naziv vakcine: <xsl:value-of select="/pot:Potvrda/pot:Vakcinacija_info[1]/pot:Naziv_vakcine[1]"/>
-
-
+                        
+                        
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="0.66em" color="gray" margin-bottom="15px">
                         Name of vaccine:
-
-
+                        
+                        
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em">
                         Datum izdavanja potvrde: <xsl:value-of select="/pot:Potvrda/pot:Vakcinacija_info[1]/pot:Datum_izdavanja[1]"/>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="0.66em" color="gray" margin-bottom="15px">
                         Confirmation Release Date:
-
-
+                        
+                       
                     </fo:block>
 
                     <fo:block text-align-last="justify" font-weight="bold" font-size="10px">
@@ -109,16 +109,17 @@
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em">
                         Ova potvrda vazi bez potpisa i pecata
-
-
+                        
+                        
+                        
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="0.66em" color="gray" margin-bottom="15px">
-                        This certificate is valid without signatures and seals
-
+                        This certificate is valid without signatures and seals                        
+                        
                     </fo:block>
-
-
-
+                    
+                    
+              
                 </fo:flow>
             </fo:page-sequence>
         </fo:root>

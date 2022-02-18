@@ -1,11 +1,13 @@
-<div style="text-align: center;">
-  <h1>Your Documents</h1>
+<div style="text-align: center">
+  <h1>Vasi dokumenti</h1>
 
-  <div style="width: 50%;margin-left: 25%;">
+  <div style="width: 50%; margin-left: 25%">
     <p-table [value]="documentNames">
       <ng-template pTemplate="header">
         <tr>
-          <th>Document name</th>
+          <th>Ime dokumenta</th>
+          <th></th>
+          <th></th>
           <th></th>
           <th></th>
           <th></th>
@@ -13,10 +15,47 @@
       </ng-template>
       <ng-template pTemplate="body" let-document>
         <tr>
-          <td>{{document}}</td>
-          <td><button pButton type="button" label="Download As PDF" (click)="downloadPDF(document)"></button></td>
-          <td><button pButton type="button" label="Download As HTML" (click)="downloadHTML(document)"></button></td>
-          <td><button pButton type="button" label="Display" (click)="display(document)"></button></td>
+          <td>{{ document }}</td>
+          <td>
+            <button
+              pButton
+              type="button"
+              label="Download As PDF"
+              (click)="downloadPDF(document)"
+            ></button>
+          </td>
+          <td>
+            <button
+              pButton
+              type="button"
+              label="Download As HTML"
+              (click)="downloadHTML(document)"
+            ></button>
+          </td>
+          <td>
+            <button
+              pButton
+              type="button"
+              label="Display"
+              (click)="display(document)"
+            ></button>
+          </td>
+          <td>
+            <button
+              pButton
+              type="button"
+              label="Display RDF"
+              (click)="exportMetadataRdf(document)"
+            ></button>
+          </td>
+          <td>
+            <button
+              pButton
+              type="button"
+              label="Display JSON"
+              (click)="exportMetadataJson(document)"
+            ></button>
+          </td>
         </tr>
       </ng-template>
     </p-table>

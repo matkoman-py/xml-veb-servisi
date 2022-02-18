@@ -41,10 +41,10 @@
                         Broj sertifikata/Certificate ID: <xsl:value-of select="/zel:zeleni_sertifikat/zel:broj_sertifikata[1]"/>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="5px" margin-top="6px">
-                        Datum i vreme izdavanja sertifikata/Certificate issuing date and time: <xsl:value-of select="substring-before(/zel:zeleni_sertifikat/zel:datum_izdavanja, 'T')"/> <xsl:text> </xsl:text> <xsl:value-of select="substring-after(/zel:zeleni_sertifikat/zel:datum_izdavanja, 'T')"/>
+                        Datum i vreme izdavanja sertifikata/Certificate issuing date and time: <xsl:value-of select="substring-before(/zel:zeleni_sertifikat/zel:datum_izdavanja, 'T')"/>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="5px" margin-top="6px">
-                        Ime i prezime/Name and surname: <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:ime_prezime[1]"/>
+                        Ime i prezime/Name and surname: <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:ime"/> <xsl:text> </xsl:text> <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:prezime"/>
                     </fo:block>
                     <fo:block font-family="sans-serif" font-size="1em" padding="5px" margin-top="6px">
                         Pol/Gender: <xsl:value-of select="/zel:zeleni_sertifikat/zel:podaci_o_pacijentu[1]/zel:pol[1]"/>

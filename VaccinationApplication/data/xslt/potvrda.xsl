@@ -90,7 +90,7 @@
                 <p class="small">Confirmation code:</p>
                 <h2>POTVRDA O IZVRESNOJ VAKCINACIJI PROTIV COVID-19</h2>
                 <h3>CONFIRMATION OF THE <b>COVID-19</b> VACCINATION</h3>
-                <p class="form">Ime i prezime: <xsl:value-of select="pot:Potvrda/pot:pacijent[1]/pot:Ime_i_prezime"/></p>
+                <p class="form">Ime i prezime: <xsl:value-of select="pot:Potvrda/pot:pacijent[1]/pot:ime"/> <xsl:text> </xsl:text> <xsl:value-of select="pot:Potvrda/pot:pacijent[1]/pot:prezime"/></p>
                 <p class="small">First and Last Name:</p>
 
                 <p class="form">Pol: <xsl:value-of select="pot:Potvrda/pot:pacijent/pot:Pol"/></p>

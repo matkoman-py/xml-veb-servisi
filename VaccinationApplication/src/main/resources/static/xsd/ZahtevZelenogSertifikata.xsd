@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-           targetNamespace="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
-           xmlns:zzs="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
-           xmlns:pred="http://www.ftn.uns.ac.rs/predicate">
+    targetNamespace="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
+    xmlns:zzs="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata"
+    xmlns:pred="http://www.ftn.uns.ac.rs/predicate">
     <xs:element name="zahtev">
         <xs:complexType>
             <xs:sequence>
                 <xs:element form="qualified" name="Podnosilac_zahteva"
-                            type="zzs:TInformacije_o_podnosiocu"/>
+                    type="zzs:TInformacije_o_podnosiocu"/>
                 <xs:element name="Informacije_o_zahtevu" type="zzs:TInformacije_o_zahtevu"/>
             </xs:sequence>
             <xs:attribute name="about" type="xs:string" use="required"/>
@@ -28,14 +28,7 @@
         <xs:sequence>
             <xs:element name="Ime_i_prezime" type="zzs:TImePrezime"/>
             <xs:element name="Datum_rodjenja" type="xs:date"/>
-            <xs:element name="Pol">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="Musko"/>
-                        <xs:enumeration value="Zensko"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="Pol" type="xs:string"> </xs:element>
             <xs:element name="Jedinstveni_maticni_broj_gradjana" type="zzs:TJmbg"> </xs:element>
             <xs:element name="Broj_pasosa" type="zzs:TBrojPasosa"> </xs:element>
         </xs:sequence>

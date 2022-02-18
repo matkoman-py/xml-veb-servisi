@@ -349,7 +349,7 @@ public class IzvestajOImunizacijiService {
 
   		zs.setQrKod("dSADSADKLDNLK");
   		String res = convertToXml(zs);
-  		generateHTML(res, "data/xslt/zeleni.xsl");
+  		generateHTML(res, "data/xslt/zelenisertifikat.xsl");
 		generatePDF("gen/itext/izvestaj.pdf");
 		mailSenderService.odobrenZeleni(pacijentData);
   		

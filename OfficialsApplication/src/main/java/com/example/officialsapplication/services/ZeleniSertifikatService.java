@@ -294,7 +294,7 @@ public class ZeleniSertifikatService {
   		zs.getBrojSertifikata().setProperty("pred:broj_sertifikata");
   		zs.getBrojSertifikata().setDatatype("xs:string");
   		zs.setDatumIzdavanja(new com.example.officialsapplication.model.zeleni_sertifikat.TDatumIzdavanja());
-  		zs.getDatumIzdavanja().setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(dn.get(Calendar.YEAR), dn.get(Calendar.MONTH)+1, dn.get(Calendar.DAY_OF_MONTH), dn.get(Calendar.HOUR_OF_DAY), dn.get(Calendar.MINUTE), dn.get(Calendar.SECOND), DatatypeConstants.FIELD_UNDEFINED, DatatypeConstants.FIELD_UNDEFINED));
+  		zs.getDatumIzdavanja().setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(dn.get(Calendar.YEAR), dn.get(Calendar.MONTH)+1, dn.get(Calendar.DAY_OF_MONTH), 0, 0,0, 0,0));
   		zs.getDatumIzdavanja().setDatatype("xs:dateTime");
   		zs.getDatumIzdavanja().setProperty("pred:datum");
   		zs.setPodaciOPacijentu(new TPacijent());
@@ -352,9 +352,10 @@ public class ZeleniSertifikatService {
   		ByteArrayInputStream is = pdfGeneratorService.generatePDF(convertToXml(zs), "data/xsl-fo/zeleni_fo.xsl");
   		ByteArrayInputStream is1 =  htmlGeneratorService.generateHTML(convertToXml(zs), "data/xslt/zelenisertifikat.xsl");
   		System.out.println(convertToXml(zs));
-		mailSenderService.odobrenZeleni2(pacijentData, IOUtils.toByteArray(is), IOUtils.toByteArray(is1));
 
 		ResponseEntity<ZeleniSertifikat> response = restTemplate.postForEntity("http://localhost:8087/api/zelenisertifikati/saveXmlText", convertToXml(zs), ZeleniSertifikat.class);
+		mailSenderService.odobrenZeleni2(pacijentData, IOUtils.toByteArray(is), IOUtils.toByteArray(is1));
+
 		return convertToXml(response.getBody());
 		
   		
