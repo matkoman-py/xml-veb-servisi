@@ -16,7 +16,6 @@ export class InteresovanjeComponent implements OnInit {
     { name: 'Pfizer-BioNTech', value: 'Pfizer-BioNTech' },
     { name: 'Sinopharm', value: 'Sinopharm' },
     { name: 'AstraZeneca', value: 'AstraZeneca' },
-    { name: 'Moderna', value: 'Moderna' },
   ];
 
   selectedVakcina: SelectType = { name: '', value: '' };

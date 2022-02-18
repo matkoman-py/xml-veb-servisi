@@ -1,37 +1,59 @@
 <p-toast position="top-center" key="tc"></p-toast>
 <div class="card">
-    <div class="flex flex-wrap align-items-center justify-content-center card-container">
-        <h1 >Unesite pocetni i krajnji datum za izvestaj:</h1>
+  <div
+    class="flex flex-wrap align-items-center justify-content-center card-container"
+  >
+    <h1>Unesite pocetni i krajnji datum za izvestaj:</h1>
+  </div>
+  <div
+    class="flex flex-wrap align-items-center justify-content-center card-container"
+  >
+    <div class="mx-6 p-3 flex align-items-center justify-content-center">
+      <p-calendar
+        [(ngModel)]="df"
+        dateFormat="yy-mm-dd"
+        placeholder="Unesite datum od"
+      ></p-calendar>
     </div>
-    <div class="flex flex-wrap align-items-center justify-content-center card-container">
-            <div class="mx-6 p-3 flex align-items-center justify-content-center">
-                <p-calendar [(ngModel)]="df" dateFormat="yy-mm-dd" placeholder="Unesite datum od"></p-calendar>
-            </div>
-            <div class="mx-6 p-3 flex align-items-center justify-content-center">
-                <p-calendar [(ngModel)]="dt" dateFormat="yy-mm-dd" placeholder="Unesite datum od"></p-calendar>
-            </div>
-            <div class="mx-6 p-3 flex align-items-center justify-content-center">
-                <button pButton type="button" label="Click" (click)="onSave()"></button>
-            </div>
+    <div class="mx-6 p-3 flex align-items-center justify-content-center">
+      <p-calendar
+        [(ngModel)]="dt"
+        dateFormat="yy-mm-dd"
+        placeholder="Unesite datum od"
+      ></p-calendar>
     </div>
+    <div class="mx-6 p-3 flex align-items-center justify-content-center">
+      <button pButton type="button" label="Click" (click)="onSave()"></button>
+    </div>
+  </div>
 </div>
 
 <div class="card" *ngIf="isMade">
-    
-    <div class="mx-auto w-9">
-        <div class="flex flex-wrap align-items-center justify-content-center card-container">
-            <h1 >Izvestaj uspesno kreiran! Na dugmetu ispod mozete pogledati u PDF formatu</h1>
-        </div>
-
-        <div class="flex flex-wrap align-items-center justify-content-center card-container">
-            <p-button label="PDF" icon="pi pi-file-pdf" class="p-button-danger" (click)="displayPdf()"></p-button>
-            <p-button label="HTML" icon="pi pi-file" class="p-button-success" (click)="displayHtml()"></p-button>
-        </div>
-
-        <a href="api/izvestaji/html/{{fileName}}">OVDE</a>
-
-
-
+  <div class="mx-auto w-9">
+    <div
+      class="flex flex-wrap align-items-center justify-content-center card-container"
+    >
+      <h1>
+        Izvestaj uspesno kreiran! Na dugmetu ispod mozete pogledati u PDF
+        formatu
+      </h1>
     </div>
-</div>
 
+    <div
+      class="flex flex-wrap align-items-center justify-content-center card-container"
+    >
+      <p-button
+        label="PDF"
+        icon="pi pi-file-pdf"
+        class="p-button-danger"
+        (click)="displayPdf()"
+      ></p-button>
+      <p-button
+        label="HTML"
+        icon="pi pi-file"
+        class="p-button-success"
+        (click)="displayHtml()"
+      ></p-button>
+    </div>
+  </div>
+</div>
