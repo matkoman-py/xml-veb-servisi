@@ -27,7 +27,12 @@ export class UserDocumentsComponent implements OnInit {
   }
 
   downloadPDF(docName: string): void {
-    this.userDocumentsService.getPDF('2206999810092', this.getDocType(docName)).subscribe((data) => {
+    let forSend: string = "";
+
+    if(docName.startsWith("Zahtev")) forSend = docName.split(' ')[1];
+    else forSend = '2206999810092';
+
+    this.userDocumentsService.getPDF(forSend, this.getDocType(docName)).subscribe((data) => {
       this.blob = new Blob([data], {
         type: 'application/pdf'
       });
@@ -48,7 +53,12 @@ export class UserDocumentsComponent implements OnInit {
   }
 
   downloadHTML(docName: string): void {
-    this.userDocumentsService.getHTML('2206999810092', this.getDocType(docName)).subscribe((data) => {
+    let forSend: string = "";
+
+    if(docName.startsWith("Zahtev")) forSend = docName.split(' ')[1];
+    else forSend = '2206999810092';
+    
+    this.userDocumentsService.getHTML(forSend, this.getDocType(docName)).subscribe((data) => {
       this.blob = new Blob([data], {
         type: 'application/pdf'
       });
@@ -69,7 +79,12 @@ export class UserDocumentsComponent implements OnInit {
   }
 
   display(docName: string): void {
-    this.userDocumentsService.getPDF('2206999810092', this.getDocType(docName)).subscribe((data) => {
+    let forSend: string = "";
+
+    if(docName.startsWith("Zahtev")) forSend = docName.split(' ')[1];
+    else forSend = '2206999810092';
+
+    this.userDocumentsService.getPDF(forSend, this.getDocType(docName)).subscribe((data) => {
       this.blob = new Blob([data], {
         type: 'application/pdf'
       });

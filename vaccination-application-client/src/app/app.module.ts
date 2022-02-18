@@ -29,6 +29,7 @@ import { RippleModule } from 'primeng/ripple';
 import { SaglasnostComponent } from './saglasnost/saglasnost.component';
 import { CalendarModule } from 'primeng/calendar';
 import { EvidencijaVakcinacijeComponent } from './evidencija-vakcinacije/evidencija-vakcinacije.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { EvidencijaVakcinacijeComponent } from './evidencija-vakcinacije/evidenc
     MenubarModule,
     InputTextModule,
     DropdownModule,
+    InputTextareaModule,
     CheckboxModule,
     FormsModule,
     InputNumberModule,

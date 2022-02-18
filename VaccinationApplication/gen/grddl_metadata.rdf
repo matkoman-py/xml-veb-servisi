@@ -1,14 +1,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/2206999810092-2022-02-18-15-25-28">
-    <pred:ime_i_prezime xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">Marko markovic</pred:ime_i_prezime>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/2206999810092-2022-02-18-17-08-24">
+    <pred:ime_i_prezime xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">dfasfasfas</pred:ime_i_prezime>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/2206999810092-2022-02-18-15-25-28">
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/2206999810092-2022-02-18-17-08-24">
     <pred:jmbg xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">2206999810092</pred:jmbg>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/2206999810092-2022-02-18-15-25-28">
-    <pred:broj_pasosa xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">dsadsad</pred:broj_pasosa>
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/2206999810092-2022-02-18-17-08-24">
+    <pred:broj_pasosa xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="string">32343243</pred:broj_pasosa>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/2206999810092-2022-02-18-15-25-28">
+  <rdf:Description rdf:about="http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/2206999810092-2022-02-18-17-08-24">
     <pred:datum xmlns:pred="http://www.ftn.uns.ac.rs/predicate/" rdf:datatype="date">2022-02-18</pred:datum>
   </rdf:Description>
 </rdf:RDF>
