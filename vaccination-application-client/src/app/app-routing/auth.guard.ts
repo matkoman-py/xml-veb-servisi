@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -26,8 +22,7 @@ export class AuthGuard implements CanActivate {
       if (tokenPayload === 'zdravstveni_radnik') {
         this.router.navigate(['evidencija-vakcinacije']);
       } else {
-        this.router.navigate(['send-request']);
-
+        this.router.navigate(['user-documents']);
       }
       return false;
     }

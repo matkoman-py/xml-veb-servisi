@@ -9,23 +9,20 @@ import jwt_decode from 'jwt-decode';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class LoginComponent implements OnInit {
-  
   username: string;
   password: string;
 
   validLogin: boolean = true;
 
-  constructor(
-    private loginService: LoginService,
-    private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) {}
 
   onLogin = () => {
     const auth: Login = {
       username: this.username,
-      password: this.password
+      password: this.password,
     };
 
     this.loginService.userLogin(auth).subscribe(
@@ -34,45 +31,66 @@ export class LoginComponent implements OnInit {
         if (role !== undefined) {
           localStorage.setItem('role', role);
           localStorage.setItem('isLoggedIn', 'true');
-          localStorage.setItem('token', response.body.accessToken)
+          localStorage.setItem('token', response.body.accessToken);
 
-          this.loginService.emitLogin() 
-          if(role === 'gradjanin') {
-
-            this.loginService.getData(this.username).subscribe(res => {
+          this.loginService.emitLogin();
+          if (role === 'gradjanin') {
+            this.loginService.getData(this.username).subscribe((res) => {
               let parseString = require('xml2js').parseString;
               let self = this;
               parseString(res, function (err: any, result: any) {
                 localStorage.setItem('adresa', result.korisnik.adresa[0]);
-                localStorage.setItem('broj_pasosa', result.korisnik.broj_pasosa[0]);
-                localStorage.setItem('datum_rodjenja', result.korisnik.datum_rodjenja[0]);
-                localStorage.setItem('drzavljanstvo', result.korisnik.drzavljanstvo[0]);
+                localStorage.setItem(
+                  'broj_pasosa',
+                  result.korisnik.broj_pasosa[0]
+                );
+                localStorage.setItem(
+                  'datum_rodjenja',
+                  result.korisnik.datum_rodjenja[0]
+                );
+                localStorage.setItem(
+                  'drzavljanstvo',
+                  result.korisnik.drzavljanstvo[0]
+                );
                 localStorage.setItem('email', result.korisnik.email[0]);
-                localStorage.setItem('fiksni_telefon', result.korisnik.fiksni_telefon[0]);
+                localStorage.setItem(
+                  'fiksni_telefon',
+                  result.korisnik.fiksni_telefon[0]
+                );
                 localStorage.setItem('grad', result.korisnik.grad[0]);
                 localStorage.setItem('ime', result.korisnik.ime[0]);
-                localStorage.setItem('ime_roditelja', result.korisnik.ime_roditelja[0]);
+                localStorage.setItem(
+                  'ime_roditelja',
+                  result.korisnik.ime_roditelja[0]
+                );
                 localStorage.setItem('jmbg', result.korisnik.jmbg[0]);
                 localStorage.setItem('mesto', result.korisnik.mesto[0]);
-                localStorage.setItem('mesto_rodjenja', result.korisnik.mesto_rodjenja[0]);
-                localStorage.setItem('mobilni_telefon', result.korisnik.mobilni_telefon[0]);
+                localStorage.setItem(
+                  'mesto_rodjenja',
+                  result.korisnik.mesto_rodjenja[0]
+                );
+                localStorage.setItem(
+                  'mobilni_telefon',
+                  result.korisnik.mobilni_telefon[0]
+                );
                 localStorage.setItem('pol', result.korisnik.pol[0]);
                 localStorage.setItem('prezime', result.korisnik.prezime[0]);
-              }); 
-            })
 
-            this.router.navigate(['send-request']);
-          } else if(role === 'zdravstveni_radnik') {
+                self.router.navigate(['user-documents']);
+              });
+            });
+          } else if (role === 'zdravstveni_radnik') {
             this.router.navigate(['evidencija-vakcinacije']);
           }
- 
-          console.log(role + " je uloga");
+
+          console.log(role + ' je uloga');
         }
       },
       () => {
         this.validLogin = false;
-      })
-  }
+      }
+    );
+  };
 
   findUserRole(token: any) {
     let user: any;
@@ -96,7 +114,5 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
