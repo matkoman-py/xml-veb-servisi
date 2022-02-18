@@ -1,5 +1,6 @@
 package com.example.VaccinationApplication.controller;
 
+import com.example.VaccinationApplication.dto.MetadataDTO;
 import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import com.example.VaccinationApplication.model.zeleni_sertifikat.ZeleniSertifikat;
 import com.example.VaccinationApplication.services.PotvrdaService;
@@ -102,5 +103,17 @@ public class PotvrdaController {
                                                      @RequestParam(required = false) String datum,
                                                      @RequestParam(required = false) boolean poklapanje) throws FileNotFoundException, TransformerException {
         return ResponseEntity.ok(potvrdaService.getPotvrdaAdvanced(ime, prezime, ustanova, datum, poklapanje));
+    }
+
+    @GetMapping("/getMetadataJson/{id}")
+    public MetadataDTO getMetadataJson(@PathVariable String id) {
+        return potvrdaService.getMetadataJSON(id);
+    }
+
+    @RequestMapping(value = "/getMetadataRdf/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public String getMetadataRdf(@PathVariable String id) {
+
+        System.out.println(potvrdaService.getMetadataRDF(id));
+        return potvrdaService.getMetadataRDF(id);
     }
 }

@@ -16,19 +16,19 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TVakcinacija">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="doza" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/>
- *         &lt;element name="tip" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="proizvodjac_serija" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}date"/>
- *         &lt;element name="zdravstvena_ustanova" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="TVakcinacija"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="doza" type="{http://www.w3.org/2001/XMLSchema}positiveInteger"/&gt;
+ *         &lt;element name="tip" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="proizvodjac_serija" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}date"/&gt;
+ *         &lt;element name="zdravstvena_ustanova" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

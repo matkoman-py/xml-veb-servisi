@@ -1,6 +1,7 @@
 package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
+import com.example.VaccinationApplication.dto.MetadataDTO;
 import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.potvrda.ListaPotvrda;
@@ -61,7 +62,17 @@ public class PotvrdaService {
     public Potvrda saveXmlFromObject(Potvrda potvrda) {
         String documentId = potvrda.getSifraPotvrde() + ".xml";
         dataAccessLayer.saveDocument(potvrda, folderId, documentId, Potvrda.class);
+
+        try {
+            metadataExtractor.extractAndSave(convertToXml(potvrda), "/potvrde");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+
         return potvrda;
+
     }
 
     public String convertToXml(Potvrda potvrda) {
@@ -226,17 +237,11 @@ public class PotvrdaService {
             Potvrda potvrda = convertToObject(item);
 
             str.append("<potvrda>\n");
+
             str.append("<sifraPotvrde>");
             str.append(potvrda.getSifraPotvrde());
             str.append("</sifraPotvrde>\n");
 
-            str.append("<linkedDocNamespace>");
-            str.append(potvrda.getHref().split("/")[3]);
-            str.append("</linkedDocNamespace>\n");
-
-            str.append("<linkedDocName>");
-            str.append(potvrda.getHref().split("/")[4]);
-            str.append("</linkedDocName>\n");
             str.append("</potvrda>\n");
         }
 
@@ -248,19 +253,19 @@ public class PotvrdaService {
         ArrayList<String> conditions = new ArrayList<>();
         String predicate;
         if(!ime.trim().equals("")) {
-            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime_i_prezime> \"" + ime + " " + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;");
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime> \"" + ime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/string> ;");
         }
-//        if(!prezime.trim().equals("")) {
-//            condition += "?s <http://www.ftn.uns.ac.rs/predicate/prezime_i_prezime> \"" + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;";
-//        }
+        if(!prezime.trim().equals("")) {
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/prezime> \"" + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/string> ;");
+        }
         if(!ustanova.trim().equals("")) {
-            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/zdravstvena_ustanova> \"" + ustanova + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> .");
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/zdravstvena_ustanova> \"" + ustanova + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/string> .");
         }
         if(!datum.trim().equals("")) {
-            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/date> ;");
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/date> ;");
         }
         if(conditions.isEmpty()) {
-            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime_i_prezime> ?o");
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime> ?o");
         }
 
         HashSet<String> results = new HashSet<>();
@@ -295,18 +300,19 @@ public class PotvrdaService {
             str.append(potvrda.getSifraPotvrde());
             str.append("</sifraPotvrde>\n");
 
-            str.append("<linkedDocNamespace>");
-            str.append(potvrda.getHref().split("/")[3]);
-            str.append("</linkedDocNamespace>\n");
-
-            str.append("<linkedDocName>");
-            str.append(potvrda.getHref().split("/")[4]);
-            str.append("</linkedDocName>\n");
             str.append("</potvrda>\n");
         }
 
         str.append(("</listaPotvrda>\n"));
 
         return str.toString();
+    }
+
+    public MetadataDTO getMetadataJSON(String id) {
+        return new MetadataDTO("<http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji/" + id + ">", metadataExtractor.getMetadata("/potvrde", "/potvrda_o_vakcinaciji", id));
+    }
+
+    public String getMetadataRDF(String id) {
+        return metadataExtractor.getRdfMetadata("/potvrde", "/potvrda_o_vakcinaciji", id);
     }
 }

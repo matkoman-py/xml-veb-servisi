@@ -1,6 +1,7 @@
 package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
+import com.example.VaccinationApplication.dto.MetadataDTO;
 import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.zahtev_zeleni_sertifikat.ListaZahtevaZelenogSertifikata;
@@ -188,17 +189,25 @@ public String getForUser(String id) throws Exception {
          return zahtevi.get(0);
      }
 
-public String getAllWaiting() throws Exception {
-	
-	String xPath = "/zahtev[@accepted = 'waiting']";
-	System.out.println(xPath);
-	List<Zahtev> zahtevi = new ArrayList<Zahtev>();
-    List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zahtevi", xPath, "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata");
-    for (String string : rezultat) {
-		zahtevi.add(convertToObject(string));
-	}
-    ListaZahtevaZelenogSertifikata lzzs = new ListaZahtevaZelenogSertifikata();
-    lzzs.setZahtev(zahtevi);
-    return convertToXml(lzzs);
-}
+    public String getAllWaiting() throws Exception {
+
+        String xPath = "/zahtev[@accepted = 'waiting']";
+        System.out.println(xPath);
+        List<Zahtev> zahtevi = new ArrayList<Zahtev>();
+        List<String> rezultat = dataAccessLayer.izvrsiXPathIzraz("/db/vaccination-system/zahtevi", xPath, "http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata");
+        for (String string : rezultat) {
+            zahtevi.add(convertToObject(string));
+        }
+        ListaZahtevaZelenogSertifikata lzzs = new ListaZahtevaZelenogSertifikata();
+        lzzs.setZahtev(zahtevi);
+        return convertToXml(lzzs);
+    }
+
+    public MetadataDTO getMetadataJSON(String id) {
+        return new MetadataDTO("<http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/" + id + ">", metadataExtractor.getMetadata("/zahtevi", "/zahtev_zelenog_sertifikata", id));
+    }
+
+    public String getMetadataRDF(String id) {
+        return metadataExtractor.getRdfMetadata("/zahtevi", "/zahtev_zelenog_sertifikata", id);
+    }
 }

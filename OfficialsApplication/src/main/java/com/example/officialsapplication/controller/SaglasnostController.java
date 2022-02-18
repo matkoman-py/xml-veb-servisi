@@ -1,5 +1,6 @@
 package com.example.officialsapplication.controller;
 
+import com.example.officialsapplication.dto.MetadataDTO;
 import com.example.officialsapplication.services.SaglasnostService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpHeaders;
@@ -53,4 +54,15 @@ public class SaglasnostController {
 
         return new ResponseEntity<byte[]>(IOUtils.toByteArray(bi), headers, HttpStatus.OK);
     }
+
+    @GetMapping("/getMetadataJson/{id}")
+    public MetadataDTO getMetadataJson(@PathVariable String id) {
+        return saglasnostService.getMetadataJSON(id);
+    }
+
+    @RequestMapping(value = "/getMetadataRdf/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public String getMetadataRdf(@PathVariable String id) {
+        return saglasnostService.getMetadataRDF(id);
+    }
+
 }

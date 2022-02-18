@@ -1,6 +1,7 @@
 package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
+import com.example.VaccinationApplication.dto.MetadataDTO;
 import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
 import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
@@ -218,19 +219,19 @@ public class ZeleniSertifikatService {
         ArrayList<String> conditions = new ArrayList<>();
 
         if(!ime.trim().equals("")) {
-            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime_i_prezime> \"" + ime + " " + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;");
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime> \"" + ime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/string> ;");
         }
-//        if(!prezime.trim().equals("")) {
-//            condition += "?s <http://www.ftn.uns.ac.rs/predicate/prezime> \"" + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;";
-//        }
+        if(!prezime.trim().equals("")) {
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/prezime> \"" + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/string> ;");
+        }
 //        if(!ustanova.trim().equals("")) {
 //            condition += "?s <http://www.ftn.uns.ac.rs/predicate/zdravstvena_ustanova> \"" + ustanova + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> .";
 //        }
-//        if(!datum.trim().equals("")) {
-//            condition += "?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/date> ;";
-//        }
+        if(!datum.trim().equals("")) {
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/date> ;");
+        }
         if(conditions.isEmpty()) {
-            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime_i_prezime> ?o");
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime> ?o");
         }
 
         HashSet<String> results = new HashSet<>();
@@ -279,5 +280,13 @@ public class ZeleniSertifikatService {
         str.append(("</listaSertifikata>\n"));
 
         return str.toString();
+    }
+
+    public MetadataDTO getMetadataJSON(String id) {
+        return new MetadataDTO("<http://www.ftn.uns.ac.rs/zahtev_zelenog_sertifikata/" + id + ">", metadataExtractor.getMetadata("/zeleni-sertifikat", "/zelenisertifikat", id));
+    }
+
+    public String getMetadataRDF(String id) {
+        return metadataExtractor.getRdfMetadata("/zeleni-sertifikat", "/zelenisertifikat", id);
     }
 }

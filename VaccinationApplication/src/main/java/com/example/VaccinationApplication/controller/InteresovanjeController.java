@@ -1,5 +1,6 @@
 package com.example.VaccinationApplication.controller;
 
+import com.example.VaccinationApplication.dto.MetadataDTO;
 import com.example.VaccinationApplication.exceptions.InteresovanjeAlreadyExistsException;
 import com.example.VaccinationApplication.model.interesovanje.Interesovanje;
 import com.example.VaccinationApplication.model.potvrda.Potvrda;
@@ -86,6 +87,16 @@ public class InteresovanjeController {
     public ResponseEntity<Interesovanje> xmlToObject(@RequestBody String xmlString) throws FileNotFoundException, TransformerException {
         Interesovanje retval = interesovanjeService.convertToObject(xmlString);
         return ResponseEntity.ok(retval);
+    }
+
+    @GetMapping("/getMetadataJson/{id}")
+    public MetadataDTO getMetadataJson(@PathVariable String id) {
+        return interesovanjeService.getMetadataJSON(id);
+    }
+
+    @RequestMapping(value = "/getMetadataRdf/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public String getMetadataRdf(@PathVariable String id) {
+        return interesovanjeService.getMetadataRDF(id);
     }
 
 

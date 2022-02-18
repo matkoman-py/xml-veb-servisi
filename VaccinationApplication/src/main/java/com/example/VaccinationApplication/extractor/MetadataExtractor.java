@@ -116,4 +116,53 @@ public class MetadataExtractor {
 
 		return retval;
 	}
+
+	public HashMap<String, String> getMetadata(String path, String namespace, String id) {
+		HashMap<String, String> retval = new HashMap<>();
+
+		String queryEndpoint = String.join("/", rdfConfig.getEndpoint().trim(), rdfConfig.getDataset().trim(), rdfConfig.getQuery().trim());
+		String sparqlQuery = SparqlUtil.selectData(rdfConfig.getEndpoint().trim() + path, "<http://www.ftn.uns.ac.rs" + namespace + "/" + id + "> ?p ?o");
+		QueryExecution query = QueryExecutionFactory.sparqlService(queryEndpoint, sparqlQuery);
+		ResultSet results = query.execSelect();
+		String p;
+		String o;
+		RDFNode predicate;
+		RDFNode object;
+		while (results.hasNext()) {
+			QuerySolution querySolution = results.next();
+			Iterator<String> variableBindings = querySolution.varNames();
+
+			p = variableBindings.next();
+			predicate = querySolution.get(p);
+
+			o = variableBindings.next();
+			object = querySolution.get(o);
+
+			int indexOfEnd = object.toString().indexOf("^");
+			if(indexOfEnd != -1) {
+				retval.put(predicate.toString(), object.toString().substring(0, indexOfEnd));
+			} else {
+				retval.put(predicate.toString(), object.toString());
+			}
+		}
+		query.close();
+		return retval;
+	}
+
+	public String getRdfMetadata(String path, String namespace, String id) {
+		HashMap<String, String> map = getMetadata(path, namespace, id);
+		StringBuilder builder =
+				new StringBuilder("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" +
+						"<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n" +
+						"         xmlns:pred=\"http://www.ftn.uns.ac.rs" + path + "/predicate/\">\n" +
+						"\n" +
+						"  <rdf:Description rdf:about=\"http://www.ftn.uns.ac.rs.org" + namespace + "/" + id + "\">\n");
+
+		for (Map.Entry<String, String> entry : map.entrySet()) {
+			String predicate = entry.getKey().split("http://www.ftn.uns.ac.rs/predicate/")[1];
+			builder.append("\t\t<pred:").append(predicate).append(">").append(entry.getValue()).append("</pred:").append(predicate).append(">\n");
+		}
+		builder.append("  </rdf:Description>\n\n</rdf:RDF>");
+		return builder.toString();
+	}
 }

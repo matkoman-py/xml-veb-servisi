@@ -1,6 +1,7 @@
 package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
+import com.example.VaccinationApplication.dto.MetadataDTO;
 import com.example.VaccinationApplication.exceptions.InteresovanjeAlreadyExistsException;
 import com.example.VaccinationApplication.extractor.MetadataExtractor;
 import com.example.VaccinationApplication.mappers.MultiwayMapper;
@@ -216,6 +217,14 @@ public String getInteresovanje(String id) throws Exception {
         ListaInteresovanja li = new ListaInteresovanja();
         li.setIzvestaj(interesovanja);
         return convertToXml(li);
+    }
+
+    public MetadataDTO getMetadataJSON(String id) {
+        return new MetadataDTO("<http://www.ftn.uns.ac.rs/interesovanje/" + id + ">", metadataExtractor.getMetadata("/interesovanja", "/interesovanje", id));
+    }
+
+    public String getMetadataRDF(String id) {
+        return metadataExtractor.getRdfMetadata("/interesovanja", "/interesovanje", id);
     }
 
 }

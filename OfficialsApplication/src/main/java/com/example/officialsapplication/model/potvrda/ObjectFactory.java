@@ -1,6 +1,7 @@
 
 package com.example.officialsapplication.model.potvrda;
 
+import com.example.officialsapplication.model.zeleni_sertifikat.TPrezime;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -8,7 +9,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the java.com.example.VaccinationApplication package. 
+ * generated in the rand package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -24,7 +25,7 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: java.com.example.VaccinationApplication
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: rand
      * 
      */
     public ObjectFactory() {
@@ -55,11 +56,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link TImeIPrezime }
+     * Create an instance of {@link TDozaInfo }
      * 
      */
-    public TImeIPrezime createTImeIPrezime() {
-        return new TImeIPrezime();
+    public TDozaInfo createTDozaInfo() {
+        return new TDozaInfo();
+    }
+
+    /**
+     * Create an instance of {@link TNazivVakcine }
+     * 
+     */
+    public TNazivVakcine createTNazivVakcine() {
+        return new TNazivVakcine();
     }
 
     /**
@@ -71,19 +80,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link TDozaInfo }
+     * Create an instance of {@link TIme }
      * 
      */
-    public TDozaInfo createTDozaInfo() {
-        return new TDozaInfo();
-    }
-
-    /**
-     * Create an instance of {@link TDatumIzdavanja }
-     * 
-     */
-    public TDatumIzdavanja createTDatumIzdavanja() {
-        return new TDatumIzdavanja();
+    public TIme createTIme() {
+        return new TIme();
     }
 
     /**
@@ -95,11 +96,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link TNazivVakcine }
+     * Create an instance of {@link TDatumIzdavanja }
      * 
      */
-    public TNazivVakcine createTNazivVakcine() {
-        return new TNazivVakcine();
+    public TDatumIzdavanja createTDatumIzdavanja() {
+        return new TDatumIzdavanja();
+    }
+
+    /**
+     * Create an instance of {@link TPrezime }
+     * 
+     */
+    public TPrezime createTPrezime() {
+        return new TPrezime();
     }
 
 }

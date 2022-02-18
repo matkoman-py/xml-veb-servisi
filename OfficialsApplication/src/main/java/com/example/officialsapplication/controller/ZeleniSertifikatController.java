@@ -1,5 +1,6 @@
 package com.example.officialsapplication.controller;
 
+import com.example.officialsapplication.dto.MetadataDTO;
 import com.example.officialsapplication.exceptions.EntityNotFoundException;
 import com.example.officialsapplication.exceptions.RequestAlreadyAnsweredException;
 import com.example.officialsapplication.model.potvrda.Potvrda;
@@ -124,5 +125,16 @@ public class ZeleniSertifikatController {
 
         return new ResponseEntity<>(IOUtils.toByteArray(bi), headers, HttpStatus.OK);
     }
-    
+
+    @GetMapping("/getMetadataJson/{id}")
+    public MetadataDTO getMetadataJson(@PathVariable String id) {
+        return zeleniSertifikatService.getMetadataJSON(id);
+    }
+
+    @RequestMapping(value = "/getMetadataRdf/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public String getMetadataRdf(@PathVariable String id) {
+        return zeleniSertifikatService.getMetadataRDF(id);
+    }
+
+
 }

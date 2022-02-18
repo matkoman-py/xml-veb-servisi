@@ -27,7 +27,8 @@
     </xs:element>
     <xs:complexType name="TPacijent">
         <xs:sequence>
-            <xs:element name="ime_prezime" type="zel:TImeIPrezime"> </xs:element>
+            <xs:element name="ime" type="zel:TIme"> </xs:element>
+            <xs:element name="prezime" type="zel:TPrezime"/>
             <xs:element name="pol">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
@@ -50,10 +51,10 @@
             <xs:element name="zdravstvena_ustanova" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="TImeIPrezime">
+    <xs:complexType name="TIme">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attribute name="property" use="required" fixed="pred:ime_i_prezime"/>
+                <xs:attribute name="property" use="required" fixed="pred:ime"/>
                 <xs:attribute name="datatype" use="required" fixed="xs:string"/>
             </xs:extension>
         </xs:simpleContent>
@@ -79,6 +80,14 @@
             <xs:extension base="xs:dateTime">
                 <xs:attribute name="property" use="required" fixed="pred:datum"/>
                 <xs:attribute name="datatype" use="required" fixed="xs:dateTime"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TPrezime">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="property" use="required" fixed="pred:prezime"/>
+                <xs:attribute name="datatype" use="required" fixed="xs:string"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>

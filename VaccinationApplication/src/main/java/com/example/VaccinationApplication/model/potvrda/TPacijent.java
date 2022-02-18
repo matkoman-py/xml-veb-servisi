@@ -15,40 +15,37 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TPacijent">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="Ime_i_prezime" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TImeIPrezime"/>
- *         &lt;element name="Datum_rodjenja" type="{http://www.w3.org/2001/XMLSchema}date"/>
- *         &lt;element name="Pol">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;enumeration value="Musko"/>
- *               &lt;enumeration value="Zensko"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="Jmbg" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TJmbg"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="TPacijent"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="ime" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TIme"/&gt;
+ *         &lt;element name="prezime" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TPrezime"/&gt;
+ *         &lt;element name="Datum_rodjenja" type="{http://www.w3.org/2001/XMLSchema}date"/&gt;
+ *         &lt;element name="Pol" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="Jmbg" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TJmbg"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TPacijent", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", propOrder = {
-    "imeIPrezime",
+    "ime",
+    "prezime",
     "datumRodjenja",
     "pol",
     "jmbg"
 })
 public class TPacijent {
 
-    @XmlElement(name = "Ime_i_prezime", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
-    protected TImeIPrezime imeIPrezime;
+    @XmlElement(namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
+    protected TIme ime;
+    @XmlElement(namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
+    protected TPrezime prezime;
     @XmlElement(name = "Datum_rodjenja", namespace = "http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji", required = true)
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar datumRodjenja;
@@ -58,27 +55,51 @@ public class TPacijent {
     protected TJmbg jmbg;
 
     /**
-     * Gets the value of the imeIPrezime property.
+     * Gets the value of the ime property.
      * 
      * @return
      *     possible object is
-     *     {@link TImeIPrezime }
+     *     {@link TIme }
      *     
      */
-    public TImeIPrezime getImeIPrezime() {
-        return imeIPrezime;
+    public TIme getIme() {
+        return ime;
     }
 
     /**
-     * Sets the value of the imeIPrezime property.
+     * Sets the value of the ime property.
      * 
      * @param value
      *     allowed object is
-     *     {@link TImeIPrezime }
+     *     {@link TIme }
      *     
      */
-    public void setImeIPrezime(TImeIPrezime value) {
-        this.imeIPrezime = value;
+    public void setIme(TIme value) {
+        this.ime = value;
+    }
+
+    /**
+     * Gets the value of the prezime property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link TPrezime }
+     *     
+     */
+    public TPrezime getPrezime() {
+        return prezime;
+    }
+
+    /**
+     * Sets the value of the prezime property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link TPrezime }
+     *     
+     */
+    public void setPrezime(TPrezime value) {
+        this.prezime = value;
     }
 
     /**

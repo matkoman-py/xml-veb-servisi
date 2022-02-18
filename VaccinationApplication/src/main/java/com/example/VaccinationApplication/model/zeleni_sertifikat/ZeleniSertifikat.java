@@ -17,28 +17,28 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="qr_kod">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;minLength value="4"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="broj_sertifikata" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TBrojSertifikata"/>
- *         &lt;element name="datum_izdavanja" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TDatumIzdavanja"/>
- *         &lt;element name="podaci_o_pacijentu" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TPacijent"/>
- *         &lt;element name="podaci_o_vakcinaciji" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TVakcinacija" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *       &lt;attribute name="about" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="rel" type="{http://www.w3.org/2001/XMLSchema}string" fixed="pred:answerTo" />
- *       &lt;attribute name="href" type="{http://www.w3.org/2001/XMLSchema}string" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="qr_kod"&gt;
+ *           &lt;simpleType&gt;
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *               &lt;minLength value="4"/&gt;
+ *             &lt;/restriction&gt;
+ *           &lt;/simpleType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="broj_sertifikata" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TBrojSertifikata"/&gt;
+ *         &lt;element name="datum_izdavanja" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TDatumIzdavanja"/&gt;
+ *         &lt;element name="podaci_o_pacijentu" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TPacijent"/&gt;
+ *         &lt;element name="podaci_o_vakcinaciji" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TVakcinacija" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="about" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="rel" type="{http://www.w3.org/2001/XMLSchema}string" fixed="pred:answerTo" /&gt;
+ *       &lt;attribute name="href" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

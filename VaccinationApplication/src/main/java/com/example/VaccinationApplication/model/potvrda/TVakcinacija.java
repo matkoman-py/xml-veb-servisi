@@ -13,19 +13,19 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TVakcinacija">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="Prva_doza" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TDozaInfo"/>
- *         &lt;element name="Druga_doza" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TDozaInfo" minOccurs="0"/>
- *         &lt;element name="Zdravstvena_ustanova" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TZdravstvenaUstanova"/>
- *         &lt;element name="Naziv_vakcine" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TNazivVakcine"/>
- *         &lt;element name="Datum_izdavanja" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TDatumIzdavanja"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="TVakcinacija"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="Prva_doza" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TDozaInfo"/&gt;
+ *         &lt;element name="Druga_doza" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TDozaInfo" minOccurs="0"/&gt;
+ *         &lt;element name="Zdravstvena_ustanova" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TZdravstvenaUstanova"/&gt;
+ *         &lt;element name="Naziv_vakcine" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TNazivVakcine"/&gt;
+ *         &lt;element name="Datum_izdavanja" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TDatumIzdavanja"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

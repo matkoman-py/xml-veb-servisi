@@ -1,5 +1,6 @@
 package com.example.officialsapplication.services;
 
+import com.example.officialsapplication.dto.MetadataDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -29,5 +30,13 @@ public class SaglasnostService {
         ResponseEntity<String> res = restTemplate
                 .getForEntity("http://localhost:8087/api/saglasnost/getXmlText/" + id, String.class);
         return htmlGeneratorService.generateHTML(res.getBody(), "data/xslt/saglasnost.xsl");
+    }
+
+    public MetadataDTO getMetadataJSON(String id) {
+        return restTemplate.getForEntity("http://localhost:8087/api/saglasnost/getMetadataJson/" + id, MetadataDTO.class).getBody();
+    }
+
+    public String getMetadataRDF(String id) {
+        return restTemplate.getForEntity("http://localhost:8087/api/saglasnost/getMetadataRdf/" + id, String.class).getBody();
     }
 }

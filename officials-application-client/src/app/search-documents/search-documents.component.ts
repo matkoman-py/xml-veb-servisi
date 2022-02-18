@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { runInThisContext } from 'vm';
 import { AdvancedSearch } from '../models/advanced_search';
 import { SearchDocumentsService } from './service/search-documents.service';
 
@@ -26,6 +27,7 @@ export class SearchDocumentsComponent implements OnInit {
   saglasnosti: any = null;
 
   cols!: any[];
+  sagCols!: any[];
 
   constructor(
     private searchDocumentsService: SearchDocumentsService,
@@ -49,8 +51,15 @@ export class SearchDocumentsComponent implements OnInit {
           if(this.saglasnosti[0].saglasnost === undefined) this.saglasnosti = null;
         })
         this.disableBasicSearch = false;
+
+        if(this.potvrde == null && this.sertifikati == null && this.saglasnosti == null) {
+          this.messageService.add({key:'tc', severity:'warn', summary:'Pretraga neuspesna!', detail:`Pretraga nije dala rezultate`});
+        }
       }
-    );
+    , () => {
+      this.messageService.add({key:'tc', severity:'warning', summary:'Pretraga neuspesna!', detail:`Pretraga nije dala rezultate`});
+      this.disableBasicSearch = false;
+    });
 
   }
 
@@ -77,15 +86,23 @@ export class SearchDocumentsComponent implements OnInit {
           this.potvrde = result.search.listaPotvrda;
           this.sertifikati = result.search.listaSertifikata;
           this.saglasnosti = result.search.listaSaglasnosti;
-          console.log(this.potvrde)
           if(this.potvrde[0].potvrda === undefined) this.potvrde = null;
           if(this.sertifikati[0].sertifikat === undefined) this.sertifikati = null;
           if(this.saglasnosti[0].saglasnost === undefined) this.saglasnosti = null;
+          console.log(this.potvrde, this.sertifikati, this.saglasnosti)
+          
+          if(this.potvrde == null && this.sertifikati == null && this.saglasnosti == null) {
+            this.messageService.add({key:'tc', severity:'warn', summary:'Pretraga neuspesna!', detail:`Pretraga nije dala rezultate`});
+          }
+
 
         })
         this.disableAdvancedSearch = false;
       }
-    );
+     , () => {
+      this.messageService.add({key:'tc', severity:'warn', summary:'Pretraga neuspesna!', detail:`Pretraga nije dala rezultate`});
+       this.disableAdvancedSearch = false
+     });
 
   }
 
@@ -153,11 +170,40 @@ export class SearchDocumentsComponent implements OnInit {
     window.open("api/potvrde/getHtml/" + id);
   }
 
+  exportMetadataJson(id: string, tip: string) {
+      switch (tip) {
+        case 'saglasnost': 
+          window.open("api/saglasnost/getMetadataJson/" + id); break;
+        case 'potvrda': 
+          window.open("api/potvrde/getMetadataJson/" + id); break;
+        case 'sertifikat':
+          window.open("api/zelenisertifikati/getMetadataJson/" + id); break;
+      }
+  } 
+
+  exportMetadataRdf(id: string, tip: string) {
+    switch (tip) {
+      case 'saglasnost': 
+        window.open("api/saglasnost/getMetadataRdf/" + id); break;
+      case 'potvrda': 
+        window.open("api/potvrde/getMetadataRdf/" + id); break;
+      case 'sertifikat':
+        window.open("api/zelenisertifikati/getMetadataRdf/" + id); break;
+    }
+} 
+
   ngOnInit(): void {
     this.cols = [
       { field: 'naziv', header: 'Naziv dokumenta' },
       { field: 'povezan', header: 'Referencirani dokument' },
       { field: 'download', header: 'Preuzmi' },
+      { field: 'metadata', header: 'Metapodaci' },
+    ]
+
+    this.sagCols = [
+      { field: 'naziv', header: 'Naziv dokumenta' },
+      { field: 'download', header: 'Preuzmi' },
+      { field: 'metadata', header: 'Metapodaci' },
     ]
   }
 

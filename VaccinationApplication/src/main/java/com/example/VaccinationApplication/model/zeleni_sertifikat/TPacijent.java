@@ -15,40 +15,35 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TPacijent">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="ime_prezime" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TImeIPrezime"/>
- *         &lt;element name="pol">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;enumeration value="Musko"/>
- *               &lt;enumeration value="Zensko"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *         &lt;element name="datum_rodjenja" type="{http://www.w3.org/2001/XMLSchema}date"/>
- *         &lt;element name="jmbg" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TJmbg"/>
- *         &lt;element name="broj_pasosa">
- *           &lt;simpleType>
- *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *               &lt;length value="13"/>
- *               &lt;pattern value="\d+"/>
- *             &lt;/restriction>
- *           &lt;/simpleType>
- *         &lt;/element>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="TPacijent"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="ime" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TIme"/&gt;
+ *         &lt;element name="prezime" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TPrezime"/&gt;
+ *         &lt;element name="pol"&gt;
+ *           &lt;simpleType&gt;
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *               &lt;enumeration value="Musko"/&gt;
+ *               &lt;enumeration value="Zensko"/&gt;
+ *             &lt;/restriction&gt;
+ *           &lt;/simpleType&gt;
+ *         &lt;/element&gt;
+ *         &lt;element name="datum_rodjenja" type="{http://www.w3.org/2001/XMLSchema}date"/&gt;
+ *         &lt;element name="jmbg" type="{http://www.ftn.uns.ac.rs/zelenisertifikat}TJmbg"/&gt;
+ *         &lt;element name="broj_pasosa" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TPacijent", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", propOrder = {
-    "imePrezime",
+    "ime",
+    "prezime",
     "pol",
     "datumRodjenja",
     "jmbg",
@@ -56,8 +51,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class TPacijent {
 
-    @XmlElement(name = "ime_prezime", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
-    protected TImeIPrezime imePrezime;
+    @XmlElement(namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    protected TIme ime;
+    @XmlElement(namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
+    protected TPrezime prezime;
     @XmlElement(namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
     protected String pol;
     @XmlElement(name = "datum_rodjenja", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", required = true)
@@ -69,27 +66,51 @@ public class TPacijent {
     protected String brojPasosa;
 
     /**
-     * Gets the value of the imePrezime property.
+     * Gets the value of the ime property.
      * 
      * @return
      *     possible object is
-     *     {@link TImeIPrezime }
+     *     {@link TIme }
      *     
      */
-    public TImeIPrezime getImePrezime() {
-        return imePrezime;
+    public TIme getIme() {
+        return ime;
     }
 
     /**
-     * Sets the value of the imePrezime property.
+     * Sets the value of the ime property.
      * 
      * @param value
      *     allowed object is
-     *     {@link TImeIPrezime }
+     *     {@link TIme }
      *     
      */
-    public void setImePrezime(TImeIPrezime value) {
-        this.imePrezime = value;
+    public void setIme(TIme value) {
+        this.ime = value;
+    }
+
+    /**
+     * Gets the value of the prezime property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link TPrezime }
+     *     
+     */
+    public TPrezime getPrezime() {
+        return prezime;
+    }
+
+    /**
+     * Sets the value of the prezime property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link TPrezime }
+     *     
+     */
+    public void setPrezime(TPrezime value) {
+        this.prezime = value;
     }
 
     /**

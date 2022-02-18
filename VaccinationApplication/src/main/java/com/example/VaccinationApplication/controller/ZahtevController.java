@@ -1,5 +1,6 @@
 package com.example.VaccinationApplication.controller;
 
+import com.example.VaccinationApplication.dto.MetadataDTO;
 import com.example.VaccinationApplication.model.potvrda.Potvrda;
 import com.example.VaccinationApplication.model.zahtev_zeleni_sertifikat.Zahtev;
 import com.example.VaccinationApplication.model.zeleni_sertifikat.ZeleniSertifikat;
@@ -110,4 +111,15 @@ public class ZahtevController {
         Zahtev retval = zahtevService.convertToObject(xmlString);
         return ResponseEntity.ok(retval);
     }
+
+    @GetMapping("/getMetadataJson/{id}")
+    public MetadataDTO getMetadataJson(@PathVariable String id) {
+        return zahtevService.getMetadataJSON(id);
+    }
+
+    @RequestMapping(value = "/getMetadataRdf/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public String getMetadataRdf(@PathVariable String id) {
+        return zahtevService.getMetadataRDF(id);
+    }
+
 }

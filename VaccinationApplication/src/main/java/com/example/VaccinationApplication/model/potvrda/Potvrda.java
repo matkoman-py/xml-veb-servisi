@@ -15,21 +15,21 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="Sifra_potvrde" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="pacijent" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TPacijent"/>
- *         &lt;element name="Vakcinacija_info" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TVakcinacija"/>
- *         &lt;element name="Qr_kod" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *       &lt;attribute name="about" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="rel" type="{http://www.w3.org/2001/XMLSchema}string" fixed="pred:parentTo" />
- *       &lt;attribute name="href" type="{http://www.w3.org/2001/XMLSchema}string" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="Sifra_potvrde" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="pacijent" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TPacijent"/&gt;
+ *         &lt;element name="Vakcinacija_info" type="{http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji}TVakcinacija"/&gt;
+ *         &lt;element name="Qr_kod" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="about" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="rel" type="{http://www.w3.org/2001/XMLSchema}string" fixed="pred:parentTo" /&gt;
+ *       &lt;attribute name="href" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

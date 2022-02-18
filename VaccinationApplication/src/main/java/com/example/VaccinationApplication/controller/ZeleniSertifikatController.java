@@ -1,5 +1,6 @@
 package com.example.VaccinationApplication.controller;
 
+import com.example.VaccinationApplication.dto.MetadataDTO;
 import com.example.VaccinationApplication.model.interesovanje.ListaInteresovanja;
 import com.example.VaccinationApplication.model.zeleni_sertifikat.ZeleniSertifikat;
 import com.example.VaccinationApplication.services.ZeleniSertifikatService;
@@ -87,10 +88,22 @@ public class ZeleniSertifikatController {
         return ResponseEntity.ok(zeleniSertifikatService.getSertifikatAdvanced(ime, prezime, ustanova, datum, poklapanje));
 
     }
-    
+
+    @GetMapping("/getMetadataJson/{id}")
+    public MetadataDTO getMetadataJson(@PathVariable String id) {
+        return zeleniSertifikatService.getMetadataJSON(id);
+    }
+
+    @RequestMapping(value = "/getMetadataRdf/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public String getMetadataRdf(@PathVariable String id) {
+        return zeleniSertifikatService.getMetadataRDF(id);
+    }
+
+
 //    @RequestMapping(value = "/convertToObject", method = RequestMethod.POST, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<ZeleniSertifikat> xmlToObject(@RequestBody String xmlString) throws FileNotFoundException, TransformerException {
 //        ZeleniSertifikat retval = zeleniSertifikatService.convertToObject(xmlString);
 //        return ResponseEntity.ok(retval);
 //    }
+
 }

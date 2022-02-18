@@ -1,6 +1,7 @@
 package com.example.VaccinationApplication.services;
 
 import com.example.VaccinationApplication.dao.DataAccessLayer;
+import com.example.VaccinationApplication.dto.MetadataDTO;
 import com.example.VaccinationApplication.exceptions.SaglasnostNijeIskazanaException;
 import com.example.VaccinationApplication.exceptions.TerminNePostojiException;
 import com.example.VaccinationApplication.extractor.MetadataExtractor;
@@ -235,7 +236,7 @@ public class SaglasnostService {
 
             str.append("<saglasnost>\n");
             str.append("<sifraSaglasnosti>");
-            saglasnost.getDrzavljanstvo().getJMBG();
+            str.append(saglasnost.getAbout().split("/")[4]);
             str.append("</sifraSaglasnosti>\n");
 
             str.append("<linkedDocNamespace>");
@@ -256,16 +257,16 @@ public class SaglasnostService {
         ArrayList<String> conditions = new ArrayList<>();
         String predicate;
         if(!ime.trim().equals("")) {
-            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime> \"" + ime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;");
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime> \"" + ime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/string> ;");
         }
         if(!prezime.trim().equals("")) {
-            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/prezime> \"" + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> ;");
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/prezime> \"" + prezime + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/string> ;");
         }
         if(!ustanova.trim().equals("")) {
-            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/zdravstvena_ustanova> \"" + ustanova + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/string> .");
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/zdravstvena_ustanova> \"" + ustanova + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/string> .");
         }
         if(!datum.trim().equals("")) {
-            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "\"^^<file:///C:/Users/marko/xml-veb-servisi/VaccinationApplication/gen/date> ;");
+            conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/datum> \"" + datum + "\"^^<file:///C:/Users/marko/xml-veb-servisi/OfficialsApplication/gen/date> ;");
         }
         if(conditions.isEmpty()) {
             conditions.add("?s <http://www.ftn.uns.ac.rs/predicate/ime> ?o");
@@ -336,13 +337,19 @@ public class SaglasnostService {
 
         Potvrda potvrda = new Potvrda();
         potvrda.setSifraPotvrde(saglasnost.getDrzavljanstvo().getJMBG());
-        String imeIprezime= saglasnost.getPodaciOPacijentu().getIme().getValue() + " "+ saglasnost.getPodaciOPacijentu().getPrezime().getValue();
-        TImeIPrezime tImeIPrezime =new TImeIPrezime();
-        tImeIPrezime.setValue(imeIprezime);
-        tImeIPrezime.setProperty("pred:ime_i_prezime");
-        tImeIPrezime.setDatatype("xs:string");
+        String ime= saglasnost.getPodaciOPacijentu().getIme().getValue();
+        String prezime = saglasnost.getPodaciOPacijentu().getPrezime().getValue();
+        TIme tIme =new TIme();
+        TPrezime tPrezime =new TPrezime();
+        tIme.setValue(ime);
+        tPrezime.setValue(prezime);
+        tIme.setProperty("pred:ime");
+        tPrezime.setProperty("pred:prezime");
+        tIme.setDatatype("xs:string");
+        tPrezime.setDatatype("xs:string");
         TPacijent tPacijent = new TPacijent();
-        tPacijent.setImeIPrezime(tImeIPrezime);
+        tPacijent.setIme(tIme);
+        tPacijent.setPrezime(tPrezime);
         tPacijent.setDatumRodjenja(saglasnost.getPodaciOPacijentu().getDatumRodjenja());
         if(saglasnost.getPodaciOPacijentu().getPol().value().equals("muski")){
             tPacijent.setPol("Musko");
@@ -434,5 +441,13 @@ public class SaglasnostService {
 
         dataAccessLayer.saveDocument(saglasnost, folderId, documentId, Saglasnost.class);
         return saglasnost;
+    }
+
+    public MetadataDTO getMetadataJSON(String id) {
+        return new MetadataDTO("<http://www.ftn.uns.ac.rs/Saglasnost/" + id + ">", metadataExtractor.getMetadata("/saglasnosti", "/Saglasnost", id));
+    }
+
+    public String getMetadataRDF(String id) {
+        return metadataExtractor.getRdfMetadata("/saglasnosti", "/Saglasnost", id);
     }
 }

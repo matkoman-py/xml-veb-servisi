@@ -10,15 +10,15 @@ import javax.xml.bind.annotation.XmlValue;
 
 
 /**
- * <p>Java class for TJmbg complex type.
+ * <p>Java class for TIme complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TJmbg"&gt;
+ * &lt;complexType name="TIme"&gt;
  *   &lt;simpleContent&gt;
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
- *       &lt;attribute name="property" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" fixed="pred:jmbg" /&gt;
+ *       &lt;attribute name="property" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" fixed="pred:ime" /&gt;
  *       &lt;attribute name="datatype" use="required" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" fixed="xs:string" /&gt;
  *     &lt;/extension&gt;
  *   &lt;/simpleContent&gt;
@@ -28,10 +28,10 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TJmbg", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", propOrder = {
+@XmlType(name = "TIme", namespace = "http://www.ftn.uns.ac.rs/zelenisertifikat", propOrder = {
     "value"
 })
-public class TJmbg {
+public class TIme {
 
     @XmlValue
     protected String value;
@@ -76,7 +76,7 @@ public class TJmbg {
      */
     public String getProperty() {
         if (property == null) {
-            return "pred:jmbg";
+            return "pred:ime";
         } else {
             return property;
         }

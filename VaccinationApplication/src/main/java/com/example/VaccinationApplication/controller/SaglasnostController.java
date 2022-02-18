@@ -1,5 +1,6 @@
 package com.example.VaccinationApplication.controller;
 
+import com.example.VaccinationApplication.dto.MetadataDTO;
 import com.example.VaccinationApplication.exceptions.InteresovanjeAlreadyExistsException;
 import com.example.VaccinationApplication.exceptions.SaglasnostNijeIskazanaException;
 import com.example.VaccinationApplication.exceptions.TerminNePostojiException;
@@ -113,6 +114,16 @@ public class SaglasnostController {
     public ResponseEntity<Saglasnost> xmlToObject(@RequestBody String xmlString) {
         Saglasnost retval = saglasnostService.convertToObject(xmlString);
         return ResponseEntity.ok(retval);
+    }
+
+    @GetMapping("/getMetadataJson/{id}")
+    public MetadataDTO getMetadataJson(@PathVariable String id) {
+        return saglasnostService.getMetadataJSON(id);
+    }
+
+    @RequestMapping(value = "/getMetadataRdf/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public String getMetadataRdf(@PathVariable String id) {
+        return saglasnostService.getMetadataRDF(id);
     }
 
 }

@@ -1,3 +1,5 @@
+<p-toast position="top-center" key="tc"></p-toast>
+
 <div>
     <span class="p-input-icon-left center search">
         <i class="pi pi-search"></i>
@@ -48,13 +50,17 @@
                 <button (click)="getSaglasnostPdf(saglasnost.saglasnost[0].sifraSaglasnosti)" pButton pRipple type="button" label="PDF" class="p-button-danger" style="margin-right: 0.5rem;"></button>
                 <button (click)="getSaglasnostHtml(saglasnost.saglasnost[0].sifraSaglasnosti)" pButton pRipple type="button" label="HTML" class="p-button-info"></button>
             </td>
+            <td *ngFor="let saglasnost of saglasnosti">
+                <button (click)="exportMetadataJson(saglasnost.saglasnost[0].sifraSaglasnosti, 'saglasnost')" pButton pRipple type="button" label="JSON" class="p-button-warning" style="margin-right: 0.5rem;"></button>
+                <button (click)="exportMetadataRdf(saglasnost.saglasnost[0].sifraSaglasnosti, 'saglasnost')" pButton pRipple type="button" label="RDF" class="p-button-info"></button>
+            </td>
         </tr>
     </ng-template>
 </p-table>
 <br>
     
 <h2 *ngIf="potvrde !== null">Potvrde o vakcinaciji</h2>
-<p-table *ngIf="potvrde !== null" [columns]="cols" [value]="potvrde" responsiveLayout="scroll">
+<p-table *ngIf="potvrde !== null" [columns]="sagCols" [value]="potvrde" responsiveLayout="scroll">
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of columns">
@@ -67,12 +73,16 @@
             <td *ngFor="let potvrda of potvrde">
                 {{potvrda.potvrda[0].sifraPotvrde[0]}}
             </td>
-            <td *ngFor="let potvrda of potvrde">
+            <!-- <td *ngFor="let potvrda of potvrde">
                 {{parsePotvrda(potvrda.potvrda[0])}}
-            </td>
+            </td> -->
             <td *ngFor="let potvrda of potvrde">
                 <button pButton pRipple (click)="getPotvrdaPdf(potvrda.potvrda[0].sifraPotvrde)" type="button" label="PDF" class="p-button-danger" style="margin-right: 0.5rem;"></button>
                 <button pButton pRipple (click)="getPotvrdaHtml(potvrda.potvrda[0].sifraPotvrde)" type="button" label="HTML" class="p-button-info"></button>
+            </td>
+            <td *ngFor="let potvrda of potvrde">
+                <button (click)="exportMetadataJson(potvrda.potvrda[0].sifraPotvrde, 'potvrda')" pButton pRipple type="button" label="JSON" class="p-button-warning" style="margin-right: 0.5rem;"></button>
+                <button (click)="exportMetadataRdf(potvrda.potvrda[0].sifraPotvrde, 'potvrda')" pButton pRipple type="button" label="RDF" class="p-button-info"></button>
             </td>
         </tr>
     </ng-template>
@@ -99,6 +109,10 @@
             <td *ngFor="let sertifikat of sertifikati">
                 <button pButton pRipple (click)="getSertifikatPdf(sertifikat.sertifikat[0].sifraSertifikata)" type="button" label="PDF" class="p-button-danger" style="margin-right: 0.5rem;"></button>
                 <button pButton pRipple (click)="getSertifikatHtml(sertifikat.sertifikat[0].sifraSertifikata)" type="button" label="HTML" class="p-button-info"></button>
+            </td>
+            <td *ngFor="let sertifikat of sertifikati">
+                <button (click)="exportMetadataJson(sertifikat.sertifikat[0].sifraSertifikata, 'sertifikat')" pButton pRipple type="button" label="JSON" class="p-button-warning" style="margin-right: 0.5rem;"></button>
+                <button (click)="exportMetadataRdf(sertifikat.sertifikat[0].sifraSertifikata, 'sertifikat')" pButton pRipple type="button" label="RDF" class="p-button-info"></button>
             </td>
         </tr>
     </ng-template>

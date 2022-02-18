@@ -1,5 +1,6 @@
 package com.example.officialsapplication.services;
 
+import com.example.officialsapplication.dto.MetadataDTO;
 import com.example.officialsapplication.dao.DataAccessLayer;
 import com.example.officialsapplication.exceptions.EntityNotFoundException;
 import com.example.officialsapplication.exceptions.RequestAlreadyAnsweredException;
@@ -10,7 +11,8 @@ import com.example.officialsapplication.model.users.korisnik.Korisnik;
 import com.example.officialsapplication.model.zahtev_zeleni_sertifikat.ListaZahtevaZelenogSertifikata;
 import com.example.officialsapplication.model.zahtev_zeleni_sertifikat.Zahtev;
 import com.example.officialsapplication.model.zeleni_sertifikat.TBrojSertifikata;
-import com.example.officialsapplication.model.zeleni_sertifikat.TImeIPrezime;
+import com.example.officialsapplication.model.zeleni_sertifikat.TIme;
+import com.example.officialsapplication.model.zeleni_sertifikat.TPrezime;
 import com.example.officialsapplication.model.zeleni_sertifikat.TJmbg;
 import com.example.officialsapplication.model.zeleni_sertifikat.TPacijent;
 import com.example.officialsapplication.model.zeleni_sertifikat.TVakcinacija;
@@ -298,10 +300,14 @@ public class ZeleniSertifikatService {
   		zs.setPodaciOPacijentu(new TPacijent());
   		zs.getPodaciOPacijentu().setBrojPasosa(pacijentData.getBrojPasosa());
   		zs.getPodaciOPacijentu().setDatumRodjenja(pacijentData.getDatumRodjenja());
-  		zs.getPodaciOPacijentu().setImePrezime(new TImeIPrezime());
-  		zs.getPodaciOPacijentu().getImePrezime().setValue(pacijentData.getIme() + " " + pacijentData.getPrezime());
-  		zs.getPodaciOPacijentu().getImePrezime().setProperty("pred:ime_i_prezime");
-  		zs.getPodaciOPacijentu().getImePrezime().setDatatype("xs:string");
+		zs.getPodaciOPacijentu().setIme(new TIme());
+		zs.getPodaciOPacijentu().setPrezime(new TPrezime());
+		zs.getPodaciOPacijentu().getIme().setValue(pacijentData.getIme());
+		zs.getPodaciOPacijentu().getPrezime().setValue(pacijentData.getPrezime());
+		zs.getPodaciOPacijentu().getIme().setProperty("pred:ime");
+		zs.getPodaciOPacijentu().getPrezime().setProperty("pred:prezime");
+		zs.getPodaciOPacijentu().getIme().setDatatype("xs:string");
+		zs.getPodaciOPacijentu().getPrezime().setDatatype("xs:string");
   		zs.getPodaciOPacijentu().setJmbg(new TJmbg());
   		zs.getPodaciOPacijentu().getJmbg().setValue(pacijentData.getJmbg());
   		zs.getPodaciOPacijentu().getJmbg().setProperty("pred:jmbg");
@@ -365,4 +371,13 @@ public class ZeleniSertifikatService {
 				.getForEntity("http://localhost:8087/api/zelenisertifikati/getXmlText/" + id, String.class);
 		return htmlGeneratorService.generateHTML(res.getBody(), "data/xslt/zelenisertifikat.xsl");
 	}
+
+	public MetadataDTO getMetadataJSON(String id) {
+		return restTemplate.getForEntity("http://localhost:8087/api/zelenisertifikati/getMetadataJson/" + id, MetadataDTO.class).getBody();
+	}
+
+	public String getMetadataRDF(String id) {
+		return restTemplate.getForEntity("http://localhost:8087/api/zelenisertifikati/getMetadataRdf/" + id, String.class).getBody();
+	}
+
 }
