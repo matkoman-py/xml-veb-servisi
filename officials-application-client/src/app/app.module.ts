@@ -7,7 +7,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { InputTextModule } from 'primeng/inputtext';
 import { MenubarModule } from 'primeng/menubar';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
@@ -20,14 +19,12 @@ import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
-import { ZeleniSertifikatComponent } from './zeleni-sertifikat/zeleni-sertifikat.component';  
+import { ZeleniSertifikatComponent } from './zeleni-sertifikat/zeleni-sertifikat.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { SearchDocumentsComponent } from './search-documents/search-documents.component';
-import {ToggleButtonModule} from 'primeng/togglebutton';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 import { VaccineStockComponent } from './vaccine-stock/vaccine-stock.component';
-
-
 
 @NgModule({
   declarations: [
@@ -37,14 +34,15 @@ import { VaccineStockComponent } from './vaccine-stock/vaccine-stock.component';
     VaccineStockComponent,
     ZeleniSertifikatComponent,
     SearchDocumentsComponent,
-    NavbarComponent, 
-    LoginComponent, 
-    LogoutComponent
+    NavbarComponent,
+    LoginComponent,
+    LogoutComponent,
   ],
 
   imports: [
+    InputTextareaModule,
     BrowserModule,
-    AppRoutingModule, 
+    AppRoutingModule,
     MenubarModule,
     FormsModule,
     ReactiveFormsModule,

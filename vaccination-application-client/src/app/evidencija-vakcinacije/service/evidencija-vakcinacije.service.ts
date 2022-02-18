@@ -53,7 +53,9 @@ export class EvidencijaVakcinacijeService {
 <sag:Saglasnost xmlns:sag="http://www.ftn.uns.ac.rs/Saglasnost"
  xmlns:pred="http://www.ftn.uns.ac.rs/predicate"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.ftn.uns.ac.rs/Saglasnost file:/D:/Faks/CetvrtaDina/XMLVebServisi/xml-veb-servisi/VaccinationApplication/src/main/resources/static/xsd/Saglasnost.xsd" about="about0" rel="pred:fromInteresovanje"
+ xsi:schemaLocation="http://www.ftn.uns.ac.rs/Saglasnost file:/D:/Faks/CetvrtaDina/XMLVebServisi/xml-veb-servisi/VaccinationApplication/src/main/resources/static/xsd/Saglasnost.xsd" about="http://www.ftn.uns.ac.rs/Saglasnost/${
+   saglasnost.jmbg
+ }-${doza}-doza" rel="pred:fromInteresovanje"
     href="http://www.ftn.uns.ac.rs/interesovanje/${saglasnost.jmbg}">
     <sag:Drzavljanstvo>
         <sag:JMBG>${saglasnost.jmbg}</sag:JMBG>

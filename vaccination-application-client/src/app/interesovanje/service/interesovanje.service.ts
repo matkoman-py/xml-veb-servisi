@@ -23,7 +23,7 @@ export class InteresovanjeService {
       dayString = '0' + day.toString();
     }
     var date = today.getFullYear() + '-' + monthString + '-' + dayString;
-    var xml = `<int:interesovanje about="string" rel="pred:answeredBy" href="string" xmlns:int="http://www.ftn.uns.ac.rs/interesovanje">
+    var xml = `<int:interesovanje about="http://www.ftn.uns.ac.rs/interesovanje/${interesovanje.jmbg}" rel="pred:answeredBy" href="string" xmlns:int="http://www.ftn.uns.ac.rs/interesovanje">
   <int:Podaci_o_primaocu>
     <int:Drzavljanstvo>${interesovanje.drzavljanstvo}</int:Drzavljanstvo>
     <int:JMBG property="pred:jmbg" datatype="xs:string">${interesovanje.jmbg}</int:JMBG>

@@ -60,20 +60,8 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
-            <xs:element name="Broj_mobilnog_telefona">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="06\d{8}"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="Broj_fiksnog_telefona">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="0[1-2]{1}\d{7}"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="Broj_mobilnog_telefona" type="xs:string"> </xs:element>
+            <xs:element name="Broj_fiksnog_telefona" type="xs:string"> </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="TIme">

@@ -22,12 +22,12 @@ public class SaglasnostService {
     public ByteArrayInputStream getPdf(String id) throws Exception {
         ResponseEntity<String> res =
                 restTemplate.getForEntity("http://localhost:8087/api/saglasnost/getXmlText/" + id, String.class);
-        return pdfGeneratorService.generatePDF(res.getBody(), "OfficialsApplication/data/xsl-fo/saglasnost_fo.xsl");
+        return pdfGeneratorService.generatePDF(res.getBody(), "data/xsl-fo/saglasnost_fo.xsl");
     }
 
     public ByteArrayInputStream getHtml(String id) throws IOException {
         ResponseEntity<String> res = restTemplate
                 .getForEntity("http://localhost:8087/api/saglasnost/getXmlText/" + id, String.class);
-        return htmlGeneratorService.generateHTML(res.getBody(), "OfficialsApplication/data/xslt/saglasnost.xsl");
+        return htmlGeneratorService.generateHTML(res.getBody(), "data/xslt/saglasnost.xsl");
     }
 }

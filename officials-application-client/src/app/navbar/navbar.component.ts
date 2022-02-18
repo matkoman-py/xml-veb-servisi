@@ -80,6 +80,11 @@ export class NavbarComponent implements OnInit {
           routerLink: '/vaccine-stock',
         },
         {
+          label: 'Search',
+          icon: 'pi pi-fw pi-search',
+          routerLink: '/search',
+        },
+        {
           label: 'Logout',
           icon: 'pi pi-sign-out',
           routerLink: '/logout',

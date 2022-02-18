@@ -28,14 +28,14 @@ export class SaglasnostService {
     var today = new Date();
     var todayFormatiran = this.formatirajDatum(today);
     //var datumRodjenjaFormatiran = this.formatirajDatum(
-      //saglasnost.datumRodjenja ? saglasnost.datumRodjenja : new Date()
+    //saglasnost.datumRodjenja ? saglasnost.datumRodjenja : new Date()
     //);
     var xml = `<?xml version="1.0" encoding="UTF-8"?>
 <sag:Saglasnost xmlns:sag="http://www.ftn.uns.ac.rs/Saglasnost"
  xmlns:pred="http://www.ftn.uns.ac.rs/predicate"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.ftn.uns.ac.rs/Saglasnost file:/D:/Faks/CetvrtaDina/XMLVebServisi/xml-veb-servisi/VaccinationApplication/src/main/resources/static/xsd/Saglasnost.xsd" about="about0" rel="pred:fromInteresovanje"
-    href="http://www.ftn.uns.ac.rs/interesovanje/1111111111111">
+ xsi:schemaLocation="http://www.ftn.uns.ac.rs/Saglasnost file:/D:/Faks/CetvrtaDina/XMLVebServisi/xml-veb-servisi/VaccinationApplication/src/main/resources/static/xsd/Saglasnost.xsd" about="http://www.ftn.uns.ac.rs/Saglasnost/${saglasnost.jmbg}-prva-doza" rel="pred:fromInteresovanje"
+    href="http://www.ftn.uns.ac.rs/interesovanje/${saglasnost.jmbg}">
     <sag:Drzavljanstvo>
         <sag:JMBG>${saglasnost.jmbg}</sag:JMBG>
     </sag:Drzavljanstvo>

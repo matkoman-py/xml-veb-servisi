@@ -62,6 +62,6 @@ public class SearchService {
     public ByteArrayInputStream getPdf(String id) throws Exception {
         ResponseEntity<String> res =
                 restTemplate.getForEntity("http://localhost:8087/api/zelenisertifikati/getXmlText/"+id, String.class);
-        return pdfGeneratorService.generatePDF(res.getBody(), "OfficialsApplication/data/xsl-fo/zeleni_fo.xsl");
+        return pdfGeneratorService.generatePDF(res.getBody(), "data/xsl-fo/zeleni_fo.xsl");
     }
 }

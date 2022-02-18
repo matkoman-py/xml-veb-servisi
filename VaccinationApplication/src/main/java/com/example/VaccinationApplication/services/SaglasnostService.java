@@ -370,7 +370,7 @@ public class SaglasnostService {
             prvaDoza.setSerijaVakcine(prvaDozaSerija);
             tVakcinacija.setPrvaDoza(prvaDoza);
             potvrda.setVakcinacijaInfo(tVakcinacija);
-            potvrda.setAbout(saglasnost.getDrzavljanstvo().getJMBG());
+            potvrda.setAbout("http://www.ftn.uns.ac.rs/potvrda_o_vakcinaciji/"+saglasnost.getDrzavljanstvo().getJMBG());
 
             potvrdaService.saveXmlFromObject(potvrda);
             //posalji mejl za drugi termin

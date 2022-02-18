@@ -40,7 +40,7 @@ public class PdfGeneratorService {
 	public PdfGeneratorService() throws SAXException, IOException {
 		
 		// Initialize FOP factory object
-		fopFactory = FopFactory.newInstance(new File("OfficialsApplication/src/fop.xconf"));
+		fopFactory = FopFactory.newInstance(new File("src/fop.xconf"));
 		
 		// Setup the XSLT transformer factory
 		transformerFactory = new TransformerFactoryImpl();
