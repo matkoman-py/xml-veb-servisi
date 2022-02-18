@@ -26,14 +26,7 @@
         <xs:sequence>
             <xs:element name="Ime_i_prezime" type="pot:TImeIPrezime"/>
             <xs:element name="Datum_rodjenja" type="xs:date"/>
-            <xs:element name="Pol">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="Musko"/>
-                        <xs:enumeration value="Zensko"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
+            <xs:element name="Pol" type="xs:string"> </xs:element>
             <xs:element name="Jmbg" type="pot:TJmbg"> </xs:element>
         </xs:sequence>
     </xs:complexType>

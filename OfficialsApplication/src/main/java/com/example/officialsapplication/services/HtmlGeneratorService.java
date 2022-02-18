@@ -29,7 +29,7 @@ public class HtmlGeneratorService {
 	private static TransformerFactory transformerFactory;
 	
 	
-	public static final String HTML_FILE = "OfficialsApplication/gen/itext/temp.html";
+	public static final String HTML_FILE = "gen/itext/temp.html";
 	
 
 	static {
